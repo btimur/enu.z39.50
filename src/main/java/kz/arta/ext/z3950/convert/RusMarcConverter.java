@@ -17,11 +17,12 @@ public class RusMarcConverter implements IMarcConverter {
         Book book = new Book();
         book.setId(marcRecord.getControlNumberField().getData());
         book.setTitle(getSubfieldData(marcRecord, "200", 'a'));
-        book.setPublishedPlace(getSubfieldData(marcRecord, "200", 'a'));
-        book.setPublishedDate(getSubfieldData(marcRecord, "200", 'd'));
+        book.setPublishedPlace(getSubfieldData(marcRecord, "210", 'a'));
+        book.setPublishedDate(getSubfieldData(marcRecord, "210", 'd'));
         book.setKeywords(getSubfieldMultiData(marcRecord, "610", 'a'));
         book.setIsbn(getSubfieldData(marcRecord, "010", 'a'));
-        book.setAuthor(getSubfieldData(marcRecord, "700", 'a'));
+        book.setAuthor(getSubfieldData(marcRecord, "700", 'a') + " " +
+                getSubfieldData(marcRecord, "700", 'b'));
         return book;
     }
 
