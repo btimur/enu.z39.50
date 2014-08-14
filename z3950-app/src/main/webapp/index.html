@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>ENUSearch App</title>
-    <link rel="stylesheet" href="css/app.css"/>
+
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/font-awesome.css"/>
 </head>
 <body ng-app="z3950" ng-controller="SearchCtrl">
@@ -75,9 +76,10 @@
                     <div class="col-md-11">
                         <div>
                             <!--<input class="form-control" id="search_value" name="search" type="text">-->
-                            <input type="text" class="form-control input-lg col-sm-10"
+                            <input id="searchTerm" type="text" class="form-control input-lg col-sm-10"
                                    placeholder="Введите автора, наименование или ISBN"
-                                   style="min-width: 500px" ng-model="formData.term">
+                                   style="min-width: 500px" ng-model="formData.term" ng-class="termClass">
+                            <!--<div class="loader"><img border="0" alt="Загрузка..." src="img/loader.gif"></div>-->
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -86,41 +88,49 @@
                 </div>
                 <div class="row top-buffer">
                     <div class="col-md-12">
-                        <h5 class="as_button collapsed" ng-click="advancedSearch = !advancedSearch">
+                        <h5 class="as_button collapsed" ng-click="formData.advancedSearch = !formData.advancedSearch">
                             Расширенный поиск ↓
                         </h5>
-                        <div id="advanced_search"  ng-show="advancedSearch" class="top-buffer" >
+                        <div id="advanced_search"  ng-show="formData.advancedSearch" class="top-buffer" >
                             <div class="form-inline">
                                 <div class="spacer20"></div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_701b" name="701b" placeholder="коллективный автор" type="text"></div>
+                                    <div><input class="form-control" id="id_701b" name="701b" placeholder="коллективный автор" type="text"
+                                                ng-model="formData.addAuthor"></div>
                                 </div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_200d" name="200d" placeholder="параллельное заглавие" type="text"></div>
+                                    <div><input class="form-control" id="id_200d" name="200d" placeholder="параллельное заглавие" type="text"
+                                                ng-model="formData.parallelTitle"></div>
                                 </div>
                                 <div class="form-group">
 
-                                    <div><input class="form-control" id="id_210d" name="210d" placeholder="год издания" type="text"></div>
+                                    <div><input class="form-control" id="id_210d" name="210d" placeholder="год издания" type="text"
+                                                ng-model="formData.publishedYear"></div>
                                 </div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_210c" name="210c" placeholder="издательство" type="text"></div>
+                                    <div><input class="form-control" id="id_210c" name="210c" placeholder="издательство" type="text"
+                                                ng-model="formData.publishedName"></div>
                                 </div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_210a" name="210a" placeholder="место издания" type="text"></div>
+                                    <div><input class="form-control" id="id_210a" name="210a" placeholder="место издания" type="text"
+                                                ng-model="formData.publishedPlace"></div>
                                 </div>
                                 <div class="spacer20"></div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_300a" name="300a" placeholder="общие примечания" type="text"></div>
+                                    <div><input class="form-control" id="id_300a" name="300a" placeholder="общие примечания" type="text"
+                                                ng-model="formData.commoonSubject"></div>
                                 </div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_610a" name="610a" placeholder="ключевое слово" type="text"></div>
+                                    <div><input class="form-control" id="id_610a" name="610a" placeholder="ключевое слово" type="text"
+                                                ng-model="formData.keyword"></div>
                                 </div>
                                 <div class="form-group">
-                                    <div><input class="form-control" id="id_907a" name="907a" placeholder="начальный элемент ввода ББК (Предметная рубрика)" type="text"></div>
+                                    <div><input class="form-control" id="id_022a" name="022a" placeholder="Номер ISSN" type="text"
+                                                ng-model="formData.issn"></div>
                                 </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_010a" name="010a" placeholder="Номер ISBN" type="text"></div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                    <!--<div><input class="form-control" id="id_010a" name="010a" placeholder="Номер ISBN" type="text"></div>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -303,7 +313,7 @@
                     <div class="ul_counter">{{$index+1}}.</div>
                     <div class="item">
                         <div class="item_pre">
-                            <div><img src="img/pre2.png"></div>
+                            <div><img src="img/pre.png"></div>
                             <span><a class="book_card_view" href="/">Просмотр</a></span>
                         </div>
                         <div class="item_info">

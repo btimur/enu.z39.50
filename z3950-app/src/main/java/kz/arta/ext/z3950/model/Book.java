@@ -1,5 +1,7 @@
 package kz.arta.ext.z3950.model;
 
+import org.marc4j.marc.Record;
+
 /**
  * Created by timur on 09/08/2014 12:17.
  */
@@ -11,8 +13,8 @@ public class Book {
     private String publishedDate;
     private String publishedPlace;
     private String keywords;
-    private String libraryCode;
-    private Object rec;
+    private Long libraryId;
+    private Record record;
 
 
     public String getId() {
@@ -71,19 +73,19 @@ public class Book {
         this.keywords = keywords;
     }
 
-    public String getLibraryCode() {
-        return libraryCode;
+    public Long getLibraryId() {
+        return libraryId;
     }
 
-    public void setLibraryCode(String libraryCode) {
-        this.libraryCode = libraryCode;
+    public void setLibraryId(Long libraryId) {
+        this.libraryId = libraryId;
     }
 
-    public Object getRec() {
-        return rec;
+    public Record getRecord() {
+        return record;
     }
 
-    public void setRec(Object rec) {
-        this.rec = rec;
+    public void setRecord(Record record) {
+        this.record = record;
     }
 }

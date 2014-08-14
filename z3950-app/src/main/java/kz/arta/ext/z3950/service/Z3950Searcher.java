@@ -1,27 +1,36 @@
 package kz.arta.ext.z3950.service;
 
 import kz.arta.ext.z3950.model.Library;
+import kz.arta.ext.z3950.model.QueryType;
 import kz.arta.ext.z3950.model.search.SearchFilter;
 import kz.arta.ext.z3950.model.search.SearchResult;
+import kz.arta.ext.z3950.model.SimpleSearch;
+import kz.arta.ext.z3950.search.QueryBuilderFactory;
 import kz.arta.ext.z3950.util.RuMarcStreamReader;
+import org.apache.logging.log4j.Logger;
 import org.marc4j.MarcReader;
 import org.yaz4j.*;
 import org.yaz4j.exception.ZoomException;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
 
 /**
  * Created by timur on 25/07/2014 12:47.
  */
-
+@Stateless
 public class Z3950Searcher {
 
-//    @Inject
-//    private Logger log;
+    @Inject
+    private Logger log;
+
+    @Inject
+    private LibraryRepository libraryRepository;
 
     public SearchResult search(Library library, SearchFilter filter) throws Exception {
         Connection con = new Connection(library.getZhost(), library.getZport());
-        con.setSyntax(library.getzFormat().name());
+        con.setSyntax(library.getzFormat());
         con.setDatabaseName(library.getZdb());
         SearchResult result;
         try {
@@ -52,7 +61,7 @@ public class Z3950Searcher {
 
     public SearchResult searchCql(Library library, SearchFilter filter) throws Exception {
         Connection con = new Connection(library.getZhost(), library.getZport());
-        con.setSyntax(library.getzFormat().name());
+        con.setSyntax(library.getzFormat());
         con.setDatabaseName(library.getZdb());
         SearchResult result;
         try {
@@ -79,7 +88,35 @@ public class Z3950Searcher {
         return result;
     }
 
-    private org.marc4j.marc.Record readMarc(Record rec, Library library) {
+    public SearchResult search(SimpleSearch search) throws Exception {
+        Library library = libraryRepository.find(search.getLibraryId());
+        Connection con = new Connection(library.getZhost(), library.getZport());
+        con.setSyntax(library.getzFormat());
+        con.setDatabaseName(library.getZdb());
+        SearchResult result;
+        try {
+            con.connect();
+            Query query = QueryBuilderFactory.createBuilder(QueryType.valueOf(library.getQueryType())).createQuery(search);
+            ResultSet set = con.search(query);
+            log.info("Showing {0} of {1}",search.getMaxResult(), set.getHitCount());
+            result = new SearchResult();
+            for (int i = 0; i < set.getHitCount() && i < search.getMaxResult(); i++) {
+                Record rec = set.getRecord(i);
+                log.debug(rec.getSyntax());
+                log.debug(rec.render());
+                result.getRecords().add(readMarc(rec, library));
+            }
+            result.setCount(set.getHitCount());
+
+        } catch (ZoomException ze) {
+            throw new Exception(ze);
+        } finally {
+            con.close();
+        }
+        return result;
+    }
+
+    public org.marc4j.marc.Record readMarc(Record rec, Library library) {
         byte[] b = rec.getContent();
 //        Charset charset = Charset.forName("CP1251");
 //        String s = new String(b, charset);

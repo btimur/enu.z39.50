@@ -35,12 +35,18 @@ public class Library {
     /**
      * Format библиотеки для сервиса Z39.50
      */
-    private FormatEnum zFormat;
+    private String zFormat;
 
     /**
      * Format библиотеки для сервиса Z39.50
      */
     private String encoding = "UTF8";
+
+    /***
+     * тип запросов
+     * The following is supported: prefix for Prefix Query Notation (Type-1 Query); cql for CQL search (Type-2 Query),
+     */
+    private String queryType;
 
     public Long getId() {
         return id;
@@ -98,11 +104,11 @@ public class Library {
         this.zPwd = zPwd;
     }
 
-    public FormatEnum getzFormat() {
+    public String getzFormat() {
         return zFormat;
     }
 
-    public void setzFormat(FormatEnum zFormat) {
+    public void setzFormat(String zFormat) {
         this.zFormat = zFormat;
     }
 
@@ -112,5 +118,13 @@ public class Library {
 
     public void setEncoding(String encoding) {
         this.encoding = encoding;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 }

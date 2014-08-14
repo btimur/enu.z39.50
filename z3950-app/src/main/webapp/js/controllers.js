@@ -14,14 +14,17 @@ app.controller('SearchCtrl', function ($scope,  $http) {
 //            console.log('search z3950');
 //            $scope.message = result1;
 //        });
+        $scope.termClass = 'searchTermProgress';
+
         $http({
             method  : 'POST',
-            url     : '/enu-z3950/rest/search/simpleSeacrh',
+            url     : '/z3950-app/rest/search/simpleSeacrh',
             data    : $scope.formData,  // pass in data as strings
             headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
         })
             .success(function(data) {
                 console.log(data);
+                $scope.termClass = 'searchTermNormal';
                 $scope.books = data;
 //                if (!data.success) {
 //                    // if not successful, bind errors to error variables

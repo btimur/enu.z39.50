@@ -1,0 +1,7 @@
+.searchTermProgress {
+    background: #FFF url("../img/loader.gif") no-repeat right center;
+    border-right: 10px solid transparent;
+}
+.searchTermNormal {
+
+}

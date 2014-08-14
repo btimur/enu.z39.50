@@ -11,7 +11,7 @@ import kz.arta.ext.z3950.model.synergy.Autoreferat;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
 import kz.arta.ext.z3950.util.ApiFormField;
 import kz.arta.ext.z3950.util.CodeConstants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.beans.IntrospectionException;

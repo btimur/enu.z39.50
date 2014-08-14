@@ -8,6 +8,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by timur on 12/07/2014 23:45.
@@ -31,7 +33,8 @@ public class LibraryRepository {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Library find(Long id) {
-        return (Library) find(Library.class, id);
+        return getDefaultLibrary();
+//        return (Library) find(Library.class, id);
     }
 
     public Library getDefaultLibrary() {
@@ -39,8 +42,15 @@ public class LibraryRepository {
         library.setZhost("193.233.14.5");
         library.setZport(9999);
         library.setZdb("katb");
-        library.setzFormat(FormatEnum.RUSMARC);
+        library.setzFormat(FormatEnum.RUSMARC.name());
         library.setEncoding("cp1251");
         return library;
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Library> getFindLibraries() {
+        List<Library> libraries = new ArrayList<Library>();
+        libraries.add(getDefaultLibrary());
+        return libraries;
     }
 }
