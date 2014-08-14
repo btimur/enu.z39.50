@@ -1,45 +1,63 @@
 package kz.arta.ext.z3950.model;
 
+import javax.persistence.*;
+
 /**
  * Created by timur on 25/07/2014 12:05.
  */
+@Entity
+@Table(name = "lib_configuration")
 public class Library {
+
+    public static final String FILDNAME_LIBNAME = "nameLib";
     /**
      * идентификатор
      */
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
     /**
      * наименование библиотеки
      */
+    @Column(name = "NAME")
     private String nameLib;
     /**
      * хост библиотеки для сервиса Z39.50
      */
+    @Column(name = "HOST")
     private String zhost;
     /**
      * порт библиотеки для сервиса Z39.50
      */
+    @Column(name = "PORT")
     private int zport;
     /**
      * база библиотеки для сервиса Z39.50
      */
+    @Column(name = "DBNAME")
     private String zdb;
     /**
      * пользовател библиотеки для сервиса Z39.50
      */
+    @Column(name = "LOGIN")
     private String zUser;
     /**
      * пароль библиотеки для сервиса Z39.50
      */
+    @Column(name = "PASSWORD")
     private String zPwd;
     /**
      * Format библиотеки для сервиса Z39.50
      */
+    @Column(name = "FORMAT")
+    @Enumerated(EnumType.STRING)
     private FormatEnum zFormat;
 
     /**
      * Format библиотеки для сервиса Z39.50
      */
+    @Column(name = "ENCODING")
     private String encoding = "UTF8";
 
     public Long getId() {
