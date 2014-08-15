@@ -1,5 +1,6 @@
 package kz.arta.ext.z3950.model;
 
+import kz.arta.ext.z3950.util.ApiFormField;
 import org.marc4j.marc.Record;
 
 /**

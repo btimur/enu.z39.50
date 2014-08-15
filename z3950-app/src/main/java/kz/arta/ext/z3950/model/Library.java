@@ -1,51 +1,71 @@
 package kz.arta.ext.z3950.model;
 
+import javax.persistence.*;
+
 /**
- * Created by timur on 25/07/2014 12:05.
+ * Класс - объект "Конфигурация подключения к библиотеке"
  */
-public class Library {
+@Entity
+@Table(name = "lib_configuration")
+public class Library implements IEntity{
+
+    public static final String FILDNAME_LIBNAME = "nameLib";
+
     /**
      * идентификатор
      */
-    private Long id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "ID")
+    protected Long id;
+
     /**
      * наименование библиотеки
      */
+    @Column(name = "NAME_LIB")
     private String nameLib;
     /**
      * хост библиотеки для сервиса Z39.50
      */
+    @Column(name = "HOST_LIB")
     private String zhost;
     /**
      * порт библиотеки для сервиса Z39.50
      */
+    @Column(name = "PORT")
     private int zport;
     /**
      * база библиотеки для сервиса Z39.50
      */
+    @Column(name = "DBNAME")
     private String zdb;
     /**
      * пользовател библиотеки для сервиса Z39.50
      */
+    @Column(name = "LOGIN")
     private String zUser;
     /**
      * пароль библиотеки для сервиса Z39.50
      */
+    @Column(name = "PWD")
     private String zPwd;
     /**
      * Format библиотеки для сервиса Z39.50
      */
+    @Column(name = "FORMAT_LIB")
     private String zFormat;
 
     /**
      * Format библиотеки для сервиса Z39.50
      */
+    @Column(name = "ENCODING")
     private String encoding = "UTF8";
 
     /***
      * тип запросов
      * The following is supported: prefix for Prefix Query Notation (Type-1 Query); cql for CQL search (Type-2 Query),
      */
+    @Column(name = "QUERY_TYPE")
     private String queryType;
 
     public Long getId() {

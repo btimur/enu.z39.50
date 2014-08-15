@@ -2,10 +2,12 @@ package kz.arta.ext.z3950.rest;
 
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.z3950.convert.IMarcConverter;
+import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.SimpleSearch;
 import kz.arta.ext.z3950.model.search.SearchResult;
+import kz.arta.ext.z3950.model.synergy.ABook;
 import kz.arta.ext.z3950.model.synergy.Autoreferat;
 import kz.arta.ext.z3950.rest.api.AutoreferatReader;
 import kz.arta.ext.z3950.service.LibraryRepository;
@@ -38,20 +40,26 @@ public class SearchRestService {
     @Inject
     private IMarcConverter marcConverter;
 
+    @Inject
+    private AutoreferatReader reader;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getFindLibraries")
     public List<Library> getFindLibraries() {
 
-        return libraryRepository.getFindLibraries();
+        return libraryRepository.getLibraryList();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("simpleSeacrh")
     public List<Book> simpleSeacrh(SimpleSearch simpleSeacrh) {
-
+        /**[TODO]блок  тестов*/
+        simpleSeacrh.setMaxResult(10);
+        simpleSeacrh.setLibraryId(1);
+         /***/
         try {
             SearchResult result = searcher.search(simpleSeacrh);
             List<Book> books = new ArrayList<Book>();
@@ -74,9 +82,10 @@ public class SearchRestService {
     @Path("importBook")
     public boolean importBook(Book book) {
         try {
-            AutoreferatReader reader = new AutoreferatReader();
-            Autoreferat autoreferat = new Autoreferat()  ;
-            return reader.Save(autoreferat, ConfigUtils.getQueryContext());
+
+            Record record = CacheManager.getInstance().getRecord(book);
+            ABook autoreferat = marcConverter.reverseConvert(record);
+            return reader.Save((Autoreferat) autoreferat, ConfigUtils.getQueryContext());
         } catch (Exception e) {
             log.error(e);
             return false;

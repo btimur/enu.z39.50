@@ -2,39 +2,44 @@ package kz.arta.ext.z3950.service;
 
 import kz.arta.ext.z3950.model.FormatEnum;
 import kz.arta.ext.z3950.model.Library;
+import kz.arta.ext.z3950.model.QueryType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by timur on 12/07/2014 23:45.
+ * Класс - объект "Репозиторий конфигураций подключения к библиотекам"
  */
 @Stateless
-public class LibraryRepository {
+public class LibraryRepository extends ARepository<Library> {
 
+    /**
+     * Менеджер JPA
+     */
     @Inject
     protected EntityManager em;
 
-
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void update(Library library) {
-        em.merge(library);
+    /**
+     * Поиск объекта "Конфигурация подключения к библиотеке" по имени
+     * @param name - имя объекта "Конфигурация подключения к библиотеке"
+     * @return - объект "Конфигурация подключения к библиотеке"
+     */
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public Library findByName(String name) {
+        return em.createQuery("select l from Library l where l.nameLib=?1", Library.class).setParameter(1,name).getSingleResult();
     }
 
+    /**
+     * Поиск объекта "Конфигурация подключения к библиотеке" по имени
+     * @return - весь список объектов "Конфигурация подключения к библиотеке"
+     */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Object find(Class entityClass, Object id) {
-        return em.find(entityClass, id);
-    }
-
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Library find(Long id) {
-        return getDefaultLibrary();
-//        return (Library) find(Library.class, id);
+    public List<Library> getLibraryList() {
+        return em.createQuery("select x from Library x", Library.class).getResultList();
     }
 
     public Library getDefaultLibrary() {
@@ -44,13 +49,18 @@ public class LibraryRepository {
         library.setZdb("katb");
         library.setzFormat(FormatEnum.RUSMARC.name());
         library.setEncoding("cp1251");
+        library.setQueryType(QueryType.PREFIX_QUERY.name());
         return library;
     }
 
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public List<Library> getFindLibraries() {
-        List<Library> libraries = new ArrayList<Library>();
-        libraries.add(getDefaultLibrary());
-        return libraries;
+    @Override
+    protected EntityManager getEm() {
+        return em;
     }
+
+    @Override
+    public Class getEntityClass() {
+        return Library.class;
+    }
+
 }

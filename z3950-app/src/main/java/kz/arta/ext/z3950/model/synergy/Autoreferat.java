@@ -252,284 +252,644 @@ public class Autoreferat extends ABook {
     /**
      * Идентификатор записи
      */
-    @ApiFormField(nameField = "idksdh",typeField = "textbox")
-    private String fidksdh;
+    @ApiFormField(nameField = "001",typeField = "textbox")
+    private String f001;
 
     /**
      * Уточнения
      */
-    @ApiFormField(nameField = "cmp-phl5wf",typeField = "textbox")
-    private String fcmp_phl5wf;
+    @ApiFormField(nameField = "010b",typeField = "textbox")
+    private String f010b;
 
     /**
      * Ошибочный номер ISBN
      */
-    @ApiFormField(nameField = "cmp-pl7j0m",typeField = "textbox")
-    private String fcmp_pl7j0m;
+    @ApiFormField(nameField = "010z",typeField = "textbox")
+    private String f010z;
+
+    /**
+     * Номер ISSN
+     */
+    @ApiFormField(nameField = "011a",typeField = "textbox")
+    private String f011a;
+
+    /**
+     * Квалификация
+     */
+    @ApiFormField(nameField = "011b",typeField = "textbox")
+    private String f011b;
+
+    /**
+     * Условия приобретения или цена
+     */
+    @ApiFormField(nameField = "011d",typeField = "textbox")
+    private String f011d;
+
+    /**
+     * Aнулированный ISSN
+     */
+    @ApiFormField(nameField = "011y",typeField = "textbox")
+    private String f011y;
+
+    /**
+     * Ошибочный ISSN.
+     */
+    @ApiFormField(nameField = "011z",typeField = "textbox")
+    private String f011z;
+
+    /**
+     * Отпечатки пальцев
+     */
+    @ApiFormField(nameField = "012a",typeField = "textbox")
+    private String f012a;
+
+    /**
+     * Код системы контроля отпечатка пальцев
+     */
+    @ApiFormField(nameField = "0122",typeField = "textbox")
+    private String f0122;
+
+    /**
+     * Учреждение, к которому применяется область
+     */
+    @ApiFormField(nameField = "0125",typeField = "textbox")
+    private String f0125;
+
+    /**
+     * Номер (ISMN)
+     */
+    @ApiFormField(nameField = "013a",typeField = "textbox")
+    private String f013a;
+
+    /**
+     * Квалификация
+     */
+    @ApiFormField(nameField = "013b",typeField = "textbox")
+    private String f013b;
+
+    /**
+     * Условия доступности и/или цена
+     */
+    @ApiFormField(nameField = "013d",typeField = "textbox")
+    private String f013d;
+
+    /**
+     * Ошибочный ISMN
+     */
+    @ApiFormField(nameField = "013z",typeField = "textbox")
+    private String f013z;
+
+    /**
+     * Ошибочный идентификатор статьи
+     */
+    @ApiFormField(nameField = "014a",typeField = "textbox")
+    private String f014a;
+
+    /**
+     * Код системы
+     */
+    @ApiFormField(nameField = "014z",typeField = "textbox")
+    private String f014z;
+
+    /**
+     * Идентификатор статьи
+     */
+    @ApiFormField(nameField = "0142",typeField = "textbox")
+    private String f0142;
+
+    /**
+     * Номер (ISRN)
+     */
+    @ApiFormField(nameField = "015a",typeField = "textbox")
+    private String f015a;
+
+    /**
+     * Квалификация
+     */
+    @ApiFormField(nameField = "015b",typeField = "textbox")
+    private String f015b;
+
+    /**
+     * Условия доступности и/или цена
+     */
+    @ApiFormField(nameField = "015d",typeField = "textbox")
+    private String f015d;
+
+    /**
+     * Аннулированный/Недействительный/Ошибочный ISRN
+     */
+    @ApiFormField(nameField = "015z",typeField = "textbox")
+    private String f015z;
+
+    /**
+     * Номер (ISRC)
+     */
+    @ApiFormField(nameField = "016a",typeField = "textbox")
+    private String f016a;
+
+    /**
+     * Квалификация
+     */
+    @ApiFormField(nameField = "016b",typeField = "textbox")
+    private String f016b;
+
+    /**
+     * Условия доступности и/или цена
+     */
+    @ApiFormField(nameField = "016d",typeField = "textbox")
+    private String f016d;
+
+    /**
+     * Ошибочный ISRC
+     */
+    @ApiFormField(nameField = "016z",typeField = "textbox")
+    private String f016z;
 
     /**
      * Код страны
      */
-    @ApiFormField(nameField = "cmp-gxvuqk",typeField = "textbox")
-    private String fcmp_gxvuqk;
+    @ApiFormField(nameField = "020a",typeField = "textbox")
+    private String f020a;
 
     /**
      * Номер
      */
-    @ApiFormField(nameField = "cmp-7ryuow",typeField = "textbox")
-    private String fcmp_7ryuow;
+    @ApiFormField(nameField = "020b",typeField = "textbox")
+    private String f020b;
 
     /**
      * Ошибочный номер
      */
-    @ApiFormField(nameField = "cmp-3h8iil",typeField = "textbox")
-    private String fcmp_3h8iil;
+    @ApiFormField(nameField = "020z",typeField = "textbox")
+    private String f020z;
 
     /**
      * Код страны
      */
-    @ApiFormField(nameField = "cmp-u8yl9a",typeField = "textbox")
-    private String fcmp_u8yl9a;
+    @ApiFormField(nameField = "021a",typeField = "textbox")
+    private String f021a;
 
     /**
      * Номер
      */
-    @ApiFormField(nameField = "cmp-5grpy9",typeField = "textbox")
-    private String fcmp_5grpy9;
+    @ApiFormField(nameField = "021b",typeField = "textbox")
+    private String f021b;
 
     /**
      * Ошибочный номер
      */
-    @ApiFormField(nameField = "cmp-kaxb3b",typeField = "textbox")
-    private String fcmp_kaxb3b;
+    @ApiFormField(nameField = "021z",typeField = "textbox")
+    private String f021z;
+
+    /**
+     * Код страны
+     */
+    @ApiFormField(nameField = "022a",typeField = "textbox")
+    private String f022a;
+
+    /**
+     * Номер
+     */
+    @ApiFormField(nameField = "022b",typeField = "textbox")
+    private String f022b;
+
+    /**
+     * Ошибочный номер
+     */
+    @ApiFormField(nameField = "022z",typeField = "textbox")
+    private String f022z;
+
+    /**
+     * Номер системы контроля
+     */
+    @ApiFormField(nameField = "035a",typeField = "textbox")
+    private String f035a;
+
+    /**
+     * Аннулированный или недействительный контрольный номер
+     */
+    @ApiFormField(nameField = "035z",typeField = "textbox")
+    private String f035z;
 
     /**
      * Общие данные обработки
      */
-    @ApiFormField(nameField = "cmp-0rjfra",typeField = "textbox")
-    private String fcmp_0rjfra;
+    @ApiFormField(nameField = "100a",typeField = "textbox")
+    private String f100a;
 
     /**
      * Дата ввода записи в файл
      */
-    @ApiFormField(nameField = "cmp-hv1kyr",typeField = "textbox")
-    private String fcmp_hv1kyr;
+    @ApiFormField(nameField = "100a(1)",typeField = "textbox")
+    private String f100a_1;
 
     /**
      * Тип даты публикации
      */
-    @ApiFormField(nameField = "cmp-qb5k3a",typeField = "textbox")
-    private String fcmp_qb5k3a;
+    @ApiFormField(nameField = "100a(2)",typeField = "textbox")
+    private String f100a_2;
 
     /**
      * Дата публикации 1
      */
-    @ApiFormField(nameField = "cmp-dm9yst",typeField = "textbox")
-    private String fcmp_dm9yst;
+    @ApiFormField(nameField = "100a(3)",typeField = "textbox")
+    private String f100a_3;
 
     /**
      * Дата публикации 2
      */
-    @ApiFormField(nameField = "cmp-rcgb3o",typeField = "textbox")
-    private String fcmp_rcgb3o;
+    @ApiFormField(nameField = "100a(4)",typeField = "textbox")
+    private String f100a_4;
 
     /**
      * Код целевого назначения
      */
-    @ApiFormField(nameField = "cmp-1nagv7",typeField = "textbox")
-    private String fcmp_1nagv7;
+    @ApiFormField(nameField = "100a(5)",typeField = "textbox")
+    private String f100a_5;
 
     /**
      * Правительственная публикация
      */
-    @ApiFormField(nameField = "cmp-q44ozp",typeField = "textbox")
-    private String fcmp_q44ozp;
+    @ApiFormField(nameField = "100a(6)",typeField = "textbox")
+    private String f100a_6;
 
     /**
      * Код модифицированной записи
      */
-    @ApiFormField(nameField = "cmp-vj51eb",typeField = "textbox")
-    private String fcmp_vj51eb;
+    @ApiFormField(nameField = "100a(7)",typeField = "textbox")
+    private String f100a_7;
 
     /**
      * Язык каталогизации
      */
-    @ApiFormField(nameField = "cmp-xyq4ic",typeField = "textbox")
-    private String fcmp_xyq4ic;
+    @ApiFormField(nameField = "100a(8)",typeField = "textbox")
+    private String f100a_8;
 
     /**
      * Код транслитерации
      */
-    @ApiFormField(nameField = "cmp-gzp554",typeField = "textbox")
-    private String fcmp_gzp554;
+    @ApiFormField(nameField = "100a(9)",typeField = "textbox")
+    private String f100a_9;
 
     /**
      * Наборы символов
      */
-    @ApiFormField(nameField = "cmp-u42mya",typeField = "textbox")
-    private String fcmp_u42mya;
+    @ApiFormField(nameField = "100a(10)",typeField = "textbox")
+    private String f100a_10;
 
     /**
      * Дополнительные наборы символов
      */
-    @ApiFormField(nameField = "cmp-ayqko3",typeField = "textbox")
-    private String fcmp_ayqko3;
+    @ApiFormField(nameField = "100a(11)",typeField = "textbox")
+    private String f100a_11;
 
     /**
      * Графика заглавия
      */
-    @ApiFormField(nameField = "cmp-jikk5o",typeField = "textbox")
-    private String fcmp_jikk5o;
+    @ApiFormField(nameField = "100a(12)",typeField = "textbox")
+    private String f100a_12;
 
     /**
      * Язык резюме
      */
-    @ApiFormField(nameField = "cmp-tjky1y",typeField = "textbox")
-    private String fcmp_tjky1y;
+    @ApiFormField(nameField = "101d",typeField = "textbox")
+    private String f101d;
 
     /**
      * Язык оглавления
      */
-    @ApiFormField(nameField = "cmp-flci2k",typeField = "textbox")
-    private String fcmp_flci2k;
+    @ApiFormField(nameField = "101e",typeField = "textbox")
+    private String f101e;
 
     /**
      * Язык промежуточного перевода, когда каталогизируемый документ переводится с языка оригинала
      */
-    @ApiFormField(nameField = "cmp-zmwjf4",typeField = "textbox")
-    private String fcmp_zmwjf4;
+    @ApiFormField(nameField = "101b",typeField = "textbox")
+    private String f101b;
 
     /**
      * Язык оригинала
      */
-    @ApiFormField(nameField = "cmp-55njih",typeField = "textbox")
-    private String fcmp_55njih;
+    @ApiFormField(nameField = "101c",typeField = "textbox")
+    private String f101c;
+
+    /**
+     * Язык точного названия если это не основной язык текста, музыки из кинофильма и т.д
+     */
+    @ApiFormField(nameField = "101g",typeField = "textbox")
+    private String f101g;
+
+    /**
+     * Язык либретто
+     */
+    @ApiFormField(nameField = "101h",typeField = "textbox")
+    private String f101h;
+
+    /**
+     * язык сопроводительного материала (не кртакого изложения, резюме, либретто)
+     */
+    @ApiFormField(nameField = "101i",typeField = "textbox")
+    private String f101i;
+
+    /**
+     * Язык подзагловока
+     */
+    @ApiFormField(nameField = "101j",typeField = "textbox")
+    private String f101j;
 
     /**
      * Страна публикации
      */
-    @ApiFormField(nameField = "cmp-1m6no1",typeField = "textbox")
-    private String fcmp_1m6no1;
+    @ApiFormField(nameField = "102a",typeField = "textbox")
+    private String f102a;
 
     /**
      * Кодированные данные о книге
      */
-    @ApiFormField(nameField = "cmp-b2xa27",typeField = "textbox")
-    private String fcmp_b2xa27;
+    @ApiFormField(nameField = "105a",typeField = "textbox")
+    private String f105a;
 
     /**
      * Коды иллюстраций
      */
-    @ApiFormField(nameField = "cmp-1yd286",typeField = "textbox")
-    private String fcmp_1yd286;
+    @ApiFormField(nameField = "105a(1)",typeField = "textbox")
+    private String f105a_1;
 
     /**
      * Коды формы содержания
      */
-    @ApiFormField(nameField = "cmp-9t8svd",typeField = "textbox")
-    private String fcmp_9t8svd;
+    @ApiFormField(nameField = "105a(2)",typeField = "textbox")
+    private String f105a_2;
 
     /**
      * Код конференции или совещания
      */
-    @ApiFormField(nameField = "cmp-9isal0",typeField = "textbox")
-    private String fcmp_9isal0;
+    @ApiFormField(nameField = "105a(3)",typeField = "textbox")
+    private String f105a_3;
 
     /**
      * Индикатор юбилейного издания
      */
-    @ApiFormField(nameField = "cmp-qgcbp7",typeField = "textbox")
-    private String fcmp_qgcbp7;
+    @ApiFormField(nameField = "105a(4)",typeField = "textbox")
+    private String f105a_4;
 
     /**
      * Индикатор указателя
      */
-    @ApiFormField(nameField = "cmp-41syr8",typeField = "textbox")
-    private String fcmp_41syr8;
+    @ApiFormField(nameField = "105a(5)",typeField = "textbox")
+    private String f105a_5;
 
     /**
      * Код литературного жанра
      */
-    @ApiFormField(nameField = "cmp-dmjx3v",typeField = "textbox")
-    private String fcmp_dmjx3v;
+    @ApiFormField(nameField = "105a(6)",typeField = "textbox")
+    private String f105a_6;
 
     /**
      * Код биографии
      */
-    @ApiFormField(nameField = "cmp-sov3uf",typeField = "textbox")
-    private String fcmp_sov3uf;
+    @ApiFormField(nameField = "105a(7)",typeField = "textbox")
+    private String f105a_7;
 
     /**
      * Кодированные данные сериального издания
      */
-    @ApiFormField(nameField = "cmp-oa6frl",typeField = "textbox")
-    private String fcmp_oa6frl;
+    @ApiFormField(nameField = "110a",typeField = "textbox")
+    private String f110a;
 
     /**
      * Определитель типа сериального издания
      */
-    @ApiFormField(nameField = "cmp-3nc17b",typeField = "textbox")
-    private String fcmp_3nc17b;
+    @ApiFormField(nameField = "110a(1)",typeField = "textbox")
+    private String f110a_1;
 
     /**
      * Периодичность издания
      */
-    @ApiFormField(nameField = "cmp-bnanu7",typeField = "textbox")
-    private String fcmp_bnanu7;
+    @ApiFormField(nameField = "110a(2)",typeField = "textbox")
+    private String f110a_2;
 
     /**
      * Регулярность
      */
-    @ApiFormField(nameField = "cmp-krwyo0",typeField = "textbox")
-    private String fcmp_krwyo0;
+    @ApiFormField(nameField = "110a(3)",typeField = "textbox")
+    private String f110a_3;
 
     /**
      * Код вида материала
      */
-    @ApiFormField(nameField = "cmp-7kimft",typeField = "textbox")
-    private String fcmp_7kimft;
+    @ApiFormField(nameField = "110a(4)",typeField = "textbox")
+    private String f110a_4;
 
     /**
      * Код типа содержания
      */
-    @ApiFormField(nameField = "cmp-pcmsp3",typeField = "textbox")
-    private String fcmp_pcmsp3;
+    @ApiFormField(nameField = "110a(5)",typeField = "textbox")
+    private String f110a_5;
 
     /**
      * Индикатор материалов конференции
      */
-    @ApiFormField(nameField = "cmp-oeua6l",typeField = "textbox")
-    private String fcmp_oeua6l;
+    @ApiFormField(nameField = "110a(6)",typeField = "textbox")
+    private String f110a_6;
 
     /**
      * Код наличия титульного листа
      */
-    @ApiFormField(nameField = "cmp-el2m8g",typeField = "textbox")
-    private String fcmp_el2m8g;
+    @ApiFormField(nameField = "110a(7)",typeField = "textbox")
+    private String f110a_7;
 
     /**
      * Код наличия указателя
      */
-    @ApiFormField(nameField = "cmp-j5rtst",typeField = "textbox")
-    private String fcmp_j5rtst;
+    @ApiFormField(nameField = "110a(8)",typeField = "textbox")
+    private String f110a_8;
 
     /**
      * Код наличия кумулятивного указателя
      */
-    @ApiFormField(nameField = "cmp-v3a2jt",typeField = "textbox")
-    private String fcmp_v3a2jt;
+    @ApiFormField(nameField = "110a(9)",typeField = "textbox")
+    private String f110a_9;
+
+    /**
+     * Шифрованные данные - Общие
+     */
+    @ApiFormField(nameField = "115a",typeField = "textbox")
+    private String f115a;
+
+    /**
+     * Тип материала
+     */
+    @ApiFormField(nameField = "115a(1)",typeField = "textbox")
+    private String f115a_1;
+
+    /**
+     * Форма презентации - видеозапись
+     */
+    @ApiFormField(nameField = "115a(12)",typeField = "textbox")
+    private String f115a_12;
+
+    /**
+     * Основа материала эмульсии - визуальное проектирование
+     */
+    @ApiFormField(nameField = "115a(13)",typeField = "textbox")
+    private String f115a_13;
+
+    /**
+     * Вторичный материал поддержки -визуальное проектирование
+     */
+    @ApiFormField(nameField = "115a(14)",typeField = "textbox")
+    private String f115a_14;
+
+    /**
+     * Стандарт телерадиовещания - видеозапись
+     */
+    @ApiFormField(nameField = "115a(15)",typeField = "textbox")
+    private String f115a_15;
+
+    /**
+     * Шифрованные данные кинофильма - архивный
+     */
+    @ApiFormField(nameField = "115b",typeField = "textbox")
+    private String f115b;
+
+    /**
+     * Поколение/генерация
+     */
+    @ApiFormField(nameField = "115b(1)",typeField = "textbox")
+    private String f115b_1;
+
+    /**
+     * Элементы производства
+     */
+    @ApiFormField(nameField = "115b(2)",typeField = "textbox")
+    private String f115b_2;
+
+    /**
+     * Улучшенные катгории цвета для кинофильмов
+     */
+    @ApiFormField(nameField = "115b(3)",typeField = "textbox")
+    private String f115b_3;
+
+    /**
+     * кино/фото
+     */
+    @ApiFormField(nameField = "115b(4)",typeField = "textbox")
+    private String f115b_4;
+
+    /**
+     * Основа фильма
+     */
+    @ApiFormField(nameField = "115b(5)",typeField = "textbox")
+    private String f115b_5;
+
+    /**
+     * Вид звука при пермещении изображения
+     */
+    @ApiFormField(nameField = "115b(6)",typeField = "textbox")
+    private String f115b_6;
+
+    /**
+     * Вид запаса фильма или печати
+     */
+    @ApiFormField(nameField = "115b(7)",typeField = "textbox")
+    private String f115b_7;
+
+    /**
+     * Стадия износа (повреждения)
+     */
+    @ApiFormField(nameField = "115b(8)",typeField = "textbox")
+    private String f115b_8;
+
+    /**
+     * Законченность
+     */
+    @ApiFormField(nameField = "115b(9)",typeField = "textbox")
+    private String f115b_9;
+
+    /**
+     * Дата проверки фильма
+     */
+    @ApiFormField(nameField = "115b(10)",typeField = "textbox")
+    private String f115b_10;
+
+    /**
+     * Длина
+     */
+    @ApiFormField(nameField = "115a(2)",typeField = "textbox")
+    private String f115a_2;
+
+    /**
+     * Цветной индикатор
+     */
+    @ApiFormField(nameField = "115a(3)",typeField = "textbox")
+    private String f115a_3;
+
+    /**
+     * Звуковой индикатор
+     */
+    @ApiFormField(nameField = "115a(4)",typeField = "textbox")
+    private String f115a_4;
+
+    /**
+     * Носитель информации для звкуа
+     */
+    @ApiFormField(nameField = "115a(5)",typeField = "textbox")
+    private String f115a_5;
+
+    /**
+     * Ширина или размеры
+     */
+    @ApiFormField(nameField = "115a(6)",typeField = "textbox")
+    private String f115a_6;
+
+    /**
+     * Форма выпуска - визуальное проектирование, кинофильм
+     */
+    @ApiFormField(nameField = "115a(7)",typeField = "textbox")
+    private String f115a_7;
+
+    /**
+     * Техника - видеозапись, кинофильм
+     */
+    @ApiFormField(nameField = "115a(8)",typeField = "textbox")
+    private String f115a_8;
+
+    /**
+     * Формат презентации - кинофильм
+     */
+    @ApiFormField(nameField = "115a(9)",typeField = "textbox")
+    private String f115a_9;
+
+    /**
+     * Сопровождающий материал
+     */
+    @ApiFormField(nameField = "115a(10)",typeField = "textbox")
+    private String f115a_10;
+
+    /**
+     * Форма выпуска - видеозапись
+     */
+    @ApiFormField(nameField = "115a(11)",typeField = "textbox")
+    private String f115a_11;
+
+    /**
+     * 135 ПОЛЕ КОДИРОВАННЫХ ДАННЫХ: ЭЛЕКТРОННЫЕ РЕСУРСЫ
+     */
+    @ApiFormField(nameField = "135",typeField = "textbox")
+    private String f135;
 
     /**
      * Основное заглавие произведения другого автора
      */
-    @ApiFormField(nameField = "cmp-tc6yjv",typeField = "textbox")
-    private String fcmp_tc6yjv;
+    @ApiFormField(nameField = "200c",typeField = "textbox")
+    private String f200c;
 
     /**
      * Последующие сведения об ответственности
      */
-    @ApiFormField(nameField = "cmp-m2rf35",typeField = "textbox")
-    private String fcmp_m2rf35;
+    @ApiFormField(nameField = "200g",typeField = "textbox")
+    private String f200g;
 
     /**
      * Обозначение тома
@@ -540,8 +900,8 @@ public class Autoreferat extends ABook {
     /**
      * Дополнительные сведения об издании
      */
-    @ApiFormField(nameField = "205sfgsfgk",typeField = "textbox")
-    private String f205sfgsfgk;
+    @ApiFormField(nameField = "205b",typeField = "textbox")
+    private String f205b;
 
     /**
      * Сведения об ответственности,  относящиеся к изданию
@@ -552,8 +912,8 @@ public class Autoreferat extends ABook {
     /**
      * Источник информации о нумерации
      */
-    @ApiFormField(nameField = "cmp-o3ga4m",typeField = "textbox")
-    private String fcmp_o3ga4m;
+    @ApiFormField(nameField = "207z",typeField = "textbox")
+    private String f207z;
 
     /**
      * Размеры
@@ -564,8 +924,8 @@ public class Autoreferat extends ABook {
     /**
      * Параллельное заглавие серии
      */
-    @ApiFormField(nameField = "cmp-y1iiu1",typeField = "textbox")
-    private String fcmp_y1iiu1;
+    @ApiFormField(nameField = "225d",typeField = "textbox")
+    private String f225d;
 
     /**
      * Сведения, относящиеся к заглавию
@@ -582,26 +942,26 @@ public class Autoreferat extends ABook {
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "cmp-h3hq1g",typeField = "textbox")
-    private String fcmp_h3hq1g;
+    @ApiFormField(nameField = "225h",typeField = "textbox")
+    private String f225h;
 
     /**
      * Наименование части
      */
-    @ApiFormField(nameField = "cmp-6ifobu",typeField = "textbox")
-    private String fcmp_6ifobu;
+    @ApiFormField(nameField = "225i",typeField = "textbox")
+    private String f225i;
 
     /**
      * Язык параллельного заглавия
      */
-    @ApiFormField(nameField = "cmp-bd51jt",typeField = "textbox")
-    private String fcmp_bd51jt;
+    @ApiFormField(nameField = "225z",typeField = "textbox")
+    private String f225z;
 
     /**
      * Обозначение тома
      */
-    @ApiFormField(nameField = "cmp-q1dd1v",typeField = "textbox")
-    private String fcmp_q1dd1v;
+    @ApiFormField(nameField = "225v",typeField = "textbox")
+    private String f225v;
 
     /**
      * ISSN серии
@@ -610,16 +970,268 @@ public class Autoreferat extends ABook {
     private String f225x;
 
     /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "301a",typeField = "textbox")
+    private String f301a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "302a",typeField = "textbox")
+    private String f302a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "303a",typeField = "textbox")
+    private String f303a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "304a",typeField = "textbox")
+    private String f304a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "305a",typeField = "textbox")
+    private String f305a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "306a",typeField = "textbox")
+    private String f306a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "307a",typeField = "textbox")
+    private String f307a;
+
+    /**
+     *  Текст или заметки
+     */
+    @ApiFormField(nameField = "308a",typeField = "textbox")
+    private String f308a;
+
+    /**
+     *  Текст или заметки
+     */
+    @ApiFormField(nameField = "310a",typeField = "textbox")
+    private String f310a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "311a",typeField = "textbox")
+    private String f311a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "312a",typeField = "textbox")
+    private String f312a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "313a",typeField = "textbox")
+    private String f313a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "314a",typeField = "textbox")
+    private String f314a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "315a",typeField = "textbox")
+    private String f315a;
+
+    /**
+     *  Текст или заметки
+     */
+    @ApiFormField(nameField = "316a",typeField = "textbox")
+    private String f316a;
+
+    /**
+     * Учреждение к котороу применяется эта область
+     */
+    @ApiFormField(nameField = "3165",typeField = "textbox")
+    private String f3165;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "317a",typeField = "textbox")
+    private String f317a;
+
+    /**
+     * Учреждение к котороу применяется эта область
+     */
+    @ApiFormField(nameField = "3175",typeField = "textbox")
+    private String f3175;
+
+    /**
+     * Действие
+     */
+    @ApiFormField(nameField = "318a",typeField = "textbox")
+    private String f318a;
+
+    /**
+     * Идентификатор действия
+     */
+    @ApiFormField(nameField = "318b",typeField = "textbox")
+    private String f318b;
+
+    /**
+     * Время действия
+     */
+    @ApiFormField(nameField = "318c",typeField = "textbox")
+    private String f318c;
+
+    /**
+     * Интервал действия
+     */
+    @ApiFormField(nameField = "318d",typeField = "textbox")
+    private String f318d;
+
+    /**
+     * Непредвиденные обстоятельства для действия
+     */
+    @ApiFormField(nameField = "318e",typeField = "textbox")
+    private String f318e;
+
+    /**
+     * Разрешение
+     */
+    @ApiFormField(nameField = "318f",typeField = "textbox")
+    private String f318f;
+
+    /**
+     * Юрисдикция
+     */
+    @ApiFormField(nameField = "318h",typeField = "textbox")
+    private String f318h;
+
+    /**
+     * Методы действия
+     */
+    @ApiFormField(nameField = "318i",typeField = "textbox")
+    private String f318i;
+
+    /**
+     * Участок действия
+     */
+    @ApiFormField(nameField = "318j",typeField = "textbox")
+    private String f318j;
+
+    /**
+     * Агент Действия
+     */
+    @ApiFormField(nameField = "318k",typeField = "textbox")
+    private String f318k;
+
+    /**
+     * Статус
+     */
+    @ApiFormField(nameField = "318l",typeField = "textbox")
+    private String f318l;
+
+    /**
+     * Степень
+     */
+    @ApiFormField(nameField = "318n",typeField = "textbox")
+    private String f318n;
+
+    /**
+     * Тип единицы
+     */
+    @ApiFormField(nameField = "318o",typeField = "textbox")
+    private String f318o;
+
+    /**
+     * Непубличное примечание
+     */
+    @ApiFormField(nameField = "318p",typeField = "textbox")
+    private String f318p;
+
+    /**
+     * Публичное примечание
+     */
+    @ApiFormField(nameField = "318r",typeField = "textbox")
+    private String f318r;
+
+    /**
+     * Учреждение к котороу применяется эта область
+     */
+    @ApiFormField(nameField = "3185",typeField = "textbox")
+    private String f3185;
+
+    /**
+     * Наименование источника
+     */
+    @ApiFormField(nameField = "321a",typeField = "textbox")
+    private String f321a;
+
+    /**
+     * Период охвата
+     */
+    @ApiFormField(nameField = "321b",typeField = "textbox")
+    private String f321b;
+
+    /**
+     * Международный стандартный номер
+     */
+    @ApiFormField(nameField = "321x",typeField = "textbox")
+    private String f321x;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "322a",typeField = "textbox")
+    private String f322a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "323a",typeField = "textbox")
+    private String f323a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "324a",typeField = "textbox")
+    private String f324a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "325a",typeField = "textbox")
+    private String f325a;
+
+    /**
      * Периодичность
      */
-    @ApiFormField(nameField = "cmp-505a02",typeField = "textbox")
-    private String fcmp_505a02;
+    @ApiFormField(nameField = "326a",typeField = "textbox")
+    private String f326a;
 
     /**
      * Даты периодичности
      */
-    @ApiFormField(nameField = "cmp-ceyoio",typeField = "textbox")
-    private String fcmp_ceyoio;
+    @ApiFormField(nameField = "326b",typeField = "textbox")
+    private String f326b;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "328a",typeField = "textbox")
+    private String f328a;
 
     /**
      * Текст примечания
@@ -628,10 +1240,64 @@ public class Autoreferat extends ABook {
     private String f330a;
 
     /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "331a",typeField = "textbox")
+    private String f331a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "332a",typeField = "textbox")
+    private String f332a;
+
+    /**
+     * Текст примечания награды
+     */
+    @ApiFormField(nameField = "333a",typeField = "textbox")
+    private String f333a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "336a",typeField = "textbox")
+    private String f336a;
+
+    /**
+     * Текст или заметки
+     */
+    @ApiFormField(nameField = "337a",typeField = "textbox")
+    private String f337a;
+
+    /**
+     * Источник для комлектования/подписки
+     */
+    @ApiFormField(nameField = "345a",typeField = "textbox")
+    private String f345a;
+
+    /**
+     * Номер фонда
+     */
+    @ApiFormField(nameField = "345b",typeField = "textbox")
+    private String f345b;
+
+    /**
+     * Среднее
+     */
+    @ApiFormField(nameField = "345c",typeField = "textbox")
+    private String f345c;
+
+    /**
+     * Условия доступности
+     */
+    @ApiFormField(nameField = "345d",typeField = "textbox")
+    private String f345d;
+
+    /**
      * 410 СЕРИЯ
      */
-    @ApiFormField(nameField = "cmp-80g8dy",typeField = "textbox")
-    private String fcmp_80g8dy;
+    @ApiFormField(nameField = "410",typeField = "textbox")
+    private String f410;
 
     /**
      * 411 ПОДСЕРИЯ
@@ -642,314 +1308,626 @@ public class Autoreferat extends ABook {
     /**
      * 421 ПРИЛОЖЕНИЕ
      */
-    @ApiFormField(nameField = "cmp-cmkm8l",typeField = "textbox")
-    private String fcmp_cmkm8l;
+    @ApiFormField(nameField = "421",typeField = "textbox")
+    private String f421;
 
     /**
      * 422 ИЗДАНИЕ, К КОТОРОМУ ОТНОСИТСЯ ПРИЛОЖЕНИЕ
      */
-    @ApiFormField(nameField = "cmp-6dk42u",typeField = "textbox")
-    private String fcmp_6dk42u;
+    @ApiFormField(nameField = "422",typeField = "textbox")
+    private String f422;
 
     /**
      * 453 ПЕРЕВОД
      */
-    @ApiFormField(nameField = "cmp-4q7bt8",typeField = "textbox")
-    private String fcmp_4q7bt8;
+    @ApiFormField(nameField = "453",typeField = "textbox")
+    private String f453;
 
     /**
      * 454 ОРИГИНАЛ
      */
-    @ApiFormField(nameField = "cmp-o3c8o3",typeField = "textbox")
-    private String fcmp_o3c8o3;
+    @ApiFormField(nameField = "454",typeField = "textbox")
+    private String f454;
 
     /**
      * 461 УРОВЕНЬ НАБОРА
      */
-    @ApiFormField(nameField = "cmp-s0ay8t",typeField = "textbox")
-    private String fcmp_s0ay8t;
+    @ApiFormField(nameField = "461",typeField = "textbox")
+    private String f461;
 
     /**
      * Данные связываемой записи
      */
-    @ApiFormField(nameField = "cmp-k2c8mc",typeField = "textbox")
-    private String fcmp_k2c8mc;
+    @ApiFormField(nameField = "4631",typeField = "textbox")
+    private String f4631;
 
     /**
-     * Параллельное заглавие
+     * Однородное название
      */
-    @ApiFormField(nameField = "cmp-jd2s86",typeField = "textbox")
-    private String fcmp_jd2s86;
+    @ApiFormField(nameField = "500a",typeField = "textbox")
+    private String f500a;
 
     /**
-     * Сведения, относящиеся к заглавию
+     * Общее материальное обозначение
      */
-    @ApiFormField(nameField = "cmp-wkocwv",typeField = "textbox")
-    private String fcmp_wkocwv;
+    @ApiFormField(nameField = "500b",typeField = "textbox")
+    private String f500b;
 
     /**
-     * Номер части
+     * Номер секции или части
      */
-    @ApiFormField(nameField = "cmp-sevakw",typeField = "textbox")
-    private String fcmp_sevakw;
+    @ApiFormField(nameField = "500h",typeField = "textbox")
+    private String f500h;
 
     /**
-     * Наименование части
+     * Номер секции или части
      */
-    @ApiFormField(nameField = "cmp-vgpgyw",typeField = "textbox")
-    private String fcmp_vgpgyw;
+    @ApiFormField(nameField = "500i",typeField = "textbox")
+    private String f500i;
 
     /**
-     * Язык заглавия
+     * Форма подразделения
      */
-    @ApiFormField(nameField = "cmp-id5s7p",typeField = "textbox")
-    private String fcmp_id5s7p;
+    @ApiFormField(nameField = "500j",typeField = "textbox")
+    private String f500j;
 
     /**
-     * Заглавие обложки
+     * Дата публикации сведений
      */
-    @ApiFormField(nameField = "cmp-78isiw",typeField = "textbox")
-    private String fcmp_78isiw;
+    @ApiFormField(nameField = "500k",typeField = "textbox")
+    private String f500k;
 
     /**
-     * Сведения, относящиеся к заглавию
+     * Форма подзаголовка
      */
-    @ApiFormField(nameField = "cmp-fsryh2",typeField = "textbox")
-    private String fcmp_fsryh2;
+    @ApiFormField(nameField = "500l",typeField = "textbox")
+    private String f500l;
 
     /**
-     * Прежнее основное заглавие
+     * Язык (в части заголовка)
      */
-    @ApiFormField(nameField = "cmp-7prgul",typeField = "textbox")
-    private String fcmp_7prgul;
+    @ApiFormField(nameField = "500m",typeField = "textbox")
+    private String f500m;
 
     /**
-     * Сведения, относящиеся к заглавию
+     * Разная информация
      */
-    @ApiFormField(nameField = "cmp-pkch5i",typeField = "textbox")
-    private String fcmp_pkch5i;
+    @ApiFormField(nameField = "500n",typeField = "textbox")
+    private String f500n;
 
     /**
-     * Номер части
+     * Версия (или дата версии)
      */
-    @ApiFormField(nameField = "cmp-nfggxu",typeField = "textbox")
-    private String fcmp_nfggxu;
+    @ApiFormField(nameField = "500q",typeField = "textbox")
+    private String f500q;
 
     /**
-     * Наименование части
+     * Способ исполнения (для музыки)
      */
-    @ApiFormField(nameField = "cmp-orr5va",typeField = "textbox")
-    private String fcmp_orr5va;
+    @ApiFormField(nameField = "500r",typeField = "textbox")
+    private String f500r;
 
     /**
-     * Тома или даты выхода документа под прежним заглавием
+     * Числовое обозначение (для музыки)
      */
-    @ApiFormField(nameField = "cmp-gbkw6y",typeField = "textbox")
-    private String fcmp_gbkw6y;
+    @ApiFormField(nameField = "500s",typeField = "textbox")
+    private String f500s;
 
     /**
-     * ISSN прежнего заглавия
+     * Ключ (для музыки)
      */
-    @ApiFormField(nameField = "cmp-2e4djs",typeField = "textbox")
-    private String fcmp_2e4djs;
+    @ApiFormField(nameField = "500u",typeField = "textbox")
+    private String f500u;
 
     /**
-     * Ключевое заглавие
+     * Обозначение объема
      */
-    @ApiFormField(nameField = "cmp-c63clf",typeField = "textbox")
-    private String fcmp_c63clf;
+    @ApiFormField(nameField = "500v",typeField = "textbox")
+    private String f500v;
 
     /**
-     * Уточнение
+     * Классифицированная учетная запись (для музыки)
      */
-    @ApiFormField(nameField = "cmp-wfenvg",typeField = "textbox")
-    private String fcmp_wfenvg;
+    @ApiFormField(nameField = "500w",typeField = "textbox")
+    private String f500w;
 
     /**
-     * Перевод заглавия
+     * Актуальное подразделение
      */
-    @ApiFormField(nameField = "cmp-v9cvxg",typeField = "textbox")
-    private String fcmp_v9cvxg;
+    @ApiFormField(nameField = "500x",typeField = "textbox")
+    private String f500x;
 
     /**
-     * Номер части
+     * Географическое подразделение
      */
-    @ApiFormField(nameField = "cmp-r47ddd",typeField = "textbox")
-    private String fcmp_r47ddd;
+    @ApiFormField(nameField = "500y",typeField = "textbox")
+    private String f500y;
 
     /**
-     * Заглавие части
+     * Хронологическое подразделение
      */
-    @ApiFormField(nameField = "cmp-fbw8yl",typeField = "textbox")
-    private String fcmp_fbw8yl;
+    @ApiFormField(nameField = "500z",typeField = "textbox")
+    private String f500z;
 
     /**
-     * Язык перевода заглавия
+     * Системный код
      */
-    @ApiFormField(nameField = "cmp-z8onot",typeField = "textbox")
-    private String fcmp_z8onot;
-
-    /**
-     * Начальный элемент ввода
-     */
-    @ApiFormField(nameField = "cmp-obue2m",typeField = "textbox")
-    private String fcmp_obue2m;
-
-    /**
-     * Часть имени, отличная от начального элемента ввода
-     */
-    @ApiFormField(nameField = "cmp-jiuuyd",typeField = "textbox")
-    private String fcmp_jiuuyd;
-
-    /**
-     * Дополнения к имени
-     */
-    @ApiFormField(nameField = "cmp-3j845c",typeField = "textbox")
-    private String fcmp_3j845c;
-
-    /**
-     * Даты
-     */
-    @ApiFormField(nameField = "cmp-48s1hp",typeField = "textbox")
-    private String fcmp_48s1hp;
-
-    /**
-     * Тематическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-l2tlwo",typeField = "textbox")
-    private String fcmp_l2tlwo;
-
-    /**
-     * Начальный элемент ввода
-     */
-    @ApiFormField(nameField = "cmp-0riekw",typeField = "textbox")
-    private String fcmp_0riekw;
-
-    /**
-     * Структурное подразделение
-     */
-    @ApiFormField(nameField = "cmp-yu795n",typeField = "textbox")
-    private String fcmp_yu795n;
-
-    /**
-     * Дополнение к наименованию организации или уточнения
-     */
-    @ApiFormField(nameField = "cmp-ioso08",typeField = "textbox")
-    private String fcmp_ioso08;
-
-    /**
-     * Номер совещания
-     */
-    @ApiFormField(nameField = "cmp-chilh7",typeField = "textbox")
-    private String fcmp_chilh7;
-
-    /**
-     * Место проведения совещания
-     */
-    @ApiFormField(nameField = "cmp-3ntduj",typeField = "textbox")
-    private String fcmp_3ntduj;
-
-    /**
-     * Дата проведения совещания
-     */
-    @ApiFormField(nameField = "cmp-jwv4hk",typeField = "textbox")
-    private String fcmp_jwv4hk;
-
-    /**
-     * Инвертированный элемент
-     */
-    @ApiFormField(nameField = "cmp-nn7p92",typeField = "textbox")
-    private String fcmp_nn7p92;
-
-    /**
-     * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
-     */
-    @ApiFormField(nameField = "cmp-aucr0w",typeField = "textbox")
-    private String fcmp_aucr0w;
+    @ApiFormField(nameField = "5002",typeField = "textbox")
+    private String f5002;
 
     /**
      * Номер авторитетной записи
      */
-    @ApiFormField(nameField = "cmp-yjkgyj",typeField = "textbox")
-    private String fcmp_yjkgyj;
+    @ApiFormField(nameField = "5003",typeField = "textbox")
+    private String f5003;
+
+    /**
+     * Коллективное однородное заглаиве
+     */
+    @ApiFormField(nameField = "501a",typeField = "textbox")
+    private String f501a;
+
+    /**
+     * Общее материальное обозначение
+     */
+    @ApiFormField(nameField = "501b",typeField = "textbox")
+    private String f501b;
+
+    /**
+     * Коллективный однородный подзаголовок
+     */
+    @ApiFormField(nameField = "501e",typeField = "textbox")
+    private String f501e;
+
+    /**
+     * Форма подразделения
+     */
+    @ApiFormField(nameField = "501j",typeField = "textbox")
+    private String f501j;
+
+    /**
+     * Дата публикации и пр.
+     */
+    @ApiFormField(nameField = "501k",typeField = "textbox")
+    private String f501k;
+
+    /**
+     * Язык (когда часть заголовка)
+     */
+    @ApiFormField(nameField = "501m",typeField = "textbox")
+    private String f501m;
+
+    /**
+     * Способ исполнения (для музыки)
+     */
+    @ApiFormField(nameField = "501r",typeField = "textbox")
+    private String f501r;
+
+    /**
+     * Числовое обозначение (для музыки)
+     */
+    @ApiFormField(nameField = "501s",typeField = "textbox")
+    private String f501s;
+
+    /**
+     * Ключ (для музыки)
+     */
+    @ApiFormField(nameField = "501u",typeField = "textbox")
+    private String f501u;
+
+    /**
+     * Классифицированная учетная запись (для музыки)
+     */
+    @ApiFormField(nameField = "501w",typeField = "textbox")
+    private String f501w;
+
+    /**
+     * Актуальное подразделение
+     */
+    @ApiFormField(nameField = "501x",typeField = "textbox")
+    private String f501x;
+
+    /**
+     * Географическое подразделение
+     */
+    @ApiFormField(nameField = "501y",typeField = "textbox")
+    private String f501y;
+
+    /**
+     * Хронологическое подразделение
+     */
+    @ApiFormField(nameField = "501z",typeField = "textbox")
+    private String f501z;
+
+    /**
+     * Системный код
+     */
+    @ApiFormField(nameField = "5012",typeField = "textbox")
+    private String f5012;
+
+    /**
+     * Номер авторитетной записи
+     */
+    @ApiFormField(nameField = "5013",typeField = "textbox")
+    private String f5013;
+
+    /**
+     * Форма относящаяся к рубрике
+     */
+    @ApiFormField(nameField = "502a",typeField = "textbox")
+    private String f502a;
+
+    /**
+     * Форма подзаголовка
+     */
+    @ApiFormField(nameField = "502b",typeField = "textbox")
+    private String f502b;
+
+    /**
+     * Месяц и день
+     */
+    @ApiFormField(nameField = "502d",typeField = "textbox")
+    private String f502d;
+
+    /**
+     * Фамилия
+     */
+    @ApiFormField(nameField = "502e",typeField = "textbox")
+    private String f502e;
+
+    /**
+     * Имя
+     */
+    @ApiFormField(nameField = "502f",typeField = "textbox")
+    private String f502f;
+
+    /**
+     * Определитель имени собственного
+     */
+    @ApiFormField(nameField = "502h",typeField = "textbox")
+    private String f502h;
+
+    /**
+     * Заглавие части
+     */
+    @ApiFormField(nameField = "502i",typeField = "textbox")
+    private String f502i;
+
+    /**
+     * Год
+     */
+    @ApiFormField(nameField = "502j",typeField = "textbox")
+    private String f502j;
+
+    /**
+     * Нумерация (арабская)
+     */
+    @ApiFormField(nameField = "502k",typeField = "textbox")
+    private String f502k;
+
+    /**
+     * Нумерация (римская)
+     */
+    @ApiFormField(nameField = "502l",typeField = "textbox")
+    private String f502l;
+
+    /**
+     * Местоположение
+     */
+    @ApiFormField(nameField = "502m",typeField = "textbox")
+    private String f502m;
+
+    /**
+     * Учреждение в местоположении
+     */
+    @ApiFormField(nameField = "502n",typeField = "textbox")
+    private String f502n;
+
+    /**
+     * Параллельное заглавие
+     */
+    @ApiFormField(nameField = "510a",typeField = "textbox")
+    private String f510a;
+
+    /**
+     * Сведения, относящиеся к заглавию
+     */
+    @ApiFormField(nameField = "510e",typeField = "textbox")
+    private String f510e;
+
+    /**
+     * Номер части
+     */
+    @ApiFormField(nameField = "510h",typeField = "textbox")
+    private String f510h;
+
+    /**
+     * Наименование части
+     */
+    @ApiFormField(nameField = "510i",typeField = "textbox")
+    private String f510i;
+
+    /**
+     * Язык заглавия
+     */
+    @ApiFormField(nameField = "510z",typeField = "textbox")
+    private String f510z;
+
+    /**
+     * Заглавие обложки
+     */
+    @ApiFormField(nameField = "512a",typeField = "textbox")
+    private String f512a;
+
+    /**
+     * Сведения, относящиеся к заглавию
+     */
+    @ApiFormField(nameField = "512e",typeField = "textbox")
+    private String f512e;
+
+    /**
+     * Добавочное заглавие титульного листа
+     */
+    @ApiFormField(nameField = "513a",typeField = "textbox")
+    private String f513a;
+
+    /**
+     * Сведения относящиеся к заглавию
+     */
+    @ApiFormField(nameField = "513e",typeField = "textbox")
+    private String f513e;
+
+    /**
+     * Номер части
+     */
+    @ApiFormField(nameField = "513h",typeField = "textbox")
+    private String f513h;
+
+    /**
+     * Наименование части
+     */
+    @ApiFormField(nameField = "513i",typeField = "textbox")
+    private String f513i;
+
+    /**
+     * Прежнее основное заглавие
+     */
+    @ApiFormField(nameField = "520a",typeField = "textbox")
+    private String f520a;
+
+    /**
+     * Сведения, относящиеся к заглавию
+     */
+    @ApiFormField(nameField = "520e",typeField = "textbox")
+    private String f520e;
+
+    /**
+     * Номер части
+     */
+    @ApiFormField(nameField = "520h",typeField = "textbox")
+    private String f520h;
+
+    /**
+     * Наименование части
+     */
+    @ApiFormField(nameField = "520i",typeField = "textbox")
+    private String f520i;
+
+    /**
+     * Тома или даты выхода документа под прежним заглавием
+     */
+    @ApiFormField(nameField = "520j",typeField = "textbox")
+    private String f520j;
+
+    /**
+     * ISSN прежнего заглавия
+     */
+    @ApiFormField(nameField = "520x",typeField = "textbox")
+    private String f520x;
+
+    /**
+     * Ключевое заглавие
+     */
+    @ApiFormField(nameField = "530a",typeField = "textbox")
+    private String f530a;
+
+    /**
+     * Уточнение
+     */
+    @ApiFormField(nameField = "530b",typeField = "textbox")
+    private String f530b;
+
+    /**
+     * Перевод заглавия
+     */
+    @ApiFormField(nameField = "541a",typeField = "textbox")
+    private String f541a;
+
+    /**
+     * Номер части
+     */
+    @ApiFormField(nameField = "541h",typeField = "textbox")
+    private String f541h;
+
+    /**
+     * Заглавие части
+     */
+    @ApiFormField(nameField = "541i",typeField = "textbox")
+    private String f541i;
+
+    /**
+     * Язык перевода заглавия
+     */
+    @ApiFormField(nameField = "541z",typeField = "textbox")
+    private String f541z;
 
     /**
      * Начальный элемент ввода
      */
-    @ApiFormField(nameField = "cmp-si8n4a",typeField = "textbox")
-    private String fcmp_si8n4a;
+    @ApiFormField(nameField = "600a",typeField = "textbox")
+    private String f600a;
+
+    /**
+     * Часть имени, отличная от начального элемента ввода
+     */
+    @ApiFormField(nameField = "600b",typeField = "textbox")
+    private String f600b;
+
+    /**
+     * Дополнения к имени
+     */
+    @ApiFormField(nameField = "600c",typeField = "textbox")
+    private String f600c;
+
+    /**
+     * Даты
+     */
+    @ApiFormField(nameField = "600f",typeField = "textbox")
+    private String f600f;
 
     /**
      * Тематическая подрубрика
      */
-    @ApiFormField(nameField = "cmp-4ts4dx",typeField = "textbox")
-    private String fcmp_4ts4dx;
-
-    /**
-     * Географическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-ctryeb",typeField = "textbox")
-    private String fcmp_ctryeb;
-
-    /**
-     * Хронологическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-gajp9c",typeField = "textbox")
-    private String fcmp_gajp9c;
-
-    /**
-     * Тематическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-yixkyu",typeField = "textbox")
-    private String fcmp_yixkyu;
-
-    /**
-     * Географическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-2puodq",typeField = "textbox")
-    private String fcmp_2puodq;
-
-    /**
-     * Хронологическая подрубрика
-     */
-    @ApiFormField(nameField = "cmp-num7gz",typeField = "textbox")
-    private String fcmp_num7gz;
+    @ApiFormField(nameField = "600x",typeField = "textbox")
+    private String f600x;
 
     /**
      * Начальный элемент ввода
      */
-    @ApiFormField(nameField = "cmp-7jziez",typeField = "textbox")
-    private String fcmp_7jziez;
+    @ApiFormField(nameField = "601a",typeField = "textbox")
+    private String f601a;
+
+    /**
+     * Структурное подразделение
+     */
+    @ApiFormField(nameField = "601b",typeField = "textbox")
+    private String f601b;
+
+    /**
+     * Дополнение к наименованию организации или уточнения
+     */
+    @ApiFormField(nameField = "601c",typeField = "textbox")
+    private String f601c;
+
+    /**
+     * Номер совещания
+     */
+    @ApiFormField(nameField = "601d",typeField = "textbox")
+    private String f601d;
+
+    /**
+     * Место проведения совещания
+     */
+    @ApiFormField(nameField = "601e",typeField = "textbox")
+    private String f601e;
+
+    /**
+     * Дата проведения совещания
+     */
+    @ApiFormField(nameField = "601f",typeField = "textbox")
+    private String f601f;
+
+    /**
+     * Инвертированный элемент
+     */
+    @ApiFormField(nameField = "601g",typeField = "textbox")
+    private String f601g;
+
+    /**
+     * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
+     */
+    @ApiFormField(nameField = "601h",typeField = "textbox")
+    private String f601h;
+
+    /**
+     * Номер авторитетной записи
+     */
+    @ApiFormField(nameField = "601i",typeField = "textbox")
+    private String f601i;
+
+    /**
+     * Начальный элемент ввода
+     */
+    @ApiFormField(nameField = "605a",typeField = "textbox")
+    private String f605a;
 
     /**
      * Тематическая подрубрика
      */
-    @ApiFormField(nameField = "cmp-3e9lq0",typeField = "textbox")
-    private String fcmp_3e9lq0;
+    @ApiFormField(nameField = "605x",typeField = "textbox")
+    private String f605x;
 
     /**
      * Географическая подрубрика
      */
-    @ApiFormField(nameField = "cmp-kh3lsl",typeField = "textbox")
-    private String fcmp_kh3lsl;
+    @ApiFormField(nameField = "605y",typeField = "textbox")
+    private String f605y;
 
     /**
      * Хронологическая подрубрика
      */
-    @ApiFormField(nameField = "cmp-9c7tzl",typeField = "textbox")
-    private String fcmp_9c7tzl;
+    @ApiFormField(nameField = "601z",typeField = "textbox")
+    private String f601z;
+
+    /**
+     * НАчальный элемент ввода
+     */
+    @ApiFormField(nameField = "606a",typeField = "textbox")
+    private String f606a;
+
+    /**
+     * Тематическая подрубрика
+     */
+    @ApiFormField(nameField = "606x",typeField = "textbox")
+    private String f606x;
+
+    /**
+     * Географическая подрубрика
+     */
+    @ApiFormField(nameField = "606y",typeField = "textbox")
+    private String f606y;
+
+    /**
+     * Хронологическая подрубрика
+     */
+    @ApiFormField(nameField = "606z",typeField = "textbox")
+    private String f606z;
+
+    /**
+     * Начальный элемент ввода
+     */
+    @ApiFormField(nameField = "607a",typeField = "textbox")
+    private String f607a;
+
+    /**
+     * Тематическая подрубрика
+     */
+    @ApiFormField(nameField = "607x",typeField = "textbox")
+    private String f607x;
+
+    /**
+     * Географическая подрубрика
+     */
+    @ApiFormField(nameField = "607y",typeField = "textbox")
+    private String f607y;
+
+    /**
+     * Хронологическая подрубрика
+     */
+    @ApiFormField(nameField = "607z",typeField = "textbox")
+    private String f607z;
 
     /**
      * Издание
      */
-    @ApiFormField(nameField = "cmp-2joh9k",typeField = "textbox")
-    private String fcmp_2joh9k;
+    @ApiFormField(nameField = "675v",typeField = "textbox")
+    private String f675v;
 
     /**
      * Язык издания
      */
-    @ApiFormField(nameField = "cmp-y93ups",typeField = "textbox")
-    private String fcmp_y93ups;
+    @ApiFormField(nameField = "675z",typeField = "textbox")
+    private String f675z;
 
     /**
      * Индекс классификации
@@ -960,38 +1938,38 @@ public class Autoreferat extends ABook {
     /**
      * Книжный номер
      */
-    @ApiFormField(nameField = "cmp-goivbk",typeField = "textbox")
-    private String fcmp_goivbk;
+    @ApiFormField(nameField = "686b",typeField = "textbox")
+    private String f686b;
 
     /**
      * Классификационная подрубрика
      */
-    @ApiFormField(nameField = "cmp-wudvif",typeField = "textbox")
-    private String fcmp_wudvif;
+    @ApiFormField(nameField = "686c",typeField = "textbox")
+    private String f686c;
 
     /**
      * Код системы
      */
-    @ApiFormField(nameField = "cmp-wz7irn",typeField = "textbox")
-    private String fcmp_wz7irn;
+    @ApiFormField(nameField = "6862",typeField = "textbox")
+    private String f6862;
 
     /**
      * Часть имени, кроме начального элемента ввода
      */
-    @ApiFormField(nameField = "cmp-9t9dby",typeField = "textbox")
-    private String fcmp_9t9dby;
+    @ApiFormField(nameField = "700b",typeField = "textbox")
+    private String f700b;
 
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "cmp-rghp7h",typeField = "textbox")
-    private String fcmp_rghp7h;
+    @ApiFormField(nameField = "700c",typeField = "textbox")
+    private String f700c;
 
     /**
      * Римские цифры
      */
-    @ApiFormField(nameField = "cmp-1jjlw8",typeField = "textbox")
-    private String fcmp_1jjlw8;
+    @ApiFormField(nameField = "700d",typeField = "textbox")
+    private String f700d;
 
     /**
      * Даты
@@ -1002,8 +1980,8 @@ public class Autoreferat extends ABook {
     /**
      * Расширение инициалов личного имени
      */
-    @ApiFormField(nameField = "cmp-6fntbc",typeField = "textbox")
-    private String fcmp_6fntbc;
+    @ApiFormField(nameField = "700g",typeField = "textbox")
+    private String f700g;
 
     /**
      * Место работы/адрес
@@ -1020,14 +1998,14 @@ public class Autoreferat extends ABook {
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "cmp-jmx7so",typeField = "textbox")
-    private String fcmp_jmx7so;
+    @ApiFormField(nameField = "7004",typeField = "textbox")
+    private String f7004;
 
     /**
      * Начальный элемент ввода (Фамилия)
      */
-    @ApiFormField(nameField = "cmp-3jipa9",typeField = "textbox")
-    private String fcmp_3jipa9;
+    @ApiFormField(nameField = "701a",typeField = "textbox")
+    private String f701a;
 
     /**
      * Часть имени, кроме начального элемента ввода
@@ -1038,14 +2016,14 @@ public class Autoreferat extends ABook {
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "cmp-toq7w4",typeField = "textbox")
-    private String fcmp_toq7w4;
+    @ApiFormField(nameField = "701c",typeField = "textbox")
+    private String f701c;
 
     /**
      * Римские цифры
      */
-    @ApiFormField(nameField = "cmp-lcj4dd",typeField = "textbox")
-    private String fcmp_lcj4dd;
+    @ApiFormField(nameField = "701d",typeField = "textbox")
+    private String f701d;
 
     /**
      * Даты
@@ -1056,14 +2034,14 @@ public class Autoreferat extends ABook {
     /**
      * Расширение инициалов личного имени
      */
-    @ApiFormField(nameField = "cmp-bpm7o8",typeField = "textbox")
-    private String fcmp_bpm7o8;
+    @ApiFormField(nameField = "701g",typeField = "textbox")
+    private String f701g;
 
     /**
      * Место работы/адрес
      */
-    @ApiFormField(nameField = "cmp-4ygna4",typeField = "textbox")
-    private String fcmp_4ygna4;
+    @ApiFormField(nameField = "701p",typeField = "textbox")
+    private String f701p;
 
     /**
      * Номер авторитетной записи
@@ -1074,260 +2052,404 @@ public class Autoreferat extends ABook {
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "cmp-u3i9al",typeField = "textbox")
-    private String fcmp_u3i9al;
+    @ApiFormField(nameField = "7014",typeField = "textbox")
+    private String f7014;
 
     /**
      * Начальный элемент ввода (Фамилия)
      */
-    @ApiFormField(nameField = "cmp-jcyhz3",typeField = "textbox")
-    private String fcmp_jcyhz3;
+    @ApiFormField(nameField = "702a",typeField = "textbox")
+    private String f702a;
 
     /**
      * Часть имени, кроме начального элемента ввода
      */
-    @ApiFormField(nameField = "cmp-tn35dc",typeField = "textbox")
-    private String fcmp_tn35dc;
+    @ApiFormField(nameField = "702b",typeField = "textbox")
+    private String f702b;
 
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "cmp-e44po5",typeField = "textbox")
-    private String fcmp_e44po5;
+    @ApiFormField(nameField = "702c",typeField = "textbox")
+    private String f702c;
 
     /**
      * Римские цифры
      */
-    @ApiFormField(nameField = "cmp-lpeu86",typeField = "textbox")
-    private String fcmp_lpeu86;
+    @ApiFormField(nameField = "702d",typeField = "textbox")
+    private String f702d;
 
     /**
      * Даты
      */
-    @ApiFormField(nameField = "cmp-7515ab",typeField = "textbox")
-    private String fcmp_7515ab;
+    @ApiFormField(nameField = "702f",typeField = "textbox")
+    private String f702f;
 
     /**
      * Расширение инициалов личного имени
      */
-    @ApiFormField(nameField = "cmp-9gog5t",typeField = "textbox")
-    private String fcmp_9gog5t;
+    @ApiFormField(nameField = "702g",typeField = "textbox")
+    private String f702g;
 
     /**
      * Место работы/адрес
      */
-    @ApiFormField(nameField = "cmp-48xyin",typeField = "textbox")
-    private String fcmp_48xyin;
+    @ApiFormField(nameField = "702p",typeField = "textbox")
+    private String f702p;
 
     /**
      * Номер авторитетной записи
      */
-    @ApiFormField(nameField = "cmp-267n2z",typeField = "textbox")
-    private String fcmp_267n2z;
+    @ApiFormField(nameField = "7023",typeField = "textbox")
+    private String f7023;
 
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "cmp-abkg6e",typeField = "textbox")
-    private String fcmp_abkg6e;
+    @ApiFormField(nameField = "7024",typeField = "textbox")
+    private String f7024;
 
     /**
      * Начальный элемент ввода
      */
-    @ApiFormField(nameField = "cmp-gsu5sp",typeField = "textbox")
-    private String fcmp_gsu5sp;
+    @ApiFormField(nameField = "710a",typeField = "textbox")
+    private String f710a;
 
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "cmp-18wm4h",typeField = "textbox")
-    private String fcmp_18wm4h;
+    @ApiFormField(nameField = "710b",typeField = "textbox")
+    private String f710b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "cmp-oex7h1",typeField = "textbox")
-    private String fcmp_oex7h1;
+    @ApiFormField(nameField = "710c",typeField = "textbox")
+    private String f710c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "cmp-at9l93",typeField = "textbox")
-    private String fcmp_at9l93;
+    @ApiFormField(nameField = "710d",typeField = "textbox")
+    private String f710d;
 
     /**
      * Место проведения совещания
      */
-    @ApiFormField(nameField = "cmp-is3xn3",typeField = "textbox")
-    private String fcmp_is3xn3;
+    @ApiFormField(nameField = "710e",typeField = "textbox")
+    private String f710e;
 
     /**
      * Дата совещания
      */
-    @ApiFormField(nameField = "cmp-8dy2we",typeField = "textbox")
-    private String fcmp_8dy2we;
+    @ApiFormField(nameField = "710f",typeField = "textbox")
+    private String f710f;
 
     /**
      * Инвертированный элемент
      */
-    @ApiFormField(nameField = "cmp-ka42ib",typeField = "textbox")
-    private String fcmp_ka42ib;
+    @ApiFormField(nameField = "710g",typeField = "textbox")
+    private String f710g;
 
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "cmp-cpbxvv",typeField = "textbox")
-    private String fcmp_cpbxvv;
+    @ApiFormField(nameField = "710h",typeField = "textbox")
+    private String f710h;
 
     /**
      * Местонахождение организации
      */
-    @ApiFormField(nameField = "cmp-i9kssw",typeField = "textbox")
-    private String fcmp_i9kssw;
+    @ApiFormField(nameField = "710p",typeField = "textbox")
+    private String f710p;
 
     /**
      * Номер авторитетной записи
      */
-    @ApiFormField(nameField = "cmp-hidbhu",typeField = "textbox")
-    private String fcmp_hidbhu;
+    @ApiFormField(nameField = "7103",typeField = "textbox")
+    private String f7103;
 
     /**
      * Начальный элемент ввода
      */
-    @ApiFormField(nameField = "cmp-hmsw3x",typeField = "textbox")
-    private String fcmp_hmsw3x;
+    @ApiFormField(nameField = "711a",typeField = "textbox")
+    private String f711a;
 
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "cmp-ke5q5n",typeField = "textbox")
-    private String fcmp_ke5q5n;
+    @ApiFormField(nameField = "711b",typeField = "textbox")
+    private String f711b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "cmp-5uoxxb",typeField = "textbox")
-    private String fcmp_5uoxxb;
+    @ApiFormField(nameField = "711c",typeField = "textbox")
+    private String f711c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "cmp-yr55hh",typeField = "textbox")
-    private String fcmp_yr55hh;
+    @ApiFormField(nameField = "711d",typeField = "textbox")
+    private String f711d;
 
     /**
      * Место проведения совещания
      */
-    @ApiFormField(nameField = "cmp-3e77q3",typeField = "textbox")
-    private String fcmp_3e77q3;
+    @ApiFormField(nameField = "711e",typeField = "textbox")
+    private String f711e;
 
     /**
      * Дата совещания
      */
-    @ApiFormField(nameField = "cmp-t7my6n",typeField = "textbox")
-    private String fcmp_t7my6n;
+    @ApiFormField(nameField = "711f",typeField = "textbox")
+    private String f711f;
 
     /**
      * Инвертированный элемент
      */
-    @ApiFormField(nameField = "cmp-3yf6dn",typeField = "textbox")
-    private String fcmp_3yf6dn;
+    @ApiFormField(nameField = "711g",typeField = "textbox")
+    private String f711g;
 
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "cmp-n7mu55",typeField = "textbox")
-    private String fcmp_n7mu55;
+    @ApiFormField(nameField = "711h",typeField = "textbox")
+    private String f711h;
 
     /**
      * Местонахождение организации
      */
-    @ApiFormField(nameField = "cmp-a09ea7",typeField = "textbox")
-    private String fcmp_a09ea7;
+    @ApiFormField(nameField = "711p",typeField = "textbox")
+    private String f711p;
 
     /**
      * Номер авторитетной записи
      */
-    @ApiFormField(nameField = "cmp-mqi9lf",typeField = "textbox")
-    private String fcmp_mqi9lf;
+    @ApiFormField(nameField = "7113",typeField = "textbox")
+    private String f7113;
 
     /**
      * Начальный элемент ввода
      */
-    @ApiFormField(nameField = "cmp-vbcmrb",typeField = "textbox")
-    private String fcmp_vbcmrb;
+    @ApiFormField(nameField = "712a",typeField = "textbox")
+    private String f712a;
 
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "cmp-asnq3o",typeField = "textbox")
-    private String fcmp_asnq3o;
+    @ApiFormField(nameField = "712b",typeField = "textbox")
+    private String f712b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "cmp-bbtzcb",typeField = "textbox")
-    private String fcmp_bbtzcb;
+    @ApiFormField(nameField = "712c",typeField = "textbox")
+    private String f712c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "cmp-pxihly",typeField = "textbox")
-    private String fcmp_pxihly;
+    @ApiFormField(nameField = "712d",typeField = "textbox")
+    private String f712d;
 
     /**
      * Место проведения совещания
      */
-    @ApiFormField(nameField = "cmp-fnv0zo",typeField = "textbox")
-    private String fcmp_fnv0zo;
+    @ApiFormField(nameField = "712e",typeField = "textbox")
+    private String f712e;
 
     /**
      * Дата совещания
      */
-    @ApiFormField(nameField = "cmp-1k2pra",typeField = "textbox")
-    private String fcmp_1k2pra;
+    @ApiFormField(nameField = "712f",typeField = "textbox")
+    private String f712f;
 
     /**
      * Инвертированный элемент
      */
-    @ApiFormField(nameField = "cmp-zjc5bd",typeField = "textbox")
-    private String fcmp_zjc5bd;
+    @ApiFormField(nameField = "712g",typeField = "textbox")
+    private String f712g;
 
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "cmp-e849ad",typeField = "textbox")
-    private String fcmp_e849ad;
+    @ApiFormField(nameField = "712h",typeField = "textbox")
+    private String f712h;
 
     /**
      * Местонахождение организации
      */
-    @ApiFormField(nameField = "cmp-5h9v6b",typeField = "textbox")
-    private String fcmp_5h9v6b;
+    @ApiFormField(nameField = "712p",typeField = "textbox")
+    private String f712p;
 
     /**
      * Номер авторитетной записи
      */
-    @ApiFormField(nameField = "cmp-j8wyw2",typeField = "textbox")
-    private String fcmp_j8wyw2;
+    @ApiFormField(nameField = "7123",typeField = "textbox")
+    private String f7123;
 
     /**
      * Страна
      */
-    @ApiFormField(nameField = "cmp-r56s00",typeField = "textbox")
-    private String fcmp_r56s00;
+    @ApiFormField(nameField = "801a",typeField = "textbox")
+    private String f801a;
 
     /**
      * Агентство
      */
-    @ApiFormField(nameField = "cmp-hkvapz",typeField = "textbox")
-    private String fcmp_hkvapz;
+    @ApiFormField(nameField = "801b",typeField = "textbox")
+    private String f801b;
 
     /**
      * Дата составления
      */
-    @ApiFormField(nameField = "cmp-6y932b",typeField = "textbox")
-    private String fcmp_6y932b;
+    @ApiFormField(nameField = "801c",typeField = "textbox")
+    private String f801c;
+
+    /**
+     * Имя хоста
+     */
+    @ApiFormField(nameField = "856a",typeField = "textbox")
+    private String f856a;
+
+    /**
+     * Номер доступа
+     */
+    @ApiFormField(nameField = "856b",typeField = "textbox")
+    private String f856b;
+
+    /**
+     * Сжатая информация
+     */
+    @ApiFormField(nameField = "856c",typeField = "textbox")
+    private String f856c;
+
+    /**
+     * Дорожка
+     */
+    @ApiFormField(nameField = "856d",typeField = "textbox")
+    private String f856d;
+
+    /**
+     * Дата и час консультации и доступа
+     */
+    @ApiFormField(nameField = "856e",typeField = "textbox")
+    private String f856e;
+
+    /**
+     * Электронное название
+     */
+    @ApiFormField(nameField = "856f",typeField = "textbox")
+    private String f856f;
+
+    /**
+     * Просессор запроса
+     */
+    @ApiFormField(nameField = "856g",typeField = "textbox")
+    private String f856g;
+
+    /**
+     * Инструкции
+     */
+    @ApiFormField(nameField = "856h",typeField = "textbox")
+    private String f856h;
+
+    /**
+     * Биты в секунду
+     */
+    @ApiFormField(nameField = "856i",typeField = "textbox")
+    private String f856i;
+
+    /**
+     * Пароль
+     */
+    @ApiFormField(nameField = "856j",typeField = "textbox")
+    private String f856j;
+
+    /**
+     * Вход в систему/логин
+     */
+    @ApiFormField(nameField = "856k",typeField = "textbox")
+    private String f856k;
+
+    /**
+     * Контакты для помощи в доступе
+     */
+    @ApiFormField(nameField = "856l",typeField = "textbox")
+    private String f856l;
+
+    /**
+     * Наименование месторасположения хоста
+     */
+    @ApiFormField(nameField = "856m",typeField = "textbox")
+    private String f856m;
+
+    /**
+     * Операционная система
+     */
+    @ApiFormField(nameField = "856n",typeField = "textbox")
+    private String f856n;
+
+    /**
+     * Порт
+     */
+    @ApiFormField(nameField = "856o",typeField = "textbox")
+    private String f856o;
+
+    /**
+     * Электронный тип формата
+     */
+    @ApiFormField(nameField = "856p",typeField = "textbox")
+    private String f856p;
+
+    /**
+     * Параметры настройки
+     */
+    @ApiFormField(nameField = "856q",typeField = "textbox")
+    private String f856q;
+
+    /**
+     * Размер файла
+     */
+    @ApiFormField(nameField = "856r",typeField = "textbox")
+    private String f856r;
+
+    /**
+     * Предельная эмуляция
+     */
+    @ApiFormField(nameField = "856s",typeField = "textbox")
+    private String f856s;
+
+    /**
+     * Часы доступа
+     */
+    @ApiFormField(nameField = "856u",typeField = "textbox")
+    private String f856u;
+
+    /**
+     * Номер контрольной записи
+     */
+    @ApiFormField(nameField = "856w",typeField = "textbox")
+    private String f856w;
+
+    /**
+     * Непубличное примечание
+     */
+    @ApiFormField(nameField = "856x",typeField = "textbox")
+    private String f856x;
+
+    /**
+     * Метод доступа
+     */
+    @ApiFormField(nameField = "856y",typeField = "textbox")
+    private String f856y;
+
+    /**
+     * Публичное примечание
+     */
+    @ApiFormField(nameField = "856z",typeField = "textbox")
+    private String f856z;
 
     /**
      * Сигла библиотеки
@@ -1342,34 +2464,16 @@ public class Autoreferat extends ABook {
     private String f9016;
 
     /**
+     * Алфавитный указатель
+     */
+    @ApiFormField(nameField = "909a",typeField = "textbox")
+    private String f909a;
+
+    /**
      * Тематический рубрика
      */
-    @ApiFormField(nameField = "cmp-5iri6j",typeField = "textbox")
-    private String fcmp_5iri6j;
-
-    /**
-     * Факультет
-     */
-    @ApiFormField(nameField = "910a",typeField = "textbox")
-    private String f910a;
-
-    /**
-     * Кафедра
-     */
-    @ApiFormField(nameField = "910b",typeField = "textbox")
-    private String f910b;
-
-    /**
-     * Курс
-     */
-    @ApiFormField(nameField = "910d",typeField = "textbox")
-    private String f910d;
-
-    /**
-     * Дисциплина
-     */
-    @ApiFormField(nameField = "911a",typeField = "textbox")
-    private String f911a;
+    @ApiFormField(nameField = "909b",typeField = "textbox")
+    private String f909b;
 
     /**
      * Номер гос.регистрации
@@ -1697,380 +2801,860 @@ public class Autoreferat extends ABook {
         this.fcmp_hqzf4n = fcmp_hqzf4n;
     }
 
-    public String getFidksdh() {
-        return fidksdh;
+    public String getF001() {
+        return f001;
     }
 
-    public void setFidksdh(String fidksdh) {
-        this.fidksdh = fidksdh;
+    public void setF001(String f001) {
+        this.f001 = f001;
     }
 
-    public String getFcmp_phl5wf() {
-        return fcmp_phl5wf;
+    public String getF010b() {
+        return f010b;
     }
 
-    public void setFcmp_phl5wf(String fcmp_phl5wf) {
-        this.fcmp_phl5wf = fcmp_phl5wf;
+    public void setF010b(String f010b) {
+        this.f010b = f010b;
     }
 
-    public String getFcmp_pl7j0m() {
-        return fcmp_pl7j0m;
+    public String getF010z() {
+        return f010z;
     }
 
-    public void setFcmp_pl7j0m(String fcmp_pl7j0m) {
-        this.fcmp_pl7j0m = fcmp_pl7j0m;
+    public void setF010z(String f010z) {
+        this.f010z = f010z;
     }
 
-    public String getFcmp_gxvuqk() {
-        return fcmp_gxvuqk;
+    public String getF011a() {
+        return f011a;
     }
 
-    public void setFcmp_gxvuqk(String fcmp_gxvuqk) {
-        this.fcmp_gxvuqk = fcmp_gxvuqk;
+    public void setF011a(String f011a) {
+        this.f011a = f011a;
     }
 
-    public String getFcmp_7ryuow() {
-        return fcmp_7ryuow;
+    public String getF011b() {
+        return f011b;
     }
 
-    public void setFcmp_7ryuow(String fcmp_7ryuow) {
-        this.fcmp_7ryuow = fcmp_7ryuow;
+    public void setF011b(String f011b) {
+        this.f011b = f011b;
     }
 
-    public String getFcmp_3h8iil() {
-        return fcmp_3h8iil;
+    public String getF011d() {
+        return f011d;
     }
 
-    public void setFcmp_3h8iil(String fcmp_3h8iil) {
-        this.fcmp_3h8iil = fcmp_3h8iil;
+    public void setF011d(String f011d) {
+        this.f011d = f011d;
     }
 
-    public String getFcmp_u8yl9a() {
-        return fcmp_u8yl9a;
+    public String getF011y() {
+        return f011y;
     }
 
-    public void setFcmp_u8yl9a(String fcmp_u8yl9a) {
-        this.fcmp_u8yl9a = fcmp_u8yl9a;
+    public void setF011y(String f011y) {
+        this.f011y = f011y;
     }
 
-    public String getFcmp_5grpy9() {
-        return fcmp_5grpy9;
+    public String getF011z() {
+        return f011z;
     }
 
-    public void setFcmp_5grpy9(String fcmp_5grpy9) {
-        this.fcmp_5grpy9 = fcmp_5grpy9;
+    public void setF011z(String f011z) {
+        this.f011z = f011z;
     }
 
-    public String getFcmp_kaxb3b() {
-        return fcmp_kaxb3b;
+    public String getF012a() {
+        return f012a;
     }
 
-    public void setFcmp_kaxb3b(String fcmp_kaxb3b) {
-        this.fcmp_kaxb3b = fcmp_kaxb3b;
+    public void setF012a(String f012a) {
+        this.f012a = f012a;
     }
 
-    public String getFcmp_0rjfra() {
-        return fcmp_0rjfra;
+    public String getF0122() {
+        return f0122;
     }
 
-    public void setFcmp_0rjfra(String fcmp_0rjfra) {
-        this.fcmp_0rjfra = fcmp_0rjfra;
+    public void setF0122(String f0122) {
+        this.f0122 = f0122;
     }
 
-    public String getFcmp_hv1kyr() {
-        return fcmp_hv1kyr;
+    public String getF0125() {
+        return f0125;
     }
 
-    public void setFcmp_hv1kyr(String fcmp_hv1kyr) {
-        this.fcmp_hv1kyr = fcmp_hv1kyr;
+    public void setF0125(String f0125) {
+        this.f0125 = f0125;
     }
 
-    public String getFcmp_qb5k3a() {
-        return fcmp_qb5k3a;
+    public String getF013a() {
+        return f013a;
     }
 
-    public void setFcmp_qb5k3a(String fcmp_qb5k3a) {
-        this.fcmp_qb5k3a = fcmp_qb5k3a;
+    public void setF013a(String f013a) {
+        this.f013a = f013a;
     }
 
-    public String getFcmp_dm9yst() {
-        return fcmp_dm9yst;
+    public String getF013b() {
+        return f013b;
     }
 
-    public void setFcmp_dm9yst(String fcmp_dm9yst) {
-        this.fcmp_dm9yst = fcmp_dm9yst;
+    public void setF013b(String f013b) {
+        this.f013b = f013b;
     }
 
-    public String getFcmp_rcgb3o() {
-        return fcmp_rcgb3o;
+    public String getF013d() {
+        return f013d;
     }
 
-    public void setFcmp_rcgb3o(String fcmp_rcgb3o) {
-        this.fcmp_rcgb3o = fcmp_rcgb3o;
+    public void setF013d(String f013d) {
+        this.f013d = f013d;
     }
 
-    public String getFcmp_1nagv7() {
-        return fcmp_1nagv7;
+    public String getF013z() {
+        return f013z;
     }
 
-    public void setFcmp_1nagv7(String fcmp_1nagv7) {
-        this.fcmp_1nagv7 = fcmp_1nagv7;
+    public void setF013z(String f013z) {
+        this.f013z = f013z;
     }
 
-    public String getFcmp_q44ozp() {
-        return fcmp_q44ozp;
+    public String getF014a() {
+        return f014a;
     }
 
-    public void setFcmp_q44ozp(String fcmp_q44ozp) {
-        this.fcmp_q44ozp = fcmp_q44ozp;
+    public void setF014a(String f014a) {
+        this.f014a = f014a;
     }
 
-    public String getFcmp_vj51eb() {
-        return fcmp_vj51eb;
+    public String getF014z() {
+        return f014z;
     }
 
-    public void setFcmp_vj51eb(String fcmp_vj51eb) {
-        this.fcmp_vj51eb = fcmp_vj51eb;
+    public void setF014z(String f014z) {
+        this.f014z = f014z;
     }
 
-    public String getFcmp_xyq4ic() {
-        return fcmp_xyq4ic;
+    public String getF0142() {
+        return f0142;
     }
 
-    public void setFcmp_xyq4ic(String fcmp_xyq4ic) {
-        this.fcmp_xyq4ic = fcmp_xyq4ic;
+    public void setF0142(String f0142) {
+        this.f0142 = f0142;
     }
 
-    public String getFcmp_gzp554() {
-        return fcmp_gzp554;
+    public String getF015a() {
+        return f015a;
     }
 
-    public void setFcmp_gzp554(String fcmp_gzp554) {
-        this.fcmp_gzp554 = fcmp_gzp554;
+    public void setF015a(String f015a) {
+        this.f015a = f015a;
     }
 
-    public String getFcmp_u42mya() {
-        return fcmp_u42mya;
+    public String getF015b() {
+        return f015b;
     }
 
-    public void setFcmp_u42mya(String fcmp_u42mya) {
-        this.fcmp_u42mya = fcmp_u42mya;
+    public void setF015b(String f015b) {
+        this.f015b = f015b;
     }
 
-    public String getFcmp_ayqko3() {
-        return fcmp_ayqko3;
+    public String getF015d() {
+        return f015d;
     }
 
-    public void setFcmp_ayqko3(String fcmp_ayqko3) {
-        this.fcmp_ayqko3 = fcmp_ayqko3;
+    public void setF015d(String f015d) {
+        this.f015d = f015d;
     }
 
-    public String getFcmp_jikk5o() {
-        return fcmp_jikk5o;
+    public String getF015z() {
+        return f015z;
     }
 
-    public void setFcmp_jikk5o(String fcmp_jikk5o) {
-        this.fcmp_jikk5o = fcmp_jikk5o;
+    public void setF015z(String f015z) {
+        this.f015z = f015z;
     }
 
-    public String getFcmp_tjky1y() {
-        return fcmp_tjky1y;
+    public String getF016a() {
+        return f016a;
     }
 
-    public void setFcmp_tjky1y(String fcmp_tjky1y) {
-        this.fcmp_tjky1y = fcmp_tjky1y;
+    public void setF016a(String f016a) {
+        this.f016a = f016a;
     }
 
-    public String getFcmp_flci2k() {
-        return fcmp_flci2k;
+    public String getF016b() {
+        return f016b;
     }
 
-    public void setFcmp_flci2k(String fcmp_flci2k) {
-        this.fcmp_flci2k = fcmp_flci2k;
+    public void setF016b(String f016b) {
+        this.f016b = f016b;
     }
 
-    public String getFcmp_zmwjf4() {
-        return fcmp_zmwjf4;
+    public String getF016d() {
+        return f016d;
     }
 
-    public void setFcmp_zmwjf4(String fcmp_zmwjf4) {
-        this.fcmp_zmwjf4 = fcmp_zmwjf4;
+    public void setF016d(String f016d) {
+        this.f016d = f016d;
     }
 
-    public String getFcmp_55njih() {
-        return fcmp_55njih;
+    public String getF016z() {
+        return f016z;
     }
 
-    public void setFcmp_55njih(String fcmp_55njih) {
-        this.fcmp_55njih = fcmp_55njih;
+    public void setF016z(String f016z) {
+        this.f016z = f016z;
     }
 
-    public String getFcmp_1m6no1() {
-        return fcmp_1m6no1;
+    public String getF020a() {
+        return f020a;
     }
 
-    public void setFcmp_1m6no1(String fcmp_1m6no1) {
-        this.fcmp_1m6no1 = fcmp_1m6no1;
+    public void setF020a(String f020a) {
+        this.f020a = f020a;
     }
 
-    public String getFcmp_b2xa27() {
-        return fcmp_b2xa27;
+    public String getF020b() {
+        return f020b;
     }
 
-    public void setFcmp_b2xa27(String fcmp_b2xa27) {
-        this.fcmp_b2xa27 = fcmp_b2xa27;
+    public void setF020b(String f020b) {
+        this.f020b = f020b;
     }
 
-    public String getFcmp_1yd286() {
-        return fcmp_1yd286;
+    public String getF020z() {
+        return f020z;
     }
 
-    public void setFcmp_1yd286(String fcmp_1yd286) {
-        this.fcmp_1yd286 = fcmp_1yd286;
+    public void setF020z(String f020z) {
+        this.f020z = f020z;
     }
 
-    public String getFcmp_9t8svd() {
-        return fcmp_9t8svd;
+    public String getF021a() {
+        return f021a;
     }
 
-    public void setFcmp_9t8svd(String fcmp_9t8svd) {
-        this.fcmp_9t8svd = fcmp_9t8svd;
+    public void setF021a(String f021a) {
+        this.f021a = f021a;
     }
 
-    public String getFcmp_9isal0() {
-        return fcmp_9isal0;
+    public String getF021b() {
+        return f021b;
     }
 
-    public void setFcmp_9isal0(String fcmp_9isal0) {
-        this.fcmp_9isal0 = fcmp_9isal0;
+    public void setF021b(String f021b) {
+        this.f021b = f021b;
     }
 
-    public String getFcmp_qgcbp7() {
-        return fcmp_qgcbp7;
+    public String getF021z() {
+        return f021z;
     }
 
-    public void setFcmp_qgcbp7(String fcmp_qgcbp7) {
-        this.fcmp_qgcbp7 = fcmp_qgcbp7;
+    public void setF021z(String f021z) {
+        this.f021z = f021z;
     }
 
-    public String getFcmp_41syr8() {
-        return fcmp_41syr8;
+    public String getF022a() {
+        return f022a;
     }
 
-    public void setFcmp_41syr8(String fcmp_41syr8) {
-        this.fcmp_41syr8 = fcmp_41syr8;
+    public void setF022a(String f022a) {
+        this.f022a = f022a;
     }
 
-    public String getFcmp_dmjx3v() {
-        return fcmp_dmjx3v;
+    public String getF022b() {
+        return f022b;
     }
 
-    public void setFcmp_dmjx3v(String fcmp_dmjx3v) {
-        this.fcmp_dmjx3v = fcmp_dmjx3v;
+    public void setF022b(String f022b) {
+        this.f022b = f022b;
     }
 
-    public String getFcmp_sov3uf() {
-        return fcmp_sov3uf;
+    public String getF022z() {
+        return f022z;
     }
 
-    public void setFcmp_sov3uf(String fcmp_sov3uf) {
-        this.fcmp_sov3uf = fcmp_sov3uf;
+    public void setF022z(String f022z) {
+        this.f022z = f022z;
     }
 
-    public String getFcmp_oa6frl() {
-        return fcmp_oa6frl;
+    public String getF035a() {
+        return f035a;
     }
 
-    public void setFcmp_oa6frl(String fcmp_oa6frl) {
-        this.fcmp_oa6frl = fcmp_oa6frl;
+    public void setF035a(String f035a) {
+        this.f035a = f035a;
     }
 
-    public String getFcmp_3nc17b() {
-        return fcmp_3nc17b;
+    public String getF035z() {
+        return f035z;
     }
 
-    public void setFcmp_3nc17b(String fcmp_3nc17b) {
-        this.fcmp_3nc17b = fcmp_3nc17b;
+    public void setF035z(String f035z) {
+        this.f035z = f035z;
     }
 
-    public String getFcmp_bnanu7() {
-        return fcmp_bnanu7;
+    public String getF100a() {
+        return f100a;
     }
 
-    public void setFcmp_bnanu7(String fcmp_bnanu7) {
-        this.fcmp_bnanu7 = fcmp_bnanu7;
+    public void setF100a(String f100a) {
+        this.f100a = f100a;
     }
 
-    public String getFcmp_krwyo0() {
-        return fcmp_krwyo0;
+    public String getF100a_1() {
+        return f100a_1;
     }
 
-    public void setFcmp_krwyo0(String fcmp_krwyo0) {
-        this.fcmp_krwyo0 = fcmp_krwyo0;
+    public void setF100a_1(String f100a_1) {
+        this.f100a_1 = f100a_1;
     }
 
-    public String getFcmp_7kimft() {
-        return fcmp_7kimft;
+    public String getF100a_2() {
+        return f100a_2;
     }
 
-    public void setFcmp_7kimft(String fcmp_7kimft) {
-        this.fcmp_7kimft = fcmp_7kimft;
+    public void setF100a_2(String f100a_2) {
+        this.f100a_2 = f100a_2;
     }
 
-    public String getFcmp_pcmsp3() {
-        return fcmp_pcmsp3;
+    public String getF100a_3() {
+        return f100a_3;
     }
 
-    public void setFcmp_pcmsp3(String fcmp_pcmsp3) {
-        this.fcmp_pcmsp3 = fcmp_pcmsp3;
+    public void setF100a_3(String f100a_3) {
+        this.f100a_3 = f100a_3;
     }
 
-    public String getFcmp_oeua6l() {
-        return fcmp_oeua6l;
+    public String getF100a_4() {
+        return f100a_4;
     }
 
-    public void setFcmp_oeua6l(String fcmp_oeua6l) {
-        this.fcmp_oeua6l = fcmp_oeua6l;
+    public void setF100a_4(String f100a_4) {
+        this.f100a_4 = f100a_4;
     }
 
-    public String getFcmp_el2m8g() {
-        return fcmp_el2m8g;
+    public String getF100a_5() {
+        return f100a_5;
     }
 
-    public void setFcmp_el2m8g(String fcmp_el2m8g) {
-        this.fcmp_el2m8g = fcmp_el2m8g;
+    public void setF100a_5(String f100a_5) {
+        this.f100a_5 = f100a_5;
     }
 
-    public String getFcmp_j5rtst() {
-        return fcmp_j5rtst;
+    public String getF100a_6() {
+        return f100a_6;
     }
 
-    public void setFcmp_j5rtst(String fcmp_j5rtst) {
-        this.fcmp_j5rtst = fcmp_j5rtst;
+    public void setF100a_6(String f100a_6) {
+        this.f100a_6 = f100a_6;
     }
 
-    public String getFcmp_v3a2jt() {
-        return fcmp_v3a2jt;
+    public String getF100a_7() {
+        return f100a_7;
     }
 
-    public void setFcmp_v3a2jt(String fcmp_v3a2jt) {
-        this.fcmp_v3a2jt = fcmp_v3a2jt;
+    public void setF100a_7(String f100a_7) {
+        this.f100a_7 = f100a_7;
     }
 
-    public String getFcmp_tc6yjv() {
-        return fcmp_tc6yjv;
+    public String getF100a_8() {
+        return f100a_8;
     }
 
-    public void setFcmp_tc6yjv(String fcmp_tc6yjv) {
-        this.fcmp_tc6yjv = fcmp_tc6yjv;
+    public void setF100a_8(String f100a_8) {
+        this.f100a_8 = f100a_8;
     }
 
-    public String getFcmp_m2rf35() {
-        return fcmp_m2rf35;
+    public String getF100a_9() {
+        return f100a_9;
     }
 
-    public void setFcmp_m2rf35(String fcmp_m2rf35) {
-        this.fcmp_m2rf35 = fcmp_m2rf35;
+    public void setF100a_9(String f100a_9) {
+        this.f100a_9 = f100a_9;
+    }
+
+    public String getF100a_10() {
+        return f100a_10;
+    }
+
+    public void setF100a_10(String f100a_10) {
+        this.f100a_10 = f100a_10;
+    }
+
+    public String getF100a_11() {
+        return f100a_11;
+    }
+
+    public void setF100a_11(String f100a_11) {
+        this.f100a_11 = f100a_11;
+    }
+
+    public String getF100a_12() {
+        return f100a_12;
+    }
+
+    public void setF100a_12(String f100a_12) {
+        this.f100a_12 = f100a_12;
+    }
+
+    public String getF101d() {
+        return f101d;
+    }
+
+    public void setF101d(String f101d) {
+        this.f101d = f101d;
+    }
+
+    public String getF101e() {
+        return f101e;
+    }
+
+    public void setF101e(String f101e) {
+        this.f101e = f101e;
+    }
+
+    public String getF101b() {
+        return f101b;
+    }
+
+    public void setF101b(String f101b) {
+        this.f101b = f101b;
+    }
+
+    public String getF101c() {
+        return f101c;
+    }
+
+    public void setF101c(String f101c) {
+        this.f101c = f101c;
+    }
+
+    public String getF101g() {
+        return f101g;
+    }
+
+    public void setF101g(String f101g) {
+        this.f101g = f101g;
+    }
+
+    public String getF101h() {
+        return f101h;
+    }
+
+    public void setF101h(String f101h) {
+        this.f101h = f101h;
+    }
+
+    public String getF101i() {
+        return f101i;
+    }
+
+    public void setF101i(String f101i) {
+        this.f101i = f101i;
+    }
+
+    public String getF101j() {
+        return f101j;
+    }
+
+    public void setF101j(String f101j) {
+        this.f101j = f101j;
+    }
+
+    public String getF102a() {
+        return f102a;
+    }
+
+    public void setF102a(String f102a) {
+        this.f102a = f102a;
+    }
+
+    public String getF105a() {
+        return f105a;
+    }
+
+    public void setF105a(String f105a) {
+        this.f105a = f105a;
+    }
+
+    public String getF105a_1() {
+        return f105a_1;
+    }
+
+    public void setF105a_1(String f105a_1) {
+        this.f105a_1 = f105a_1;
+    }
+
+    public String getF105a_2() {
+        return f105a_2;
+    }
+
+    public void setF105a_2(String f105a_2) {
+        this.f105a_2 = f105a_2;
+    }
+
+    public String getF105a_3() {
+        return f105a_3;
+    }
+
+    public void setF105a_3(String f105a_3) {
+        this.f105a_3 = f105a_3;
+    }
+
+    public String getF105a_4() {
+        return f105a_4;
+    }
+
+    public void setF105a_4(String f105a_4) {
+        this.f105a_4 = f105a_4;
+    }
+
+    public String getF105a_5() {
+        return f105a_5;
+    }
+
+    public void setF105a_5(String f105a_5) {
+        this.f105a_5 = f105a_5;
+    }
+
+    public String getF105a_6() {
+        return f105a_6;
+    }
+
+    public void setF105a_6(String f105a_6) {
+        this.f105a_6 = f105a_6;
+    }
+
+    public String getF105a_7() {
+        return f105a_7;
+    }
+
+    public void setF105a_7(String f105a_7) {
+        this.f105a_7 = f105a_7;
+    }
+
+    public String getF110a() {
+        return f110a;
+    }
+
+    public void setF110a(String f110a) {
+        this.f110a = f110a;
+    }
+
+    public String getF110a_1() {
+        return f110a_1;
+    }
+
+    public void setF110a_1(String f110a_1) {
+        this.f110a_1 = f110a_1;
+    }
+
+    public String getF110a_2() {
+        return f110a_2;
+    }
+
+    public void setF110a_2(String f110a_2) {
+        this.f110a_2 = f110a_2;
+    }
+
+    public String getF110a_3() {
+        return f110a_3;
+    }
+
+    public void setF110a_3(String f110a_3) {
+        this.f110a_3 = f110a_3;
+    }
+
+    public String getF110a_4() {
+        return f110a_4;
+    }
+
+    public void setF110a_4(String f110a_4) {
+        this.f110a_4 = f110a_4;
+    }
+
+    public String getF110a_5() {
+        return f110a_5;
+    }
+
+    public void setF110a_5(String f110a_5) {
+        this.f110a_5 = f110a_5;
+    }
+
+    public String getF110a_6() {
+        return f110a_6;
+    }
+
+    public void setF110a_6(String f110a_6) {
+        this.f110a_6 = f110a_6;
+    }
+
+    public String getF110a_7() {
+        return f110a_7;
+    }
+
+    public void setF110a_7(String f110a_7) {
+        this.f110a_7 = f110a_7;
+    }
+
+    public String getF110a_8() {
+        return f110a_8;
+    }
+
+    public void setF110a_8(String f110a_8) {
+        this.f110a_8 = f110a_8;
+    }
+
+    public String getF110a_9() {
+        return f110a_9;
+    }
+
+    public void setF110a_9(String f110a_9) {
+        this.f110a_9 = f110a_9;
+    }
+
+    public String getF115a() {
+        return f115a;
+    }
+
+    public void setF115a(String f115a) {
+        this.f115a = f115a;
+    }
+
+    public String getF115a_1() {
+        return f115a_1;
+    }
+
+    public void setF115a_1(String f115a_1) {
+        this.f115a_1 = f115a_1;
+    }
+
+    public String getF115a_12() {
+        return f115a_12;
+    }
+
+    public void setF115a_12(String f115a_12) {
+        this.f115a_12 = f115a_12;
+    }
+
+    public String getF115a_13() {
+        return f115a_13;
+    }
+
+    public void setF115a_13(String f115a_13) {
+        this.f115a_13 = f115a_13;
+    }
+
+    public String getF115a_14() {
+        return f115a_14;
+    }
+
+    public void setF115a_14(String f115a_14) {
+        this.f115a_14 = f115a_14;
+    }
+
+    public String getF115a_15() {
+        return f115a_15;
+    }
+
+    public void setF115a_15(String f115a_15) {
+        this.f115a_15 = f115a_15;
+    }
+
+    public String getF115b() {
+        return f115b;
+    }
+
+    public void setF115b(String f115b) {
+        this.f115b = f115b;
+    }
+
+    public String getF115b_1() {
+        return f115b_1;
+    }
+
+    public void setF115b_1(String f115b_1) {
+        this.f115b_1 = f115b_1;
+    }
+
+    public String getF115b_2() {
+        return f115b_2;
+    }
+
+    public void setF115b_2(String f115b_2) {
+        this.f115b_2 = f115b_2;
+    }
+
+    public String getF115b_3() {
+        return f115b_3;
+    }
+
+    public void setF115b_3(String f115b_3) {
+        this.f115b_3 = f115b_3;
+    }
+
+    public String getF115b_4() {
+        return f115b_4;
+    }
+
+    public void setF115b_4(String f115b_4) {
+        this.f115b_4 = f115b_4;
+    }
+
+    public String getF115b_5() {
+        return f115b_5;
+    }
+
+    public void setF115b_5(String f115b_5) {
+        this.f115b_5 = f115b_5;
+    }
+
+    public String getF115b_6() {
+        return f115b_6;
+    }
+
+    public void setF115b_6(String f115b_6) {
+        this.f115b_6 = f115b_6;
+    }
+
+    public String getF115b_7() {
+        return f115b_7;
+    }
+
+    public void setF115b_7(String f115b_7) {
+        this.f115b_7 = f115b_7;
+    }
+
+    public String getF115b_8() {
+        return f115b_8;
+    }
+
+    public void setF115b_8(String f115b_8) {
+        this.f115b_8 = f115b_8;
+    }
+
+    public String getF115b_9() {
+        return f115b_9;
+    }
+
+    public void setF115b_9(String f115b_9) {
+        this.f115b_9 = f115b_9;
+    }
+
+    public String getF115b_10() {
+        return f115b_10;
+    }
+
+    public void setF115b_10(String f115b_10) {
+        this.f115b_10 = f115b_10;
+    }
+
+    public String getF115a_2() {
+        return f115a_2;
+    }
+
+    public void setF115a_2(String f115a_2) {
+        this.f115a_2 = f115a_2;
+    }
+
+    public String getF115a_3() {
+        return f115a_3;
+    }
+
+    public void setF115a_3(String f115a_3) {
+        this.f115a_3 = f115a_3;
+    }
+
+    public String getF115a_4() {
+        return f115a_4;
+    }
+
+    public void setF115a_4(String f115a_4) {
+        this.f115a_4 = f115a_4;
+    }
+
+    public String getF115a_5() {
+        return f115a_5;
+    }
+
+    public void setF115a_5(String f115a_5) {
+        this.f115a_5 = f115a_5;
+    }
+
+    public String getF115a_6() {
+        return f115a_6;
+    }
+
+    public void setF115a_6(String f115a_6) {
+        this.f115a_6 = f115a_6;
+    }
+
+    public String getF115a_7() {
+        return f115a_7;
+    }
+
+    public void setF115a_7(String f115a_7) {
+        this.f115a_7 = f115a_7;
+    }
+
+    public String getF115a_8() {
+        return f115a_8;
+    }
+
+    public void setF115a_8(String f115a_8) {
+        this.f115a_8 = f115a_8;
+    }
+
+    public String getF115a_9() {
+        return f115a_9;
+    }
+
+    public void setF115a_9(String f115a_9) {
+        this.f115a_9 = f115a_9;
+    }
+
+    public String getF115a_10() {
+        return f115a_10;
+    }
+
+    public void setF115a_10(String f115a_10) {
+        this.f115a_10 = f115a_10;
+    }
+
+    public String getF115a_11() {
+        return f115a_11;
+    }
+
+    public void setF115a_11(String f115a_11) {
+        this.f115a_11 = f115a_11;
+    }
+
+    public String getF135() {
+        return f135;
+    }
+
+    public void setF135(String f135) {
+        this.f135 = f135;
+    }
+
+    public String getF200c() {
+        return f200c;
+    }
+
+    public void setF200c(String f200c) {
+        this.f200c = f200c;
+    }
+
+    public String getF200g() {
+        return f200g;
+    }
+
+    public void setF200g(String f200g) {
+        this.f200g = f200g;
     }
 
     public String getF200v() {
@@ -2081,12 +3665,12 @@ public class Autoreferat extends ABook {
         this.f200v = f200v;
     }
 
-    public String getF205sfgsfgk() {
-        return f205sfgsfgk;
+    public String getF205b() {
+        return f205b;
     }
 
-    public void setF205sfgsfgk(String f205sfgsfgk) {
-        this.f205sfgsfgk = f205sfgsfgk;
+    public void setF205b(String f205b) {
+        this.f205b = f205b;
     }
 
     public String getF205f() {
@@ -2097,12 +3681,12 @@ public class Autoreferat extends ABook {
         this.f205f = f205f;
     }
 
-    public String getFcmp_o3ga4m() {
-        return fcmp_o3ga4m;
+    public String getF207z() {
+        return f207z;
     }
 
-    public void setFcmp_o3ga4m(String fcmp_o3ga4m) {
-        this.fcmp_o3ga4m = fcmp_o3ga4m;
+    public void setF207z(String f207z) {
+        this.f207z = f207z;
     }
 
     public String getF215d() {
@@ -2113,12 +3697,12 @@ public class Autoreferat extends ABook {
         this.f215d = f215d;
     }
 
-    public String getFcmp_y1iiu1() {
-        return fcmp_y1iiu1;
+    public String getF225d() {
+        return f225d;
     }
 
-    public void setFcmp_y1iiu1(String fcmp_y1iiu1) {
-        this.fcmp_y1iiu1 = fcmp_y1iiu1;
+    public void setF225d(String f225d) {
+        this.f225d = f225d;
     }
 
     public String getF225e() {
@@ -2137,36 +3721,36 @@ public class Autoreferat extends ABook {
         this.f225f = f225f;
     }
 
-    public String getFcmp_h3hq1g() {
-        return fcmp_h3hq1g;
+    public String getF225h() {
+        return f225h;
     }
 
-    public void setFcmp_h3hq1g(String fcmp_h3hq1g) {
-        this.fcmp_h3hq1g = fcmp_h3hq1g;
+    public void setF225h(String f225h) {
+        this.f225h = f225h;
     }
 
-    public String getFcmp_6ifobu() {
-        return fcmp_6ifobu;
+    public String getF225i() {
+        return f225i;
     }
 
-    public void setFcmp_6ifobu(String fcmp_6ifobu) {
-        this.fcmp_6ifobu = fcmp_6ifobu;
+    public void setF225i(String f225i) {
+        this.f225i = f225i;
     }
 
-    public String getFcmp_bd51jt() {
-        return fcmp_bd51jt;
+    public String getF225z() {
+        return f225z;
     }
 
-    public void setFcmp_bd51jt(String fcmp_bd51jt) {
-        this.fcmp_bd51jt = fcmp_bd51jt;
+    public void setF225z(String f225z) {
+        this.f225z = f225z;
     }
 
-    public String getFcmp_q1dd1v() {
-        return fcmp_q1dd1v;
+    public String getF225v() {
+        return f225v;
     }
 
-    public void setFcmp_q1dd1v(String fcmp_q1dd1v) {
-        this.fcmp_q1dd1v = fcmp_q1dd1v;
+    public void setF225v(String f225v) {
+        this.f225v = f225v;
     }
 
     public String getF225x() {
@@ -2177,20 +3761,356 @@ public class Autoreferat extends ABook {
         this.f225x = f225x;
     }
 
-    public String getFcmp_505a02() {
-        return fcmp_505a02;
+    public String getF301a() {
+        return f301a;
     }
 
-    public void setFcmp_505a02(String fcmp_505a02) {
-        this.fcmp_505a02 = fcmp_505a02;
+    public void setF301a(String f301a) {
+        this.f301a = f301a;
     }
 
-    public String getFcmp_ceyoio() {
-        return fcmp_ceyoio;
+    public String getF302a() {
+        return f302a;
     }
 
-    public void setFcmp_ceyoio(String fcmp_ceyoio) {
-        this.fcmp_ceyoio = fcmp_ceyoio;
+    public void setF302a(String f302a) {
+        this.f302a = f302a;
+    }
+
+    public String getF303a() {
+        return f303a;
+    }
+
+    public void setF303a(String f303a) {
+        this.f303a = f303a;
+    }
+
+    public String getF304a() {
+        return f304a;
+    }
+
+    public void setF304a(String f304a) {
+        this.f304a = f304a;
+    }
+
+    public String getF305a() {
+        return f305a;
+    }
+
+    public void setF305a(String f305a) {
+        this.f305a = f305a;
+    }
+
+    public String getF306a() {
+        return f306a;
+    }
+
+    public void setF306a(String f306a) {
+        this.f306a = f306a;
+    }
+
+    public String getF307a() {
+        return f307a;
+    }
+
+    public void setF307a(String f307a) {
+        this.f307a = f307a;
+    }
+
+    public String getF308a() {
+        return f308a;
+    }
+
+    public void setF308a(String f308a) {
+        this.f308a = f308a;
+    }
+
+    public String getF310a() {
+        return f310a;
+    }
+
+    public void setF310a(String f310a) {
+        this.f310a = f310a;
+    }
+
+    public String getF311a() {
+        return f311a;
+    }
+
+    public void setF311a(String f311a) {
+        this.f311a = f311a;
+    }
+
+    public String getF312a() {
+        return f312a;
+    }
+
+    public void setF312a(String f312a) {
+        this.f312a = f312a;
+    }
+
+    public String getF313a() {
+        return f313a;
+    }
+
+    public void setF313a(String f313a) {
+        this.f313a = f313a;
+    }
+
+    public String getF314a() {
+        return f314a;
+    }
+
+    public void setF314a(String f314a) {
+        this.f314a = f314a;
+    }
+
+    public String getF315a() {
+        return f315a;
+    }
+
+    public void setF315a(String f315a) {
+        this.f315a = f315a;
+    }
+
+    public String getF316a() {
+        return f316a;
+    }
+
+    public void setF316a(String f316a) {
+        this.f316a = f316a;
+    }
+
+    public String getF3165() {
+        return f3165;
+    }
+
+    public void setF3165(String f3165) {
+        this.f3165 = f3165;
+    }
+
+    public String getF317a() {
+        return f317a;
+    }
+
+    public void setF317a(String f317a) {
+        this.f317a = f317a;
+    }
+
+    public String getF3175() {
+        return f3175;
+    }
+
+    public void setF3175(String f3175) {
+        this.f3175 = f3175;
+    }
+
+    public String getF318a() {
+        return f318a;
+    }
+
+    public void setF318a(String f318a) {
+        this.f318a = f318a;
+    }
+
+    public String getF318b() {
+        return f318b;
+    }
+
+    public void setF318b(String f318b) {
+        this.f318b = f318b;
+    }
+
+    public String getF318c() {
+        return f318c;
+    }
+
+    public void setF318c(String f318c) {
+        this.f318c = f318c;
+    }
+
+    public String getF318d() {
+        return f318d;
+    }
+
+    public void setF318d(String f318d) {
+        this.f318d = f318d;
+    }
+
+    public String getF318e() {
+        return f318e;
+    }
+
+    public void setF318e(String f318e) {
+        this.f318e = f318e;
+    }
+
+    public String getF318f() {
+        return f318f;
+    }
+
+    public void setF318f(String f318f) {
+        this.f318f = f318f;
+    }
+
+    public String getF318h() {
+        return f318h;
+    }
+
+    public void setF318h(String f318h) {
+        this.f318h = f318h;
+    }
+
+    public String getF318i() {
+        return f318i;
+    }
+
+    public void setF318i(String f318i) {
+        this.f318i = f318i;
+    }
+
+    public String getF318j() {
+        return f318j;
+    }
+
+    public void setF318j(String f318j) {
+        this.f318j = f318j;
+    }
+
+    public String getF318k() {
+        return f318k;
+    }
+
+    public void setF318k(String f318k) {
+        this.f318k = f318k;
+    }
+
+    public String getF318l() {
+        return f318l;
+    }
+
+    public void setF318l(String f318l) {
+        this.f318l = f318l;
+    }
+
+    public String getF318n() {
+        return f318n;
+    }
+
+    public void setF318n(String f318n) {
+        this.f318n = f318n;
+    }
+
+    public String getF318o() {
+        return f318o;
+    }
+
+    public void setF318o(String f318o) {
+        this.f318o = f318o;
+    }
+
+    public String getF318p() {
+        return f318p;
+    }
+
+    public void setF318p(String f318p) {
+        this.f318p = f318p;
+    }
+
+    public String getF318r() {
+        return f318r;
+    }
+
+    public void setF318r(String f318r) {
+        this.f318r = f318r;
+    }
+
+    public String getF3185() {
+        return f3185;
+    }
+
+    public void setF3185(String f3185) {
+        this.f3185 = f3185;
+    }
+
+    public String getF321a() {
+        return f321a;
+    }
+
+    public void setF321a(String f321a) {
+        this.f321a = f321a;
+    }
+
+    public String getF321b() {
+        return f321b;
+    }
+
+    public void setF321b(String f321b) {
+        this.f321b = f321b;
+    }
+
+    public String getF321x() {
+        return f321x;
+    }
+
+    public void setF321x(String f321x) {
+        this.f321x = f321x;
+    }
+
+    public String getF322a() {
+        return f322a;
+    }
+
+    public void setF322a(String f322a) {
+        this.f322a = f322a;
+    }
+
+    public String getF323a() {
+        return f323a;
+    }
+
+    public void setF323a(String f323a) {
+        this.f323a = f323a;
+    }
+
+    public String getF324a() {
+        return f324a;
+    }
+
+    public void setF324a(String f324a) {
+        this.f324a = f324a;
+    }
+
+    public String getF325a() {
+        return f325a;
+    }
+
+    public void setF325a(String f325a) {
+        this.f325a = f325a;
+    }
+
+    public String getF326a() {
+        return f326a;
+    }
+
+    public void setF326a(String f326a) {
+        this.f326a = f326a;
+    }
+
+    public String getF326b() {
+        return f326b;
+    }
+
+    public void setF326b(String f326b) {
+        this.f326b = f326b;
+    }
+
+    public String getF328a() {
+        return f328a;
+    }
+
+    public void setF328a(String f328a) {
+        this.f328a = f328a;
     }
 
     public String getF330a() {
@@ -2201,12 +4121,84 @@ public class Autoreferat extends ABook {
         this.f330a = f330a;
     }
 
-    public String getFcmp_80g8dy() {
-        return fcmp_80g8dy;
+    public String getF331a() {
+        return f331a;
     }
 
-    public void setFcmp_80g8dy(String fcmp_80g8dy) {
-        this.fcmp_80g8dy = fcmp_80g8dy;
+    public void setF331a(String f331a) {
+        this.f331a = f331a;
+    }
+
+    public String getF332a() {
+        return f332a;
+    }
+
+    public void setF332a(String f332a) {
+        this.f332a = f332a;
+    }
+
+    public String getF333a() {
+        return f333a;
+    }
+
+    public void setF333a(String f333a) {
+        this.f333a = f333a;
+    }
+
+    public String getF336a() {
+        return f336a;
+    }
+
+    public void setF336a(String f336a) {
+        this.f336a = f336a;
+    }
+
+    public String getF337a() {
+        return f337a;
+    }
+
+    public void setF337a(String f337a) {
+        this.f337a = f337a;
+    }
+
+    public String getF345a() {
+        return f345a;
+    }
+
+    public void setF345a(String f345a) {
+        this.f345a = f345a;
+    }
+
+    public String getF345b() {
+        return f345b;
+    }
+
+    public void setF345b(String f345b) {
+        this.f345b = f345b;
+    }
+
+    public String getF345c() {
+        return f345c;
+    }
+
+    public void setF345c(String f345c) {
+        this.f345c = f345c;
+    }
+
+    public String getF345d() {
+        return f345d;
+    }
+
+    public void setF345d(String f345d) {
+        this.f345d = f345d;
+    }
+
+    public String getF410() {
+        return f410;
+    }
+
+    public void setF410(String f410) {
+        this.f410 = f410;
     }
 
     public String getF411() {
@@ -2217,420 +4209,836 @@ public class Autoreferat extends ABook {
         this.f411 = f411;
     }
 
-    public String getFcmp_cmkm8l() {
-        return fcmp_cmkm8l;
+    public String getF421() {
+        return f421;
     }
 
-    public void setFcmp_cmkm8l(String fcmp_cmkm8l) {
-        this.fcmp_cmkm8l = fcmp_cmkm8l;
+    public void setF421(String f421) {
+        this.f421 = f421;
     }
 
-    public String getFcmp_6dk42u() {
-        return fcmp_6dk42u;
+    public String getF422() {
+        return f422;
     }
 
-    public void setFcmp_6dk42u(String fcmp_6dk42u) {
-        this.fcmp_6dk42u = fcmp_6dk42u;
+    public void setF422(String f422) {
+        this.f422 = f422;
     }
 
-    public String getFcmp_4q7bt8() {
-        return fcmp_4q7bt8;
+    public String getF453() {
+        return f453;
     }
 
-    public void setFcmp_4q7bt8(String fcmp_4q7bt8) {
-        this.fcmp_4q7bt8 = fcmp_4q7bt8;
+    public void setF453(String f453) {
+        this.f453 = f453;
     }
 
-    public String getFcmp_o3c8o3() {
-        return fcmp_o3c8o3;
+    public String getF454() {
+        return f454;
     }
 
-    public void setFcmp_o3c8o3(String fcmp_o3c8o3) {
-        this.fcmp_o3c8o3 = fcmp_o3c8o3;
+    public void setF454(String f454) {
+        this.f454 = f454;
     }
 
-    public String getFcmp_s0ay8t() {
-        return fcmp_s0ay8t;
+    public String getF461() {
+        return f461;
     }
 
-    public void setFcmp_s0ay8t(String fcmp_s0ay8t) {
-        this.fcmp_s0ay8t = fcmp_s0ay8t;
+    public void setF461(String f461) {
+        this.f461 = f461;
     }
 
-    public String getFcmp_k2c8mc() {
-        return fcmp_k2c8mc;
+    public String getF4631() {
+        return f4631;
     }
 
-    public void setFcmp_k2c8mc(String fcmp_k2c8mc) {
-        this.fcmp_k2c8mc = fcmp_k2c8mc;
+    public void setF4631(String f4631) {
+        this.f4631 = f4631;
     }
 
-    public String getFcmp_jd2s86() {
-        return fcmp_jd2s86;
+    public String getF500a() {
+        return f500a;
     }
 
-    public void setFcmp_jd2s86(String fcmp_jd2s86) {
-        this.fcmp_jd2s86 = fcmp_jd2s86;
+    public void setF500a(String f500a) {
+        this.f500a = f500a;
     }
 
-    public String getFcmp_wkocwv() {
-        return fcmp_wkocwv;
+    public String getF500b() {
+        return f500b;
     }
 
-    public void setFcmp_wkocwv(String fcmp_wkocwv) {
-        this.fcmp_wkocwv = fcmp_wkocwv;
+    public void setF500b(String f500b) {
+        this.f500b = f500b;
     }
 
-    public String getFcmp_sevakw() {
-        return fcmp_sevakw;
+    public String getF500h() {
+        return f500h;
     }
 
-    public void setFcmp_sevakw(String fcmp_sevakw) {
-        this.fcmp_sevakw = fcmp_sevakw;
+    public void setF500h(String f500h) {
+        this.f500h = f500h;
     }
 
-    public String getFcmp_vgpgyw() {
-        return fcmp_vgpgyw;
+    public String getF500i() {
+        return f500i;
     }
 
-    public void setFcmp_vgpgyw(String fcmp_vgpgyw) {
-        this.fcmp_vgpgyw = fcmp_vgpgyw;
+    public void setF500i(String f500i) {
+        this.f500i = f500i;
     }
 
-    public String getFcmp_id5s7p() {
-        return fcmp_id5s7p;
+    public String getF500j() {
+        return f500j;
     }
 
-    public void setFcmp_id5s7p(String fcmp_id5s7p) {
-        this.fcmp_id5s7p = fcmp_id5s7p;
+    public void setF500j(String f500j) {
+        this.f500j = f500j;
     }
 
-    public String getFcmp_78isiw() {
-        return fcmp_78isiw;
+    public String getF500k() {
+        return f500k;
     }
 
-    public void setFcmp_78isiw(String fcmp_78isiw) {
-        this.fcmp_78isiw = fcmp_78isiw;
+    public void setF500k(String f500k) {
+        this.f500k = f500k;
     }
 
-    public String getFcmp_fsryh2() {
-        return fcmp_fsryh2;
+    public String getF500l() {
+        return f500l;
     }
 
-    public void setFcmp_fsryh2(String fcmp_fsryh2) {
-        this.fcmp_fsryh2 = fcmp_fsryh2;
+    public void setF500l(String f500l) {
+        this.f500l = f500l;
     }
 
-    public String getFcmp_7prgul() {
-        return fcmp_7prgul;
+    public String getF500m() {
+        return f500m;
     }
 
-    public void setFcmp_7prgul(String fcmp_7prgul) {
-        this.fcmp_7prgul = fcmp_7prgul;
+    public void setF500m(String f500m) {
+        this.f500m = f500m;
     }
 
-    public String getFcmp_pkch5i() {
-        return fcmp_pkch5i;
+    public String getF500n() {
+        return f500n;
     }
 
-    public void setFcmp_pkch5i(String fcmp_pkch5i) {
-        this.fcmp_pkch5i = fcmp_pkch5i;
+    public void setF500n(String f500n) {
+        this.f500n = f500n;
     }
 
-    public String getFcmp_nfggxu() {
-        return fcmp_nfggxu;
+    public String getF500q() {
+        return f500q;
     }
 
-    public void setFcmp_nfggxu(String fcmp_nfggxu) {
-        this.fcmp_nfggxu = fcmp_nfggxu;
+    public void setF500q(String f500q) {
+        this.f500q = f500q;
     }
 
-    public String getFcmp_orr5va() {
-        return fcmp_orr5va;
+    public String getF500r() {
+        return f500r;
     }
 
-    public void setFcmp_orr5va(String fcmp_orr5va) {
-        this.fcmp_orr5va = fcmp_orr5va;
+    public void setF500r(String f500r) {
+        this.f500r = f500r;
     }
 
-    public String getFcmp_gbkw6y() {
-        return fcmp_gbkw6y;
+    public String getF500s() {
+        return f500s;
     }
 
-    public void setFcmp_gbkw6y(String fcmp_gbkw6y) {
-        this.fcmp_gbkw6y = fcmp_gbkw6y;
+    public void setF500s(String f500s) {
+        this.f500s = f500s;
     }
 
-    public String getFcmp_2e4djs() {
-        return fcmp_2e4djs;
+    public String getF500u() {
+        return f500u;
     }
 
-    public void setFcmp_2e4djs(String fcmp_2e4djs) {
-        this.fcmp_2e4djs = fcmp_2e4djs;
+    public void setF500u(String f500u) {
+        this.f500u = f500u;
     }
 
-    public String getFcmp_c63clf() {
-        return fcmp_c63clf;
+    public String getF500v() {
+        return f500v;
     }
 
-    public void setFcmp_c63clf(String fcmp_c63clf) {
-        this.fcmp_c63clf = fcmp_c63clf;
+    public void setF500v(String f500v) {
+        this.f500v = f500v;
     }
 
-    public String getFcmp_wfenvg() {
-        return fcmp_wfenvg;
+    public String getF500w() {
+        return f500w;
     }
 
-    public void setFcmp_wfenvg(String fcmp_wfenvg) {
-        this.fcmp_wfenvg = fcmp_wfenvg;
+    public void setF500w(String f500w) {
+        this.f500w = f500w;
     }
 
-    public String getFcmp_v9cvxg() {
-        return fcmp_v9cvxg;
+    public String getF500x() {
+        return f500x;
     }
 
-    public void setFcmp_v9cvxg(String fcmp_v9cvxg) {
-        this.fcmp_v9cvxg = fcmp_v9cvxg;
+    public void setF500x(String f500x) {
+        this.f500x = f500x;
     }
 
-    public String getFcmp_r47ddd() {
-        return fcmp_r47ddd;
+    public String getF500y() {
+        return f500y;
     }
 
-    public void setFcmp_r47ddd(String fcmp_r47ddd) {
-        this.fcmp_r47ddd = fcmp_r47ddd;
+    public void setF500y(String f500y) {
+        this.f500y = f500y;
     }
 
-    public String getFcmp_fbw8yl() {
-        return fcmp_fbw8yl;
+    public String getF500z() {
+        return f500z;
     }
 
-    public void setFcmp_fbw8yl(String fcmp_fbw8yl) {
-        this.fcmp_fbw8yl = fcmp_fbw8yl;
+    public void setF500z(String f500z) {
+        this.f500z = f500z;
     }
 
-    public String getFcmp_z8onot() {
-        return fcmp_z8onot;
+    public String getF5002() {
+        return f5002;
     }
 
-    public void setFcmp_z8onot(String fcmp_z8onot) {
-        this.fcmp_z8onot = fcmp_z8onot;
+    public void setF5002(String f5002) {
+        this.f5002 = f5002;
     }
 
-    public String getFcmp_obue2m() {
-        return fcmp_obue2m;
+    public String getF5003() {
+        return f5003;
     }
 
-    public void setFcmp_obue2m(String fcmp_obue2m) {
-        this.fcmp_obue2m = fcmp_obue2m;
+    public void setF5003(String f5003) {
+        this.f5003 = f5003;
     }
 
-    public String getFcmp_jiuuyd() {
-        return fcmp_jiuuyd;
+    public String getF501a() {
+        return f501a;
     }
 
-    public void setFcmp_jiuuyd(String fcmp_jiuuyd) {
-        this.fcmp_jiuuyd = fcmp_jiuuyd;
+    public void setF501a(String f501a) {
+        this.f501a = f501a;
     }
 
-    public String getFcmp_3j845c() {
-        return fcmp_3j845c;
+    public String getF501b() {
+        return f501b;
     }
 
-    public void setFcmp_3j845c(String fcmp_3j845c) {
-        this.fcmp_3j845c = fcmp_3j845c;
+    public void setF501b(String f501b) {
+        this.f501b = f501b;
     }
 
-    public String getFcmp_48s1hp() {
-        return fcmp_48s1hp;
+    public String getF501e() {
+        return f501e;
     }
 
-    public void setFcmp_48s1hp(String fcmp_48s1hp) {
-        this.fcmp_48s1hp = fcmp_48s1hp;
+    public void setF501e(String f501e) {
+        this.f501e = f501e;
     }
 
-    public String getFcmp_l2tlwo() {
-        return fcmp_l2tlwo;
+    public String getF501j() {
+        return f501j;
     }
 
-    public void setFcmp_l2tlwo(String fcmp_l2tlwo) {
-        this.fcmp_l2tlwo = fcmp_l2tlwo;
+    public void setF501j(String f501j) {
+        this.f501j = f501j;
     }
 
-    public String getFcmp_0riekw() {
-        return fcmp_0riekw;
+    public String getF501k() {
+        return f501k;
     }
 
-    public void setFcmp_0riekw(String fcmp_0riekw) {
-        this.fcmp_0riekw = fcmp_0riekw;
+    public void setF501k(String f501k) {
+        this.f501k = f501k;
     }
 
-    public String getFcmp_yu795n() {
-        return fcmp_yu795n;
+    public String getF501m() {
+        return f501m;
     }
 
-    public void setFcmp_yu795n(String fcmp_yu795n) {
-        this.fcmp_yu795n = fcmp_yu795n;
+    public void setF501m(String f501m) {
+        this.f501m = f501m;
     }
 
-    public String getFcmp_ioso08() {
-        return fcmp_ioso08;
+    public String getF501r() {
+        return f501r;
     }
 
-    public void setFcmp_ioso08(String fcmp_ioso08) {
-        this.fcmp_ioso08 = fcmp_ioso08;
+    public void setF501r(String f501r) {
+        this.f501r = f501r;
     }
 
-    public String getFcmp_chilh7() {
-        return fcmp_chilh7;
+    public String getF501s() {
+        return f501s;
     }
 
-    public void setFcmp_chilh7(String fcmp_chilh7) {
-        this.fcmp_chilh7 = fcmp_chilh7;
+    public void setF501s(String f501s) {
+        this.f501s = f501s;
     }
 
-    public String getFcmp_3ntduj() {
-        return fcmp_3ntduj;
+    public String getF501u() {
+        return f501u;
     }
 
-    public void setFcmp_3ntduj(String fcmp_3ntduj) {
-        this.fcmp_3ntduj = fcmp_3ntduj;
+    public void setF501u(String f501u) {
+        this.f501u = f501u;
     }
 
-    public String getFcmp_jwv4hk() {
-        return fcmp_jwv4hk;
+    public String getF501w() {
+        return f501w;
     }
 
-    public void setFcmp_jwv4hk(String fcmp_jwv4hk) {
-        this.fcmp_jwv4hk = fcmp_jwv4hk;
+    public void setF501w(String f501w) {
+        this.f501w = f501w;
     }
 
-    public String getFcmp_nn7p92() {
-        return fcmp_nn7p92;
+    public String getF501x() {
+        return f501x;
     }
 
-    public void setFcmp_nn7p92(String fcmp_nn7p92) {
-        this.fcmp_nn7p92 = fcmp_nn7p92;
+    public void setF501x(String f501x) {
+        this.f501x = f501x;
     }
 
-    public String getFcmp_aucr0w() {
-        return fcmp_aucr0w;
+    public String getF501y() {
+        return f501y;
     }
 
-    public void setFcmp_aucr0w(String fcmp_aucr0w) {
-        this.fcmp_aucr0w = fcmp_aucr0w;
+    public void setF501y(String f501y) {
+        this.f501y = f501y;
     }
 
-    public String getFcmp_yjkgyj() {
-        return fcmp_yjkgyj;
+    public String getF501z() {
+        return f501z;
     }
 
-    public void setFcmp_yjkgyj(String fcmp_yjkgyj) {
-        this.fcmp_yjkgyj = fcmp_yjkgyj;
+    public void setF501z(String f501z) {
+        this.f501z = f501z;
     }
 
-    public String getFcmp_si8n4a() {
-        return fcmp_si8n4a;
+    public String getF5012() {
+        return f5012;
     }
 
-    public void setFcmp_si8n4a(String fcmp_si8n4a) {
-        this.fcmp_si8n4a = fcmp_si8n4a;
+    public void setF5012(String f5012) {
+        this.f5012 = f5012;
     }
 
-    public String getFcmp_4ts4dx() {
-        return fcmp_4ts4dx;
+    public String getF5013() {
+        return f5013;
     }
 
-    public void setFcmp_4ts4dx(String fcmp_4ts4dx) {
-        this.fcmp_4ts4dx = fcmp_4ts4dx;
+    public void setF5013(String f5013) {
+        this.f5013 = f5013;
     }
 
-    public String getFcmp_ctryeb() {
-        return fcmp_ctryeb;
+    public String getF502a() {
+        return f502a;
     }
 
-    public void setFcmp_ctryeb(String fcmp_ctryeb) {
-        this.fcmp_ctryeb = fcmp_ctryeb;
+    public void setF502a(String f502a) {
+        this.f502a = f502a;
     }
 
-    public String getFcmp_gajp9c() {
-        return fcmp_gajp9c;
+    public String getF502b() {
+        return f502b;
     }
 
-    public void setFcmp_gajp9c(String fcmp_gajp9c) {
-        this.fcmp_gajp9c = fcmp_gajp9c;
+    public void setF502b(String f502b) {
+        this.f502b = f502b;
     }
 
-    public String getFcmp_yixkyu() {
-        return fcmp_yixkyu;
+    public String getF502d() {
+        return f502d;
     }
 
-    public void setFcmp_yixkyu(String fcmp_yixkyu) {
-        this.fcmp_yixkyu = fcmp_yixkyu;
+    public void setF502d(String f502d) {
+        this.f502d = f502d;
     }
 
-    public String getFcmp_2puodq() {
-        return fcmp_2puodq;
+    public String getF502e() {
+        return f502e;
     }
 
-    public void setFcmp_2puodq(String fcmp_2puodq) {
-        this.fcmp_2puodq = fcmp_2puodq;
+    public void setF502e(String f502e) {
+        this.f502e = f502e;
     }
 
-    public String getFcmp_num7gz() {
-        return fcmp_num7gz;
+    public String getF502f() {
+        return f502f;
     }
 
-    public void setFcmp_num7gz(String fcmp_num7gz) {
-        this.fcmp_num7gz = fcmp_num7gz;
+    public void setF502f(String f502f) {
+        this.f502f = f502f;
     }
 
-    public String getFcmp_7jziez() {
-        return fcmp_7jziez;
+    public String getF502h() {
+        return f502h;
     }
 
-    public void setFcmp_7jziez(String fcmp_7jziez) {
-        this.fcmp_7jziez = fcmp_7jziez;
+    public void setF502h(String f502h) {
+        this.f502h = f502h;
     }
 
-    public String getFcmp_3e9lq0() {
-        return fcmp_3e9lq0;
+    public String getF502i() {
+        return f502i;
     }
 
-    public void setFcmp_3e9lq0(String fcmp_3e9lq0) {
-        this.fcmp_3e9lq0 = fcmp_3e9lq0;
+    public void setF502i(String f502i) {
+        this.f502i = f502i;
     }
 
-    public String getFcmp_kh3lsl() {
-        return fcmp_kh3lsl;
+    public String getF502j() {
+        return f502j;
     }
 
-    public void setFcmp_kh3lsl(String fcmp_kh3lsl) {
-        this.fcmp_kh3lsl = fcmp_kh3lsl;
+    public void setF502j(String f502j) {
+        this.f502j = f502j;
     }
 
-    public String getFcmp_9c7tzl() {
-        return fcmp_9c7tzl;
+    public String getF502k() {
+        return f502k;
     }
 
-    public void setFcmp_9c7tzl(String fcmp_9c7tzl) {
-        this.fcmp_9c7tzl = fcmp_9c7tzl;
+    public void setF502k(String f502k) {
+        this.f502k = f502k;
     }
 
-    public String getFcmp_2joh9k() {
-        return fcmp_2joh9k;
+    public String getF502l() {
+        return f502l;
     }
 
-    public void setFcmp_2joh9k(String fcmp_2joh9k) {
-        this.fcmp_2joh9k = fcmp_2joh9k;
+    public void setF502l(String f502l) {
+        this.f502l = f502l;
     }
 
-    public String getFcmp_y93ups() {
-        return fcmp_y93ups;
+    public String getF502m() {
+        return f502m;
     }
 
-    public void setFcmp_y93ups(String fcmp_y93ups) {
-        this.fcmp_y93ups = fcmp_y93ups;
+    public void setF502m(String f502m) {
+        this.f502m = f502m;
+    }
+
+    public String getF502n() {
+        return f502n;
+    }
+
+    public void setF502n(String f502n) {
+        this.f502n = f502n;
+    }
+
+    public String getF510a() {
+        return f510a;
+    }
+
+    public void setF510a(String f510a) {
+        this.f510a = f510a;
+    }
+
+    public String getF510e() {
+        return f510e;
+    }
+
+    public void setF510e(String f510e) {
+        this.f510e = f510e;
+    }
+
+    public String getF510h() {
+        return f510h;
+    }
+
+    public void setF510h(String f510h) {
+        this.f510h = f510h;
+    }
+
+    public String getF510i() {
+        return f510i;
+    }
+
+    public void setF510i(String f510i) {
+        this.f510i = f510i;
+    }
+
+    public String getF510z() {
+        return f510z;
+    }
+
+    public void setF510z(String f510z) {
+        this.f510z = f510z;
+    }
+
+    public String getF512a() {
+        return f512a;
+    }
+
+    public void setF512a(String f512a) {
+        this.f512a = f512a;
+    }
+
+    public String getF512e() {
+        return f512e;
+    }
+
+    public void setF512e(String f512e) {
+        this.f512e = f512e;
+    }
+
+    public String getF513a() {
+        return f513a;
+    }
+
+    public void setF513a(String f513a) {
+        this.f513a = f513a;
+    }
+
+    public String getF513e() {
+        return f513e;
+    }
+
+    public void setF513e(String f513e) {
+        this.f513e = f513e;
+    }
+
+    public String getF513h() {
+        return f513h;
+    }
+
+    public void setF513h(String f513h) {
+        this.f513h = f513h;
+    }
+
+    public String getF513i() {
+        return f513i;
+    }
+
+    public void setF513i(String f513i) {
+        this.f513i = f513i;
+    }
+
+    public String getF520a() {
+        return f520a;
+    }
+
+    public void setF520a(String f520a) {
+        this.f520a = f520a;
+    }
+
+    public String getF520e() {
+        return f520e;
+    }
+
+    public void setF520e(String f520e) {
+        this.f520e = f520e;
+    }
+
+    public String getF520h() {
+        return f520h;
+    }
+
+    public void setF520h(String f520h) {
+        this.f520h = f520h;
+    }
+
+    public String getF520i() {
+        return f520i;
+    }
+
+    public void setF520i(String f520i) {
+        this.f520i = f520i;
+    }
+
+    public String getF520j() {
+        return f520j;
+    }
+
+    public void setF520j(String f520j) {
+        this.f520j = f520j;
+    }
+
+    public String getF520x() {
+        return f520x;
+    }
+
+    public void setF520x(String f520x) {
+        this.f520x = f520x;
+    }
+
+    public String getF530a() {
+        return f530a;
+    }
+
+    public void setF530a(String f530a) {
+        this.f530a = f530a;
+    }
+
+    public String getF530b() {
+        return f530b;
+    }
+
+    public void setF530b(String f530b) {
+        this.f530b = f530b;
+    }
+
+    public String getF541a() {
+        return f541a;
+    }
+
+    public void setF541a(String f541a) {
+        this.f541a = f541a;
+    }
+
+    public String getF541h() {
+        return f541h;
+    }
+
+    public void setF541h(String f541h) {
+        this.f541h = f541h;
+    }
+
+    public String getF541i() {
+        return f541i;
+    }
+
+    public void setF541i(String f541i) {
+        this.f541i = f541i;
+    }
+
+    public String getF541z() {
+        return f541z;
+    }
+
+    public void setF541z(String f541z) {
+        this.f541z = f541z;
+    }
+
+    public String getF600a() {
+        return f600a;
+    }
+
+    public void setF600a(String f600a) {
+        this.f600a = f600a;
+    }
+
+    public String getF600b() {
+        return f600b;
+    }
+
+    public void setF600b(String f600b) {
+        this.f600b = f600b;
+    }
+
+    public String getF600c() {
+        return f600c;
+    }
+
+    public void setF600c(String f600c) {
+        this.f600c = f600c;
+    }
+
+    public String getF600f() {
+        return f600f;
+    }
+
+    public void setF600f(String f600f) {
+        this.f600f = f600f;
+    }
+
+    public String getF600x() {
+        return f600x;
+    }
+
+    public void setF600x(String f600x) {
+        this.f600x = f600x;
+    }
+
+    public String getF601a() {
+        return f601a;
+    }
+
+    public void setF601a(String f601a) {
+        this.f601a = f601a;
+    }
+
+    public String getF601b() {
+        return f601b;
+    }
+
+    public void setF601b(String f601b) {
+        this.f601b = f601b;
+    }
+
+    public String getF601c() {
+        return f601c;
+    }
+
+    public void setF601c(String f601c) {
+        this.f601c = f601c;
+    }
+
+    public String getF601d() {
+        return f601d;
+    }
+
+    public void setF601d(String f601d) {
+        this.f601d = f601d;
+    }
+
+    public String getF601e() {
+        return f601e;
+    }
+
+    public void setF601e(String f601e) {
+        this.f601e = f601e;
+    }
+
+    public String getF601f() {
+        return f601f;
+    }
+
+    public void setF601f(String f601f) {
+        this.f601f = f601f;
+    }
+
+    public String getF601g() {
+        return f601g;
+    }
+
+    public void setF601g(String f601g) {
+        this.f601g = f601g;
+    }
+
+    public String getF601h() {
+        return f601h;
+    }
+
+    public void setF601h(String f601h) {
+        this.f601h = f601h;
+    }
+
+    public String getF601i() {
+        return f601i;
+    }
+
+    public void setF601i(String f601i) {
+        this.f601i = f601i;
+    }
+
+    public String getF605a() {
+        return f605a;
+    }
+
+    public void setF605a(String f605a) {
+        this.f605a = f605a;
+    }
+
+    public String getF605x() {
+        return f605x;
+    }
+
+    public void setF605x(String f605x) {
+        this.f605x = f605x;
+    }
+
+    public String getF605y() {
+        return f605y;
+    }
+
+    public void setF605y(String f605y) {
+        this.f605y = f605y;
+    }
+
+    public String getF601z() {
+        return f601z;
+    }
+
+    public void setF601z(String f601z) {
+        this.f601z = f601z;
+    }
+
+    public String getF606a() {
+        return f606a;
+    }
+
+    public void setF606a(String f606a) {
+        this.f606a = f606a;
+    }
+
+    public String getF606x() {
+        return f606x;
+    }
+
+    public void setF606x(String f606x) {
+        this.f606x = f606x;
+    }
+
+    public String getF606y() {
+        return f606y;
+    }
+
+    public void setF606y(String f606y) {
+        this.f606y = f606y;
+    }
+
+    public String getF606z() {
+        return f606z;
+    }
+
+    public void setF606z(String f606z) {
+        this.f606z = f606z;
+    }
+
+    public String getF607a() {
+        return f607a;
+    }
+
+    public void setF607a(String f607a) {
+        this.f607a = f607a;
+    }
+
+    public String getF607x() {
+        return f607x;
+    }
+
+    public void setF607x(String f607x) {
+        this.f607x = f607x;
+    }
+
+    public String getF607y() {
+        return f607y;
+    }
+
+    public void setF607y(String f607y) {
+        this.f607y = f607y;
+    }
+
+    public String getF607z() {
+        return f607z;
+    }
+
+    public void setF607z(String f607z) {
+        this.f607z = f607z;
+    }
+
+    public String getF675v() {
+        return f675v;
+    }
+
+    public void setF675v(String f675v) {
+        this.f675v = f675v;
+    }
+
+    public String getF675z() {
+        return f675z;
+    }
+
+    public void setF675z(String f675z) {
+        this.f675z = f675z;
     }
 
     public String getF686a() {
@@ -2641,52 +5049,52 @@ public class Autoreferat extends ABook {
         this.f686a = f686a;
     }
 
-    public String getFcmp_goivbk() {
-        return fcmp_goivbk;
+    public String getF686b() {
+        return f686b;
     }
 
-    public void setFcmp_goivbk(String fcmp_goivbk) {
-        this.fcmp_goivbk = fcmp_goivbk;
+    public void setF686b(String f686b) {
+        this.f686b = f686b;
     }
 
-    public String getFcmp_wudvif() {
-        return fcmp_wudvif;
+    public String getF686c() {
+        return f686c;
     }
 
-    public void setFcmp_wudvif(String fcmp_wudvif) {
-        this.fcmp_wudvif = fcmp_wudvif;
+    public void setF686c(String f686c) {
+        this.f686c = f686c;
     }
 
-    public String getFcmp_wz7irn() {
-        return fcmp_wz7irn;
+    public String getF6862() {
+        return f6862;
     }
 
-    public void setFcmp_wz7irn(String fcmp_wz7irn) {
-        this.fcmp_wz7irn = fcmp_wz7irn;
+    public void setF6862(String f6862) {
+        this.f6862 = f6862;
     }
 
-    public String getFcmp_9t9dby() {
-        return fcmp_9t9dby;
+    public String getF700b() {
+        return f700b;
     }
 
-    public void setFcmp_9t9dby(String fcmp_9t9dby) {
-        this.fcmp_9t9dby = fcmp_9t9dby;
+    public void setF700b(String f700b) {
+        this.f700b = f700b;
     }
 
-    public String getFcmp_rghp7h() {
-        return fcmp_rghp7h;
+    public String getF700c() {
+        return f700c;
     }
 
-    public void setFcmp_rghp7h(String fcmp_rghp7h) {
-        this.fcmp_rghp7h = fcmp_rghp7h;
+    public void setF700c(String f700c) {
+        this.f700c = f700c;
     }
 
-    public String getFcmp_1jjlw8() {
-        return fcmp_1jjlw8;
+    public String getF700d() {
+        return f700d;
     }
 
-    public void setFcmp_1jjlw8(String fcmp_1jjlw8) {
-        this.fcmp_1jjlw8 = fcmp_1jjlw8;
+    public void setF700d(String f700d) {
+        this.f700d = f700d;
     }
 
     public String getF700f() {
@@ -2697,12 +5105,12 @@ public class Autoreferat extends ABook {
         this.f700f = f700f;
     }
 
-    public String getFcmp_6fntbc() {
-        return fcmp_6fntbc;
+    public String getF700g() {
+        return f700g;
     }
 
-    public void setFcmp_6fntbc(String fcmp_6fntbc) {
-        this.fcmp_6fntbc = fcmp_6fntbc;
+    public void setF700g(String f700g) {
+        this.f700g = f700g;
     }
 
     public String getF700p() {
@@ -2721,20 +5129,20 @@ public class Autoreferat extends ABook {
         this.f7003 = f7003;
     }
 
-    public String getFcmp_jmx7so() {
-        return fcmp_jmx7so;
+    public String getF7004() {
+        return f7004;
     }
 
-    public void setFcmp_jmx7so(String fcmp_jmx7so) {
-        this.fcmp_jmx7so = fcmp_jmx7so;
+    public void setF7004(String f7004) {
+        this.f7004 = f7004;
     }
 
-    public String getFcmp_3jipa9() {
-        return fcmp_3jipa9;
+    public String getF701a() {
+        return f701a;
     }
 
-    public void setFcmp_3jipa9(String fcmp_3jipa9) {
-        this.fcmp_3jipa9 = fcmp_3jipa9;
+    public void setF701a(String f701a) {
+        this.f701a = f701a;
     }
 
     public String getF701b() {
@@ -2745,20 +5153,20 @@ public class Autoreferat extends ABook {
         this.f701b = f701b;
     }
 
-    public String getFcmp_toq7w4() {
-        return fcmp_toq7w4;
+    public String getF701c() {
+        return f701c;
     }
 
-    public void setFcmp_toq7w4(String fcmp_toq7w4) {
-        this.fcmp_toq7w4 = fcmp_toq7w4;
+    public void setF701c(String f701c) {
+        this.f701c = f701c;
     }
 
-    public String getFcmp_lcj4dd() {
-        return fcmp_lcj4dd;
+    public String getF701d() {
+        return f701d;
     }
 
-    public void setFcmp_lcj4dd(String fcmp_lcj4dd) {
-        this.fcmp_lcj4dd = fcmp_lcj4dd;
+    public void setF701d(String f701d) {
+        this.f701d = f701d;
     }
 
     public String getF701f() {
@@ -2769,20 +5177,20 @@ public class Autoreferat extends ABook {
         this.f701f = f701f;
     }
 
-    public String getFcmp_bpm7o8() {
-        return fcmp_bpm7o8;
+    public String getF701g() {
+        return f701g;
     }
 
-    public void setFcmp_bpm7o8(String fcmp_bpm7o8) {
-        this.fcmp_bpm7o8 = fcmp_bpm7o8;
+    public void setF701g(String f701g) {
+        this.f701g = f701g;
     }
 
-    public String getFcmp_4ygna4() {
-        return fcmp_4ygna4;
+    public String getF701p() {
+        return f701p;
     }
 
-    public void setFcmp_4ygna4(String fcmp_4ygna4) {
-        this.fcmp_4ygna4 = fcmp_4ygna4;
+    public void setF701p(String f701p) {
+        this.f701p = f701p;
     }
 
     public String getF7013() {
@@ -2793,348 +5201,540 @@ public class Autoreferat extends ABook {
         this.f7013 = f7013;
     }
 
-    public String getFcmp_u3i9al() {
-        return fcmp_u3i9al;
+    public String getF7014() {
+        return f7014;
     }
 
-    public void setFcmp_u3i9al(String fcmp_u3i9al) {
-        this.fcmp_u3i9al = fcmp_u3i9al;
+    public void setF7014(String f7014) {
+        this.f7014 = f7014;
     }
 
-    public String getFcmp_jcyhz3() {
-        return fcmp_jcyhz3;
+    public String getF702a() {
+        return f702a;
     }
 
-    public void setFcmp_jcyhz3(String fcmp_jcyhz3) {
-        this.fcmp_jcyhz3 = fcmp_jcyhz3;
+    public void setF702a(String f702a) {
+        this.f702a = f702a;
     }
 
-    public String getFcmp_tn35dc() {
-        return fcmp_tn35dc;
+    public String getF702b() {
+        return f702b;
     }
 
-    public void setFcmp_tn35dc(String fcmp_tn35dc) {
-        this.fcmp_tn35dc = fcmp_tn35dc;
+    public void setF702b(String f702b) {
+        this.f702b = f702b;
     }
 
-    public String getFcmp_e44po5() {
-        return fcmp_e44po5;
+    public String getF702c() {
+        return f702c;
     }
 
-    public void setFcmp_e44po5(String fcmp_e44po5) {
-        this.fcmp_e44po5 = fcmp_e44po5;
+    public void setF702c(String f702c) {
+        this.f702c = f702c;
     }
 
-    public String getFcmp_lpeu86() {
-        return fcmp_lpeu86;
+    public String getF702d() {
+        return f702d;
     }
 
-    public void setFcmp_lpeu86(String fcmp_lpeu86) {
-        this.fcmp_lpeu86 = fcmp_lpeu86;
+    public void setF702d(String f702d) {
+        this.f702d = f702d;
     }
 
-    public String getFcmp_7515ab() {
-        return fcmp_7515ab;
+    public String getF702f() {
+        return f702f;
     }
 
-    public void setFcmp_7515ab(String fcmp_7515ab) {
-        this.fcmp_7515ab = fcmp_7515ab;
+    public void setF702f(String f702f) {
+        this.f702f = f702f;
     }
 
-    public String getFcmp_9gog5t() {
-        return fcmp_9gog5t;
+    public String getF702g() {
+        return f702g;
     }
 
-    public void setFcmp_9gog5t(String fcmp_9gog5t) {
-        this.fcmp_9gog5t = fcmp_9gog5t;
+    public void setF702g(String f702g) {
+        this.f702g = f702g;
     }
 
-    public String getFcmp_48xyin() {
-        return fcmp_48xyin;
+    public String getF702p() {
+        return f702p;
     }
 
-    public void setFcmp_48xyin(String fcmp_48xyin) {
-        this.fcmp_48xyin = fcmp_48xyin;
+    public void setF702p(String f702p) {
+        this.f702p = f702p;
     }
 
-    public String getFcmp_267n2z() {
-        return fcmp_267n2z;
+    public String getF7023() {
+        return f7023;
     }
 
-    public void setFcmp_267n2z(String fcmp_267n2z) {
-        this.fcmp_267n2z = fcmp_267n2z;
+    public void setF7023(String f7023) {
+        this.f7023 = f7023;
     }
 
-    public String getFcmp_abkg6e() {
-        return fcmp_abkg6e;
+    public String getF7024() {
+        return f7024;
     }
 
-    public void setFcmp_abkg6e(String fcmp_abkg6e) {
-        this.fcmp_abkg6e = fcmp_abkg6e;
+    public void setF7024(String f7024) {
+        this.f7024 = f7024;
     }
 
-    public String getFcmp_gsu5sp() {
-        return fcmp_gsu5sp;
+    public String getF710a() {
+        return f710a;
     }
 
-    public void setFcmp_gsu5sp(String fcmp_gsu5sp) {
-        this.fcmp_gsu5sp = fcmp_gsu5sp;
+    public void setF710a(String f710a) {
+        this.f710a = f710a;
     }
 
-    public String getFcmp_18wm4h() {
-        return fcmp_18wm4h;
+    public String getF710b() {
+        return f710b;
     }
 
-    public void setFcmp_18wm4h(String fcmp_18wm4h) {
-        this.fcmp_18wm4h = fcmp_18wm4h;
+    public void setF710b(String f710b) {
+        this.f710b = f710b;
     }
 
-    public String getFcmp_oex7h1() {
-        return fcmp_oex7h1;
+    public String getF710c() {
+        return f710c;
     }
 
-    public void setFcmp_oex7h1(String fcmp_oex7h1) {
-        this.fcmp_oex7h1 = fcmp_oex7h1;
+    public void setF710c(String f710c) {
+        this.f710c = f710c;
     }
 
-    public String getFcmp_at9l93() {
-        return fcmp_at9l93;
+    public String getF710d() {
+        return f710d;
     }
 
-    public void setFcmp_at9l93(String fcmp_at9l93) {
-        this.fcmp_at9l93 = fcmp_at9l93;
+    public void setF710d(String f710d) {
+        this.f710d = f710d;
     }
 
-    public String getFcmp_is3xn3() {
-        return fcmp_is3xn3;
+    public String getF710e() {
+        return f710e;
     }
 
-    public void setFcmp_is3xn3(String fcmp_is3xn3) {
-        this.fcmp_is3xn3 = fcmp_is3xn3;
+    public void setF710e(String f710e) {
+        this.f710e = f710e;
     }
 
-    public String getFcmp_8dy2we() {
-        return fcmp_8dy2we;
+    public String getF710f() {
+        return f710f;
     }
 
-    public void setFcmp_8dy2we(String fcmp_8dy2we) {
-        this.fcmp_8dy2we = fcmp_8dy2we;
+    public void setF710f(String f710f) {
+        this.f710f = f710f;
     }
 
-    public String getFcmp_ka42ib() {
-        return fcmp_ka42ib;
+    public String getF710g() {
+        return f710g;
     }
 
-    public void setFcmp_ka42ib(String fcmp_ka42ib) {
-        this.fcmp_ka42ib = fcmp_ka42ib;
+    public void setF710g(String f710g) {
+        this.f710g = f710g;
     }
 
-    public String getFcmp_cpbxvv() {
-        return fcmp_cpbxvv;
+    public String getF710h() {
+        return f710h;
     }
 
-    public void setFcmp_cpbxvv(String fcmp_cpbxvv) {
-        this.fcmp_cpbxvv = fcmp_cpbxvv;
+    public void setF710h(String f710h) {
+        this.f710h = f710h;
     }
 
-    public String getFcmp_i9kssw() {
-        return fcmp_i9kssw;
+    public String getF710p() {
+        return f710p;
     }
 
-    public void setFcmp_i9kssw(String fcmp_i9kssw) {
-        this.fcmp_i9kssw = fcmp_i9kssw;
+    public void setF710p(String f710p) {
+        this.f710p = f710p;
     }
 
-    public String getFcmp_hidbhu() {
-        return fcmp_hidbhu;
+    public String getF7103() {
+        return f7103;
     }
 
-    public void setFcmp_hidbhu(String fcmp_hidbhu) {
-        this.fcmp_hidbhu = fcmp_hidbhu;
+    public void setF7103(String f7103) {
+        this.f7103 = f7103;
     }
 
-    public String getFcmp_hmsw3x() {
-        return fcmp_hmsw3x;
+    public String getF711a() {
+        return f711a;
     }
 
-    public void setFcmp_hmsw3x(String fcmp_hmsw3x) {
-        this.fcmp_hmsw3x = fcmp_hmsw3x;
+    public void setF711a(String f711a) {
+        this.f711a = f711a;
     }
 
-    public String getFcmp_ke5q5n() {
-        return fcmp_ke5q5n;
+    public String getF711b() {
+        return f711b;
     }
 
-    public void setFcmp_ke5q5n(String fcmp_ke5q5n) {
-        this.fcmp_ke5q5n = fcmp_ke5q5n;
+    public void setF711b(String f711b) {
+        this.f711b = f711b;
     }
 
-    public String getFcmp_5uoxxb() {
-        return fcmp_5uoxxb;
+    public String getF711c() {
+        return f711c;
     }
 
-    public void setFcmp_5uoxxb(String fcmp_5uoxxb) {
-        this.fcmp_5uoxxb = fcmp_5uoxxb;
+    public void setF711c(String f711c) {
+        this.f711c = f711c;
     }
 
-    public String getFcmp_yr55hh() {
-        return fcmp_yr55hh;
+    public String getF711d() {
+        return f711d;
     }
 
-    public void setFcmp_yr55hh(String fcmp_yr55hh) {
-        this.fcmp_yr55hh = fcmp_yr55hh;
+    public void setF711d(String f711d) {
+        this.f711d = f711d;
     }
 
-    public String getFcmp_3e77q3() {
-        return fcmp_3e77q3;
+    public String getF711e() {
+        return f711e;
     }
 
-    public void setFcmp_3e77q3(String fcmp_3e77q3) {
-        this.fcmp_3e77q3 = fcmp_3e77q3;
+    public void setF711e(String f711e) {
+        this.f711e = f711e;
     }
 
-    public String getFcmp_t7my6n() {
-        return fcmp_t7my6n;
+    public String getF711f() {
+        return f711f;
     }
 
-    public void setFcmp_t7my6n(String fcmp_t7my6n) {
-        this.fcmp_t7my6n = fcmp_t7my6n;
+    public void setF711f(String f711f) {
+        this.f711f = f711f;
     }
 
-    public String getFcmp_3yf6dn() {
-        return fcmp_3yf6dn;
+    public String getF711g() {
+        return f711g;
     }
 
-    public void setFcmp_3yf6dn(String fcmp_3yf6dn) {
-        this.fcmp_3yf6dn = fcmp_3yf6dn;
+    public void setF711g(String f711g) {
+        this.f711g = f711g;
     }
 
-    public String getFcmp_n7mu55() {
-        return fcmp_n7mu55;
+    public String getF711h() {
+        return f711h;
     }
 
-    public void setFcmp_n7mu55(String fcmp_n7mu55) {
-        this.fcmp_n7mu55 = fcmp_n7mu55;
+    public void setF711h(String f711h) {
+        this.f711h = f711h;
     }
 
-    public String getFcmp_a09ea7() {
-        return fcmp_a09ea7;
+    public String getF711p() {
+        return f711p;
     }
 
-    public void setFcmp_a09ea7(String fcmp_a09ea7) {
-        this.fcmp_a09ea7 = fcmp_a09ea7;
+    public void setF711p(String f711p) {
+        this.f711p = f711p;
     }
 
-    public String getFcmp_mqi9lf() {
-        return fcmp_mqi9lf;
+    public String getF7113() {
+        return f7113;
     }
 
-    public void setFcmp_mqi9lf(String fcmp_mqi9lf) {
-        this.fcmp_mqi9lf = fcmp_mqi9lf;
+    public void setF7113(String f7113) {
+        this.f7113 = f7113;
     }
 
-    public String getFcmp_vbcmrb() {
-        return fcmp_vbcmrb;
+    public String getF712a() {
+        return f712a;
     }
 
-    public void setFcmp_vbcmrb(String fcmp_vbcmrb) {
-        this.fcmp_vbcmrb = fcmp_vbcmrb;
+    public void setF712a(String f712a) {
+        this.f712a = f712a;
     }
 
-    public String getFcmp_asnq3o() {
-        return fcmp_asnq3o;
+    public String getF712b() {
+        return f712b;
     }
 
-    public void setFcmp_asnq3o(String fcmp_asnq3o) {
-        this.fcmp_asnq3o = fcmp_asnq3o;
+    public void setF712b(String f712b) {
+        this.f712b = f712b;
     }
 
-    public String getFcmp_bbtzcb() {
-        return fcmp_bbtzcb;
+    public String getF712c() {
+        return f712c;
     }
 
-    public void setFcmp_bbtzcb(String fcmp_bbtzcb) {
-        this.fcmp_bbtzcb = fcmp_bbtzcb;
+    public void setF712c(String f712c) {
+        this.f712c = f712c;
     }
 
-    public String getFcmp_pxihly() {
-        return fcmp_pxihly;
+    public String getF712d() {
+        return f712d;
     }
 
-    public void setFcmp_pxihly(String fcmp_pxihly) {
-        this.fcmp_pxihly = fcmp_pxihly;
+    public void setF712d(String f712d) {
+        this.f712d = f712d;
     }
 
-    public String getFcmp_fnv0zo() {
-        return fcmp_fnv0zo;
+    public String getF712e() {
+        return f712e;
     }
 
-    public void setFcmp_fnv0zo(String fcmp_fnv0zo) {
-        this.fcmp_fnv0zo = fcmp_fnv0zo;
+    public void setF712e(String f712e) {
+        this.f712e = f712e;
     }
 
-    public String getFcmp_1k2pra() {
-        return fcmp_1k2pra;
+    public String getF712f() {
+        return f712f;
     }
 
-    public void setFcmp_1k2pra(String fcmp_1k2pra) {
-        this.fcmp_1k2pra = fcmp_1k2pra;
+    public void setF712f(String f712f) {
+        this.f712f = f712f;
     }
 
-    public String getFcmp_zjc5bd() {
-        return fcmp_zjc5bd;
+    public String getF712g() {
+        return f712g;
     }
 
-    public void setFcmp_zjc5bd(String fcmp_zjc5bd) {
-        this.fcmp_zjc5bd = fcmp_zjc5bd;
+    public void setF712g(String f712g) {
+        this.f712g = f712g;
     }
 
-    public String getFcmp_e849ad() {
-        return fcmp_e849ad;
+    public String getF712h() {
+        return f712h;
     }
 
-    public void setFcmp_e849ad(String fcmp_e849ad) {
-        this.fcmp_e849ad = fcmp_e849ad;
+    public void setF712h(String f712h) {
+        this.f712h = f712h;
     }
 
-    public String getFcmp_5h9v6b() {
-        return fcmp_5h9v6b;
+    public String getF712p() {
+        return f712p;
     }
 
-    public void setFcmp_5h9v6b(String fcmp_5h9v6b) {
-        this.fcmp_5h9v6b = fcmp_5h9v6b;
+    public void setF712p(String f712p) {
+        this.f712p = f712p;
     }
 
-    public String getFcmp_j8wyw2() {
-        return fcmp_j8wyw2;
+    public String getF7123() {
+        return f7123;
     }
 
-    public void setFcmp_j8wyw2(String fcmp_j8wyw2) {
-        this.fcmp_j8wyw2 = fcmp_j8wyw2;
+    public void setF7123(String f7123) {
+        this.f7123 = f7123;
     }
 
-    public String getFcmp_r56s00() {
-        return fcmp_r56s00;
+    public String getF801a() {
+        return f801a;
     }
 
-    public void setFcmp_r56s00(String fcmp_r56s00) {
-        this.fcmp_r56s00 = fcmp_r56s00;
+    public void setF801a(String f801a) {
+        this.f801a = f801a;
     }
 
-    public String getFcmp_hkvapz() {
-        return fcmp_hkvapz;
+    public String getF801b() {
+        return f801b;
     }
 
-    public void setFcmp_hkvapz(String fcmp_hkvapz) {
-        this.fcmp_hkvapz = fcmp_hkvapz;
+    public void setF801b(String f801b) {
+        this.f801b = f801b;
     }
 
-    public String getFcmp_6y932b() {
-        return fcmp_6y932b;
+    public String getF801c() {
+        return f801c;
     }
 
-    public void setFcmp_6y932b(String fcmp_6y932b) {
-        this.fcmp_6y932b = fcmp_6y932b;
+    public void setF801c(String f801c) {
+        this.f801c = f801c;
+    }
+
+    public String getF856a() {
+        return f856a;
+    }
+
+    public void setF856a(String f856a) {
+        this.f856a = f856a;
+    }
+
+    public String getF856b() {
+        return f856b;
+    }
+
+    public void setF856b(String f856b) {
+        this.f856b = f856b;
+    }
+
+    public String getF856c() {
+        return f856c;
+    }
+
+    public void setF856c(String f856c) {
+        this.f856c = f856c;
+    }
+
+    public String getF856d() {
+        return f856d;
+    }
+
+    public void setF856d(String f856d) {
+        this.f856d = f856d;
+    }
+
+    public String getF856e() {
+        return f856e;
+    }
+
+    public void setF856e(String f856e) {
+        this.f856e = f856e;
+    }
+
+    public String getF856f() {
+        return f856f;
+    }
+
+    public void setF856f(String f856f) {
+        this.f856f = f856f;
+    }
+
+    public String getF856g() {
+        return f856g;
+    }
+
+    public void setF856g(String f856g) {
+        this.f856g = f856g;
+    }
+
+    public String getF856h() {
+        return f856h;
+    }
+
+    public void setF856h(String f856h) {
+        this.f856h = f856h;
+    }
+
+    public String getF856i() {
+        return f856i;
+    }
+
+    public void setF856i(String f856i) {
+        this.f856i = f856i;
+    }
+
+    public String getF856j() {
+        return f856j;
+    }
+
+    public void setF856j(String f856j) {
+        this.f856j = f856j;
+    }
+
+    public String getF856k() {
+        return f856k;
+    }
+
+    public void setF856k(String f856k) {
+        this.f856k = f856k;
+    }
+
+    public String getF856l() {
+        return f856l;
+    }
+
+    public void setF856l(String f856l) {
+        this.f856l = f856l;
+    }
+
+    public String getF856m() {
+        return f856m;
+    }
+
+    public void setF856m(String f856m) {
+        this.f856m = f856m;
+    }
+
+    public String getF856n() {
+        return f856n;
+    }
+
+    public void setF856n(String f856n) {
+        this.f856n = f856n;
+    }
+
+    public String getF856o() {
+        return f856o;
+    }
+
+    public void setF856o(String f856o) {
+        this.f856o = f856o;
+    }
+
+    public String getF856p() {
+        return f856p;
+    }
+
+    public void setF856p(String f856p) {
+        this.f856p = f856p;
+    }
+
+    public String getF856q() {
+        return f856q;
+    }
+
+    public void setF856q(String f856q) {
+        this.f856q = f856q;
+    }
+
+    public String getF856r() {
+        return f856r;
+    }
+
+    public void setF856r(String f856r) {
+        this.f856r = f856r;
+    }
+
+    public String getF856s() {
+        return f856s;
+    }
+
+    public void setF856s(String f856s) {
+        this.f856s = f856s;
+    }
+
+    public String getF856u() {
+        return f856u;
+    }
+
+    public void setF856u(String f856u) {
+        this.f856u = f856u;
+    }
+
+    public String getF856w() {
+        return f856w;
+    }
+
+    public void setF856w(String f856w) {
+        this.f856w = f856w;
+    }
+
+    public String getF856x() {
+        return f856x;
+    }
+
+    public void setF856x(String f856x) {
+        this.f856x = f856x;
+    }
+
+    public String getF856y() {
+        return f856y;
+    }
+
+    public void setF856y(String f856y) {
+        this.f856y = f856y;
+    }
+
+    public String getF856z() {
+        return f856z;
+    }
+
+    public void setF856z(String f856z) {
+        this.f856z = f856z;
     }
 
     public KeyObject getF901a() {
@@ -3153,44 +5753,20 @@ public class Autoreferat extends ABook {
         this.f9016 = f9016;
     }
 
-    public String getFcmp_5iri6j() {
-        return fcmp_5iri6j;
+    public String getF909a() {
+        return f909a;
     }
 
-    public void setFcmp_5iri6j(String fcmp_5iri6j) {
-        this.fcmp_5iri6j = fcmp_5iri6j;
+    public void setF909a(String f909a) {
+        this.f909a = f909a;
     }
 
-    public String getF910a() {
-        return f910a;
+    public String getF909b() {
+        return f909b;
     }
 
-    public void setF910a(String f910a) {
-        this.f910a = f910a;
-    }
-
-    public String getF910b() {
-        return f910b;
-    }
-
-    public void setF910b(String f910b) {
-        this.f910b = f910b;
-    }
-
-    public String getF910d() {
-        return f910d;
-    }
-
-    public void setF910d(String f910d) {
-        this.f910d = f910d;
-    }
-
-    public String getF911a() {
-        return f911a;
-    }
-
-    public void setF911a(String f911a) {
-        this.f911a = f911a;
+    public void setF909b(String f909b) {
+        this.f909b = f909b;
     }
 
     public String getF912a() {
@@ -3201,4 +5777,3 @@ public class Autoreferat extends ABook {
         this.f912a = f912a;
     }
 }
-

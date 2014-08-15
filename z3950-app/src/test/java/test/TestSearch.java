@@ -35,6 +35,7 @@ public class TestSearch  {
         library.setZdb("ibis");
         library.setZport(210);
         library.setzFormat(FormatEnum.RUSMARC.name());
+        library.setQueryType(QueryType.PREFIX_QUERY.name());
 
         // library congress
 //        library.setZhost("lx2.loc.gov");
@@ -69,7 +70,7 @@ public class TestSearch  {
 //        library.setEncoding("cp1251");
     }
 
-//    @Test
+    @Test
     public void TestZ3950Searcher() throws Exception {
 
         SimpleSearch search = new SimpleSearch();
@@ -94,7 +95,10 @@ public class TestSearch  {
             result = new SearchResult();
             for (int i = 0; i < set.getHitCount() && i < search.getMaxResult(); i++) {
                 Record rec = set.getRecord(i);
-                result.getRecords().add(searcher.readMarc(rec, library));
+                System.out.println(rec.getSyntax());
+                org.marc4j.marc.Record marc = searcher.readMarc(rec, library);
+                System.out.println(marc.toString());
+                result.getRecords().add(marc);
             }
             result.setCount(set.getHitCount());
 
