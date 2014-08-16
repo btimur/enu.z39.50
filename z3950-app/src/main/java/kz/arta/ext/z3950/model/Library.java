@@ -3,29 +3,31 @@ package kz.arta.ext.z3950.model;
 import javax.persistence.*;
 
 /**
- * Created by timur on 25/07/2014 12:05.
+ * Класс - объект "Конфигурация подключения к библиотеке"
  */
 @Entity
 @Table(name = "lib_configuration")
-public class Library {
+public class Library implements IEntity{
 
     public static final String FILDNAME_LIBNAME = "nameLib";
+
     /**
      * идентификатор
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    protected Long id;
+
     /**
      * наименование библиотеки
      */
-    @Column(name = "NAME")
+    @Column(name = "NAME_LIB")
     private String nameLib;
     /**
      * хост библиотеки для сервиса Z39.50
      */
-    @Column(name = "HOST")
+    @Column(name = "HOST_LIB")
     private String zhost;
     /**
      * порт библиотеки для сервиса Z39.50
@@ -45,20 +47,26 @@ public class Library {
     /**
      * пароль библиотеки для сервиса Z39.50
      */
-    @Column(name = "PASSWORD")
+    @Column(name = "PWD")
     private String zPwd;
     /**
      * Format библиотеки для сервиса Z39.50
      */
-    @Column(name = "FORMAT")
-    @Enumerated(EnumType.STRING)
-    private FormatEnum zFormat;
+    @Column(name = "FORMAT_LIB")
+    private String zFormat;
 
     /**
      * Format библиотеки для сервиса Z39.50
      */
     @Column(name = "ENCODING")
     private String encoding = "UTF8";
+
+    /***
+     * тип запросов
+     * The following is supported: prefix for Prefix Query Notation (Type-1 Query); cql for CQL search (Type-2 Query),
+     */
+    @Column(name = "QUERY_TYPE")
+    private String queryType;
 
     public Long getId() {
         return id;
@@ -116,11 +124,11 @@ public class Library {
         this.zPwd = zPwd;
     }
 
-    public FormatEnum getzFormat() {
+    public String getzFormat() {
         return zFormat;
     }
 
-    public void setzFormat(FormatEnum zFormat) {
+    public void setzFormat(String zFormat) {
         this.zFormat = zFormat;
     }
 
@@ -130,5 +138,13 @@ public class Library {
 
     public void setEncoding(String encoding) {
         this.encoding = encoding;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 }

@@ -1,7 +1,9 @@
 package kz.arta.ext.z3950.util;
 
 
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -19,7 +21,7 @@ public class Resources {
 
     @Produces
     public Logger produceLog(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+        return LogManager.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 
 }

@@ -1,6 +1,7 @@
 package kz.arta.ext.z3950.convert;
 
 import kz.arta.ext.z3950.model.Book;
+import kz.arta.ext.z3950.model.synergy.ABook;
 import org.marc4j.marc.Record;
 
 /**
@@ -8,4 +9,6 @@ import org.marc4j.marc.Record;
  */
 public interface IMarcConverter {
     Book convert(Record marcRecord);
+
+    ABook reverseConvert(Record marcRecord);
 }
