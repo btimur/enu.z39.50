@@ -7,8 +7,8 @@ import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.api.data.RegistryRecord;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
-import kz.arta.ext.z3950.model.synergy.Autoreferat;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
+import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.util.ApiFormField;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
@@ -23,22 +23,28 @@ import java.util.Map;
 /**
  * Created by timur on 08/08/2014 16:09.
  */
-public class AutoreferatReader extends AFormsReader {
-    private final String formUUID;
-    private final String registryUUID;
+public class LibraryBookReader extends AFormsReader {
     @Inject
     protected Logger log;
+    //    private final String formUUID;
+    private String registryUUID;
 
-    public AutoreferatReader() {
-        formUUID = ConfigReader.getPropertyValue(CodeConstants.AUTOREFERAT_FORM_UUID);
+    public LibraryBookReader() {
+//        formUUID = ConfigReader.getPropertyValue(CodeConstants.AUTOREFERAT_FORM_UUID);
         registryUUID = ConfigReader.getPropertyValue(CodeConstants.AUTOREFERAT_REGISTRY_UUID);
-
     }
 
-    public boolean Save(Autoreferat book, RestQueryContext queryContext) throws Exception {
-        boolean updateSuccess = false;
-       RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
-                    registryUUID);
+    public String getRegistryUUID() {
+        return registryUUID;
+    }
+
+    public void setRegistryUUID(String registryUUID) {
+        this.registryUUID = registryUUID;
+    }
+
+    public String Save(LibraryBook book, RestQueryContext queryContext) throws Exception {
+        RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
+                registryUUID);
 
         FormData formData = readFormData(queryContext, registryRecord.getDataUUID());
 
@@ -50,26 +56,25 @@ public class AutoreferatReader extends AFormsReader {
                 log.debug("data = " + data);
                 formData.setData(data);
                 writeData(queryContext, formData);
-                updateSuccess = true;
+                return registryRecord.getDataUUID();
             }
         }
-        return updateSuccess;
+        return null;
     }
 
-    private void fillFields(Autoreferat book, FormFieldsWrapper fieldsWrapper) throws IntrospectionException, NoSuchFieldException, InvocationTargetException, IllegalAccessException {
+    private void fillFields(LibraryBook book, FormFieldsWrapper fieldsWrapper) throws IntrospectionException, NoSuchFieldException, InvocationTargetException, IllegalAccessException {
 
         Map<String, FormField> fieldMap = fieldsWrapper.getFormFieldMap();
-        for (PropertyDescriptor pd : Introspector.getBeanInfo(Autoreferat.class).getPropertyDescriptors()){
-            if(pd.getName().equals("class")) continue;
-            if(Autoreferat.class.getDeclaredField(pd.getName()).isAnnotationPresent(ApiFormField.class)) {
-                ApiFormField annotation = Autoreferat.class.getDeclaredField(pd.getName())
+        for (PropertyDescriptor pd : Introspector.getBeanInfo(LibraryBook.class).getPropertyDescriptors()) {
+            if (pd.getName().equals("class")) continue;
+            if (LibraryBook.class.getDeclaredField(pd.getName()).isAnnotationPresent(ApiFormField.class)) {
+                ApiFormField annotation = LibraryBook.class.getDeclaredField(pd.getName())
                         .getAnnotation(ApiFormField.class);
                 if (!fieldMap.containsKey(annotation.nameField())) {
 
                     fieldsWrapper.addField(annotation.nameField(),
                             annotation.typeField());
                 }
-//                FormField formField = fieldMap.get(pd.getName()); TODO check
                 FormField formField = fieldMap.get(annotation.nameField());
                 Object o = pd.getReadMethod().invoke(book);
                 if (pd.getPropertyType().equals(KeyObject.class)) {

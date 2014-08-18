@@ -1,0 +1,174 @@
+<div class="jqmWindow jqmID2" id="viewMarcWindow" style="z-index: 3000; display: block;">
+    <div class="marcViewerTitle">
+        <h3>Просмотр записи <span class="recordNumber">{{book.id}}</span></h3>
+    </div>
+    <div class="recordTitle">
+
+        <div class="dms-main-record-info">
+            <div class="dms-author-record">{{selectedBook.author}}</div>
+            <b>{{selectedBook.title}}</b> : {{selectedBook.titleBig}}. - {{selectedBook.published}}. - {{selectedBook.phisical}}.
+        </div>
+        <div class="dms-other-record-info" ng-show="showExt">
+            Хранение: {{selectedBook.recordPlace}};
+        </div>
+        <a href="#" class="toggleShowRecordTitle" ng-click="showExt = !showExt">
+                                            <span class="toggleShowRecordTitleMore" ng-show="!showExt">
+                                                еще                                            </span>
+                                            <span class="toggleShowRecordTitleLess" ng-show="showExt">
+                                                скрыть                                            </span>
+        </a>
+        <br></div>
+    <div id="marcTabs">
+        <tabset>
+            <!--class="navDocDesc"-->
+            <tab heading="Оглавление">
+                <div class="docDescriptionContent"><h3>Данный документ не оцифрован</h3></div>
+            </tab>
+            <tab heading="Описание">
+                <div class="marcDescriptionContent">
+                    <div>
+                        <table class="tableMARC21Tagged">
+                            <tbody>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Автор</td>
+                                <td class="tableColValueMARC21Tagged">Толстой, Лев Николаевич</td>
+                            </tr>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Автор</td>
+                                <td class="tableColValueMARC21Tagged">Маршакова, Е.</td>
+                            </tr>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Заглавие</td>
+                                <td class="tableColValueMARC21Tagged">Филипок Рассказы. [Для дошк. возраста]</td>
+                            </tr>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Выходные данные</td>
+                                <td class="tableColValueMARC21Tagged"> М. Дет. лит. 1983</td>
+                            </tr>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Физическое описание</td>
+                                <td class="tableColValueMARC21Tagged"> 16 с. ил. 23 см</td>
+                            </tr>
+                            <tr class="tableRowMARC21Tagged">
+                                <td class="tableColTitleMARC21Tagged">Хранение</td>
+                                <td class="tableColValueMARC21Tagged">M 83-10/388;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Карточка">
+                <div class="marcCardContent">
+                    <div>Толстой, Лев Николаевич (1828-1910.).
+                        <br>Филипок : Рассказы. [Для дошк. возраста] / Л. Н. Толстой; [Рис. Е. Маршаковой]. - М. : Дет.
+                        лит., 1983. - 16 с. : ил.; 23 см.<br>Хранение: M 83-10/388; <br>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Marc-запись">
+                <div class="marcViewerContent">
+                    <div>
+                        <table class="expanded_search">
+                            <tbody>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text">LDR</td>
+                                <td class="table-text"><strong>00740nam#a2200229#i#4500</strong></td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>001</strong></td>
+                                <td class="table-text"><strong>001165426</strong></td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>003</strong></td>
+                                <td class="table-text"><strong>RuMoRGB</strong></td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>005</strong></td>
+                                <td class="table-text"><strong>20021218120000.0</strong></td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>008</strong></td>
+                                <td class="table-text"><strong>020227s1983####|||####||####u####||rus#d</strong></td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>017</strong></td>
+                                <td class="table-text">
+                                    <strong>##</strong><br><strong>$a</strong>&nbsp;83-70244<br><strong>$b</strong>&nbsp;РКП
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>020</strong></td>
+                                <td class="table-text"><strong>##</strong><br><strong>$c</strong>&nbsp;5 к.</td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>035</strong></td>
+                                <td class="table-text"><strong>##</strong><br><strong>$a</strong>&nbsp;(RuMoRKP)ru83-70244
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>040</strong></td>
+                                <td class="table-text">
+                                    <strong>##</strong><br><strong>$a</strong>&nbsp;RKP<br><strong>$b</strong>&nbsp;rus<br><strong>$e</strong>&nbsp;PSBO
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>041</strong></td>
+                                <td class="table-text"><strong>0#</strong><br><strong>$a</strong>&nbsp;rus</td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>080</strong></td>
+                                <td class="table-text"><strong>##</strong><br><strong>$a</strong>&nbsp;882-93</td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>084</strong></td>
+                                <td class="table-text"><strong>##</strong><br><strong>$a</strong>&nbsp;48.3<br><strong>$2</strong>&nbsp;rueskl
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>100</strong></td>
+                                <td class="table-text"><strong>1#</strong><br><strong>$a</strong>&nbsp;Толстой, Лев
+                                    Николаевич<br><strong>$d</strong>&nbsp;1828-1910.
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>245</strong></td>
+                                <td class="table-text">
+                                    <strong>10</strong><br><strong>$a</strong>&nbsp;Филипок<br><strong>$b</strong>&nbsp;Рассказы.
+                                    [Для дошк. возраста]<br><strong>$c</strong>&nbsp;Л. Н. Толстой; [Рис. Е. Маршаковой]
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>260</strong></td>
+                                <td class="table-text">
+                                    <strong>##</strong><br><strong>$a</strong>&nbsp;М.<br><strong>$b</strong>&nbsp;Дет.
+                                    лит.<br><strong>$c</strong>&nbsp;1983
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>300</strong></td>
+                                <td class="table-text"><strong>##</strong><br><strong>$a</strong>&nbsp;16 с.<br><strong>$b</strong>&nbsp;ил.<br><strong>$c</strong>&nbsp;23
+                                    см
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>700</strong></td>
+                                <td class="table-text"><strong>1#</strong><br><strong>$a</strong>&nbsp;Маршакова, Е.<br><strong>$e</strong>&nbsp;ил.<br><strong>$4</strong>&nbsp;ill
+                                </td>
+                            </tr>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text"><strong>852</strong></td>
+                                <td class="table-text">
+                                    <strong>##</strong><br><strong>$a</strong>&nbsp;РГБ<br><strong>$b</strong>&nbsp;FB<br><strong>$j</strong>&nbsp;M
+                                    83-10/388<br><strong>$x</strong>&nbsp;70
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+    </div>
+</div>

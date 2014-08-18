@@ -1,5 +1,4 @@
-DROP TABLE subindex
-  GO
+DROP TABLE IF EXISTS subindex;
 
 CREATE TABLE subindex  (
   ID        	bigint(20) AUTO_INCREMENT COMMENT 'Идентификатор'  NOT NULL,
@@ -10,5 +9,4 @@ CREATE TABLE subindex  (
   START       	int(11) COMMENT 'начало индекса подполя'  NULL,
   END       	int(11) COMMENT 'окончания индекса подполя'  NULL,
   PRIMARY KEY(ID)
-)
-  GO
+)ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COMMENT='подполя для строковых индексов';

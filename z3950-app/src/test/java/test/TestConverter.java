@@ -4,7 +4,7 @@ import kz.arta.ext.z3950.convert.IMarcConverter;
 import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.SubIndex;
-import kz.arta.ext.z3950.model.synergy.Autoreferat;
+import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.util.RuMarcStreamReader;
 import org.junit.Assert;
 import org.junit.Before;
@@ -80,48 +80,48 @@ public class TestConverter {
 
     @Test
     public void testReverse() {
-        Autoreferat autoreferat = (Autoreferat) converter.reverseConvert(record);
-        Assert.assertNotNull(autoreferat);
-        Assert.assertNotNull(autoreferat.getF010a());
-        Assert.assertEquals(autoreferat.getF010a(), "5-8046-0135-0");
-        Assert.assertNotNull(autoreferat.getF700a());
-        Assert.assertEquals(autoreferat.getF700a(), "Эдди");//"Эдди С.Э."
-        Assert.assertNotNull(autoreferat.getF200a());
-        Assert.assertEquals(autoreferat.getF200a(), "XML: справочник");
-        Assert.assertNotNull(autoreferat.getF210d());
-        Assert.assertEquals(autoreferat.getF210d(), "1999");
-        Assert.assertNotNull(autoreferat.getF210a());
-        Assert.assertEquals(autoreferat.getF210a(), "спб. и др.");
+        LibraryBook libraryBook = converter.reverseConvert(record);
+        Assert.assertNotNull(libraryBook);
+        Assert.assertNotNull(libraryBook.getF010a());
+        Assert.assertEquals(libraryBook.getF010a(), "5-8046-0135-0");
+        Assert.assertNotNull(libraryBook.getF700a());
+        Assert.assertEquals(libraryBook.getF700a(), "Эдди");//"Эдди С.Э."
+        Assert.assertNotNull(libraryBook.getF200a());
+        Assert.assertEquals(libraryBook.getF200a(), "XML: справочник");
+        Assert.assertNotNull(libraryBook.getF210d());
+        Assert.assertEquals(libraryBook.getF210d(), "1999");
+        Assert.assertNotNull(libraryBook.getF210a());
+        Assert.assertEquals(libraryBook.getF210a(), "спб. и др.");
 
     }
 
     @Test
     public void testSubIndex() throws Exception {
-        Autoreferat autoreferat = (Autoreferat) converter.reverseConvert(record);
-        Assert.assertNotNull(autoreferat);
-        Assert.assertNotNull(autoreferat.getF100a());
-        Assert.assertEquals(autoreferat.getF100a(), "19991214d1999    |||y1rusy0204    ca");
-        Assert.assertNotNull(autoreferat.getF100a_1());
-        Assert.assertEquals(autoreferat.getF100a_1(), "19991214");
-        Assert.assertNotNull(autoreferat.getF100a_2());
-        Assert.assertEquals(autoreferat.getF100a_2(), "d");
-        Assert.assertNotNull(autoreferat.getF100a_3());
-        Assert.assertEquals(autoreferat.getF100a_3(), "1999");
-        Assert.assertNull(autoreferat.getF100a_4());
-        Assert.assertNotNull(autoreferat.getF100a_5());
-        Assert.assertEquals(autoreferat.getF100a_5(), "|||");
-        Assert.assertNotNull(autoreferat.getF100a_6());
-        Assert.assertEquals(autoreferat.getF100a_6(), "y");
-        Assert.assertNotNull(autoreferat.getF100a_7());
-        Assert.assertEquals(autoreferat.getF100a_7(), "1");
-        Assert.assertNotNull(autoreferat.getF100a_8());
-        Assert.assertEquals(autoreferat.getF100a_8(), "rus");
-        Assert.assertNotNull(autoreferat.getF100a_9());
-        Assert.assertEquals(autoreferat.getF100a_9(), "y");
-        Assert.assertNotNull(autoreferat.getF100a_10());
-        Assert.assertEquals(autoreferat.getF100a_10(), "0204");
-        Assert.assertNull(autoreferat.getF100a_11());
-        Assert.assertNotNull(autoreferat.getF100a_12());
-        Assert.assertEquals(autoreferat.getF100a_12(), "ca");
+        LibraryBook libraryBook = converter.reverseConvert(record);
+        Assert.assertNotNull(libraryBook);
+        Assert.assertNotNull(libraryBook.getF100a());
+        Assert.assertEquals(libraryBook.getF100a(), "19991214d1999    |||y1rusy0204    ca");
+        Assert.assertNotNull(libraryBook.getF100a_1());
+        Assert.assertEquals(libraryBook.getF100a_1(), "19991214");
+        Assert.assertNotNull(libraryBook.getF100a_2());
+        Assert.assertEquals(libraryBook.getF100a_2(), "d");
+        Assert.assertNotNull(libraryBook.getF100a_3());
+        Assert.assertEquals(libraryBook.getF100a_3(), "1999");
+        Assert.assertNull(libraryBook.getF100a_4());
+        Assert.assertNotNull(libraryBook.getF100a_5());
+        Assert.assertEquals(libraryBook.getF100a_5(), "|||");
+        Assert.assertNotNull(libraryBook.getF100a_6());
+        Assert.assertEquals(libraryBook.getF100a_6(), "y");
+        Assert.assertNotNull(libraryBook.getF100a_7());
+        Assert.assertEquals(libraryBook.getF100a_7(), "1");
+        Assert.assertNotNull(libraryBook.getF100a_8());
+        Assert.assertEquals(libraryBook.getF100a_8(), "rus");
+        Assert.assertNotNull(libraryBook.getF100a_9());
+        Assert.assertEquals(libraryBook.getF100a_9(), "y");
+        Assert.assertNotNull(libraryBook.getF100a_10());
+        Assert.assertEquals(libraryBook.getF100a_10(), "0204");
+        Assert.assertNull(libraryBook.getF100a_11());
+        Assert.assertNotNull(libraryBook.getF100a_12());
+        Assert.assertEquals(libraryBook.getF100a_12(), "ca");
     }
 }

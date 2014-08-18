@@ -5,6 +5,7 @@ package kz.arta.ext.z3950.util;
  */
 public class CodeConstants {
 
+    public static final String REGISTRY_UUID = ".registry.uuid";
     public static final String USER_ADDITIONAL_FORM_UUID = "user.additional.form.uuid";
     public static final String USER_ADDITIONAL_IIN_FIELD = "user.additional.iin.field";
     public static final String AUTOREFERAT_FORM_UUID = "autoreferat.form.uuid";

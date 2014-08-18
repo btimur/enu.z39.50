@@ -14,9 +14,14 @@ public class Book {
     private String publishedDate;
     private String publishedPlace;
     private String keywords;
+    private String booktype;
     private Long libraryId;
     private Record record;
 
+    private String titleBig;
+    private String published;
+    private String phisical;
+    private String recordPlace;
 
     public String getId() {
         return id;
@@ -88,5 +93,45 @@ public class Book {
 
     public void setRecord(Record record) {
         this.record = record;
+    }
+
+    public String getBooktype() {
+        return booktype;
+    }
+
+    public void setBooktype(String booktype) {
+        this.booktype = booktype;
+    }
+
+    public String getTitleBig() {
+        return titleBig;
+    }
+
+    public void setTitleBig(String titleBig) {
+        this.titleBig = titleBig;
+    }
+
+    public String getPublished() {
+        return published;
+    }
+
+    public void setPublished(String published) {
+        this.published = published;
+    }
+
+    public String getPhisical() {
+        return phisical;
+    }
+
+    public void setPhisical(String phisical) {
+        this.phisical = phisical;
+    }
+
+    public String getRecordPlace() {
+        return recordPlace;
+    }
+
+    public void setRecordPlace(String recordPlace) {
+        this.recordPlace = recordPlace;
     }
 }

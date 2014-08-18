@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>ENUSearch App</title>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/font-awesome.css"/>
     <link rel="stylesheet" href="css/ngDialog.css"/>
     <link rel="stylesheet" href="css/ngDialog-theme-default.css"/>
+    <!--<link rel="stylesheet" href="css/ngDialog-theme-flat.css"/>-->
 </head>
 <body ng-app="z3950" ng-controller="SearchCtrl">
 
@@ -23,7 +24,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/enu-z3950/">
-                 <img src="img/arta.png" />
+                <img src="img/arta.png"/>
                 <!--<i class="fa fa-book"></i>-->
                 <!--Электронная библиотека-->
             </a>
@@ -34,331 +35,250 @@
                 <li><a href="/auth/login/"><i class="fa fa-sign-in"></i> Войти</a></li>
 
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
+        <!--/.nav-collapse -->
     </div>
 </div>
 
 <script type="text/ng-template" id="secondDialog">
     <div class="ngdialog-message">
-        <h2>And even more!</h2>
-        <ul class="mt">
-            <li>Load your templates as strings, ng-template tags or html partials</li>
-            <li>ngDialog.js is < 2kb when minified!</li>
-            <li>It has simple, extendable and elegant API ;)</li>
-        </ul>
-        <div class="mt">Spread a word about it:</div>
-    </div>
-    <div class="mt">
-        <a href="http://twitter.com/home?status=ngDialog.js - modal windows and popups provider for Angular.js applications, via @likeastore!+http://likeastore.github.io/ngDialog/" class="action-btn" ng-like>Tweet</a>
-        <a href="http://www.facebook.com/share.php?u=http://likeastore.github.io/ngDialog" class="action-btn" ng-like>Like</a>
-        <a href="https://github.com/likeastore/ngDialog#ngdialog" class="action-btn read" target="_blank">Read docs</a>
+        <h2>Импорт карточки</h2>
+        Ваша запись успешна импортирована c uuid - <b>{{importUUID}}</b>
     </div>
 </script>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-7">
-            <span class="page_header">Поиск</span>
-        </div>
-        <div class="col-md-5">
-            <ul class="menu_lang">
-                <li>
-                    <span>рус</span>
-                </li>
-                <li>
-                    <a href="/kk/">каз</a>
-                </li>
-                <li>
-                    <a href="/en/">eng</a>
-                </li>
-            </ul>
-        </div>
+<div class="row">
+    <div class="col-md-7">
+        <span class="page_header">Поиск</span>
     </div>
-    <div class="row">
-        <!--<div class="col-md-2">-->
-            <!--<div class="logo" id="logoBlock">-->
-                <!--<a id="logoImage" title="Библиотека ЕНУ" href="#">-->
-                    <!--<img src="img/arta.png" alt="arta">-->
-                <!--</a>-->
-            <!--</div>-->
+    <div class="col-md-5">
+        <ul class="menu_lang">
+            <li>
+                <span>рус</span>
+            </li>
+            <li>
+                <a href="/kk/">каз</a>
+            </li>
+            <li>
+                <a href="/en/">eng</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <!--<div class="col-md-2">-->
+    <!--<div class="logo" id="logoBlock">-->
+    <!--<a id="logoImage" title="Библиотека ЕНУ" href="#">-->
+    <!--<img src="img/arta.png" alt="arta">-->
+    <!--</a>-->
+    <!--</div>-->
 
-        <!--</div>-->
-        <!--<div class="col-md-10">-->
-        <form ng-submit="processForm()">
-            <!--class="navbar-form navbar-left" role="search"-->
-            <div class="alert alert-danger top-buffer hide mymessage-box">
-                <span></span>
-            </div>
-            <div class="row search">
-                <div class="row">
-                    <div class="col-md-11">
-                        <div>
-                            <!--<input class="form-control" id="search_value" name="search" type="text">-->
-                            <input id="searchTerm" type="text" class="form-control input-lg col-sm-10"
-                                   placeholder="Введите автора, наименование или ISBN"
-                                   style="min-width: 500px" ng-model="formData.term" ng-class="termClass">
-                            <!--<div class="loader"><img border="0" alt="Загрузка..." src="img/loader.gif"></div>-->
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <button type="submit" class="btn btn-default btn-lg">Поиск</button>
+    <!--</div>-->
+    <!--<div class="col-md-10">-->
+    <form ng-submit="processForm()">
+        <!--class="navbar-form navbar-left" role="search"-->
+        <div class="alert alert-danger top-buffer hide mymessage-box">
+            <span></span>
+        </div>
+        <div class="row search">
+            <div class="row">
+                <div class="col-md-11">
+                    <div>
+                        <!--<input class="form-control" id="search_value" name="search" type="text">-->
+                        <input id="searchTerm" type="text" class="form-control input-lg col-sm-10"
+                               placeholder="Введите автора, наименование или ISBN"
+                               style="min-width: 500px" ng-model="formData.term" ng-class="termClass">
+                        <!--<div class="loader"><img border="0" alt="Загрузка..." src="img/loader.gif"></div>-->
                     </div>
                 </div>
-                <div class="row top-buffer">
-                    <div class="col-md-12">
-                        <h5 class="as_button collapsed" ng-click="formData.advancedSearch = !formData.advancedSearch">
-                            Расширенный поиск ↓
-                        </h5>
-                        <div id="advanced_search"  ng-show="formData.advancedSearch" class="top-buffer" >
-                            <div class="form-inline">
-                                <div class="spacer20"></div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_701b" name="701b" placeholder="коллективный автор" type="text"
-                                                ng-model="formData.addAuthor"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_200d" name="200d" placeholder="параллельное заглавие" type="text"
-                                                ng-model="formData.parallelTitle"></div>
-                                </div>
-                                <div class="form-group">
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-default btn-lg">Поиск</button>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <h5 class="as_button collapsed" ng-click="formData.advancedSearch = !formData.advancedSearch">
+                        Расширенный поиск ↓
+                    </h5>
 
-                                    <div><input class="form-control" id="id_210d" name="210d" placeholder="год издания" type="text"
-                                                ng-model="formData.publishedYear"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_210c" name="210c" placeholder="издательство" type="text"
-                                                ng-model="formData.publishedName"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_210a" name="210a" placeholder="место издания" type="text"
-                                                ng-model="formData.publishedPlace"></div>
-                                </div>
-                                <div class="spacer20"></div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_300a" name="300a" placeholder="общие примечания" type="text"
-                                                ng-model="formData.commoonSubject"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_610a" name="610a" placeholder="ключевое слово" type="text"
-                                                ng-model="formData.keyword"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div><input class="form-control" id="id_022a" name="022a" placeholder="Номер ISSN" type="text"
-                                                ng-model="formData.issn"></div>
-                                </div>
-                                <!--<div class="form-group">-->
-                                    <!--<div><input class="form-control" id="id_010a" name="010a" placeholder="Номер ISBN" type="text"></div>-->
-                                <!--</div>-->
+                    <div id="advanced_search" ng-show="formData.advancedSearch" class="top-buffer">
+                        <div class="form-inline">
+                            <div class="spacer20"></div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_701b" name="701b"
+                                            placeholder="коллективный автор" type="text"
+                                            ng-model="formData.addAuthor"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_200d" name="200d"
+                                            placeholder="параллельное заглавие" type="text"
+                                            ng-model="formData.parallelTitle"></div>
+                            </div>
+                            <div class="form-group">
+
+                                <div><input class="form-control" id="id_210d" name="210d" placeholder="год издания"
+                                            type="text"
+                                            ng-model="formData.publishedYear"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_210c" name="210c" placeholder="издательство"
+                                            type="text"
+                                            ng-model="formData.publishedName"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_210a" name="210a" placeholder="место издания"
+                                            type="text"
+                                            ng-model="formData.publishedPlace"></div>
+                            </div>
+                            <div class="spacer20"></div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_300a" name="300a" placeholder="общие примечания"
+                                            type="text"
+                                            ng-model="formData.commoonSubject"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_610a" name="610a" placeholder="ключевое слово"
+                                            type="text"
+                                            ng-model="formData.keyword"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_010a" name="010a" placeholder="Номер ISBN"
+                                            type="text"
+                                            ng-model="formData.isbn"></div>
+                            </div>
+                            <div class="form-group">
+                                <div><input class="form-control" id="id_022a" name="022a" placeholder="Номер ISSN"
+                                            type="text"
+                                            ng-model="formData.issn"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-        <!--</div>-->
+        </div>
+    </form>
+    <!--</div>-->
+</div>
+<div class="row">
+    <div class="col-md-4" style="padding-right:0">
+        <tabset>
+            <tab heading="Каталоги">
+                <ul class="menu_main">
+                    <li>
+                        <a>
+                            <input type="radio" class="search_registry" name="formUUID" ng-model="formData.booktype"
+                                   value="educational">
+                            Учебные издания
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a>
+                            <input type="radio" class="search_registry" ng-model="formData.booktype"
+                                   value="scientific">
+                            Научные издания
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a>
+                            <input type="radio" class="search_registry" ng-model="formData.booktype"
+                                   value="brochure">
+                            Брошюры
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a>
+                            <input type="radio" class="search_registry" ng-model="formData.booktype"
+                                   value="thesis">
+                            Диссертации
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a>
+                            <input type="radio" class="search_registry" ng-model="formData.booktype"
+                                   value="autoreferat">
+                            Авторефераты
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a>
+                            <input type="radio" class="search_registry" ng-model="formData.booktype"
+                                   value="fiction">
+                            Художественная литература
+                        </a>
+                    </li>
+
+
+                </ul>
+            </tab>
+            <tab heading="Библиотеки">
+                <ul class="menu_main">
+                    <li ng-repeat="lib in libraries">
+                        <span>
+                            <input type="checkbox" ng-model="lib.useSearch"> {{lib.nameLib}}
+                        </span>
+                    </li>
+                </ul>
+            </tab>
+        </tabset>
     </div>
-    <div class="row">
-        <div class="col-md-4" style="padding-right:0">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#catalogs" data-toggle="tab">Каталоги</a></li>
-                <li><a href="#filters" data-toggle="tab">Фильтры</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="catalogs">
-                    <ul class="menu_main">
 
 
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="f664a4a2-9736-469c-9b0e-a10a11624e72" checked="checked">
-                                Учебные издания (3)
-                            </a>
-                        </li>
-
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="127008ec-637c-442d-b36c-19030d08c91d">
-                                Научные издания (0)
-                            </a>
-                        </li>
-
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="9adbf1e7-81a1-4cde-b759-cd219b1852df">
-                                Брошюры (0)
-                            </a>
-                        </li>
-
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="9fe32709-5de5-4bc8-8e61-a6d52026a952">
-                                Диссертации (0)
-                            </a>
-                        </li>
-
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="18878264-401a-4177-a54a-c481cd5bff94">
-                                Авторефераты (0)
-                            </a>
-                        </li>
-
-                        <li>
-
-                            <a>
-                                <input type="checkbox" class="search_registry" name="formUUID" value="ce8a7347-5712-40bd-8cab-7b5b28bd6cf7">
-                                Художественная литература (0)
-                            </a>
-                        </li>
-
-
-
-                    </ul>
+    <div class="col-md-8 right_block">
+        <div class="notFound" ng-show="notFound">По вашему запросу ничего не найдено.</div>
+        <div class="loaderResults" ng-show="importDo">
+            <img border="0" alt="Загрузка..." src="img/loader.gif">
+        </div>
+        <div ng-show="showMultiLib">
+            <div ng-repeat="lib in librarySelected" class="row">
+                <span><b>{{lib.nameLib}} :</b></span>
+                <div class="loaderResults" ng-show="lib.load">
+                    <img border="0" alt="Загрузка..." src="img/loader.gif">
                 </div>
-                <div class="tab-pane" id="filters">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-1 top-buffer">
-
-                            <!-- NOTE. askhat what's the hell -->
-
-                            <div class="form-group">
-                                <b><label for="id_101a">Язык основного текста:</label></b><select class="form-control" id="id_101a" name="101a">
-                                <option value="" selected="selected"></option>
-                                <option value="21">каз</option>
-                                <option value="22">рус</option>
-                                <option value="24">нем</option>
-                                <option value="25">рус.,каз.,кор.</option>
-                                <option value="27">каз, рус</option>
-                                <option value="28">каз,рус</option>
-                                <option value="29">қаз</option>
-                                <option value="30">рус,каз</option>
-                                <option value="32">deu</option>
-                                <option value="34">kor</option>
-                                <option value="35">eng</option>
-                                <option value="36">ara</option>
-                                <option value="39">рус, англ</option>
-                                <option value="41">rum</option>
-                                <option value="42">hun</option>
-                                <option value="43">ami</option>
-                                <option value="44">pol</option>
-                                <option value="45">cze</option>
-                                <option value="46">fra</option>
-                                <option value="47">spa</option>
-                                <option value="48">турец.</option>
-                                <option value="50">uig</option>
-                                <option value="52">kyr</option>
-                                <option value="53">chi</option>
-                                <option value="54">tat</option>
-                                <option value="55">на каз., рус.яз.</option>
-                                <option value="56">рус.</option>
-                                <option value="57">uzb</option>
-                                <option value="58">tuk</option>
-                                <option value="59">tur</option>
-                                <option value="61">Рус</option>
-                                <option value="62">jpn</option>
-                                <option value="63">mon</option>
-                                <option value="65">bel</option>
-                                <option value="66">на каз., рус яз.</option>
-                                <option value="67">ног</option>
-                                <option value="68">кир</option>
-                                <option value="69">ita</option>
-                                <option value="70">lav</option>
-                                <option value="72">est</option>
-                                <option value="74">dan</option>
-                                <option value="77">каз, рус,англ.</option>
-                                <option value="79">tuz</option>
-                                <option value="83">англ</option>
-                                <option value="86">рус-қаз</option>
-                                <option value="87">қаз,рус</option>
-                                <option value="88">қаз, рус</option>
-                                <option value="89">қаз-рус</option>
-                                <option value="90">қаз-орысша</option>
-                                <option value="91">русз</option>
-                                <option value="92">қазақша-орысша</option>
-                                <option value="93">рус-каз</option>
-                                <option value="94">қаз - орысша</option>
-                                <option value="95">қазақ, орыс, ағылшын</option>
-                                <option value="96">азербайжан</option>
-                                <option value="97">қаз - рус</option>
-                                <option value="98">тур</option>
-                                <option value="99">aze</option>
-                                <option value="100">азе</option>
-                                <option value="103">укр</option>
-                                <option value="104">узб</option>
-                                <option value="105">қар</option>
-                                <option value="106">mal</option>
-                                <option value="107">уйг</option>
-                                <option value="108">қыт</option>
-                                <option value="109">fin</option>
-                                <option value="110">пар</option>
-                                <option value="113">133</option>
-                                <option value="114">трr</option>
-                            </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="id_8562">Электронный адрес ресурса:</label><input class="form-control" id="id_8562" name="8562" type="text">
-                            </div>
-                            <!-- <b>Сортировать по</b>
-                            <div class="form-group">
-
-                                <label class="radio-inline">
-                                  <input name="sort_by" type="radio" value="author"   checked="checked" > автору
-                                </label>
-
-                                <label class="radio-inline">
-                                  <input name="sort_by" type="radio" value="pub_year"  > году издания
-                                </label>
-
-                            </div> -->
-                        </div>
-                    </div>
+                <div class="loaderResults" ng-show="!lib.load">
+                    <a ng-click="searchOne(lib.id)">{{lib.countResult}}</a>
                 </div>
             </div>
         </div>
+        <ul style="list-style:none" ng-show="!showMultiLib">
 
-
-        <div class="col-md-8 right_block">
-            <ul style="list-style:none">
-
-                <li ng-repeat="book in books">
-                    <div class="ul_counter">{{$index+1}}.</div>
-                    <div class="item">
-                        <div class="item_pre">
-                            <div><img src="img/pre.png"></div>
-                            <span><a class="book_card_view" ng-click="importBook(book)">Импорт</a></span>
-                        </div>
-                        <div class="item_info">
-                            <div>Заглавие: <a href="/"><span>{{book.title}}</span></a></div>
-                            <ul>
-                                <li>Автор: <span>{{ book.author }}</span></li>
-                                <li>
-                                </li>
-                                <li>№ ISBN: <span>{{ book.isbn }}</span></li>
-                                <li>Ключевые слова: - <span>{{ book.keywords }}</span></li>
-                            </ul>
-                        </div>
+            <li ng-repeat="book in books">
+                <div class="ul_counter">{{$index + 1}}.</div>
+                <div class="item">
+                    <div class="item_pre">
+                        <div><img src="img/pre.png"></div>
+                        <span><a class="book_card_view" ng-click="importBook(book)">Импорт</a></span>
                     </div>
-                </li>
-            </ul>
-            <!-- Modal -->
-            <div class="modal fade" >
-                <!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-
-
-        </div>
-
-        <div class="col-md-10">
-            <div id="messages" ng-show="message">{{ message }}</div>
-        </div>
+                    <div class="item_info">
+                        <div>Заглавие: <a ng-click="showAdditional(book)"><span>{{book.title}}</span></a></div>
+                        <ul>
+                            <li>Автор: <span>{{ book.author }}</span></li>
+                            <li>
+                            </li>
+                            <li>№ ISBN: <span>{{ book.isbn }}</span></li>
+                            <li>Ключевые слова: - <span>{{ book.keywords }}</span></li>
+                        </ul>
+                        <a class="openViewMarc" ng-click="showAdditional(book)">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
+
+
+</div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -372,6 +292,7 @@
 -->
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
+<script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
 <script src="lib/angular/ngDialog.js"></script>
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>

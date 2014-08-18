@@ -1,23 +1,27 @@
 package kz.arta.ext.z3950.rest;
 
+import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.z3950.convert.IMarcConverter;
-import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.Library;
-import kz.arta.ext.z3950.model.SimpleSearch;
+import kz.arta.ext.z3950.model.search.MultiResult;
 import kz.arta.ext.z3950.model.search.SearchResult;
-import kz.arta.ext.z3950.model.synergy.ABook;
-import kz.arta.ext.z3950.model.synergy.Autoreferat;
-import kz.arta.ext.z3950.rest.api.AutoreferatReader;
+import kz.arta.ext.z3950.model.search.SimpleSearch;
+import kz.arta.ext.z3950.model.synergy.LibraryBook;
+import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.service.LibraryRepository;
 import kz.arta.ext.z3950.service.Z3950Searcher;
 import kz.arta.ext.z3950.util.CacheManager;
+import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
 import org.marc4j.marc.Record;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +45,7 @@ public class SearchRestService {
     private IMarcConverter marcConverter;
 
     @Inject
-    private AutoreferatReader reader;
+    private LibraryBookReader reader;
 
 
     @GET
@@ -56,14 +60,11 @@ public class SearchRestService {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("simpleSeacrh")
     public List<Book> simpleSeacrh(SimpleSearch simpleSeacrh) {
-        /**[TODO]блок  тестов*/
-        simpleSeacrh.setMaxResult(10);
-        simpleSeacrh.setLibraryId(1);
-         /***/
+        /***/
         try {
             SearchResult result = searcher.search(simpleSeacrh);
             List<Book> books = new ArrayList<Book>();
-            for (Record record :result.getRecords()) {
+            for (Record record : result.getRecords()) {
                 Book book = marcConverter.convert(record);
                 book.setRecord(record);
                 books.add(book);
@@ -79,17 +80,34 @@ public class SearchRestService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("multiSeacrh")
+    public MultiResult multiSeacrh(SimpleSearch simpleSeacrh) {
+        try {
+            return searcher.searchMulti(simpleSeacrh);
+        } catch (Exception e) {
+            log.error(e);
+            return new MultiResult(simpleSeacrh.getLibraryId(), 0l);
+        }
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("importBook")
-    public boolean importBook(Book book) {
+    public String importBook(Book book) {
         try {
 
             Record record = CacheManager.getInstance().getRecord(book);
-            ABook autoreferat = marcConverter.reverseConvert(record);
-            return reader.Save((Autoreferat) autoreferat, ConfigUtils.getQueryContext());
+            LibraryBook libraryBook = marcConverter.reverseConvert(record);
+            reader.setRegistryUUID(getNeedReest(book.getBooktype()));
+            return reader.Save(libraryBook, ConfigUtils.getQueryContext());
         } catch (Exception e) {
             log.error(e);
-            return false;
+            return null;
         }
+    }
+
+    private String getNeedReest(String booktype) {
+        return ConfigReader.getPropertyValue(booktype + CodeConstants.REGISTRY_UUID);
     }
 
 }

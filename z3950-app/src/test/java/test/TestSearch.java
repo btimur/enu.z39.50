@@ -4,9 +4,7 @@ package test;
 import kz.arta.ext.z3950.model.FormatEnum;
 import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.QueryType;
-import kz.arta.ext.z3950.model.SimpleSearch;
-import kz.arta.ext.z3950.model.search.SearchCondition;
-import kz.arta.ext.z3950.model.search.SearchFilter;
+import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.search.QueryBuilderFactory;
 import kz.arta.ext.z3950.service.Z3950Searcher;
@@ -31,10 +29,17 @@ public class TestSearch  {
     public void setUp() throws Exception {
         library = new Library();
         //// pushkinlibrary
-        library.setZhost("irbis.pushkinlibrary.kz");
-        library.setZdb("ibis");
+//        library.setZhost("irbis.pushkinlibrary.kz");
+//        library.setZdb("ibis");
+//        library.setZport(210);
+//        library.setzFormat(FormatEnum.RUSMARC.name());
+//        library.setQueryType(QueryType.PREFIX_QUERY.name());
+
+
+        library.setZhost("zserv.libfl.ru");
+        library.setZdb("books");
         library.setZport(210);
-        library.setzFormat(FormatEnum.RUSMARC.name());
+        library.setzFormat(FormatEnum.USMARC.name());
         library.setQueryType(QueryType.PREFIX_QUERY.name());
 
         // library congress
@@ -77,7 +82,7 @@ public class TestSearch  {
         Z3950Searcher searcher = new Z3950Searcher();
 //        condition.setCql("физика");
 //        condition.setCql("@attr 1=4 @attr 2=3 @attr 4=2 \"XML\"");
-        search.setTerm("Филипок");
+        search.setTerm("Толстой");
         search.setMaxResult(10);
 //        condition.setCql("@and @attr 1=7 \"5-8459-0115-4\" @and @attr 1=1003  \"Либерти\" @attr 1=4 @attr 2=3 @attr 3=3 \"web\" ");
 //        condition.setCql("isbn=\"5-8459-0115-4\"");

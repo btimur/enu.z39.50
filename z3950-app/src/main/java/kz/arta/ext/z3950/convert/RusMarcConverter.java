@@ -3,9 +3,8 @@ package kz.arta.ext.z3950.convert;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.FormatEnum;
 import kz.arta.ext.z3950.model.SubIndex;
-import kz.arta.ext.z3950.model.synergy.ABook;
-import kz.arta.ext.z3950.model.synergy.Autoreferat;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
+import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.service.SubIndexRepository;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
@@ -68,11 +67,11 @@ public class RusMarcConverter implements IMarcConverter {
 
 
     @Override
-    public ABook reverseConvert(Record marcRecord) {
+    public LibraryBook reverseConvert(Record marcRecord) {
         fillMap();
-        ABook autoreferat = new Autoreferat();
+        LibraryBook autoreferat = new LibraryBook();
         try {
-            for (PropertyDescriptor pd : Introspector.getBeanInfo(Autoreferat.class).getPropertyDescriptors()) {
+            for (PropertyDescriptor pd : Introspector.getBeanInfo(LibraryBook.class).getPropertyDescriptors()) {
                 if (pd.getName().equals("class") || pd.getName().length() < 5) continue;
                 String field = pd.getName().substring(1, 4);
                 char subField = pd.getName().substring(4, 5).charAt(0);

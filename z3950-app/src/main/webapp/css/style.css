@@ -304,6 +304,14 @@ body {
     padding: 15px 10px;
     color: #024fa1;
 }
+.menu_main > li > span {
+    font-family: Georgia;
+    display: block;
+    font-size: 19px;
+    padding: 10px 10px;
+    color: #024fa1;
+}
+
 .right_block {
     background-color: #f7f7f7;
     padding-right: 0px;
@@ -413,3 +421,33 @@ body {
 .spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+
+
+ /*стили просмотра карточки*/
+.jqmWindow {
+    display: none;
+
+    position: relative;
+    left: 0;
+
+    margin: 80px auto 0 auto;
+    width: 800px;
+
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #808080;
+    padding: 0;
+}
+.marcViewerTitle, .extSearchTitle, .externalResourceTitle, .highlightPageTitle, .vakCodesPageTitle {
+    margin: 10px;
+    height:20px;
+}
+
+.marcViewerTitle h3, .extSearchTitle h3, .externalResourceTitle h3, .highlightPageTitle h3, .vakCodesPageTitle h3 {
+    padding: 0;
+    font-size:14px;
+    color: #333;
+    float:left;
+    margin: 0;
+}
