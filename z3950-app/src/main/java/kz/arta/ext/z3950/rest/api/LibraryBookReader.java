@@ -42,11 +42,11 @@ public class LibraryBookReader extends AFormsReader {
         this.registryUUID = registryUUID;
     }
 
-    public String Save(LibraryBook book, RestQueryContext queryContext) throws Exception {
-        RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
-                registryUUID);
+    public boolean Save(String dataUUID, LibraryBook book, RestQueryContext queryContext) throws Exception {
+//        RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
+//                registryUUID);
 
-        FormData formData = readFormData(queryContext, registryRecord.getDataUUID());
+        FormData formData = readFormData(queryContext, dataUUID);
 
         if (formData != null) {
             FormFieldsWrapper fieldsWrapper = formData.convertToWrapper();
@@ -56,10 +56,10 @@ public class LibraryBookReader extends AFormsReader {
                 log.debug("data = " + data);
                 formData.setData(data);
                 writeData(queryContext, formData);
-                return registryRecord.getDataUUID();
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     private void fillFields(LibraryBook book, FormFieldsWrapper fieldsWrapper) throws IntrospectionException, NoSuchFieldException, InvocationTargetException, IllegalAccessException {

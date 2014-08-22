@@ -4,7 +4,9 @@ import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.z3950.convert.IMarcConverter;
 import kz.arta.ext.z3950.model.Book;
+import kz.arta.ext.z3950.model.BookAttribute;
 import kz.arta.ext.z3950.model.Library;
+import kz.arta.ext.z3950.model.MarcString;
 import kz.arta.ext.z3950.model.search.MultiResult;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.model.search.SimpleSearch;
@@ -18,10 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.marc4j.marc.Record;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,21 +92,55 @@ public class SearchRestService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("importBook")
-    public String importBook(Book book) {
+    public boolean importBook(Book book) {
         try {
 
             Record record = CacheManager.getInstance().getRecord(book);
             LibraryBook libraryBook = marcConverter.reverseConvert(record);
-            reader.setRegistryUUID(getNeedReest(book.getBooktype()));
-            return reader.Save(libraryBook, ConfigUtils.getQueryContext());
+            return reader.Save(book.getDataUUID(), libraryBook, ConfigUtils.getQueryContext());
+        } catch (Exception e) {
+            log.error(e);
+            return false;
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("loadMarc")
+    public MarcString loadMarc(@QueryParam("id") String id, @QueryParam("libraryId") Long libraryId) {
+        try {
+            Record record = getRecordFromCache(id, libraryId);
+            MarcString marcString = new MarcString();
+            marcString.setMarc(record.toString());
+            return marcString;
         } catch (Exception e) {
             log.error(e);
             return null;
         }
     }
 
-    private String getNeedReest(String booktype) {
-        return ConfigReader.getPropertyValue(booktype + CodeConstants.REGISTRY_UUID);
+    protected Book getSimpleBook(String id, Long libraryId) {
+        Book book = new Book();
+        book.setId(id);
+        book.setLibraryId(libraryId);
+        return book;
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("loadDescr")
+    public List<BookAttribute> loadDescr(@QueryParam("id") String id, @QueryParam("libraryId") Long libraryId) {
+        try {
+            Record record = getRecordFromCache(id, libraryId);
+            return marcConverter.loadDescr(record);
+        } catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+
+    protected Record getRecordFromCache(String id, Long libraryId) {
+        Book book = getSimpleBook(id, libraryId);
+        return CacheManager.getInstance().getRecord(book);
+    }
 }

@@ -3,6 +3,8 @@ package kz.arta.ext.z3950.model;
 import kz.arta.ext.z3950.util.ApiFormField;
 import org.marc4j.marc.Record;
 
+import java.util.List;
+
 /**
  * Created by timur on 09/08/2014 12:17.
  */
@@ -14,7 +16,7 @@ public class Book {
     private String publishedDate;
     private String publishedPlace;
     private String keywords;
-    private String booktype;
+//    private String booktype;
     private Long libraryId;
     private Record record;
 
@@ -22,6 +24,10 @@ public class Book {
     private String published;
     private String phisical;
     private String recordPlace;
+    private String dataUUID;
+
+    private List<BookAttribute>  attributes;
+
 
     public String getId() {
         return id;
@@ -95,12 +101,12 @@ public class Book {
         this.record = record;
     }
 
-    public String getBooktype() {
-        return booktype;
+    public String getDataUUID() {
+        return dataUUID;
     }
 
-    public void setBooktype(String booktype) {
-        this.booktype = booktype;
+    public void setDataUUID(String dataUUID) {
+        this.dataUUID = dataUUID;
     }
 
     public String getTitleBig() {
@@ -133,5 +139,13 @@ public class Book {
 
     public void setRecordPlace(String recordPlace) {
         this.recordPlace = recordPlace;
+    }
+
+    public List<BookAttribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<BookAttribute> attributes) {
+        this.attributes = attributes;
     }
 }

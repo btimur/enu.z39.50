@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/font-awesome.css"/>
-    <link rel="stylesheet" href="css/ngDialog.css"/>
-    <link rel="stylesheet" href="css/ngDialog-theme-default.css"/>
+    <!--<link rel="stylesheet" href="css/ngDialog.css"/>-->
+    <!--<link rel="stylesheet" href="css/ngDialog-theme-default.css"/>-->
     <!--<link rel="stylesheet" href="css/ngDialog-theme-flat.css"/>-->
 </head>
 <body ng-app="z3950" ng-controller="SearchCtrl">
@@ -163,64 +163,6 @@
 <div class="row">
     <div class="col-md-4" style="padding-right:0">
         <tabset>
-            <tab heading="Каталоги">
-                <ul class="menu_main">
-                    <li>
-                        <a>
-                            <input type="radio" class="search_registry" name="formUUID" ng-model="formData.booktype"
-                                   value="educational">
-                            Учебные издания
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a>
-                            <input type="radio" class="search_registry" ng-model="formData.booktype"
-                                   value="scientific">
-                            Научные издания
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a>
-                            <input type="radio" class="search_registry" ng-model="formData.booktype"
-                                   value="brochure">
-                            Брошюры
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a>
-                            <input type="radio" class="search_registry" ng-model="formData.booktype"
-                                   value="thesis">
-                            Диссертации
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a>
-                            <input type="radio" class="search_registry" ng-model="formData.booktype"
-                                   value="autoreferat">
-                            Авторефераты
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a>
-                            <input type="radio" class="search_registry" ng-model="formData.booktype"
-                                   value="fiction">
-                            Художественная литература
-                        </a>
-                    </li>
-
-
-                </ul>
-            </tab>
             <tab heading="Библиотеки">
                 <ul class="menu_main">
                     <li ng-repeat="lib in libraries">
@@ -296,7 +238,8 @@
 <script src="lib/angular/ngDialog.js"></script>
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
-<script src="js/controllers.js"></script>
+<script src="js/controllers/search.js"></script>
+<script src="js/controllers/card.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 </body>

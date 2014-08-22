@@ -1,13 +1,12 @@
-'use strict';
-
-/* Controllers */
-
+/**
+ * Created by timur on 8/22/2014.
+ */
 
 var app = angular.module('z3950.controllers', []);
 
 
-app.controller('SearchCtrl', function ($scope, $http, ngDialog) {
-    $scope.formData = {booktype: 'fiction', maxResult: 10};
+app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
+    $scope.formData = {maxResult: 10};
     $scope.importUUID = '';
     $scope.notFound = false;
     $scope.importDo = false;
@@ -104,7 +103,6 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog) {
 
     $scope.importBook = function (book) {
 
-        book.booktype = $scope.formData.booktype;
         $scope.selectedBook = book;
 
         $scope.importDo = true;
@@ -138,12 +136,15 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog) {
     };
     $scope.showAdditional = function (book) {
         $scope.selectedBook = book;
-        ngDialog.open({
-            template: 'partials/card.html',
-//            className: 'ngdialog-theme-flat',
-            scope: $scope
-        });
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/card.html',
+            controller: 'CardCtrl',
+            size: 'lg',
+            resolve: {
+                selectedBook: function () {
+                    return $scope.selectedBook;
+                }
+            }});
     }
+
 });
-
-

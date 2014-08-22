@@ -39,7 +39,7 @@ public class TestConverter {
 //        converter = new RusMarcConverter();
         RusMarcConverter c = new RusMarcConverter();
         converter = spy(c);
-        doNothing().when(converter, "fillMap");
+        doNothing().when(converter, "fillSubindexes");
 
         Map<String, SubIndex> subindexes = new HashMap<String, SubIndex>();
         subindexes.put("100a1", new SubIndex("100", 'a', 1, 0, 7));

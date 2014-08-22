@@ -424,30 +424,4 @@ body {
 
 
 
- /*стили просмотра карточки*/
-.jqmWindow {
-    display: none;
 
-    position: relative;
-    left: 0;
-
-    margin: 80px auto 0 auto;
-    width: 800px;
-
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #808080;
-    padding: 0;
-}
-.marcViewerTitle, .extSearchTitle, .externalResourceTitle, .highlightPageTitle, .vakCodesPageTitle {
-    margin: 10px;
-    height:20px;
-}
-
-.marcViewerTitle h3, .extSearchTitle h3, .externalResourceTitle h3, .highlightPageTitle h3, .vakCodesPageTitle h3 {
-    padding: 0;
-    font-size:14px;
-    color: #333;
-    float:left;
-    margin: 0;
-}
