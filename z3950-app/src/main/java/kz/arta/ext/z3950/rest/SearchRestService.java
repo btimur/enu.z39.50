@@ -109,8 +109,27 @@ public class SearchRestService {
     @Path("loadMarc")
     public MarcString loadMarc(@QueryParam("id") String id, @QueryParam("libraryId") Long libraryId) {
         try {
+
             Record record = getRecordFromCache(id, libraryId);
             MarcString marcString = new MarcString();
+            String[] inputData =  record.toString().split("\n");
+            StringBuilder builder = new StringBuilder(" <table class=\"tableMARC21Tagged\">\n");
+            for(int i=0;i<inputData.length;i++)
+            {
+                String val = inputData[i].trim();
+                String[] subVal = val.split("\t");
+                builder.append("<tr>");
+                if(subVal.length>0)
+                {
+                    builder.append("<td><strong>").append(subVal[0]).append("</strong></td>");
+                }
+                if(subVal.length>1)
+                {
+                    builder.append("<td>").append(subVal[1]).append("</td>");
+                }
+                builder.append("</tr>");
+            }
+            builder.append("<table>");
             marcString.setMarc(record.toString());
             return marcString;
         } catch (Exception e) {

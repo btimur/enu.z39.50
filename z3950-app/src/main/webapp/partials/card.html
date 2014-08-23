@@ -33,14 +33,8 @@
                         <img border="0" alt="Загрузка..." src="img/loader.gif">
                     </div>
                     <div>
-                        <table class="tableMARC21Tagged">
-                            <tbody>
-                            <tr class="tableRowMARC21Tagged" ng-repeat="bookAttribute in selectedBook.attributes">
-                                <td class="tableColTitleMARC21Tagged">{{bookAttribute.nameRu}}</td>
-                                <td class="tableColValueMARC21Tagged">{{bookAttribute.valueStr}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                       <strong>{{bookAttribute.nameRu}}</strong>
+                               {{bookAttribute.valueStr}}
                     </div>
                 </div>
             </tab>
@@ -55,12 +49,11 @@
             <tab heading="Marc-запись" select="loadMarc()">
                 <div class="marcViewerContent">
                     <div>
-                        <div class="loaderResults" ng-show="selectedBook.marc == null">
+                        <div class="loaderResults" ng-show="selectedBook.marc == null" id="loadDiv">
                             <img border="0" alt="Загрузка..." src="img/loader.gif">
                         </div>
-                        <span class="marcText">
-                            {{selectedBook.marc}}
-                        </span>
+                        <table class="tableMARC21Tagged" id="marcTable">
+                            <!--{{selectedBook.marc}}-->
                         <!--<table class="expanded_search">-->
                             <!--<tbody>-->
                             <!--<tr class="table-body" ng-repeat="recordAttribute in selectedBook.attributes">-->
@@ -68,7 +61,6 @@
                                 <!--<td class="table-text"><strong>00740nam#a2200229#i#4500</strong></td>-->
                             <!--</tr>-->
                             <!--</tbody>-->
-                        </table>
                     </div>
                 </div>
             </tab>
