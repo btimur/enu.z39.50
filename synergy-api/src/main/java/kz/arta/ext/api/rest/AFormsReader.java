@@ -121,11 +121,11 @@ public abstract class AFormsReader extends RestQuery {
     }
 
 
-    public FormData readFormData(RestQueryContext context, String formId){
+    public FormData readFormData(RestQueryContext context, String dataId){
         FormData formData = null;
         try {
 
-            String query = "/rest/api/asforms/data/" + formId;
+            String query = "/rest/api/asforms/data/" + dataId;
             String resultData = doGetQuery(context, query);
             System.out.println("resultData = " + resultData);
             //logger.debug("result="+ resultData);
@@ -155,7 +155,6 @@ public abstract class AFormsReader extends RestQuery {
         System.out.println("AFormsReader.writeData");
         try{
             String dataUUID = formData.getUuid();
-//            dataUUID = "0"+dataUUID.substring(1);
             String formUUID = formData.getForm();
             String data = formData.getData();
             //Заполняем документ
@@ -171,23 +170,15 @@ public abstract class AFormsReader extends RestQuery {
 
     public RegistryRecord addNewRegistryRecord(RestQueryContext queryContext, String registryId){
         RegistryRecord registryRecord = null;
-//        registryRecord = new RegistryRecord();
-//        registryRecord.setDataUUID("2f0cd960-02b2-4aee-89fd-299091bf669b");
-        if (true){
-            String query = "/rest/api/registry/create_doc?registryID="+registryId;
-            try {
-                String result = doGetQuery(queryContext, query);
-                System.out.println("addNewRegistryRecord.result = " + result);
-                //res = {"errorCode": "0",
-                // "documentID": "2d7ec7a7-61ce-4451-8a7b-2f67552c923f",
-                // "dataUUID": "2f0cd960-02b2-4aee-89fd-299091bf669b",
-                // "asfNodeID": "6bbe555d-834e-4e24-8232-25bfc426c68b" }
-                ObjectMapper objectMapper = new ObjectMapper();
-                registryRecord = objectMapper.readValue(result, RegistryRecord.class);
+        String query = "/rest/api/registry/create_doc?registryID="+registryId;
+        try {
+            String result = doGetQuery(queryContext, query);
+            System.out.println("addNewRegistryRecord.result = " + result);
+            ObjectMapper objectMapper = new ObjectMapper();
+            registryRecord = objectMapper.readValue(result, RegistryRecord.class);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return registryRecord;
     }

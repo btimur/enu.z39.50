@@ -1,11 +1,9 @@
 package kz.arta.ext.z3950.convert;
 
-import kz.arta.ext.z3950.model.Book;
-import kz.arta.ext.z3950.model.FormatEnum;
-import kz.arta.ext.z3950.model.SubIndex;
-import kz.arta.ext.z3950.model.synergy.ABook;
-import kz.arta.ext.z3950.model.synergy.Autoreferat;
+import kz.arta.ext.z3950.model.*;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
+import kz.arta.ext.z3950.model.synergy.LibraryBook;
+import kz.arta.ext.z3950.service.FormatFieldRepository;
 import kz.arta.ext.z3950.service.SubIndexRepository;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
@@ -16,6 +14,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +27,16 @@ public class RusMarcConverter implements IMarcConverter {
     @Inject
     private SubIndexRepository repository;
 
+    @Inject
+    private FormatFieldRepository formatFieldRepository;
+
 
     private Map<String, SubIndex> subindexes;
+    private Map<String, String> attributes;
+
+    public RusMarcConverter() {
+
+    }
 
     @Override
     public Book convert(Record marcRecord) {
@@ -68,11 +75,11 @@ public class RusMarcConverter implements IMarcConverter {
 
 
     @Override
-    public ABook reverseConvert(Record marcRecord) {
-        fillMap();
-        ABook autoreferat = new Autoreferat();
+    public LibraryBook reverseConvert(Record marcRecord) {
+        fillSubindexes();
+        LibraryBook autoreferat = new LibraryBook();
         try {
-            for (PropertyDescriptor pd : Introspector.getBeanInfo(Autoreferat.class).getPropertyDescriptors()) {
+            for (PropertyDescriptor pd : Introspector.getBeanInfo(LibraryBook.class).getPropertyDescriptors()) {
                 if (pd.getName().equals("class") || pd.getName().length() < 5) continue;
                 String field = pd.getName().substring(1, 4);
                 char subField = pd.getName().substring(4, 5).charAt(0);
@@ -108,11 +115,43 @@ public class RusMarcConverter implements IMarcConverter {
         return autoreferat;
     }
 
-    private void fillMap() {
+    @Override
+    public List<BookAttribute> loadDescr(Record record) {
+        fillAttributes();
+        List<BookAttribute> bookAttributes = new ArrayList<BookAttribute>();
+        for (String fieldKey : attributes.keySet()) {
+            String field = fieldKey.substring(0, 3);
+            char subField = fieldKey.substring(3, 4).charAt(0);
+            String data = getSubfieldData(record, field, subField);
+            if (data != null) {
+                BookAttribute bookAttribute = new BookAttribute();
+                bookAttribute.setNameRu(attributes.get(fieldKey));
+                bookAttribute.setValueStr(data);
+                bookAttributes.add(bookAttribute);
+            }
+        }
+        return bookAttributes;
+    }
+
+    private void fillSubindexes() {
+        if(subindexes != null){
+            return;
+        }
         List<SubIndex> formatList = repository.getFormatList(FormatEnum.RUSMARC.name());
         subindexes = new HashMap<String, SubIndex>();
         for (SubIndex subIndex : formatList) {
             subindexes.put(subIndex.getField() + subIndex.getTag() + subIndex.getSubindex(), subIndex);
+        }
+    }
+
+    private void fillAttributes() {
+        if(attributes != null){
+            return;
+        }
+        List<FormatField> formatList = formatFieldRepository.getSubFieldsByFormat(FormatEnum.RUSMARC.name());
+        attributes = new HashMap<String, String>();
+        for (FormatField format : formatList) {
+            attributes.put(format.getFieldName(), format.getFieldComment());
         }
     }
 }

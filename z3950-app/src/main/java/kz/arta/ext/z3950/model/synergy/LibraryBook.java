@@ -3,12 +3,9 @@ package kz.arta.ext.z3950.model.synergy;
 import kz.arta.ext.z3950.util.ApiFormField;
 
 /**
- * Created by timur on 04/08/2014 21:21.
- * Авторефераты
+ * Created by timur on 04/08/2014 21:18.
  */
-public class Autoreferat extends ABook {
-
-
+public class LibraryBook {
     /**
      * Библиография
      */

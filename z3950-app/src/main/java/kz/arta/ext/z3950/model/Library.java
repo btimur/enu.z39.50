@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Table(name = "lib_configuration")
 public class Library implements IEntity{
 
-    public static final String FILDNAME_LIBNAME = "nameLib";
-
     /**
      * идентификатор
      */
@@ -67,6 +65,19 @@ public class Library implements IEntity{
      */
     @Column(name = "QUERY_TYPE")
     private String queryType;
+
+    /***
+     * тип запросов
+     * The following is supported: prefix for Prefix Query Notation (Type-1 Query); cql for CQL search (Type-2 Query),
+     */
+    @Column(name = "USE_SEARCH")
+    private boolean useSearch;
+
+    @Transient
+    private boolean countResult;
+
+    @Transient
+    private boolean load;
 
     public Long getId() {
         return id;
@@ -147,4 +158,30 @@ public class Library implements IEntity{
     public void setQueryType(String queryType) {
         this.queryType = queryType;
     }
+
+
+    public boolean isUseSearch() {
+        return useSearch;
+    }
+
+    public void setUseSearch(boolean useSearch) {
+        this.useSearch = useSearch;
+    }
+
+    public boolean isCountResult() {
+        return countResult;
+    }
+
+    public void setCountResult(boolean countResult) {
+        this.countResult = countResult;
+    }
+
+    public boolean isLoad() {
+        return load;
+    }
+
+    public void setLoad(boolean load) {
+        this.load = load;
+    }
+
 }

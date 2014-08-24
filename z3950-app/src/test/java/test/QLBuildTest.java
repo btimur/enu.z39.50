@@ -1,6 +1,6 @@
 package test;
 
-import kz.arta.ext.z3950.model.SimpleSearch;
+import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.search.CqlBuilder;
 import kz.arta.ext.z3950.search.IQueryBuilder;
 import kz.arta.ext.z3950.search.PqlBuilder;
@@ -20,7 +20,8 @@ public class QLBuildTest {
         IQueryBuilder builder = new PqlBuilder();
         String pql = builder.createQueryString(simpleSeacrh);
         Assert.assertNotNull(pql);
-        Assert.assertEquals(pql, "@attr 1=1035 @attr 2=3 @attr 3=3 \"test\"");
+//        Assert.assertEquals(pql, "@attr 1=1035 @attr 2=3 @attr 3=3 \"test\"");
+        Assert.assertEquals(pql, "@attr 1=1035 @attr 5=1 \"test\"");
     }
 
     @Test

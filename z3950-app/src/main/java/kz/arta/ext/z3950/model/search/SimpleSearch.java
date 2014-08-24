@@ -1,4 +1,6 @@
-package kz.arta.ext.z3950.model;
+package kz.arta.ext.z3950.model.search;
+
+import java.util.List;
 
 /**
  * Created by timur on 30/07/2014 23:46.
@@ -53,6 +55,8 @@ public class SimpleSearch {
      * максимальный результат
      */
     private long libraryId;
+
+    private String booktype;
 
     public Boolean getAdvancedSearch() {
         return advancedSearch;
@@ -156,5 +160,13 @@ public class SimpleSearch {
 
     public void setLibraryId(long libraryId) {
         this.libraryId = libraryId;
+    }
+
+    public String getBooktype() {
+        return booktype;
+    }
+
+    public void setBooktype(String booktype) {
+        this.booktype = booktype;
     }
 }

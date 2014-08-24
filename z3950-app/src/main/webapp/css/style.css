@@ -304,6 +304,14 @@ body {
     padding: 15px 10px;
     color: #024fa1;
 }
+.menu_main > li > span {
+    font-family: Georgia;
+    display: block;
+    font-size: 19px;
+    padding: 10px 10px;
+    color: #024fa1;
+}
+
 .right_block {
     background-color: #f7f7f7;
     padding-right: 0px;
@@ -413,3 +421,7 @@ body {
 .spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+
+
+

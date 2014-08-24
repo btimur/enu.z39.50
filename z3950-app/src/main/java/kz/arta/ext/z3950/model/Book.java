@@ -3,6 +3,8 @@ package kz.arta.ext.z3950.model;
 import kz.arta.ext.z3950.util.ApiFormField;
 import org.marc4j.marc.Record;
 
+import java.util.List;
+
 /**
  * Created by timur on 09/08/2014 12:17.
  */
@@ -14,8 +16,17 @@ public class Book {
     private String publishedDate;
     private String publishedPlace;
     private String keywords;
+//    private String booktype;
     private Long libraryId;
     private Record record;
+
+    private String titleBig;
+    private String published;
+    private String phisical;
+    private String recordPlace;
+    private String dataUUID;
+
+    private List<BookAttribute>  attributes;
 
 
     public String getId() {
@@ -88,5 +99,53 @@ public class Book {
 
     public void setRecord(Record record) {
         this.record = record;
+    }
+
+    public String getDataUUID() {
+        return dataUUID;
+    }
+
+    public void setDataUUID(String dataUUID) {
+        this.dataUUID = dataUUID;
+    }
+
+    public String getTitleBig() {
+        return titleBig;
+    }
+
+    public void setTitleBig(String titleBig) {
+        this.titleBig = titleBig;
+    }
+
+    public String getPublished() {
+        return published;
+    }
+
+    public void setPublished(String published) {
+        this.published = published;
+    }
+
+    public String getPhisical() {
+        return phisical;
+    }
+
+    public void setPhisical(String phisical) {
+        this.phisical = phisical;
+    }
+
+    public String getRecordPlace() {
+        return recordPlace;
+    }
+
+    public void setRecordPlace(String recordPlace) {
+        this.recordPlace = recordPlace;
+    }
+
+    public List<BookAttribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<BookAttribute> attributes) {
+        this.attributes = attributes;
     }
 }
