@@ -1,5 +1,7 @@
 package kz.arta.ext.api.data;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: D. Kulakhmetov
@@ -16,6 +18,7 @@ public class FormField {
     private String label;
     private String timestamp;
     private String valueDefault;
+    private List<FormField> data;
 
     public String getId() {
         return id;
@@ -88,6 +91,14 @@ public class FormField {
 
     public void setValueDefault(String valueDefault) {
         this.valueDefault = valueDefault;
+    }
+
+    public List<FormField> getData() {
+        return data;
+    }
+
+    public void setData(List<FormField> data) {
+        this.data = data;
     }
 
     @Override

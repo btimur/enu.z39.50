@@ -5,18 +5,22 @@
 var app = angular.module('z3950.controllers', []);
 
 
-app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
-    $scope.formData = {maxResult: 10};
+app.controller('SearchCtrl', function ($scope, $http, $modal, $location) {
+    $scope.hostPrefix = '';//http://localhost:8080';
+    $scope.dataUUID = $location.search()['dataUUID'];
+    $scope.formData = {maxResult: 10, term: $location.search()['isbn'], nextElement: 0};
     $scope.importUUID = '';
     $scope.notFound = false;
     $scope.importDo = false;
     $scope.libraries = {};
+    $scope.alerts = [];
 
     angular.element(document).ready(function () {
         $http({
             method: 'GET',
-            url: '/z3950-app/rest/search/getFindLibraries',
-            headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
+            url: $scope.hostPrefix + '/z3950-app/rest/libraries/getFindLibraries',
+            headers: { 'Content-Type': 'application/json' },
+            crossDomain: true
         })
             .success(function (data) {
                 console.log(data);
@@ -26,28 +30,43 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
             });
     });
 
-    $scope.searchOne = function(libraryId){
+    $scope.loadBooks = function () {
+        if (!angular.isUndefined($scope.books) && $scope.resultCount > $scope.books.length){
+            $scope.formData.nextElement = $scope.books.length;
+            searchOneLibrary();
+        }
+    };
+
+    $scope.searchOne = function (libraryId) {
         $scope.formData.libraryId = libraryId;
         searchOneLibrary();
     };
 
     function searchOneLibrary() {
         $scope.termClass = 'searchTermProgress';
+        $scope.pageLoad = true;
+        if ($scope.formData.nextElement == 0) {
+            $scope.books = [];
+        }
         $http({
             method: 'POST',
-            url: '/z3950-app/rest/search/simpleSeacrh',
+            url: $scope.hostPrefix + '/z3950-app/rest/search/simpleSeacrh',
             data: $scope.formData,  // pass in data as strings
-            headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
+            headers: { 'Content-Type': 'application/json' },
+            crossDomain: true
         })
             .success(function (data) {
                 console.log(data);
                 $scope.termClass = 'searchTermNormal';
                 $scope.showMultiLib = false;
-                $scope.books = data;
-                $scope.notFound = data == null || data.length == 0;
+                $scope.books.push.apply($scope.books, data.books);
+                $scope.resultCount = data.count;
+                $scope.notFound = data.count == 0;
+                $scope.pageLoad = false;
             })
             .error(function (data, status, headers, config) {
                 $scope.termClass = 'searchTermNormal';
+                $scope.pageLoad = false;
             });
     }
 
@@ -61,9 +80,11 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
             }
         });
         function searchMulti(simpleSearch) {
+            $scope.formData.nextElement = 0;
+            $scope.resultCount = 0;
             $http({
                 method: 'POST',
-                url: '/z3950-app/rest/search/multiSeacrh',
+                url: $scope.hostPrefix + '/z3950-app/rest/search/multiSeacrh',
                 data: simpleSearch,  // pass in data as strings
                 headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
             })
@@ -76,6 +97,7 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
                             lib.load = false;
                         }
                     });
+
                 })
                 .error(function (data, status, headers, config) {
 //                    $scope.termClass = 'searchTermNormal';
@@ -100,35 +122,26 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
     };
 
 
-
     $scope.importBook = function (book) {
 
+        book.dataUUID = $scope.dataUUID;
         $scope.selectedBook = book;
 
         $scope.importDo = true;
         $http({
             method: 'POST',
-            url: '/z3950-app/rest/search/importBook',
-            data: book,  // pass in data as strings
+            url: $scope.hostPrefix + '/z3950-app/rest/search/importBook',
+            data: {dataUUID: $scope.dataUUID, id: book.id, libraryId: book.libraryId},  // pass in data as strings
             headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
         })
             .success(function (data) {
                 console.log(data);
                 $scope.importDo = false;
-                if (data != null && data.length > 1) {
-                    $scope.importUUID = data;
-                    ngDialog.open({
-                        template: 'secondDialog',
-                        scope: $scope
-                    });
-                }else{
-                    $scope.importUUID = null;
-                    ngDialog.open({
-                        template: '<h2>Импорт карточки</h2><p>Операция выполнена не успешна</p>',
-                        plain: true
-                    });
+                if (data) {
+                    $scope.alerts.push({ type: 'success', msg: 'Импорт карточки успешно произведен!'});
+                } else {
+                    $scope.alerts.push({type: 'danger', msg: 'Операция выполнена не успешна!'});
                 }
-//                ngDialog.cl
             })
             .error(function (data, status, headers, config) {
                 $scope.importDo = false;
@@ -146,5 +159,10 @@ app.controller('SearchCtrl', function ($scope, $http, ngDialog,$modal) {
                 }
             }});
     }
+
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
+    };
+
 
 });

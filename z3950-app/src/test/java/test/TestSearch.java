@@ -8,6 +8,7 @@ import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.search.QueryBuilderFactory;
 import kz.arta.ext.z3950.service.Z3950Searcher;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.yaz4j.Connection;
@@ -36,11 +37,11 @@ public class TestSearch  {
 //        library.setQueryType(QueryType.PREFIX_QUERY.name());
 
 
-        library.setZhost("zserv.libfl.ru");
-        library.setZdb("books");
-        library.setZport(210);
-        library.setzFormat(FormatEnum.USMARC.name());
-        library.setQueryType(QueryType.PREFIX_QUERY.name());
+//        library.setZhost("zserv.libfl.ru");
+//        library.setZdb("books");
+//        library.setZport(210);
+//        library.setzFormat(FormatEnum.USMARC.name());
+//        library.setQueryType(QueryType.PREFIX_QUERY.name());
 
         // library congress
 //        library.setZhost("lx2.loc.gov");
@@ -49,12 +50,12 @@ public class TestSearch  {
 //        library.setzFormat(FormatEnum.XML);
 
 //        ГПНТБ России. Электронный каталог
-//        library.setZhost("193.233.14.5");
-//        library.setZport(9999);
-//        library.setZdb("katb");
-//        library.setzFormat(FormatEnum.RUSMARC);
-//        library.setEncoding("cp1251");
-//        library.setQueryType(QueryType.PREFIX_QUERY);
+        library.setZhost("193.233.14.5");
+        library.setZport(9999);
+        library.setZdb("katb");
+        library.setzFormat(FormatEnum.RUSMARC.name());
+        library.setEncoding("cp1251");
+        library.setQueryType(QueryType.PREFIX_QUERY.name());
 
 //        //Самарский государственный университет - Научная библиотека
 //        library.setZhost("z3950.ssu.samara.ru");
@@ -100,20 +101,30 @@ public class TestSearch  {
             result = new SearchResult();
             for (int i = 0; i < set.getHitCount() && i < search.getMaxResult(); i++) {
                 Record rec = set.getRecord(i);
-                System.out.println(rec.getSyntax());
+//                System.out.println(rec.getSyntax());
                 org.marc4j.marc.Record marc = searcher.readMarc(rec, library);
-                System.out.println(marc.toString());
+//                System.out.println(marc.toString());
                 result.getRecords().add(marc);
             }
             result.setCount(set.getHitCount());
+            Assert.assertNotNull(result);
+            Assert.assertTrue(result.getCount() > 10);
 
+
+            for (int i = search.getMaxResult(); i<result.getCount();i++){
+                Record rec = set.getRecord(i);
+                org.marc4j.marc.Record marc = searcher.readMarc(rec, library);
+                result.getRecords().add(marc);
+            }
+            Assert.assertTrue(result.getRecords().size() == result.getCount());
         } catch (ZoomException ze) {
             throw new Exception(ze);
         } finally {
             con.close();
         }
 //        SearchResult result = searcher.searchCql(library, filter);
-        org.junit.Assert.assertNotNull(result);
+
+
 
 
     }

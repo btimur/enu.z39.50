@@ -1,9 +1,12 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('z3950', [ 'z3950.services',  'z3950.controllers','ngDialog', 'ui.bootstrap']);
+angular.module('z3950',
+    [ 'z3950.controllers','z3950.services', 'ui.bootstrap', 'ngRoute', 'infinite-scroll'])
 
-//config(['$routeProvider', function ($routeProvider) {
-//    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-//    $routeProvider.otherwise({redirectTo: '/view1'});
-//}])
+    .config(function ($routeProvider, $locationProvider) {
+        $routeProvider.when('/', {templateUrl: 'index.html', controller: 'SearchCtrl'});
+        $locationProvider.html5Mode(true);
+    })
+
+;

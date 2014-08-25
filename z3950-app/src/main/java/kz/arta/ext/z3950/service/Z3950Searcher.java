@@ -95,7 +95,8 @@ public class Z3950Searcher {
             ResultSet set = con.search(query);
             log.info("Showing {0} of {1}",search.getMaxResult(), set.getHitCount());
             result = new SearchResult();
-            for (int i = 0; i < set.getHitCount() && i < search.getMaxResult(); i++) {
+            for (int i = search.getNextElement(); i < set.getHitCount()
+                    && i < search.getNextElement() + search.getMaxResult(); i++) {
                 Record rec = set.getRecord(i);
                 log.debug(rec.getSyntax());
                 log.debug(rec.render());
