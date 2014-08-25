@@ -5,7 +5,7 @@
 var app = angular.module('z3950.controllers', []);
 
 
-app.controller('SearchCtrl', function ($scope, $http, $modal, $location) {
+app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, $location) {
     $scope.hostPrefix = '';//http://localhost:8080';
     $scope.dataUUID = $location.search()['dataUUID'];
     $scope.formData = {maxResult: 10, term: $location.search()['isbn'], nextElement: 0};
@@ -15,19 +15,8 @@ app.controller('SearchCtrl', function ($scope, $http, $modal, $location) {
     $scope.libraries = {};
     $scope.alerts = [];
 
-    angular.element(document).ready(function () {
-        $http({
-            method: 'GET',
-            url: $scope.hostPrefix + '/z3950-app/rest/libraries/getFindLibraries',
-            headers: { 'Content-Type': 'application/json' },
-            crossDomain: true
-        })
-            .success(function (data) {
-                console.log(data);
-                $scope.libraries = data;
-            })
-            .error(function (data, status, headers, config) {
-            });
+    LibrariesFactory.query({}, function (data) {
+        $scope.libraries = data;
     });
 
     $scope.loadBooks = function () {
