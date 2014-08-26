@@ -90,14 +90,8 @@
             <artifactId>yaz4j-any</artifactId>
             <!--<artifactId>yaz4j-lib</artifactId>-->
             <version>1.4</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>ppa.marc</groupId>-->
-            <!--<artifactId>marc-file-access</artifactId>-->
-            <!--<version>0.93</version>-->
-            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
-        <!--</dependency>-->
         <dependency>
             <groupId>info.freelibrary</groupId>
             <artifactId>freelib-marc4j</artifactId>
@@ -192,6 +186,12 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>2.3.7.Final</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
@@ -206,6 +206,11 @@
                 <configuration>
                     <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.yaz4j.yaz4j-any</Dependencies>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
@@ -233,7 +238,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${version.surefire.plugin}</version>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>true</skip>
                         </configuration>
                     </plugin>
                 </plugins>

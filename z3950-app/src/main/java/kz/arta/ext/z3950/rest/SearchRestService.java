@@ -8,6 +8,7 @@ import kz.arta.ext.z3950.model.BookAttribute;
 import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.MarcString;
 import kz.arta.ext.z3950.model.search.MultiResult;
+import kz.arta.ext.z3950.model.search.SearchOneResult;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
@@ -18,6 +19,7 @@ import kz.arta.ext.z3950.util.CacheManager;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
 import org.marc4j.marc.Record;
+import org.marc4j.marc.VariableField;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -47,34 +49,28 @@ public class SearchRestService {
     private LibraryBookReader reader;
 
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("getFindLibraries")
-    public List<Library> getFindLibraries() {
-
-        return libraryRepository.getLibraryList();
-    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("simpleSeacrh")
-    public List<Book> simpleSeacrh(SimpleSearch simpleSeacrh) {
+    public SearchOneResult simpleSeacrh(SimpleSearch simpleSeacrh) {
         /***/
+        SearchOneResult result = new SearchOneResult();
         try {
-            SearchResult result = searcher.search(simpleSeacrh);
-            List<Book> books = new ArrayList<Book>();
-            for (Record record : result.getRecords()) {
+            SearchResult res = searcher.search(simpleSeacrh);
+
+            result.setCount(res.getCount());
+            for (Record record : res.getRecords()) {
                 Book book = marcConverter.convert(record);
                 book.setRecord(record);
-                books.add(book);
+                result.getBooks().add(book);
                 CacheManager.getInstance().addRecord(book);
                 book.setRecord(null);
             }
-            return books;
         } catch (Exception e) {
             log.error(e);
-            return null;
         }
+        return result;
     }
 
     @POST

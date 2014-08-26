@@ -50,6 +50,10 @@ public class SimpleSearch {
      * максимальный результат
      */
     private int maxResult;
+    /**
+     * Элемент с которого начинать загрузку
+     */
+    private int nextElement;
 
     /**
      * максимальный результат
@@ -168,5 +172,13 @@ public class SimpleSearch {
 
     public void setBooktype(String booktype) {
         this.booktype = booktype;
+    }
+
+    public int getNextElement() {
+        return nextElement;
+    }
+
+    public void setNextElement(int nextElement) {
+        this.nextElement = nextElement;
     }
 }

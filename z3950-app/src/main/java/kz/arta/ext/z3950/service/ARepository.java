@@ -42,8 +42,9 @@ public abstract class ARepository<T extends IEntity> {
      * @param obj - объект "Конфигурация подключения к библиотеке"
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void save(T obj) {
+    public T save(T obj) {
         getEm().persist(obj);
+        return obj;
     }
 
     /**
@@ -51,8 +52,19 @@ public abstract class ARepository<T extends IEntity> {
      * @param obj - объект "Конфигурация подключения к библиотеке"
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void update(T obj) {
+    public T update(T obj) {
         getEm().merge(obj);
+        return obj;
+    }
+
+    /**
+     * Удаление объекта "Конфигурация подключения к библиотеке"
+     * @param id - идентификатор объекта "Конфигурация подключения к библиотеке"
+     */
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void remove(Long id) {
+        T obj = find(id);
+        getEm().remove(obj);
     }
 
 }
