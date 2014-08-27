@@ -1,18 +1,26 @@
 package kz.arta.ext.z3950.convert;
 
+import info.freelibrary.marc4j.impl.RecordImpl;
 import kz.arta.ext.z3950.model.*;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
+import kz.arta.ext.z3950.service.DictionaryService;
 import kz.arta.ext.z3950.service.FormatFieldRepository;
 import kz.arta.ext.z3950.service.SubIndexRepository;
+import org.marc4j.MarcWriter;
+import org.marc4j.MarcXmlWriter;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
+import org.marc4j.samples.Marc8ToUnicodeExample;
 
 import javax.inject.Inject;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,12 +38,22 @@ public class RusMarcConverter implements IMarcConverter {
     @Inject
     private FormatFieldRepository formatFieldRepository;
 
+    @Inject
+    private DictionaryService dictionaryService;
+
 
     private Map<String, SubIndex> subindexes;
     private Map<String, String> attributes;
+    private Map<String, String> dicCodes;
 
     public RusMarcConverter() {
-
+        dicCodes = new HashMap<String, String>();
+        dicCodes.put("101a", "Язык основного текста");
+        dicCodes.put("200b", "Материал (носитель)");
+        dicCodes.put("9015", "Служебные отметки");
+        dicCodes.put("908b", "Вид содержания");
+        dicCodes.put("908c", "Вид содержания");
+        dicCodes.put("901a", "Сигла");
     }
 
     @Override
@@ -88,8 +106,10 @@ public class RusMarcConverter implements IMarcConverter {
                     index = pd.getName().substring(6, pd.getName().length());
                 }
                 String value = getSubfieldData(marcRecord, field, subField);
-                if (pd.getPropertyType().equals(KeyObject.class)) {
-                    //todo сопоставление справочников
+                if (value != null && pd.getPropertyType().equals(KeyObject.class)) {
+                    String key = dictionaryService.getDictionaryKey(getDictionaryCode(field + String.valueOf(subField)),value);
+                    KeyObject keyObject = new KeyObject(key, value);
+                    pd.getWriteMethod().invoke(autoreferat, keyObject);
                 } else if (value != null && index != null) {
                     String key = field + subField + index;
                     SubIndex subIndex = subindexes.get(key);
@@ -101,7 +121,7 @@ public class RusMarcConverter implements IMarcConverter {
                     } else {
                         System.out.println("not found key " + key + "for field " + pd.getName());
                     }
-                } else {
+                } else if(value != null){
                     pd.getWriteMethod().invoke(autoreferat, value);
                 }
             }
@@ -113,6 +133,10 @@ public class RusMarcConverter implements IMarcConverter {
             e.printStackTrace();
         }
         return autoreferat;
+    }
+
+    private String getDictionaryCode(String field) {
+        return dicCodes.get(field);
     }
 
     @Override
@@ -132,6 +156,8 @@ public class RusMarcConverter implements IMarcConverter {
         }
         return bookAttributes;
     }
+
+
 
     private void fillSubindexes() {
         if(subindexes != null){

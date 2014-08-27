@@ -1,21 +1,29 @@
 package test;
 
+import kz.arta.ext.api.data.FormData;
+import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.z3950.convert.IMarcConverter;
 import kz.arta.ext.z3950.convert.RusMarcConverter;
+import kz.arta.ext.z3950.convert.UnimarcConverter;
 import kz.arta.ext.z3950.model.Book;
+import kz.arta.ext.z3950.model.FormatField;
 import kz.arta.ext.z3950.model.SubIndex;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
+import kz.arta.ext.z3950.rest.api.LibraryBookReader;
+import kz.arta.ext.z3950.util.CodeConstants;
 import kz.arta.ext.z3950.util.RuMarcStreamReader;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.marc4j.MarcReader;
+import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,5 +131,27 @@ public class TestConverter {
         Assert.assertNull(libraryBook.getF100a_11());
         Assert.assertNotNull(libraryBook.getF100a_12());
         Assert.assertEquals(libraryBook.getF100a_12(), "ca");
+    }
+
+    @Test
+    public void testSaveMarc() throws IOException {
+        InputStream input = ClassLoader.getSystemResourceAsStream("formdata.json");
+        StringWriter writer = new StringWriter();
+        IOUtils.copy(input, writer, CodeConstants.ENCODING_UFT8);
+        FormData formData = new LibraryBookReader().parseFormData(writer.toString());
+        Assert.assertNotNull(formData);
+        FormFieldsWrapper fieldsWrapper = formData.convertToWrapper();
+        Assert.assertNotNull(fieldsWrapper);
+        Assert.assertEquals(fieldsWrapper.getFields().size(), 415);
+        Assert.assertEquals(fieldsWrapper.getFormFieldMap().get("200a").getValue(), "Математические методы синтеза слоистых структур");
+        Assert.assertEquals(fieldsWrapper.getFormFieldMap().get("100a(2)").getValue(), "d");
+
+
+        UnimarcConverter unimarcConverter = new UnimarcConverter();
+        Record record  = unimarcConverter.getMarcRecord(fieldsWrapper);
+        Assert.assertNotNull(record);
+        Assert.assertNotNull(record.getControlNumberField().getData(),"7d4efde7-dda2-4e8f-b276-f848639033cf");
+        Assert.assertNotNull(((DataField) record.getVariableField("200")).getSubfield('a').getData(),"Математические методы синтеза слоистых структур");
+        System.out.println(record.toString());
     }
 }

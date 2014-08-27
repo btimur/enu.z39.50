@@ -1,13 +1,11 @@
 package kz.arta.ext.api.rest;
 
 import kz.arta.ext.api.data.*;
-import kz.arta.ext.api.data.Dictionary;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,33 +16,7 @@ import java.util.*;
 public abstract class AFormsReader extends RestQuery {
     public static final int maxCountPerList = 20;
 
-    protected static<T> List<Dictionary> convertToDictionaries(List<T> professions, IFieldGetter fieldGetter) {
-        List<Dictionary> dictionaries = new ArrayList<Dictionary>();
-        if (professions!=null && professions.size()>0){
-            int i=1;
-            Set<String> itemsSet = new HashSet<String>();
-            for(T profession:professions){
-                if (profession!=null){
-                    String keyField = fieldGetter.getKeyField(profession);
-                    if (keyField !=null){
-                        String keyFieldTrimmed = keyField.trim();
-                        if (keyFieldTrimmed.length()>0){
-                            String lowerKeyField = keyFieldTrimmed;//keyFieldTrimmed.toLowerCase();
-                            if (!itemsSet.contains(lowerKeyField)){
-                                Dictionary dictionary = new Dictionary(fieldGetter.getId(i, profession), keyFieldTrimmed);
-                                fieldGetter.prepareDictionary(dictionary, profession);
-                                dictionaries.add(dictionary);
-                                itemsSet.add(lowerKeyField);
-                                i++;
-                            }
-                        }
-                    }
-                }
-            }
-            Collections.sort(dictionaries);
-        }
-        return dictionaries;
-    }
+
 
     public RegistryWrapper readRegistry(RestQueryContext queryContext, String formUUID, String searchField, String condition){
         RegistryWrapper registryWrapper = null;
@@ -130,23 +102,28 @@ public abstract class AFormsReader extends RestQuery {
             System.out.println("resultData = " + resultData);
             //logger.debug("result="+ resultData);
 
-            String data = "";
-            int startData = resultData.indexOf("[");
-            if (startData>=0){
-                int endData = resultData.lastIndexOf("]");
-                data = resultData.substring(startData, endData+1);
-                resultData = resultData.substring(0, startData)+"\"\""+resultData.substring(endData+1);
-            }
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            formData = objectMapper.readValue(resultData, FormData.class);
-            formData.setData(data);
+            formData = parseFormData(resultData);
 
             //logger.debug(formData);
             //System.out.println(formData);
         } catch (Throwable e){
             e.printStackTrace();
         }
+        return formData;
+    }
+
+    public FormData parseFormData(String resultData) throws IOException {
+        String data = "";
+        int startData = resultData.indexOf("[");
+        if (startData>=0){
+            int endData = resultData.lastIndexOf("]");
+            data = resultData.substring(startData, endData+1);
+            resultData = resultData.substring(0, startData)+"\"\""+resultData.substring(endData+1);
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        FormData formData = objectMapper.readValue(resultData, FormData.class);
+        formData.setData(data);
         return formData;
     }
 

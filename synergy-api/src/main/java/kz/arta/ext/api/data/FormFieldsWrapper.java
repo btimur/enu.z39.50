@@ -3,7 +3,6 @@ package kz.arta.ext.api.data;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class FormFieldsWrapper {
     }
 
     public List<FormField> getFields() {
-        if (fields==null){
+        if (fields == null) {
             fields = new ArrayList<FormField>();
         }
         return fields;
@@ -50,29 +49,35 @@ public class FormFieldsWrapper {
         this.fields = fields;
     }
 
-    public void printFields(){
-        if (fields!=null){
-            int i=1;
-            for(FormField record:fields){
-                System.out.println((i++)+". field = " + record);
+    public void printFields() {
+        if (fields != null) {
+            int i = 1;
+            for (FormField record : fields) {
+                System.out.println((i++) + ". field = " + record);
             }
         }
     }
 
     public void mapFields() {
         formFieldMap.clear();
-        if (fields!=null){
-            for(FormField record:fields){
+        if (fields != null) {
+            for (FormField record : fields) {
                 formFieldMap.put(record.getId(), record);
+                if (record.getData() != null) {
+                    for (FormField formField : record.getData()) {
+                        formFieldMap.put(formField.getId(), formField);
+                    }
+                }
             }
         }
+
     }
 
     public Map<String, FormField> getFormFieldMap() {
         return formFieldMap;
     }
 
-    public String convertToData() throws Exception{
+    public String convertToData() throws Exception {
         String result = null;
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);

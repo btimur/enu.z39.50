@@ -1,62 +1,75 @@
 package kz.arta.ext.api.data;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import javax.naming.directory.Attribute;
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- * Created with IntelliJ IDEA.
- * User: D. Kulakhmetov
- * Date: 09.04.14
- * Time: 21:13
+ * Created by timur on 8/27/2014 7:52 PM.
  */
-public class Dictionary implements Comparable{
-    private String id;
-    private String name;
+public class Dictionary {
+    private String dictionary_code;
+    private String dictCode;
+    private String dictionaryID;
+    private List<DictionaryColumn> columns;
+    private List<DictionaryItem> items;
 
-    private String professionId;
+    @JsonIgnore
+    private Map<String, DictionaryColumn> columnMap;
 
-    public Dictionary() {
+    public String getDictCode() {
+        return dictCode;
     }
 
-    public Dictionary(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public void setDictCode(String dictCode) {
+        this.dictCode = dictCode;
     }
 
-    public String getId() {
-        return id;
+    public String getDictionary_code() {
+        return dictionary_code;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDictionary_code(String dictionary_code) {
+        this.dictionary_code = dictionary_code;
     }
 
-    public String getName() {
-        return name;
+    public String getDictionaryID() {
+        return dictionaryID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDictionaryID(String dictionaryID) {
+        this.dictionaryID = dictionaryID;
+    }
+
+    public List<DictionaryColumn> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<DictionaryColumn> columns) {
+        this.columns = columns;
+    }
+
+    public List<DictionaryItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<DictionaryItem> items) {
+        this.items = items;
     }
 
 
-    public String getProfessionId() {
-        return professionId;
-    }
-
-    public void setProfessionId(String professionId) {
-        this.professionId = professionId;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        if (o==null){
-            return 1;
+    public Map<String, DictionaryColumn> giveColumnsMap() {
+        if (columnMap == null){
+            columnMap = new HashMap<String, DictionaryColumn>();
+            for (DictionaryColumn column :columns) {
+                columnMap.put(column.getCode(), column);
+            }
         }
-        if (!(o instanceof Dictionary)){
-            return 1;
-        }
-        Dictionary d = (Dictionary) o;
-        if (name==null){
-            return -1;
-        }
-        return name.compareTo(d.getName());
+        return columnMap;
     }
 }

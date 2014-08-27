@@ -126,7 +126,7 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
             .success(function (data) {
                 console.log(data);
                 $scope.importDo = false;
-                if (data) {
+                if (data != null && data === 'true') {
                     $scope.alerts.push({ type: 'success', msg: 'Импорт карточки успешно произведен!'});
                 } else {
                     $scope.alerts.push({type: 'danger', msg: 'Операция выполнена не успешна!'});

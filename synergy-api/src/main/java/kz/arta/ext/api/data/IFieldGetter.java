@@ -9,5 +9,5 @@ package kz.arta.ext.api.data;
 public interface IFieldGetter {
     String getId(int i, Object obj);
     String getKeyField(Object obj);
-    void prepareDictionary(Dictionary dictionary, Object obj);
+//    void prepareDictionary(Dictionary dictionary, Object obj);
 }

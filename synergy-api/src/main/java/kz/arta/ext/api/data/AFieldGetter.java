@@ -8,10 +8,10 @@ package kz.arta.ext.api.data;
  */
 public abstract class AFieldGetter implements IFieldGetter{
 
-    @Override
-    public void prepareDictionary(Dictionary dictionary, Object obj) {
-
-    }
+//    @Override
+//    public void prepareDictionary(Dictionary dictionary, Object obj) {
+//
+//    }
 
     @Override
     public String getId(int i, Object obj) {
