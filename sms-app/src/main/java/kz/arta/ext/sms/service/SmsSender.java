@@ -30,7 +30,7 @@ public class SmsSender extends RestQuery {
     @Inject
     private OrderReader reader;
 
-    public boolean sendSms(String dataUUID) {
+    public boolean sendSms(String dataUUID) throws IOException {
         Order order = reader.readOrder(ConfigUtils.getQueryContext(), dataUUID);
         List<SmsGate> smsGates = smsGateRepository.getSmsGates();
         boolean result = false;
@@ -58,7 +58,7 @@ public class SmsSender extends RestQuery {
     }
 
     private String getText(SmsGate smsGate, Order order) {
-        String text = smsGate.getTemplate().replace()
+//        String text = smsGate.getTemplate().replace();
         return null;
     }
 

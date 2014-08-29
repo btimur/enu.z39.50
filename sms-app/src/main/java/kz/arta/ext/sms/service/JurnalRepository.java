@@ -2,6 +2,8 @@ package kz.arta.ext.sms.service;
 
 import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.sms.model.Jurnal;
+import kz.arta.ext.sms.model.SmsGate;
+import kz.arta.ext.sms.model.synergy.Order;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -22,12 +24,12 @@ public class JurnalRepository extends ARepository<Jurnal> {
 
     /**
      * Поиск объекта "Конфигурация подключения к библиотеке" по имени
-     * @param name - имя объекта "Конфигурация подключения к библиотеке"
+     * @param id - имя объекта "Конфигурация подключения к библиотеке"
      * @return - объект "Конфигурация подключения к библиотеке"
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-    public Jurnal findByName(String name) {
-        return em.createQuery("select l from Library l where l.nameLib=?1", Jurnal.class).setParameter(1,name).getSingleResult();
+    public Jurnal findById(long id) {
+        return em.createQuery("select l from Jurnal l where l=?1", Jurnal.class).setParameter(1,id).getSingleResult();
     }
 
     /**
@@ -36,9 +38,7 @@ public class JurnalRepository extends ARepository<Jurnal> {
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Jurnal> getJurnals() {
-        return em.createQuery("select x from Jurnal x where x.enabled=?1", Jurnal.class)
-                .setParameter(1, true)
-                .getResultList();
+        return em.createQuery("select x from Jurnal x", Jurnal.class).getResultList();
     }
 
 
@@ -52,4 +52,10 @@ public class JurnalRepository extends ARepository<Jurnal> {
         return Jurnal.class;
     }
 
+    public void saveJurnal(Order order, SmsGate smsGate) {
+        Jurnal jurnal = new Jurnal();
+        jurnal.setSmsGate(smsGate);
+        jurnal.setOrderUUID(order.getDataUUID());
+        save(jurnal);
+    }
 }

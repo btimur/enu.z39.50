@@ -26,7 +26,7 @@ public class SmsGateService {
     @Produces(MediaType.APPLICATION_JSON)
 //    @Path("getFindLibraries")
     public List<SmsGate> getFindLibraries() {
-        return repository.getSmsGateList();
+        return repository.getSmsGates();
     }
 
     @GET

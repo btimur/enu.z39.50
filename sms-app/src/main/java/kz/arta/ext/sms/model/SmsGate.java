@@ -2,27 +2,87 @@ package kz.arta.ext.sms.model;
 
 import kz.arta.ext.common.model.IEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by timur on 8/28/2014 10:19 AM.
  */
 
 @Entity
-@Table(name = "sms_gate", schema = "", catalog = "z3950")
+@Table(name = "sms_gate")
 public class SmsGate implements IEntity{
-    private Long id;
+    /**
+     * идентификатор
+     */
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "ID")
+    protected Long id;
+
+    /**
+     * наименование sms
+     */
+    @Column(name = "NAME_SMS")
     private String nameSms;
+
+    /**
+     * ссылка
+     */
+    @Column(name = "SURL")
     private String sUrl;
+
+    /**
+     * пользователь
+     */
+    @Column(name = "LOGIN")
     private String sLogin;
+
+    /**
+     * пароль
+     */
+    @Column(name = "PWD")
     private String sPwd;
+
+    /**
+     * Кодировка
+     */
+    @Column(name = "SCHARSET")
     private String sCharset;
+
+    /**
+     * Формат
+     */
+    @Column(name = "SFORMAT")
     private String sFormat;
+
+    /**
+     * Активный
+     */
+    @Column(name = "ENABLED")
     private Boolean enabled;
+
+    /**
+     * Переведен
+     */
+    @Column(name = "TRANSLIT")
     private Boolean translit;
+
+    /**
+     * Номер
+     */
+    @Column(name = "SORDER")
     private Integer sOrder;
+
+    /**
+     * Удален
+     */
+    @Column(name = "DELETED")
     private Boolean deleted;
+
+    /**
+     * Шаблон
+     */
+    @Column(name = "TEMPLATE")
     private String template;
 
     public String getNameSms() {
@@ -120,4 +180,45 @@ public class SmsGate implements IEntity{
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SmsGate that = (SmsGate) o;
+
+        if (deleted != that.deleted) return false;
+        if (enabled != that.enabled) return false;
+        if (id != that.id) return false;
+        if (sOrder != that.sOrder) return false;
+        if (translit != that.translit) return false;
+        if (sLogin != null ? !sLogin.equals(that.sLogin) : that.sLogin != null) return false;
+        if (nameSms != null ? !nameSms.equals(that.nameSms) : that.nameSms != null) return false;
+        if (sPwd != null ? !sPwd.equals(that.sPwd) : that.sPwd != null) return false;
+        if (sCharset != null ? !sCharset.equals(that.sCharset) : that.sCharset != null) return false;
+        if (sFormat != null ? !sFormat.equals(that.sFormat) : that.sFormat != null) return false;
+        if (sUrl != null ? !sUrl.equals(that.sUrl) : that.sUrl != null) return false;
+        if (template != null ? !template.equals(that.template) : that.template != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (nameSms != null ? nameSms.hashCode() : 0);
+        result = 31 * result + (sUrl != null ? sUrl.hashCode() : 0);
+        result = 31 * result + (sLogin != null ? sLogin.hashCode() : 0);
+        result = 31 * result + (sPwd != null ? sPwd.hashCode() : 0);
+        result = 31 * result + (sCharset != null ? sCharset.hashCode() : 0);
+        result = 31 * result + (sFormat != null ? sFormat.hashCode() : 0);
+        result = 31 * result + (enabled ? 1 : 0);
+        result = 31 * result + (translit ? 1 : 0);
+        result = 31 * result + sOrder;
+        result = 31 * result + (deleted ? 1 : 0);
+        result = 31 * result + (template != null ? template.hashCode() : 0);
+        return result;
+    }
+
 }
