@@ -2,7 +2,7 @@ package kz.arta.ext.sms.rest;
 
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.service.SmsGateRepository;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

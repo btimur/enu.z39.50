@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Created by timur on 8/28/2014 10:46 AM.
  */
-@MessageDriven(name = "MigrateWorkerQueue",
+@MessageDriven(name = "SmsBlockQueue",
         activationConfig =
                 {
                         @ActivationConfigProperty(propertyName = "destinationType",
