@@ -1,5 +1,6 @@
 package test;
 
+import info.freelibrary.marc4j.converter.impl.UnicodeToAnsel;
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.z3950.convert.IMarcConverter;
@@ -18,6 +19,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.marc4j.MarcReader;
+import org.marc4j.MarcStreamWriter;
+import org.marc4j.MarcWriter;
+import org.marc4j.MarcXmlWriter;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -153,5 +157,20 @@ public class TestConverter {
         Assert.assertNotNull(record.getControlNumberField().getData(),"7d4efde7-dda2-4e8f-b276-f848639033cf");
         Assert.assertNotNull(((DataField) record.getVariableField("200")).getSubfield('a').getData(),"Математические методы синтеза слоистых структур");
         System.out.println(record.toString());
+
+        OutputStream stream = null;
+        try {
+            stream = new FileOutputStream(record.getControlNumberField().getData());
+//            MarcWriter marcWriter = new MarcStreamWriter(stream, "cp1251");
+            MarcWriter marcWriter = new MarcXmlWriter(stream, "UTF8");
+            marcWriter.write(record);
+            marcWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+        }
     }
 }

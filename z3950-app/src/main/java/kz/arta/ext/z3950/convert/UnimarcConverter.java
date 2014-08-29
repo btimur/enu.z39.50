@@ -53,8 +53,8 @@ public class UnimarcConverter implements IMarcConverter {
             String fieldTag = id.substring(0, 3);
             DataField dataField = (DataField) record.getVariableField(fieldTag);
             if (dataField == null){
-                dataField = factory.newDataField();
-                dataField.setTag(fieldTag);
+                dataField = factory.newDataField(fieldTag, ' ', ' ');
+//                dataField.setTag(fieldTag);
                 record.addVariableField(dataField);
             }
             char subFieldTag = id.substring(3, 4).charAt(0);

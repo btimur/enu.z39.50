@@ -34,7 +34,7 @@
             <!--<property name="hibernate.connection.password" value="1q2w3e4r"/>-->
         <!--</properties>-->
     <!--</persistence-unit>-->
-    <persistence-unit name="z3950">
+    <persistence-unit name="smsapp">
         <jta-data-source>java:jboss/datasources/Z3950DS</jta-data-source>
         <properties>
             <!-- Properties for Hibernate -->
