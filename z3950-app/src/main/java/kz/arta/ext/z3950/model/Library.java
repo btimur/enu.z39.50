@@ -1,5 +1,6 @@
 package kz.arta.ext.z3950.model;
 
+import kz.arta.ext.common.model.IEntity;
 import kz.arta.ext.z3950.util.CodeConstants;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "lib_configuration")
-public class Library implements IEntity{
+public class Library implements IEntity {
 
     /**
      * идентификатор

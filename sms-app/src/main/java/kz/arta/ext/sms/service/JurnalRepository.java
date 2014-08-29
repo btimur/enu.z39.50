@@ -1,5 +1,6 @@
 package kz.arta.ext.sms.service;
 
+import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.sms.model.Jurnal;
 
 import javax.ejb.TransactionAttribute;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by timur on 8/28/2014 10:24 AM.
  */
-public class JurnalRepository extends ARepository<Library> {
+public class JurnalRepository extends ARepository<Jurnal> {
 
     /**
      * Менеджер JPA

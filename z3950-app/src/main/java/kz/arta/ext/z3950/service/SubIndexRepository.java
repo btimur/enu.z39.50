@@ -1,8 +1,6 @@
 package kz.arta.ext.z3950.service;
 
-import kz.arta.ext.z3950.model.FormatEnum;
-import kz.arta.ext.z3950.model.Library;
-import kz.arta.ext.z3950.model.QueryType;
+import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.z3950.model.SubIndex;
 
 import javax.ejb.Stateless;
@@ -10,7 +8,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

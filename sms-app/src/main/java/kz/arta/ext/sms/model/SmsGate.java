@@ -1,5 +1,7 @@
 package kz.arta.ext.sms.model;
 
+import kz.arta.ext.common.model.IEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,7 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sms_gate", schema = "", catalog = "z3950")
-public class SmsGate {
+public class SmsGate implements IEntity{
+    private Long id;
     private String nameSms;
     private String sUrl;
     private String sLogin;
@@ -108,5 +111,13 @@ public class SmsGate {
 
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

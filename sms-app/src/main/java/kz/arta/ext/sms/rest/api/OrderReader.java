@@ -5,8 +5,9 @@ import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
+import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.sms.model.synergy.Order;
-import kz.arta.ext.sms.util.CodeConstants;
+import kz.arta.ext.common.util.CodeConstants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ public class OrderReader extends AFormsReader {
 
     protected Date fillDate(FormFieldsWrapper wrapper, Order order, String field) {
         String dateofsdacha = wrapper.getFormFieldMap().get(field).getTimestamp();
-        if (CodeConstants.isNullOrEmpty(dateofsdacha)){
+        if (StringUtils.isNullOrEmpty(dateofsdacha)){
             return null;
         }
         try {

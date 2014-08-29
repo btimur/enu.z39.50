@@ -1,11 +1,9 @@
-package kz.arta.ext.z3950.service;
+package kz.arta.ext.common.service;
 
-import kz.arta.ext.z3950.model.IEntity;
-import kz.arta.ext.z3950.model.Library;
+import kz.arta.ext.common.model.IEntity;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,7 +19,6 @@ public abstract class ARepository<T extends IEntity> {
 
     /**
      * Тип класс ( не пашет что-то с generic t.class  -> .NET рулит)
-     * @return класс Entity
      */
     public abstract Class<T> getEntityClass();
     /**

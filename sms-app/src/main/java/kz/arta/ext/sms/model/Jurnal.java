@@ -1,11 +1,14 @@
 package kz.arta.ext.sms.model;
 
+import kz.arta.ext.common.model.IEntity;
+
 import java.sql.Timestamp;
 
 /**
  * Created by timur on 8/28/2014 10:35 AM.
  */
-public class Jurnal {
+public class Jurnal implements IEntity{
+    private Long id;
     private Timestamp dateSend;
     private String iin;
     private String phone;
@@ -77,5 +80,13 @@ public class Jurnal {
 
     public void setOrderBookName(String orderBookName) {
         this.orderBookName = orderBookName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

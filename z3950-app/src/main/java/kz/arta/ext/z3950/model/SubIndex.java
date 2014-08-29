@@ -1,5 +1,7 @@
 package kz.arta.ext.z3950.model;
 
+import kz.arta.ext.common.model.IEntity;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "subindex")
-public class SubIndex implements IEntity{
+public class SubIndex implements IEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
