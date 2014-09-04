@@ -11,7 +11,7 @@
     http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=2163679833
 
 Настройка источника данных:
- 1) Добавление jdbc драйверов в JBoss AS
+ 1) Добавление jdbc драйверов в JBoss AS. Можно скачать по ссылке http://www.firebirdsql.org/en/jdbc-driver/
     - Открываем консоль администратора JBoss, вкладка Runtime и пункт Manage Deployments
     - Добавляем jar-файлы: jaybird-2.2.5.jar, connector-api-1.5.jar и включаем их (Кнопка Enable)
  2) Добавление источника данных:
