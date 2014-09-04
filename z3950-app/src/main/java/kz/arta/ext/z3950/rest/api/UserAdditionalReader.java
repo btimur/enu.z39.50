@@ -5,6 +5,8 @@ import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.z3950.util.CodeConstants;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -48,43 +50,5 @@ public class UserAdditionalReader extends AFormsReader {
             e.printStackTrace();
         }
         return userId;
-    }
-
-    public String getUserInfoByCardUID(RestQueryContext context, String cardUID) {
-        try {
-            //todo: Connect to SKUD
-            Connection con = null;
-            Statement stmt = con.createStatement();
-            // Получаем из БД СКУД идентификатор актуального сотрудника по UID карте
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT t1.ID_STAFF " +
-                    "FROM STAFF t1 LEFT JOIN STAFF_CARDS t2 ON t1.ID_STAFF = t2.STAFF_ID " +
-                    "WHERE t2.IDENTIFIER = " + cardUID + " and t1.DATE_DISMISS IS NULL"
-            );
-            if (rs.next()) {
-                // Если существует актуальный сотрудник, берем его идентификатор
-                long staffId = rs.getLong(1);
-                if (staffId > 0) {
-                    //todo: stmt = con.createStatement();
-                    // Получаем ИИН по идентификатору сотрудника
-                    rs = stmt.executeQuery(
-                            "SELECT INFO_DATA FROM STAFF_INFO_DATA_STR WHERE REF_ID=45619 AND STAFF_ID=" + staffId);
-                    if (rs.next()) {
-                        String staffIIN = rs.getString(1);
-
-                        // Формируем запрос по получению информации о сотруднике (читателе) из "системы"
-                        String query = "/rest/api/filecabinet/get_by_field_value?formUUID=" + formUUID
-                                + "&value=" + staffIIN + "&fieldName=" + iinField;
-
-                        // Получаем результат и его же отправляем как результат
-                        String resultData = doGetQuery(context, query);
-                        return resultData;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
