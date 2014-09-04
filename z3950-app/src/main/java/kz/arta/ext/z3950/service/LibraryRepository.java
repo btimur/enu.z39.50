@@ -1,5 +1,6 @@
 package kz.arta.ext.z3950.service;
 
+import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.z3950.model.FormatEnum;
 import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.QueryType;

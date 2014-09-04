@@ -1,11 +1,9 @@
 package kz.arta.ext.z3950.service;
 
+import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.z3950.model.FormatField;
-import kz.arta.ext.z3950.model.SubIndex;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;

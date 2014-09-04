@@ -51,5 +51,6 @@
         <!-- <module>server</module> -->
         <module>synergy-api</module>
         <module>z3950-app</module>
+        <module>sms-app</module>
     </modules>
 </project>

@@ -23,8 +23,7 @@ public abstract class RestQuery {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json; charset=utf-8");
 //        String encoded = DatatypeConverter.encode((context.getLogin() + ":" + context.getPassword()).getBytes());
-        String encoded = DatatypeConverter.printBase64Binary((context.getLogin() + ":" + context.getPassword()).getBytes());
-        conn.setRequestProperty("Authorization", "Basic " + encoded);
+        authentithication(context, conn);
         String output;
         StringBuffer result = new StringBuffer();
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -34,6 +33,11 @@ public abstract class RestQuery {
         }
         conn.disconnect();
         return result.toString();
+    }
+
+    protected void authentithication(RestQueryContext context, HttpURLConnection conn) {
+        String encoded = DatatypeConverter.printBase64Binary((context.getLogin() + ":" + context.getPassword()).getBytes());
+        conn.setRequestProperty("Authorization", "Basic " + encoded);
     }
 
     protected String doPostQuery(RestQueryContext context, String query, String data) throws IOException {
@@ -47,8 +51,7 @@ public abstract class RestQuery {
         conn.setUseCaches(false);
         conn.setAllowUserInteraction(false);
         conn.setRequestProperty("Accept", "application/json; charset=utf-8");
-        String encoded = DatatypeConverter.printBase64Binary((context.getLogin() + ":" + context.getPassword()).getBytes());
-        conn.setRequestProperty("Authorization", "Basic " + encoded);
+        authentithication(context, conn);
 
         OutputStream out = conn.getOutputStream();
         Writer writer = new OutputStreamWriter(out, "UTF-8");

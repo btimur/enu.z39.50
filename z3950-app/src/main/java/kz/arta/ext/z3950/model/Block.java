@@ -1,5 +1,7 @@
 package kz.arta.ext.z3950.model;
 
+import kz.arta.ext.common.model.IEntity;
+
 import javax.persistence.*;
 
 /**

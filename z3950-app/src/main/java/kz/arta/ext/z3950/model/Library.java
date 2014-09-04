@@ -1,5 +1,8 @@
 package kz.arta.ext.z3950.model;
 
+import kz.arta.ext.common.model.IEntity;
+import kz.arta.ext.z3950.util.CodeConstants;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "lib_configuration")
-public class Library implements IEntity{
+public class Library implements IEntity {
 
     /**
      * идентификатор
@@ -57,7 +60,7 @@ public class Library implements IEntity{
      * Format библиотеки для сервиса Z39.50
      */
     @Column(name = "ENCODING")
-    private String encoding = "UTF8";
+    private String encoding = CodeConstants.ENCODING_UFT8;
 
     /***
      * тип запросов

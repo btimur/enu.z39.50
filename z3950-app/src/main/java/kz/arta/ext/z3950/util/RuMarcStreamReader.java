@@ -20,7 +20,7 @@ public class RuMarcStreamReader implements MarcReader {
 
     private MarcFactory factory;
 
-    private String encoding = "ISO8859_1";
+    private String encoding = CodeConstants.ENCODING_ISO8859_1;
 
     private boolean override = false;
 
@@ -115,7 +115,7 @@ public class RuMarcStreamReader implements MarcReader {
                 break;
             case 'a':
                 if (!override) {
-                    encoding = "UTF8";
+                    encoding = CodeConstants.ENCODING_UFT8;
                 }
         }
         record.setLeader(ldr);
@@ -338,9 +338,9 @@ public class RuMarcStreamReader implements MarcReader {
 
     private String getDataAsString(byte[] bytes) {
         String dataElement = null;
-        if (encoding.equals("UTF-8") || encoding.equals("UTF8")) {
+        if (encoding.equals(CodeConstants.ENCODING_UFT8) || encoding.equals(CodeConstants.ENCODING_UFT_8)) {
             try {
-                dataElement = new String(bytes, "UTF8");
+                dataElement = new String(bytes, CodeConstants.ENCODING_UFT8);
             } catch (UnsupportedEncodingException e) {
                 throw new MarcException("unsupported encoding", e);
             }

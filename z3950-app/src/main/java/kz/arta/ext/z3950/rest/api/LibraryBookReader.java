@@ -26,23 +26,10 @@ import java.util.Map;
 public class LibraryBookReader extends AFormsReader {
     @Inject
     protected Logger log;
-    //    private final String formUUID;
-    private String registryUUID;
 
-    public LibraryBookReader() {
-//        formUUID = ConfigReader.getPropertyValue(CodeConstants.AUTOREFERAT_FORM_UUID);
-        registryUUID = ConfigReader.getPropertyValue(CodeConstants.AUTOREFERAT_REGISTRY_UUID);
-    }
+    public LibraryBookReader() {}
 
-    public String getRegistryUUID() {
-        return registryUUID;
-    }
-
-    public void setRegistryUUID(String registryUUID) {
-        this.registryUUID = registryUUID;
-    }
-
-    public boolean Save(String dataUUID, LibraryBook book, RestQueryContext queryContext) throws Exception {
+    public boolean upadateBook(String dataUUID, LibraryBook book, RestQueryContext queryContext) throws Exception {
 //        RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
 //                registryUUID);
 

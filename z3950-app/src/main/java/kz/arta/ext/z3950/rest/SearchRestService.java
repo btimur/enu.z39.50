@@ -1,11 +1,10 @@
 package kz.arta.ext.z3950.rest;
 
-import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.z3950.convert.IMarcConverter;
+import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.BookAttribute;
-import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.MarcString;
 import kz.arta.ext.z3950.model.search.MultiResult;
 import kz.arta.ext.z3950.model.search.SearchOneResult;
@@ -16,15 +15,12 @@ import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.service.LibraryRepository;
 import kz.arta.ext.z3950.service.Z3950Searcher;
 import kz.arta.ext.z3950.util.CacheManager;
-import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
 import org.marc4j.marc.Record;
-import org.marc4j.marc.VariableField;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +39,7 @@ public class SearchRestService {
     private Z3950Searcher searcher;
 
     @Inject
-    private IMarcConverter marcConverter;
+    private RusMarcConverter marcConverter;
 
     @Inject
     private LibraryBookReader reader;
@@ -93,7 +89,7 @@ public class SearchRestService {
 
             Record record = CacheManager.getInstance().getRecord(book);
             LibraryBook libraryBook = marcConverter.reverseConvert(record);
-            return reader.Save(book.getDataUUID(), libraryBook, ConfigUtils.getQueryContext());
+            return reader.upadateBook(book.getDataUUID(), libraryBook, ConfigUtils.getQueryContext());
         } catch (Exception e) {
             log.error(e);
             return false;

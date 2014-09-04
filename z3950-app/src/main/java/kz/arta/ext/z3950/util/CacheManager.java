@@ -15,8 +15,14 @@ public class CacheManager {
 
     private Map<Long, Map<String, Record>> records;
 
+    private Map<String, Map<String,String>> dictionaries;
+    private Map<String, Integer> dictionariesId;
+
     private CacheManager() {
+
         records = new HashMap<Long, Map<String, Record>>();
+        dictionaries = new HashMap<String, Map<String, String>>();
+        dictionariesId = new HashMap<String, Integer>();
     }
 
     public static synchronized CacheManager getInstance(){
@@ -43,4 +49,39 @@ public class CacheManager {
         }
         return librariesMap.get(book.getId());
     }
+
+    public void addDictionary(String dictionaryCode,String key, String value){
+        Map<String, String> dictionaryMap  = dictionaries.get(dictionaryCode);
+        if (dictionaryMap == null){
+            dictionaryMap = new HashMap<String, String>();
+            dictionaries.put(dictionaryCode, dictionaryMap);
+        }
+        dictionaryMap.put(value, key);
+    }
+
+
+    public String getDictionaryKey(String dictionaryCode,String value){
+        Map<String, String> dictionaryMap  = dictionaries.get(dictionaryCode);
+        if (dictionaryMap == null){
+            dictionaryMap = new HashMap<String, String>();
+            dictionaries.put(dictionaryCode, dictionaryMap);
+        }
+        return dictionaryMap.get(value);
+    }
+
+
+    public void addDictionaryID(String dictionaryCode, Integer val){
+        Integer maxid = 0;
+        if (dictionariesId.containsKey(dictionaryCode)) {
+            maxid = dictionariesId.remove(dictionaryCode);
+        }
+        if (val > maxid) {
+            dictionariesId.put(dictionaryCode, val);
+        }
+    }
+
+    public Integer getDictionaryID(String dictionaryCode){
+        return dictionariesId.get(dictionaryCode);
+    }
+
 }
