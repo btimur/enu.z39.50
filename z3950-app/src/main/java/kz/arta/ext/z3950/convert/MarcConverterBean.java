@@ -11,7 +11,7 @@ import javax.inject.Inject;
 public class MarcConverterBean {
 
     @Inject
-    private RusmarcConverter rusmarcConverter;
+    private RusMarcConverter rusmarcConverter;
 
     @Inject
     private UnimarcConverter unimarcConverter;
