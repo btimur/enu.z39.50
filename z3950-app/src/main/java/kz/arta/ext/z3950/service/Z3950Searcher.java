@@ -7,7 +7,7 @@ import kz.arta.ext.z3950.model.search.SearchFilter;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.search.QueryBuilderFactory;
-import kz.arta.ext.z3950.util.RuMarcStreamReader;
+import kz.arta.ext.z3950.util.SomeMarcStreamReader;
 import org.apache.logging.log4j.Logger;
 import org.marc4j.MarcReader;
 import org.yaz4j.*;
@@ -121,7 +121,7 @@ public class Z3950Searcher {
 //                .getBean("marcFileReader");
 //            List<ppa.marc.domain.Record> records = recordReader.read(stream);
 
-        MarcReader reader = new RuMarcStreamReader(stream, library.getEncoding());
+        MarcReader reader = new SomeMarcStreamReader(stream, library.getEncoding());
 
 //        SaveMarc(b, next);
 

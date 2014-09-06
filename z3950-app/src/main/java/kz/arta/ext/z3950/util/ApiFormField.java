@@ -14,5 +14,6 @@ public @interface ApiFormField {
 
     String typeField();
     String nameField();
-
+    boolean isList() default false;
+    String parentTable() default "";
 }

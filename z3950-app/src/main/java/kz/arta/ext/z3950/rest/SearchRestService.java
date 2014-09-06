@@ -1,8 +1,7 @@
 package kz.arta.ext.z3950.rest;
 
 import kz.arta.ext.api.config.ConfigUtils;
-import kz.arta.ext.z3950.convert.IMarcConverter;
-import kz.arta.ext.z3950.convert.RusMarcConverter;
+import kz.arta.ext.z3950.convert.MarcConverterBean;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.BookAttribute;
 import kz.arta.ext.z3950.model.MarcString;
@@ -38,11 +37,12 @@ public class SearchRestService {
     @Inject
     private Z3950Searcher searcher;
 
-    @Inject
-    private RusMarcConverter marcConverter;
 
     @Inject
     private LibraryBookReader reader;
+
+    @Inject
+    private MarcConverterBean marcConverterBean;
 
 
 
@@ -57,8 +57,9 @@ public class SearchRestService {
 
             result.setCount(res.getCount());
             for (Record record : res.getRecords()) {
-                Book book = marcConverter.convert(record);
+                Book book = marcConverterBean.getConverter(libraryRepository.find(simpleSeacrh.getLibraryId())).convert(record);
                 book.setRecord(record);
+                book.setLibraryId(simpleSeacrh.getLibraryId());
                 result.getBooks().add(book);
                 CacheManager.getInstance().addRecord(book);
                 book.setRecord(null);
@@ -68,6 +69,8 @@ public class SearchRestService {
         }
         return result;
     }
+
+
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -88,7 +91,8 @@ public class SearchRestService {
         try {
 
             Record record = CacheManager.getInstance().getRecord(book);
-            LibraryBook libraryBook = marcConverter.reverseConvert(record);
+            LibraryBook libraryBook = marcConverterBean.getConverter(libraryRepository.find(book.getLibraryId()))
+                    .reverseConvert(record);
             return reader.upadateBook(book.getDataUUID(), libraryBook, ConfigUtils.getQueryContext());
         } catch (Exception e) {
             log.error(e);
@@ -143,7 +147,7 @@ public class SearchRestService {
     public List<BookAttribute> loadDescr(@QueryParam("id") String id, @QueryParam("libraryId") Long libraryId) {
         try {
             Record record = getRecordFromCache(id, libraryId);
-            return marcConverter.loadDescr(record);
+            return marcConverterBean.getConverter(libraryRepository.find(libraryId)).loadDescr(record);
         } catch (Exception e) {
             log.error(e);
             return null;

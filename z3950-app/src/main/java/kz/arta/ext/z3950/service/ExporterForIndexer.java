@@ -1,21 +1,17 @@
 package kz.arta.ext.z3950.service;
 
-import info.freelibrary.marc4j.impl.RecordImpl;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.data.FormData;
-import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
-import org.marc4j.MarcReader;
 import org.marc4j.MarcStreamWriter;
 import org.marc4j.MarcWriter;
 import org.marc4j.marc.Record;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 

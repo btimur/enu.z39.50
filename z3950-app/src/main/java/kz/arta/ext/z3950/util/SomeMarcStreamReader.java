@@ -12,7 +12,7 @@ import java.io.*;
 /**
  * Created by timur on 09/08/2014 11:06.
  */
-public class RuMarcStreamReader implements MarcReader {
+public class SomeMarcStreamReader implements MarcReader {
 
     private DataInputStream input = null;
 
@@ -29,14 +29,14 @@ public class RuMarcStreamReader implements MarcReader {
     /**
      * Constructs an instance with the specified input stream.
      */
-    public RuMarcStreamReader(InputStream input) {
+    public SomeMarcStreamReader(InputStream input) {
         this(input, null);
     }
 
     /**
      * Constructs an instance with the specified input stream.
      */
-    public RuMarcStreamReader(InputStream input, String encoding) {
+    public SomeMarcStreamReader(InputStream input, String encoding) {
         this.input =
                 new DataInputStream((input.markSupported()) ? input
                         : new BufferedInputStream(input));

@@ -88,10 +88,25 @@ public class FormFieldsWrapper {
     }
 
     public void addField(String fieldId, String fieldType) {
+        FormField field = createFormField(fieldId, fieldType);
+        getFields().add(field);
+        getFormFieldMap().put(fieldId, field);
+    }
+
+    protected FormField createFormField(String fieldId, String fieldType) {
         FormField field = new FormField();
         field.setId(fieldId);
         field.setType(fieldType);
-        getFields().add(field);
-        getFormFieldMap().put(fieldId, field);
+        return field;
+    }
+
+    public void addParentField(String parentTable, String fieldId, String fieldType) {
+        FormField parentField = new FormField();
+        parentField.setId(parentTable);
+        parentField.setData(new ArrayList<FormField>());
+        FormField child = createFormField(fieldId, fieldType);
+        parentField.getData().add(child);
+        getFields().add(parentField);
+        getFormFieldMap().put(fieldId, child);
     }
 }
