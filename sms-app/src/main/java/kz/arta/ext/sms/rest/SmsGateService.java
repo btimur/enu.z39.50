@@ -13,7 +13,7 @@ import java.util.List;
  * Created by timur on 25/07/2014 12:01.
  */
 
-@Path("/smsgates")
+@Path("/smsgate")
 public class SmsGateService {
     @Inject
     private Logger log;
@@ -25,7 +25,7 @@ public class SmsGateService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 //    @Path("getFindLibraries")
-    public List<SmsGate> getFindLibraries() {
+    public List<SmsGate> getFindSmsGates() {
         return repository.getSmsGates();
     }
 

@@ -22,14 +22,14 @@ var services = angular.module('smsapp.services', ['ngResource']);
 //var baseUrl = 'http://localhost\\:8080';
 
 services.factory('SmsGatesFactory', function ($resource) {
-    return $resource('/sms-app/rest/smsgates', {}, {
+    return $resource('/sms-app/rest/smsgate', {}, {
         query: { method: 'GET', isArray: true },
         create: { method: 'POST' }
     })
 });
 
 services.factory('SmsGateFactory', function ($resource) {
-    return $resource( '/sms-app/rest/smsgates/:id', {}, {
+    return $resource( '/sms-app/rest/smsgate/:id', {}, {
         show: { method: 'GET' },
         update: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }

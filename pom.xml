@@ -52,5 +52,6 @@
         <module>synergy-api</module>
         <module>z3950-app</module>
         <module>sms-app</module>
+        <module>skud-service</module>
     </modules>
 </project>
