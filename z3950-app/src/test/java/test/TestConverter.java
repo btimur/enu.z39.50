@@ -1,18 +1,15 @@
 package test;
 
-import info.freelibrary.marc4j.converter.impl.UnicodeToAnsel;
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.z3950.convert.IMarcConverter;
-import kz.arta.ext.z3950.convert.RusMarcConverter;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
 import kz.arta.ext.z3950.model.Book;
-import kz.arta.ext.z3950.model.FormatField;
 import kz.arta.ext.z3950.model.SubIndex;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.util.CodeConstants;
-import kz.arta.ext.z3950.util.RuMarcStreamReader;
+import kz.arta.ext.z3950.util.SomeMarcStreamReader;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.marc4j.MarcReader;
 import org.marc4j.MarcStreamWriter;
 import org.marc4j.MarcWriter;
-import org.marc4j.MarcXmlWriter;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -37,7 +33,7 @@ import static org.powermock.api.mockito.PowerMockito.*;
  * Created by timur on 8/11/2014 6:43 PM.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({RusMarcConverter.class})
+@PrepareForTest({UnimarcConverter.class})
 public class TestConverter {
 
     private IMarcConverter converter;
@@ -46,10 +42,10 @@ public class TestConverter {
     @Before
     public void setUp() throws Exception {
         InputStream input = ClassLoader.getSystemResourceAsStream("4.mrc");
-        MarcReader reader = new RuMarcStreamReader(input, "cp1251");
+        MarcReader reader = new SomeMarcStreamReader(input, "cp1251");
         record = reader.next();
 //        converter = new RusMarcConverter();
-        RusMarcConverter c = new RusMarcConverter();
+        UnimarcConverter c = new UnimarcConverter();
         converter = spy(c);
         doNothing().when(converter, "fillSubindexes");
 
@@ -66,7 +62,7 @@ public class TestConverter {
         subindexes.put("100a10", new SubIndex("100", 'a', 10, 26, 29));
         subindexes.put("100a11", new SubIndex("100", 'a', 11, 30, 33));
         subindexes.put("100a12", new SubIndex("100", 'a', 12, 34, 35));
-        field(RusMarcConverter.class, "subindexes").set(converter, subindexes);
+        field(UnimarcConverter.class, "subindexes").set(converter, subindexes);
     }
 
     @Test
@@ -161,8 +157,8 @@ public class TestConverter {
         OutputStream stream = null;
         try {
             stream = new FileOutputStream(record.getControlNumberField().getData());
-//            MarcWriter marcWriter = new MarcStreamWriter(stream, "cp1251");
-            MarcWriter marcWriter = new MarcXmlWriter(stream, "UTF8");
+            MarcWriter marcWriter = new MarcStreamWriter(stream, "UTF8");
+//            MarcWriter marcWriter = new MarcXmlWriter(stream, "UTF8");
             marcWriter.write(record);
             marcWriter.close();
         } catch (Exception e) {

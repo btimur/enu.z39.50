@@ -2,6 +2,8 @@ package kz.arta.ext.z3950.model.synergy;
 
 import kz.arta.ext.z3950.util.ApiFormField;
 
+import java.util.List;
+
 /**
  * Created by timur on 04/08/2014 21:18.
  */
@@ -9,20 +11,20 @@ public class LibraryBook {
     /**
      * Библиография
      */
-    @ApiFormField(nameField = "320a",typeField = "textbox")
-    private String f320a;
+    @ApiFormField(nameField = "320a",typeField = "textbox", isList = true, parentTable ="dyntable_320a")
+    private List<String> f320a;
 
     /**
      * Ключевое слово
      */
-    @ApiFormField(nameField = "610a",typeField = "textbox")
-    private String f610a;
+    @ApiFormField(nameField = "610a",typeField = "textbox", isList = true, parentTable = "dyntable_610a")
+    private List<String> f610a;
 
     /**
      * Автор
      */
-    @ApiFormField(nameField = "700a",typeField = "textbox")
-    private String f700a;
+    @ApiFormField(nameField = "700a",typeField = "textbox", isList = true, parentTable = "dyntable_700a")
+    private List<String> f700a;
 
     /**
      * Номер ISBN
@@ -2478,27 +2480,27 @@ public class LibraryBook {
     @ApiFormField(nameField = "912a",typeField = "textbox")
     private String f912a;
 
-    public String getF320a() {
+    public List<String> getF320a() {
         return f320a;
     }
 
-    public void setF320a(String f320a) {
+    public void setF320a(List<String> f320a) {
         this.f320a = f320a;
     }
 
-    public String getF610a() {
+    public List<String> getF610a() {
         return f610a;
     }
 
-    public void setF610a(String f610a) {
+    public void setF610a(List<String> f610a) {
         this.f610a = f610a;
     }
 
-    public String getF700a() {
+    public List<String> getF700a() {
         return f700a;
     }
 
-    public void setF700a(String f700a) {
+    public void setF700a(List<String> f700a) {
         this.f700a = f700a;
     }
 

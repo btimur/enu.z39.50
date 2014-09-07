@@ -21,6 +21,8 @@ public class FormatField implements IEntity {
     private String fieldComment;
     private Long parentFieldId;
     private String notes;
+    private String fieldAlias;
+    private String objectField;
 
     @Id
     @Column(name = "ID")
@@ -130,6 +132,26 @@ public class FormatField implements IEntity {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Basic
+    @Column(name = "FIELD_ALIAS")
+    public String getFieldAlias() {
+        return fieldAlias;
+    }
+
+    public void setFieldAlias(String fieldAlias) {
+        this.fieldAlias = fieldAlias;
+    }
+
+    @Basic
+    @Column(name = "OBJECT_FIELD")
+    public String getObjectField() {
+        return objectField;
+    }
+
+    public void setObjectField(String objectField) {
+        this.objectField = objectField;
     }
 
     @Override

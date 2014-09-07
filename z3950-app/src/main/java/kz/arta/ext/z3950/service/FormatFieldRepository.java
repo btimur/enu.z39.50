@@ -39,4 +39,15 @@ public class FormatFieldRepository extends ARepository {
     }
 
 
+    public List<FormatField> getFieldsForBook(String format) {
+        return em.createQuery("select x from FormatField x where x.mformat=?1 and x.fieldAlias is not null", FormatField.class)
+                .setParameter(1,format)
+                .getResultList();
+    }
+
+    public List<FormatField> getFieldsForConvert(String format) {
+        return em.createQuery("select x from FormatField x where x.mformat=?1 and x.objectField is not null", FormatField.class)
+                .setParameter(1,format)
+                .getResultList();
+    }
 }
