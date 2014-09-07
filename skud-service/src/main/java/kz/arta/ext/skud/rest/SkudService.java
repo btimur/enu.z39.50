@@ -1,6 +1,7 @@
 package kz.arta.ext.skud.rest;
 
 import kz.arta.ext.api.config.ConfigReader;
+import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +44,7 @@ public class SkudService extends AFormsReader {
     @GET
     @Path("/getUserIDByCardUID")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getUserInfoByCardUID(RestQueryContext context, @QueryParam("cardUID") String cardUID) {
+    public String getUserInfoByCardUID(@QueryParam("cardUID") String cardUID) {
         try {
 //            System.out.println(cardUID);
             Connection con = ds.getConnection();
@@ -57,18 +58,21 @@ public class SkudService extends AFormsReader {
             if (rs.next()) {
                 // Если существует актуальный сотрудник, берем его идентификатор
                 long staffId = rs.getLong(1);
+                //System.out.println("STAFF_ID=" + staffId);
                 if (staffId > 0) {
                     // Получаем ИИН по идентификатору сотрудника
                     rs = stmt.executeQuery(
                             "SELECT INFO_DATA FROM STAFF_INFO_DATA_STR WHERE REF_ID=45619 AND STAFF_ID=" + staffId);
                     if (rs.next()) {
                         String staffIIN = rs.getString(1);
+                        //System.out.println("STAFF_IIN=" + staffIIN);
 
                         // Формируем запрос по получению информации о сотруднике (читателе) из "системы"
                         String query = "/rest/api/filecabinet/get_by_field_value?formUUID=" + formUUID
                                 + "&value=" + staffIIN + "&fieldName=" + iinField;
 
                         // Получаем результат и его же отправляем как результат
+                        RestQueryContext context = ConfigUtils.getQueryContext();
                         String resultData = doGetQuery(context, query);
                         return resultData;
                     }
