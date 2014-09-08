@@ -26,7 +26,7 @@ public abstract class RestQuery {
         authentithication(context, conn);
         String output;
         StringBuffer result = new StringBuffer();
-        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
         while ((output = br.readLine()) != null) {
             result.append(output);

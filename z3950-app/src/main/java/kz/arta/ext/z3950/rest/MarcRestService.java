@@ -31,4 +31,13 @@ public class MarcRestService{
     }
 
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("exportAll/{registryFormUUID}")
+    public boolean exportAll(@PathParam("registryFormUUID") String registryFormUUID) {
+
+        return exporter.exportRegistry(registryFormUUID);
+    }
+
+
 }

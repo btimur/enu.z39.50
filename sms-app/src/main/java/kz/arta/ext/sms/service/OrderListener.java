@@ -42,7 +42,7 @@ public class OrderListener implements MessageListener {
         ObjectMapper mapper = new ObjectMapper();
         try {
             BlockSignalMessage blockSignalMessage = mapper.readValue(((TextMessage) message).getText(), BlockSignalMessage.class);
-            boolean result  = sender.sendSms(blockSignalMessage.getDataUUID());
+//            boolean result  = sender.sendSms(blockSignalMessage.getDataUUID());
 
         } catch (IOException e) {
             e.printStackTrace();

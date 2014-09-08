@@ -6,6 +6,7 @@ import kz.arta.ext.api.data.FormField;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.api.data.RegistryRecord;
 import kz.arta.ext.api.rest.AFormsReader;
+import kz.arta.ext.api.rest.RestQuery;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
@@ -13,16 +14,16 @@ import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.util.ApiFormField;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.logging.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.inject.Inject;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by timur on 08/08/2014 16:09.
@@ -118,6 +119,14 @@ public class LibraryBookReader extends AFormsReader {
 
     }
 
-
+    public String[] getDataUUID(String registryFormUUID, RestQueryContext queryContext) throws IOException {
+        String query = "/rest/api/asforms/search?formUUID=" + registryFormUUID + "&type=partial";
+        String result = doGetQuery(queryContext, query);
+//        result = result.replace("[","").replace("]","");
+//        result.split(",")
+        ObjectMapper objectMapper = new ObjectMapper();
+        String[] dataUUIDs = objectMapper.readValue(result, String[].class);
+        return dataUUIDs;
+    }
 }
 
