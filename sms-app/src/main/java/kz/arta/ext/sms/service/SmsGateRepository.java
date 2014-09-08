@@ -3,6 +3,7 @@ package kz.arta.ext.sms.service;
 import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.sms.model.SmsGate;
 
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by timur on 8/28/2014 10:24 AM.
  */
+@Stateless
 public class SmsGateRepository  extends ARepository<SmsGate> {
 
     /**

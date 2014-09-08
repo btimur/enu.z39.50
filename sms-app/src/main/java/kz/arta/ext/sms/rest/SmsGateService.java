@@ -40,6 +40,11 @@ public class SmsGateService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public SmsGate create(SmsGate smsGate) {
+        if(smsGate==null)
+        {
+            return null;
+        }
+        smsGate.setDeleted(false);
         return repository.save(smsGate);
     }
 
