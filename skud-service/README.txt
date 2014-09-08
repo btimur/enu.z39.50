@@ -3,7 +3,10 @@
 идентификатора сотрудника/читателя
 
 Обращение к сервису:
-    http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=<Card UID>
+    1) Возвращает ID сотрудника по UID карты
+        http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=<Card UID>
+    2) Возвращает ИИН сотрудника по UID карты
+        http://localhost:8080/skud-service/skud/rest/getUserIinByCardUID?cardUID=<Card UID>
 где,
     <Card UID> - UID карты сотрудника/читателя
 
