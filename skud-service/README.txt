@@ -3,12 +3,16 @@
 идентификатора сотрудника/читателя
 
 Обращение к сервису:
-    http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=<Card UID>
+    1) Возвращает ID сотрудника по UID карты
+        http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=<Card UID>
+    2) Возвращает ИИН сотрудника по UID карты
+        http://localhost:8080/skud-service/skud/rest/getUserIinByCardUID?cardUID=<Card UID>
 где,
     <Card UID> - UID карты сотрудника/читателя
 
 Пример ссылки:
     http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=2163679833
+    http://localhost:8080/skud-service/skud/rest/getUserIinByCardUID?cardUID=2163679833
 
 Настройка источника данных:
  1) Добавление jdbc драйверов в JBoss AS. Можно скачать по ссылке http://www.firebirdsql.org/en/jdbc-driver/

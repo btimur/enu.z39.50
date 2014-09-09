@@ -28,10 +28,18 @@ services.factory('SmsGatesFactory', function ($resource) {
     })
 });
 
+
 services.factory('SmsGateFactory', function ($resource) {
     return $resource( '/sms-app/rest/smsgate/:id', {}, {
         show: { method: 'GET' },
         update: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }
+    })
+});
+
+services.factory('JurnalsFactory', function ($resource) {
+    return $resource('/sms-app/rest/jurnal', {}, {
+        query: { method: 'GET', isArray: true },
+        create: { method: 'POST' }
     })
 });
