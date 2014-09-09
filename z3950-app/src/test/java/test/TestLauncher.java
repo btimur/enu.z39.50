@@ -11,14 +11,14 @@ import java.io.IOException;
  */
 
 public class TestLauncher {
-    @Test
-    public void testLaunch() throws IOException {
-
-        String command = "start.bat";
-        String dir = "C:\\temp";
-        ExternalLauncher launcher = new ExternalLauncher();
-        int res = launcher.launch(command, dir);
-        Assert.assertTrue( res > -1);
-
-    }
+//    @Test
+//    public void testLaunch() throws IOException {
+//
+//        String command = "start.bat";
+//        String dir = "C:\\temp";
+//        ExternalLauncher launcher = new ExternalLauncher();
+//        int res = launcher.launch(command, dir);
+//        Assert.assertTrue( res > -1);
+//
+//    }
 }

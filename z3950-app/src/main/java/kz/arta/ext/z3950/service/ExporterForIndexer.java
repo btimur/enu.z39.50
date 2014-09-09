@@ -1,6 +1,6 @@
 package kz.arta.ext.z3950.service;
 
-import info.freelibrary.marc4j.converter.impl.Iso5426ToUnicode;
+import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
@@ -28,6 +28,9 @@ public class ExporterForIndexer {
     @Inject
     private LibraryBookReader reader;
 
+    @Inject
+    private ExternalLauncher launcher;
+
     /**
      * Сохраняет все для индексации
      *
@@ -39,7 +42,7 @@ public class ExporterForIndexer {
         try {
             String[] dataUUIDs = reader.getDataUUID(registryFormUUID, ConfigUtils.getQueryContext());
             for (String dataUUID : dataUUIDs) {
-                export(dataUUID);
+                export(dataUUID, false);
                 log.info("export to UNIMARC recird {}", dataUUID);
             }
         } catch (Exception e) {
@@ -56,28 +59,44 @@ public class ExporterForIndexer {
      * @param dataUUID
      * @return
      */
-    public boolean export(String dataUUID) {
+    public boolean export(String dataUUID, boolean updateIndex) {
+        OutputStream stream = null;
         try {
-            FormData formData = reader.readFormData(ConfigUtils.getQueryContext(), dataUUID);
-            OutputStream stream = null;
-            try {
-                stream = new FileOutputStream(getPath("../indexdata/" + dataUUID));
-                MarcWriter writer = new MarcStreamWriter(stream, CodeConstants.ENCODING_UFT_8);
+            stream = new FileOutputStream(getPath(dataUUID));
+            MarcWriter writer = new MarcStreamWriter(stream, CodeConstants.ENCODING_UFT_8);
 //                writer.setConverter(new Iso5426ToUnicode());
-                Record record = getRecord(formData);
-                writer.write(record);
-            } catch (Exception e) {
-                log.error(e);
-            } finally {
-                if (stream != null) {
+            Record record = getRecord(loadFormData(dataUUID));
+            writer.write(record);
+            if (updateIndex) {
+                updateIndex(dataUUID);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (stream != null) {
+                try {
                     stream.close();
+                } catch (IOException e) {
+                    log.error(e);
                 }
             }
-            return true;
-        } catch (java.io.IOException e) {
-            log.error(e);
-            return false;
         }
+        return true;
+
+    }
+
+    private void updateIndex(String dataUUID) {
+          try {
+               launcher.launchSh("updateBook.sh "+ dataUUID,
+                       ConfigReader.getPropertyValue(CodeConstants.ZEBRA_DATA_PATH));
+          }catch (Exception e){
+              log.error("Problem update index");
+              log.error(e);
+          }
+    }
+
+    private FormData loadFormData(String dataUUID) {
+        return reader.readFormData(ConfigUtils.getQueryContext(), dataUUID);
     }
 
     public Record getRecord(FormData formData) {
@@ -86,7 +105,7 @@ public class ExporterForIndexer {
     }
 
     protected String getPath(String dataUUID) {
-        return dataUUID;
+        return ConfigReader.getPropertyValue(CodeConstants.ZEBRA_DATA_PATH) + "/" + dataUUID;
     }
 
 }

@@ -27,7 +27,7 @@ public class MarcRestService{
     @Path("{dataUUID}")
     public boolean get(@PathParam("dataUUID") String dataUUID) {
 
-        return exporter.export(dataUUID);
+        return exporter.export(dataUUID, true);
     }
 
 
