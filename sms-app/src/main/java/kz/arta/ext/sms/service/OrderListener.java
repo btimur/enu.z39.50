@@ -1,5 +1,7 @@
 package kz.arta.ext.sms.service;
 
+import kz.arta.ext.api.config.ConfigUtils;
+import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
 import kz.arta.ext.sms.util.CodeConstants;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -39,11 +41,12 @@ public class OrderListener implements MessageListener {
         if (!(message instanceof TextMessage)){
             return;
         }
+        log.info(" sms message - {}", message);
         ObjectMapper mapper = new ObjectMapper();
         try {
             BlockSignalMessage blockSignalMessage = mapper.readValue(((TextMessage) message).getText(), BlockSignalMessage.class);
-//            boolean result  = sender.sendSms(blockSignalMessage.getDataUUID());
-
+            log.info("parsed message -{}", blockSignalMessage.toString());
+            sender.sendSms(blockSignalMessage.getDataUUID(), ConfigUtils.getQueryContext());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JMSException e) {

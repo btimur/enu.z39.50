@@ -85,6 +85,35 @@ public class SmsGate implements IEntity{
     @Column(name = "TEMPLATE")
     private String template;
 
+    /**
+     * Ответ при удачной отправки
+     */
+    @Column(name = "SUCESS_RESULT")
+    private String sucessResult;
+
+
+    /**
+     * Шаблон сообщения
+     */
+    @Column(name = "MESSAGE_CONTEXT")
+    private String messageContext;
+
+    public String getMessageContext() {
+        return messageContext;
+    }
+
+    public void setMessageContext(String messageContext) {
+        this.messageContext = messageContext;
+    }
+
+    public String getSucessResult() {
+        return sucessResult;
+    }
+
+    public void setSucessResult(String sucessResult) {
+        this.sucessResult = sucessResult;
+    }
+
     public String getNameSms() {
         return nameSms;
     }
@@ -200,6 +229,7 @@ public class SmsGate implements IEntity{
         if (sFormat != null ? !sFormat.equals(that.sFormat) : that.sFormat != null) return false;
         if (sUrl != null ? !sUrl.equals(that.sUrl) : that.sUrl != null) return false;
         if (template != null ? !template.equals(that.template) : that.template != null) return false;
+        if (sucessResult != null ? !sucessResult.equals(that.sucessResult) : that.sucessResult != null) return false;
 
         return true;
     }
@@ -218,6 +248,7 @@ public class SmsGate implements IEntity{
         result = 31 * result + sOrder;
         result = 31 * result + (deleted ? 1 : 0);
         result = 31 * result + (template != null ? template.hashCode() : 0);
+        result = 31 * result + (sucessResult != null ? sucessResult.hashCode() : 0);
         return result;
     }
 

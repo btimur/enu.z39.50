@@ -31,4 +31,13 @@ public class BlockSignalMessage {
     public void setDocumentID(String documentID) {
         this.documentID = documentID;
     }
+
+    @Override
+    public String toString() {
+        return "BlockSignalMessage{" +
+                "dataUUID='" + dataUUID + '\'' +
+                ", executionID='" + executionID + '\'' +
+                ", documentID='" + documentID + '\'' +
+                '}';
+    }
 }
