@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 /**
  * Created by timur on 8/15/2014 2:48 PM.
+ * подиндексами marc  subfields
  */
 @Entity
 @Table(name = "subindex")

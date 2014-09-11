@@ -16,7 +16,7 @@ public class Book {
     private String publishedDate;
     private String publishedPlace;
     private String keywords;
-//    private String booktype;
+    private String booktype;
     private Long libraryId;
     private Record record;
 
@@ -147,5 +147,13 @@ public class Book {
 
     public void setAttributes(List<BookAttribute> attributes) {
         this.attributes = attributes;
+    }
+
+    public String getBooktype() {
+        return booktype;
+    }
+
+    public void setBooktype(String booktype) {
+        this.booktype = booktype;
     }
 }

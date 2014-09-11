@@ -60,6 +60,9 @@ public class SimpleSearch {
      */
     private long libraryId;
 
+    /**
+     * Реестр куда проиводить импорт
+     */
     private String booktype;
 
     public Boolean getAdvancedSearch() {

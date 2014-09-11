@@ -8,7 +8,6 @@ import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.SubIndex;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
-import kz.arta.ext.z3950.util.CodeConstants;
 import kz.arta.ext.z3950.util.SomeMarcStreamReader;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -137,7 +136,7 @@ public class TestConverter {
     public void testSaveMarc() throws IOException {
         InputStream input = ClassLoader.getSystemResourceAsStream("formdata.json");
         StringWriter writer = new StringWriter();
-        IOUtils.copy(input, writer, CodeConstants.ENCODING_UFT8);
+        IOUtils.copy(input, writer, kz.arta.ext.common.util.CodeConstants.ENCODING_UFT8);
         FormData formData = new LibraryBookReader().parseFormData(writer.toString());
         Assert.assertNotNull(formData);
         FormFieldsWrapper fieldsWrapper = formData.convertToWrapper();

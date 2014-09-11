@@ -1,6 +1,8 @@
 package kz.arta.ext.api.rest;
 
-import kz.arta.ext.api.data.*;
+import kz.arta.ext.api.data.FormData;
+import kz.arta.ext.api.data.RegistryRecord;
+import kz.arta.ext.api.data.RegistryWrapper;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
@@ -16,12 +18,18 @@ import java.net.URLEncoder;
 public abstract class AFormsReader extends RestQuery {
     public static final int maxCountPerList = 20;
 
+    private static String createCondition(SearchParam param, String formUUID, String suffix) throws UnsupportedEncodingException {
+        return "&type" + suffix + "=partial" +
+                "&formUUID" + suffix + "=" + formUUID +
+                "&field" + suffix + "=" + param.getField() +
+                "&search" + suffix + "=" +
+                URLEncoder.encode(param.getCondition(), "utf-8");
+    }
 
-
-    public RegistryWrapper readRegistry(RestQueryContext queryContext, String formUUID, String searchField, String condition){
+    public RegistryWrapper readRegistry(RestQueryContext queryContext, String formUUID, String searchField, String condition) {
         RegistryWrapper registryWrapper = null;
-        try{
-            if (condition==null){
+        try {
+            if (condition == null) {
                 condition = "";
             }
             String query = "/rest/api/asforms/search?" +
@@ -33,81 +41,69 @@ public abstract class AFormsReader extends RestQuery {
                     + "&getDocIds=true&startRecord=0&recordsCount=1000000";
 
             String result = doGetQuery(queryContext, query);
-            System.out.println("result = " + result);
+            log.debug("result = {}", result);
 
-            String registryJson = "{\"registryUUID\":\""+formUUID+"\", \"records\":"+result+"}";
-            System.out.println("registryJson = " + registryJson);
+            String registryJson = "{\"registryUUID\":\"" + formUUID + "\", \"records\":" + result + "}";
+            log.debug("registryJson = {}", registryJson);
 
             ObjectMapper objectMapper = new ObjectMapper();
             registryWrapper = objectMapper.readValue(registryJson, RegistryWrapper.class);
 
-            System.out.println("registryWrapper = " + registryWrapper);
+            log.debug("registryWrapper = {}", registryWrapper);
             //registryWrapper.printRecords();
 
-        }catch (Throwable e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("error read registry " + formUUID, e);
         }
         return registryWrapper;
     }
 
-
-    public RegistryWrapper readMultipleRegistry(RestQueryContext queryContext, String formUUID, SearchParam[] searchParams, SearchTerm term){
+    public RegistryWrapper readMultipleRegistry(RestQueryContext queryContext, String formUUID, SearchParam[] searchParams, SearchTerm term) {
         RegistryWrapper registryWrapper = null;
-        try{
-            if (searchParams!=null && searchParams.length>0){
+        try {
+            if (searchParams != null && searchParams.length > 0) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("/rest/api/asforms/search?getDocIds=true");
                 sb.append(createCondition(searchParams[0], formUUID, ""));
-                for(int i=1; i<searchParams.length;i++){
-                    sb.append(createCondition(searchParams[i], formUUID, ""+i));
+                for (int i = 1; i < searchParams.length; i++) {
+                    sb.append(createCondition(searchParams[i], formUUID, "" + i));
                 }
                 sb.append("&term=").append(term);
                 sb.append("&startRecord=0&recordsCount=1000000");
                 String query = sb.toString();
 
                 String result = doGetQuery(queryContext, query);
-                System.out.println("result = " + result);
+                log.debug("result = {}", result);
 
-                String registryJson = "{\"registryUUID\":\""+formUUID+"\", \"records\":"+result+"}";
-                System.out.println("registryJson = " + registryJson);
+                String registryJson = "{\"registryUUID\":\"" + formUUID + "\", \"records\":" + result + "}";
+                log.debug("registryJson = {}", registryJson);
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 registryWrapper = objectMapper.readValue(registryJson, RegistryWrapper.class);
 
-                System.out.println("registryWrapper = " + registryWrapper);
+                log.debug("registryWrapper = {}", registryWrapper);
             }
-        }catch (Throwable e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("error read multi registry " + formUUID, e);
         }
         return registryWrapper;
     }
 
-    private static String createCondition(SearchParam param, String formUUID, String suffix) throws UnsupportedEncodingException {
-        String cond =
-                "&type"+suffix+"=partial" +
-                "&formUUID"+suffix+"=" + formUUID +
-                "&field"+suffix+"=" + param.getField() +
-                "&search"+suffix+"=" +
-                URLEncoder.encode(param.getCondition(), "utf-8");
-        return cond;
-    }
-
-
-    public FormData readFormData(RestQueryContext context, String dataId){
+    public FormData readFormData(RestQueryContext context, String dataId) {
         FormData formData = null;
         try {
 
             String query = "/rest/api/asforms/data/" + dataId;
             String resultData = doGetQuery(context, query);
-            System.out.println("resultData = " + resultData);
+            log.debug("resultData = {}", resultData);
             //logger.debug("result="+ resultData);
 
             formData = parseFormData(resultData);
 
             //logger.debug(formData);
-            //System.out.println(formData);
-        } catch (Throwable e){
-            e.printStackTrace();
+            //log.debug(formData);
+        } catch (Exception e) {
+            log.error("error read form data " + dataId, e);
         }
         return formData;
     }
@@ -115,10 +111,10 @@ public abstract class AFormsReader extends RestQuery {
     public FormData parseFormData(String resultData) throws IOException {
         String data = "";
         int startData = resultData.indexOf("[");
-        if (startData>=0){
+        if (startData >= 0) {
             int endData = resultData.lastIndexOf("]");
-            data = resultData.substring(startData, endData+1);
-            resultData = resultData.substring(0, startData)+"\"\""+resultData.substring(endData+1);
+            data = resultData.substring(startData, endData + 1);
+            resultData = resultData.substring(0, startData) + "\"\"" + resultData.substring(endData + 1);
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -128,34 +124,34 @@ public abstract class AFormsReader extends RestQuery {
     }
 
 
-    public void writeData(RestQueryContext queryContext, FormData formData){
-        System.out.println("AFormsReader.writeData");
-        try{
+    public void writeData(RestQueryContext queryContext, FormData formData) {
+        log.debug("AFormsReader.writeData");
+        try {
             String dataUUID = formData.getUuid();
             String formUUID = formData.getForm();
             String data = formData.getData();
             //Заполняем документ
             String saveFormQuery = "/rest/api/asforms/data/save?formUUID=" + formUUID + "&uuid=" + dataUUID;
-            String saveResult = doPostQuery(queryContext, saveFormQuery, "\"data\":"+data);
-            System.out.println("saveResult = " + saveResult);
+            String saveResult = doPostQuery(queryContext, saveFormQuery, "\"data\":" + data);
+            log.debug("saveResult = {}", saveResult);
 
-        }catch (Throwable e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("error write data " + formData, e);
         }
     }
 
 
-    public RegistryRecord addNewRegistryRecord(RestQueryContext queryContext, String registryId){
+    public RegistryRecord addNewRegistryRecord(RestQueryContext queryContext, String registryId) {
         RegistryRecord registryRecord = null;
-        String query = "/rest/api/registry/create_doc?registryID="+registryId;
+        String query = "/rest/api/registry/create_doc?registryID=" + registryId;
         try {
             String result = doGetQuery(queryContext, query);
-            System.out.println("addNewRegistryRecord.result = " + result);
+            log.debug("addNewRegistryRecord.result = {}", result);
             ObjectMapper objectMapper = new ObjectMapper();
             registryRecord = objectMapper.readValue(result, RegistryRecord.class);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("error add new record to registry " + registryId, e);
         }
         return registryRecord;
     }

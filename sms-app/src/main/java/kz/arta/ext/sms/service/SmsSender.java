@@ -134,7 +134,7 @@ public class SmsSender extends RestQuery {
     }
 
     @Override
-    protected void authentithication(RestQueryContext context, HttpURLConnection conn) {
+    protected void authentication(RestQueryContext context, HttpURLConnection conn) {
 
     }
 }

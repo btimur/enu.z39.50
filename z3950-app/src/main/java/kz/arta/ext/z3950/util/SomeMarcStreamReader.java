@@ -11,6 +11,7 @@ import java.io.*;
 
 /**
  * Created by timur on 09/08/2014 11:06.
+ * Класс расширяет marc4j  при rusmarc  с кодировкой отличной от UTF-8 и ISO8859_1
  */
 public class SomeMarcStreamReader implements MarcReader {
 
@@ -20,7 +21,7 @@ public class SomeMarcStreamReader implements MarcReader {
 
     private MarcFactory factory;
 
-    private String encoding = CodeConstants.ENCODING_ISO8859_1;
+    private String encoding = kz.arta.ext.common.util.CodeConstants.ENCODING_ISO8859_1;
 
     private boolean override = false;
 
@@ -115,7 +116,7 @@ public class SomeMarcStreamReader implements MarcReader {
                 break;
             case 'a':
                 if (!override) {
-                    encoding = CodeConstants.ENCODING_UFT8;
+                    encoding = kz.arta.ext.common.util.CodeConstants.ENCODING_UFT8;
                 }
         }
         record.setLeader(ldr);
@@ -338,9 +339,9 @@ public class SomeMarcStreamReader implements MarcReader {
 
     private String getDataAsString(byte[] bytes) {
         String dataElement = null;
-        if (encoding.equals(CodeConstants.ENCODING_UFT8) || encoding.equals(CodeConstants.ENCODING_UFT_8)) {
+        if (encoding.equals(kz.arta.ext.common.util.CodeConstants.ENCODING_UFT8) || encoding.equals(kz.arta.ext.common.util.CodeConstants.ENCODING_UFT_8)) {
             try {
-                dataElement = new String(bytes, CodeConstants.ENCODING_UFT8);
+                dataElement = new String(bytes, kz.arta.ext.common.util.CodeConstants.ENCODING_UFT8);
             } catch (UnsupportedEncodingException e) {
                 throw new MarcException("unsupported encoding", e);
             }

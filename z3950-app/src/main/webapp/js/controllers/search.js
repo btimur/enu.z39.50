@@ -5,10 +5,14 @@
 var app = angular.module('z3950.controllers', []);
 
 
-app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, $location) {
+app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, $location, $window) {
     $scope.hostPrefix = '';//http://localhost:8080';
     $scope.dataUUID = $location.search()['dataUUID'];
-    $scope.formData = {maxResult: 10, term: $location.search()['isbn'], nextElement: 0};
+    $scope.formData = {
+        maxResult: 10,
+        term: $location.search()['isbn'],
+        nextElement: 0,
+        booktype: "educational.registry.uuid"};
     $scope.importUUID = '';
     $scope.notFound = false;
     $scope.importDo = false;
@@ -111,26 +115,36 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
     };
 
 
+    function redirectToPortal(data) {
+        var destinationUrl = '/manage/forms/small/edit/' + data;
+        $window.location.href = destinationUrl;
+        $window.open(destinationUrl);
+//        $window.location.reload();
+    }
+
     $scope.importBook = function (book) {
 
         book.dataUUID = $scope.dataUUID;
         $scope.selectedBook = book;
 
+
         $scope.importDo = true;
         $http({
             method: 'POST',
             url: $scope.hostPrefix + '/z3950-app/rest/search/importBook',
-            data: {dataUUID: $scope.dataUUID, id: book.id, libraryId: book.libraryId},  // pass in data as strings
+            data: {id: book.id, libraryId: book.libraryId, booktype: $scope.formData.booktype},  // dataUUID: $scope.dataUUID,
             headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
         })
             .success(function (data) {
                 console.log(data);
                 $scope.importDo = false;
-                if (data != null && data === 'true') {
+                if (data != null && data !== 'error') {
                     $scope.alerts.push({ type: 'success', msg: 'Импорт карточки успешно произведен!'});
+                    redirectToPortal(data);
                 } else {
                     $scope.alerts.push({type: 'danger', msg: 'Операция выполнена не успешна!'});
                 }
+
             })
             .error(function (data, status, headers, config) {
                 $scope.importDo = false;

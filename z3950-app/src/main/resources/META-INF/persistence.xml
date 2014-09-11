@@ -21,24 +21,11 @@
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
-    <!--<persistence-unit name="oldDb">-->
-        <!--<class>kz.arta.ext.z3950.model.BookinvEntity</class>-->
-        <!--<class>kz.arta.ext.z3950.model.BooksEntity</class>-->
-        <!--<class>kz.arta.ext.z3950.model.CatalogsEntity</class>-->
-        <!--<class>kz.arta.ext.z3950.model.OrderdocsEntity</class>-->
-        <!--<class>kz.arta.ext.z3950.model.OrdersEntity</class>-->
-        <!--<properties>-->
-            <!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>-->
-            <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>-->
-            <!--<property name="hibernate.connection.username" value="root"/>-->
-            <!--<property name="hibernate.connection.password" value="1q2w3e4r"/>-->
-        <!--</properties>-->
-    <!--</persistence-unit>-->
     <persistence-unit name="z3950">
         <jta-data-source>java:jboss/datasources/Z3950DS</jta-data-source>
         <properties>
             <!-- Properties for Hibernate -->
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>
 </persistence>

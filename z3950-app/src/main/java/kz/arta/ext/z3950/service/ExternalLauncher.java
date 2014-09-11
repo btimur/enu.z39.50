@@ -1,7 +1,8 @@
 package kz.arta.ext.z3950.service;
 
 
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import java.io.*;
