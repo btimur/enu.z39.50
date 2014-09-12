@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -67,6 +68,7 @@ public class SkudService extends AFormsReader {
     @GET
     @Path("/getUserIinByCardUID")
     @Produces(MediaType.APPLICATION_JSON)
+    //    @Interceptors(JacksonJsonpInterceptor.class)
     public SkudPerson getPersonIinByCardUid(@QueryParam("cardUID") String cardUID) {
         String iin = getStaffIinByCardUidFromSkudDB(cardUID);
         return iin != null ? new SkudPerson(iin) : null;

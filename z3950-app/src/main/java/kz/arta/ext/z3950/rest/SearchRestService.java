@@ -105,7 +105,8 @@ public class SearchRestService {
     }
 
     private String getRegistryUUID(String booktype) {
-        return ConfigReader.getPropertyValue(booktype);
+        return booktype;
+//        return ConfigReader.getPropertyValue(booktype);
     }
 
     @GET

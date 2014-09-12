@@ -12,7 +12,9 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
         maxResult: 10,
         term: $location.search()['isbn'],
         nextElement: 0,
-        booktype: "educational.registry.uuid"};
+//        booktype: "educational.registry.uuid"
+        booktype: $location.search()['catalog']
+    };
     $scope.importUUID = '';
     $scope.notFound = false;
     $scope.importDo = false;

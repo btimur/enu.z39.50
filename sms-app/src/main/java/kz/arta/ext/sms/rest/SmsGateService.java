@@ -34,17 +34,7 @@ public class SmsGateService {
         return repository.getSmsGates();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("test")
-    public void testMethod() {
-        RestQueryContext context = new RestQueryContext();
-        context.setAddress("http://test3.arta.kz/Synergy");
-        context.setLogin("1");
-        context.setPassword("1");
-//        SmsSender smsSender = new SmsSender();
-        smsSender.sendSms("test", context);
-    }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
