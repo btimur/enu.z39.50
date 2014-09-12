@@ -62,10 +62,10 @@ public class SkudService extends AFormsReader {
 
     @GET
     @Path("/getUserIinByCardUID")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getPersonIinByCardUid(@QueryParam("cardUID") String cardUID) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public SkudPerson getPersonIinByCardUid(@QueryParam("cardUID") String cardUID) {
         String iin = getStaffIinByCardUidFromSkudDB(cardUID);
-        return iin != null ? iin : "";
+        return iin != null ? new SkudPerson(iin) : null;
     }
 
 
