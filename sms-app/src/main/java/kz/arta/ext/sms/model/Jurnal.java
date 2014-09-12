@@ -51,7 +51,7 @@ public class Jurnal implements IEntity{
     private String result;
 
     @ManyToOne
-    @JoinColumn(name="SMS_GATE_ID", nullable=false)
+    @JoinColumn(name="SMS_GATE_ID")
     private SmsGate smsGate;
 
     /**

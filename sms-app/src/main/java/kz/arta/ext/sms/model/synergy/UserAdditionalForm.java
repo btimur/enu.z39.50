@@ -17,6 +17,34 @@ public class UserAdditionalForm {
 
     private String fullName;
     private String phoneNumber;
+    private String iin;
+    private String message;
+
+   private String responceMessage;
+
+    public String getResponceMessage() {
+        return responceMessage;
+    }
+
+    public void setResponceMessage(String responceMessage) {
+        this.responceMessage = responceMessage;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getIin() {
+        return iin;
+    }
+
+    public void setIin(String iin) {
+        this.iin = iin;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

@@ -1,5 +1,6 @@
 package kz.arta.ext.sms.service;
 
+import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.sms.model.SmsGate;
 
@@ -38,11 +39,18 @@ public class SmsGateRepository  extends ARepository<SmsGate> {
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<SmsGate> getSmsGates() {
-        return em.createQuery("select x from SmsGate x where x.enabled=?1 order by x.sOrder", SmsGate.class)
-                .setParameter(1, true)
+        return em.createQuery("select x from SmsGate x where x.deleted=?1 order by x.sOrder", SmsGate.class)
+                .setParameter(1, false)
                 .getResultList();
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<SmsGate> getActiveSmsGates() {
+        return em.createQuery("select x from SmsGate x where x.deleted=?1 and x.enabled =?2 order by x.sOrder", SmsGate.class)
+                .setParameter(1, false)
+                .setParameter(2, true)
+                .getResultList();
+    }
 
 
     @Override

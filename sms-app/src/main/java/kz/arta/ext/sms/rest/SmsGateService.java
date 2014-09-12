@@ -1,7 +1,9 @@
 package kz.arta.ext.sms.rest;
 
+import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.service.SmsGateRepository;
+import kz.arta.ext.sms.service.SmsSender;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -21,12 +23,27 @@ public class SmsGateService {
     @Inject
     private SmsGateRepository repository;
 
+    @Inject
+    private SmsSender smsSender;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 //    @Path("getFindLibraries")
     public List<SmsGate> getFindSmsGates() {
         return repository.getSmsGates();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("test")
+    public void testMethod() {
+        RestQueryContext context = new RestQueryContext();
+        context.setAddress("http://test3.arta.kz/Synergy");
+        context.setLogin("1");
+        context.setPassword("1");
+//        SmsSender smsSender = new SmsSender();
+        smsSender.sendSms("test", context);
     }
 
     @GET

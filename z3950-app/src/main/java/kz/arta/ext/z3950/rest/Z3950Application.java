@@ -1,13 +1,8 @@
 package kz.arta.ext.z3950.rest;
 
 
-import kz.arta.ext.z3950.util.CustomCorsFilter;
-
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by timur on 09/07/2014 16:17.

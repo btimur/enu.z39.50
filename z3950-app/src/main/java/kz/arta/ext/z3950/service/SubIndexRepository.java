@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by timur on 12/07/2014 23:45.
+ * Репозиторий для работы с  подиндексами marc  subfields
  */
 @Stateless
 public class SubIndexRepository extends ARepository {
@@ -33,7 +34,7 @@ public class SubIndexRepository extends ARepository {
      * @param format
      * @param field
      * @param tag
-     * @return
+     * @return лист
      */
     public List<SubIndex> getListByFieldTag(String format, String field, char tag) {
         return em.createQuery("select x from SubIndex x where x.format=?1 and x.field=?2 and x.tag=?3", SubIndex.class)

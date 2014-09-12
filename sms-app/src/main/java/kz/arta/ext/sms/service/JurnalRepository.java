@@ -4,11 +4,15 @@ import kz.arta.ext.common.service.ARepository;
 import kz.arta.ext.sms.model.Jurnal;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.model.synergy.Order;
+import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
+import kz.arta.ext.sms.util.CodeConstants;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,10 +56,28 @@ public class JurnalRepository extends ARepository<Jurnal> {
         return Jurnal.class;
     }
 
-    public void saveJurnal(Order order, SmsGate smsGate) {
+    public void saveJurnal(Order order, SmsGate smsGate, UserAdditionalForm userAdditionalForm) {
         Jurnal jurnal = new Jurnal();
         jurnal.setSmsGate(smsGate);
+        jurnal.setDateSend(new Timestamp(new Date().getTime()));
         jurnal.setOrderUUID(order.getDataUUID());
+        jurnal.setOrderBookName(order.getNameofbook());
+        jurnal.setMessage(userAdditionalForm.getMessage());
+        jurnal.setResult(userAdditionalForm.getResponceMessage());
+        if(userAdditionalForm.getIin().isEmpty())
+        {
+            jurnal.setIin(CodeConstants.VALUE_IS_EMPTY);
+        }else
+        {
+            jurnal.setIin(userAdditionalForm.getIin());
+        }
+        if(userAdditionalForm.getPhoneNumber().isEmpty())
+        {
+            jurnal.setPhone(CodeConstants.VALUE_IS_EMPTY);
+        }else
+        {
+            jurnal.setPhone(userAdditionalForm.getPhoneNumber());
+        }
         save(jurnal);
     }
 }

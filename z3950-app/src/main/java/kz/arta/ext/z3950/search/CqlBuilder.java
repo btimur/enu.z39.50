@@ -1,8 +1,8 @@
 package kz.arta.ext.z3950.search;
 
 import kz.arta.ext.z3950.model.search.SimpleSearch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaz4j.CQLQuery;
 import org.yaz4j.Query;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class CqlBuilder implements IQueryBuilder {
 
-    private Logger log = LogManager.getLogger(CqlBuilder.class);
+    private Logger log = LoggerFactory.getLogger(CqlBuilder.class);
 
     @Override
     public String createQueryString(SimpleSearch search) {
@@ -37,7 +37,7 @@ public class CqlBuilder implements IQueryBuilder {
     @Override
     public Query createQuery(SimpleSearch search) {
         String queryString = createQueryString(search);
-        log.info("pql find {0}", queryString);
+        log.info("pql find {}", queryString);
         return new CQLQuery(queryString);
     }
 }

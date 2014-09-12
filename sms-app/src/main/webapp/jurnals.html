@@ -42,18 +42,11 @@
     <div class="page-header">
         <h1>Журнал сообщении</h1>
     </div>
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Подверждение</h3>
-        </div>
-        <div class="modal-body">
-            <b>Вы точно хотите удалить сообщение</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="okForm()">OK</button>
-            <button class="btn btn-warning" ng-click="cancelForm()">Cancel</button>
-        </div>
-    </script>
+    <div id="reportrange" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+        <span></span><b class="caret" style="vertical-align: middle;"></b>
+    </div>
+
     <div class="row">
         <div style="position: fixed; top: 0; right: 0">
             <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
@@ -78,7 +71,7 @@
                 <td>{{jurnal.orderBookName}}</td>
                 <td>
                     <div>
-                        <a ng-click="showDetails(gate)"><span class="glyphicon glyphicon-info-sign"></span></a>
+                        <a ng-click="showDetails(jurnal)"><span class="glyphicon glyphicon-info-sign"></span></a>
                     </div>
                 </td>
             </tr>
@@ -96,7 +89,7 @@
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers/jurnals.js"></script>
-<script src="js/controllers/onejurnal.js.js"></script>
+<script src="js/controllers/onejurnal.js"></script>
 <script src="js/filters.js"></script>
 </body>
 </html>

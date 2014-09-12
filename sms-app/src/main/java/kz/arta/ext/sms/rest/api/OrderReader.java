@@ -41,7 +41,7 @@ public class OrderReader extends AFormsReader {
     }
 
     protected Date fillDate(FormFieldsWrapper wrapper, Order order, String field) {
-        String dateofsdacha = wrapper.getFormFieldMap().get(field).getTimestamp();
+        String dateofsdacha = wrapper.getFormFieldMap().get(field).getKey();
         if (StringUtils.isNullOrEmpty(dateofsdacha)){
             return null;
         }

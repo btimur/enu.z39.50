@@ -3,6 +3,10 @@ package kz.arta.ext.api.rest;
 //import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 
+import kz.arta.ext.common.util.CodeConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -17,16 +21,18 @@ import java.net.URLEncoder;
  */
 public abstract class RestQuery {
 
+    protected Logger log = LoggerFactory.getLogger(DictionaryReader.class);
+
     protected String doGetQuery(RestQueryContext context, String query) throws IOException {
         URL url = new URL(context.getAddress() + query);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json; charset=utf-8");
 //        String encoded = DatatypeConverter.encode((context.getLogin() + ":" + context.getPassword()).getBytes());
-        authentithication(context, conn);
+        authentication(context, conn);
         String output;
         StringBuffer result = new StringBuffer();
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), CodeConstants.ENCODING_UFT_8));
 
         while ((output = br.readLine()) != null) {
             result.append(output);
@@ -35,14 +41,14 @@ public abstract class RestQuery {
         return result.toString();
     }
 
-    protected void authentithication(RestQueryContext context, HttpURLConnection conn) {
+    protected void authentication(RestQueryContext context, HttpURLConnection conn) {
         String encoded = DatatypeConverter.printBase64Binary((context.getLogin() + ":" + context.getPassword()).getBytes());
         conn.setRequestProperty("Authorization", "Basic " + encoded);
     }
 
     protected String doPostQuery(RestQueryContext context, String query, String data) throws IOException {
-        System.out.println("query = " + query);
-        System.out.println("data = " + data);
+        log.debug("query = {}", query);
+        log.debug("data = {}", data);
         URL url = new URL(context.getAddress() + query);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -51,14 +57,14 @@ public abstract class RestQuery {
         conn.setUseCaches(false);
         conn.setAllowUserInteraction(false);
         conn.setRequestProperty("Accept", "application/json; charset=utf-8");
-        authentithication(context, conn);
+        authentication(context, conn);
 
         OutputStream out = conn.getOutputStream();
-        Writer writer = new OutputStreamWriter(out, "UTF-8");
+        Writer writer = new OutputStreamWriter(out, CodeConstants.ENCODING_UFT_8);
 
         writer.write("data");
         writer.write("=");
-        writer.write(URLEncoder.encode(data, "utf-8"));
+        writer.write(URLEncoder.encode(data, CodeConstants.ENCODING_UFT_8));
         writer.write("&");
 
         writer.close();

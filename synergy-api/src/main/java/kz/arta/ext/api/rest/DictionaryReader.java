@@ -2,10 +2,11 @@ package kz.arta.ext.api.rest;
 
 import kz.arta.ext.api.data.Dictionary;
 import kz.arta.ext.api.data.DictionaryResult;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import kz.arta.ext.common.util.CodeConstants;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
@@ -18,7 +19,7 @@ import java.net.URLEncoder;
  */
 public abstract class DictionaryReader extends RestQuery {
 
-    private Logger log = LogManager.getLogger(DictionaryReader.class);
+    private Logger log = LoggerFactory.getLogger(DictionaryReader.class);
 
     public Dictionary readDictionary(RestQueryContext context, String dictionaryCode) {
         Dictionary dictionary = null;
@@ -30,9 +31,8 @@ public abstract class DictionaryReader extends RestQuery {
             log.debug("resultData = {}", resultData);
             ObjectMapper objectMapper = new ObjectMapper();
             dictionary = objectMapper.readValue(resultData, Dictionary.class);
-        } catch (Throwable e) {
-            e.printStackTrace();
-            log.error(e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("error load Dictionary " +  dictionaryCode, e);
         }
         return dictionary;
     }
@@ -53,16 +53,15 @@ public abstract class DictionaryReader extends RestQuery {
                 return getSuccesCode(dictionary);
             }
             return resultData;
-        } catch (Throwable e) {
-            e.printStackTrace();
-            log.error(e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("error insert Dictionary " +  dictionaryCode, e);
             return null;
         }
     }
 
     protected String doPostQuery(RestQueryContext context, String query, String data) throws IOException {
-        System.out.println("query = " + query);
-        System.out.println("data = " + data);
+        log.debug("query = {}", query);
+        log.debug("data = {}", data);
         URL url = new URL(context.getAddress() + query);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -75,7 +74,7 @@ public abstract class DictionaryReader extends RestQuery {
         conn.setRequestProperty("Authorization", "Basic " + encoded);
 
         OutputStream out = conn.getOutputStream();
-        Writer writer = new OutputStreamWriter(out, "UTF-8");
+        Writer writer = new OutputStreamWriter(out, CodeConstants.ENCODING_UFT_8);
 
         writer.write(data);
 

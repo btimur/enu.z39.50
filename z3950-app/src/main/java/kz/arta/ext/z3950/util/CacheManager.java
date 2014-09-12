@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Created by timur on 8/13/2014 11:04 AM.
+ * самописный кеш - надо перевести на jboss cache  или ecache
  */
 //[TODO] cache
 public class CacheManager {

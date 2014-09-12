@@ -1,0 +1,33 @@
+# Russian character map.
+#
+# Define the basic value-set. *Beware* of changing this without re-indexing
+# your databases.
+
+# Character set this file
+
+encoding utf-8
+
+lowercase {0-9}{a-z}аәбвгғдеёжзийкқлмнңоөпрстуұүфхһцчшщъыіьэюя
+uppercase {0-9}{A-Z}АӘБВГҒДЕЁЖЗИЙКҚЛМНҢОӨПРСТУҰҮФХҺЦЧШЩЪЫІЬЭЮЯ
+
+# Breaking characters
+
+space {\001-\040}!"#$%&'\()*+,-./:;<=>?@\[\\]^_`\{|}~
+
+# Characters to be considered equivalent for searching purposes.
+# equivalent тд(ae)
+# equivalent эф(oe)
+# equivalent е(aa)
+# equivalent uщ
+# Supplemental mappings
+#map (&aelig;)      т
+#map (&oslash;)     э
+#map (&aring;)      е
+#map (&Aelig;)      Т
+#map (&Oslash;)     Э
+#map (&Aring;)      Е
+#map хХ		e
+#map ю		a
+#map я		o
+#map л		i
+#map (Aa)	(AA)

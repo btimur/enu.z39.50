@@ -27,12 +27,14 @@ public class UserAdditionalFormReader extends AFormsReader {
         }
         FormFieldsWrapper wrapper = readFormData(context, userAdditionalForm.getDataUuid()).convertToWrapper();
         String phoneNumber = wrapper.getFormFieldMap().get("telephone").getValue();
+        String iinValue = wrapper.getFormFieldMap().get("cmp-lg67bo").getValue();
 
         if(phoneNumber==null)
         {
             return null;
         }
         userAdditionalForm.setPhoneNumber(phoneNumber);
+        userAdditionalForm.setIin(iinValue);
         User user = GetUserById(context, userId);
         if(user!=null)
         {

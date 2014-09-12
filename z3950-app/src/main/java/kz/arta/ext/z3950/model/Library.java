@@ -1,7 +1,6 @@
 package kz.arta.ext.z3950.model;
 
 import kz.arta.ext.common.model.IEntity;
-import kz.arta.ext.z3950.util.CodeConstants;
 
 import javax.persistence.*;
 
@@ -60,7 +59,7 @@ public class Library implements IEntity {
      * Format библиотеки для сервиса Z39.50
      */
     @Column(name = "ENCODING")
-    private String encoding = CodeConstants.ENCODING_UFT8;
+    private String encoding = kz.arta.ext.common.util.CodeConstants.ENCODING_UFT8;
 
     /***
      * тип запросов
@@ -187,4 +186,22 @@ public class Library implements IEntity {
         this.load = load;
     }
 
+    @Override
+    public String toString() {
+        return "Library{" +
+                "id=" + id +
+                ", nameLib='" + nameLib + '\'' +
+                ", zhost='" + zhost + '\'' +
+                ", zport=" + zport +
+                ", zdb='" + zdb + '\'' +
+                ", zUser='" + zUser + '\'' +
+                ", zPwd='" + zPwd + '\'' +
+                ", zFormat='" + zFormat + '\'' +
+                ", encoding='" + encoding + '\'' +
+                ", queryType='" + queryType + '\'' +
+                ", useSearch=" + useSearch +
+                ", countResult=" + countResult +
+                ", load=" + load +
+                '}';
+    }
 }

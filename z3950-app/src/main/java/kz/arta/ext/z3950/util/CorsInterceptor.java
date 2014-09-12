@@ -17,6 +17,7 @@ import java.util.Set;
 
 /**
  * Created by timur on 8/24/2014 2:23 PM.
+ * для бытрой разработки без деплоя включал  CORS
  */
 @Provider
 @ServerInterceptor

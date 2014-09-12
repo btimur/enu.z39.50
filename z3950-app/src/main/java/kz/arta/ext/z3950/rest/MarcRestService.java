@@ -1,8 +1,7 @@
 package kz.arta.ext.z3950.rest;
 
 import kz.arta.ext.z3950.service.ExporterForIndexer;
-import kz.arta.ext.z3950.service.LibraryRepository;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -27,7 +26,7 @@ public class MarcRestService{
     @Path("{dataUUID}")
     public boolean get(@PathParam("dataUUID") String dataUUID) {
 
-        return exporter.export(dataUUID);
+        return exporter.export(dataUUID, true);
     }
 
 

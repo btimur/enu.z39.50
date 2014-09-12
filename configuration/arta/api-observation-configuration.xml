@@ -3,3 +3,7 @@
     <queue>java:jboss/queues/Synergy/SmsBlockQueue</queue>
     <event>event.blocking.order.sms</event>
 </listener>
+<listener>
+<queue>java:jboss/queues/Synergy/IndexZebraQueue</queue>
+<event>event.registers.formdata.change.index</event>
+</listener>

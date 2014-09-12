@@ -1,8 +1,8 @@
 package kz.arta.ext.z3950.search;
 
 import kz.arta.ext.z3950.model.search.SimpleSearch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaz4j.PrefixQuery;
 import org.yaz4j.Query;
 
@@ -26,7 +26,7 @@ public class PqlBuilder implements IQueryBuilder {
     public static final int BIB_1_ATTR_ANY = 1016;
 
 
-    private Logger log = LogManager.getLogger(PqlBuilder.class);
+    private Logger log = LoggerFactory.getLogger(PqlBuilder.class);
 
     @Override
     public String createQueryString(SimpleSearch search) {
@@ -63,7 +63,7 @@ public class PqlBuilder implements IQueryBuilder {
     @Override
     public Query createQuery(SimpleSearch search) {
         String queryString = createQueryString(search);
-        log.info("pql find {0}", queryString);
+        log.info("pql find {}", queryString);
         return new PrefixQuery(queryString);
     }
 }
