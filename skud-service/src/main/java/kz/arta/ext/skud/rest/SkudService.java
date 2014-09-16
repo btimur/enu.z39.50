@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -95,7 +94,6 @@ public class SkudService extends AFormsReader {
             if (rs.next()) {
                 // Если существует актуальный сотрудник, берем его идентификатор
                 long staffId = rs.getLong(1);
-                //System.out.println("STAFF_ID=" + staffId);
                 if (staffId > 0) {
                     // Получаем ИИН по идентификатору сотрудника
                     rs = stmt.executeQuery(

@@ -20,6 +20,7 @@ import java.io.OutputStreamWriter;
  * Created by timur on 9/12/14.
  * скопирован с  репозитория т/к/ на севрерах старая версия resteasy
  */
+@SuppressWarnings("UnusedDeclaration")
 @Provider
 @ServerInterceptor
 public class JacksonJsonpInterceptor implements MessageBodyWriterInterceptor {
@@ -140,7 +141,7 @@ public class JacksonJsonpInterceptor implements MessageBodyWriterInterceptor {
     /**
      * Setter used by RESTeasy to provide the {@link Providers}
      *
-     * @param providers
+     * @param providers провайдеры
      */
     @Context
     public void setProviders(Providers providers) {
@@ -150,7 +151,7 @@ public class JacksonJsonpInterceptor implements MessageBodyWriterInterceptor {
     /**
      * Set an fix {@link ObjectMapper}. If this is not set {@link Providers} are used for lookup. If there are is none too, use a default one.
      *
-     * @param objectMapper
+     * @param objectMapper маапер объектов
      */
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
