@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<listener>
-    <queue>java:jboss/queues/Synergy/SmsBlockQueue</queue>
-    <event>event.blocking.order.sms</event>
-</listener>
-<listener>
-<queue>java:jboss/queues/Synergy/IndexZebraQueue</queue>
-<event>event.registers.formdata.change.index</event>
-</listener>
+<configuration>
+    <listener>
+        <queue>java:jboss/queues/Synergy/SmsBlockQueue</queue>
+        <event>event.blocking.order.sms</event>
+    </listener>
+    <listener>
+        <queue>java:jboss/queues/Synergy/IndexZebraQueue</queue>
+        <event>event.registers.formdata.change.index</event>
+    </listener>
+    <listener>
+        <queue>java:jboss/queues/Synergy/IndexDeleteZebraQueue</queue>
+        <event>event.registers.formdata.delete.index</event>
+    </listener>
+</configuration>

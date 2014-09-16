@@ -16,15 +16,15 @@ import javax.jms.TextMessage;
  * Слушатель для событий изменеия книг для переиндексации в Zebra
  */
 @SuppressWarnings({"CdiInjectionPointsInspection", "UnusedDeclaration"})
-@MessageDriven(name = "IndexZebraQueue",
+@MessageDriven(name = "IndexDeleteZebraQueue",
         activationConfig =
                 {
                         @ActivationConfigProperty(propertyName = "destinationType",
                                 propertyValue = "javax.jms.Queue"),
                         @ActivationConfigProperty(propertyName = "destination",
-                                propertyValue = CodeConstants.INDEX_ZEBRA_JMS_DESTINATION)
+                                propertyValue = CodeConstants.INDEX_DELETE_ZEBRA_JMS_DESTINATION)
                 })
-public class UpdateIndexZebraListener implements MessageListener {
+public class DeleteIndexZebraListener implements MessageListener {
 
     @Inject
     private Logger log;
@@ -34,14 +34,16 @@ public class UpdateIndexZebraListener implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
-        log.info(" zebra get message {}", message);
+        log.info(" zebra delete index get message {}", message);
         if (!(message instanceof TextMessage)) {
             return;
         }
+//            BlockSignalMessage blockSignalMessage = mapper.readValue(((TextMessage) message).getText(), BlockSignalMessage.class);
+//            boolean result  = sender.sendSms(blockSignalMessage.getDataUUID());
         try {
             String dataUUID = ((TextMessage) message).getText();
-            log.info("--------------UPDATE ZEBRA INDEX FOR {}-----------------", dataUUID);
-            exporter.export(dataUUID, true);
+            log.info("--------------DELETE ZEBRA INDEX FOR {}-----------------", dataUUID);
+            exporter.deleteIndex(dataUUID);
         } catch (JMSException e) {
             log.error("error do message - {}", message);
         }

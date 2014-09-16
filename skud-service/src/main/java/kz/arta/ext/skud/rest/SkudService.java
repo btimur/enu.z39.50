@@ -89,11 +89,14 @@ public class SkudService extends AFormsReader {
             stmt = con.createStatement();
             // Получаем из БД СКУД идентификатор актуального сотрудника по UID карте
             ResultSet rs = stmt.executeQuery(
-                    String.format("SELECT t1.ID_STAFF FROM STAFF t1 LEFT JOIN STAFF_CARDS t2 ON t1.ID_STAFF = t2.STAFF_ID WHERE t2.IDENTIFIER = %s and t1.DATE_DISMISS IS NULL", cardUID)
+                    String.format("SELECT t1.ID_STAFF FROM STAFF t1 LEFT JOIN STAFF_CARDS t2 ON t1.ID_STAFF = t2.STAFF_ID WHERE t2.IDENTIFIER = %s"
+                            //" and t1.DATE_DISMISS IS NULL"
+                            , cardUID)
             );
             if (rs.next()) {
                 // Если существует актуальный сотрудник, берем его идентификатор
                 long staffId = rs.getLong(1);
+                log.debug("find staffID {} by card {}", staffId, cardUID);
                 if (staffId > 0) {
                     // Получаем ИИН по идентификатору сотрудника
                     rs = stmt.executeQuery(
@@ -101,8 +104,12 @@ public class SkudService extends AFormsReader {
                     if (rs.next()) {
                         String staffIIN = rs.getString(1);
                         return staffIIN != null ? staffIIN : null;
+                    } else{
+                        log.debug("can't find iin for staffId {}", staffId);
                     }
                 }
+            }else{
+                log.error("can't find any staffId in BD");
             }
         } catch (Exception e) {
             log.error("error get iin from SKUD", e);

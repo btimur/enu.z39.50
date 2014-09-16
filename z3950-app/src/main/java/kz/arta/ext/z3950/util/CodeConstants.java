@@ -11,7 +11,9 @@ public class CodeConstants {
     public static final String USER_ADDITIONAL_IIN_FIELD = "user.additional.iin.field";
 
     public static final String ZEBRA_DATA_PATH = "zebra.data.path";
+    public static final String ZEBRA_PATH = "zebra.path";
 
 
     public static final String INDEX_ZEBRA_JMS_DESTINATION = "java:jboss/queues/Synergy/IndexZebraQueue";
+    public static final String INDEX_DELETE_ZEBRA_JMS_DESTINATION = "java:jboss/queues/Synergy/IndexDeleteZebraQueue";
 }
