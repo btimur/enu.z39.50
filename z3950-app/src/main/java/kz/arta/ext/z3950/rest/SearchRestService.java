@@ -91,7 +91,7 @@ public class SearchRestService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("importBook")
-    public String importBook(Book book) {
+    public ImportWrapper importBook(Book book) {
         try {
 
             Record record = CacheManager.getInstance().getRecord(book);
@@ -100,7 +100,8 @@ public class SearchRestService {
             return reader.createBook(libraryBook, getRegistryUUID(book.getBooktype()), ConfigUtils.getQueryContext());
         } catch (Exception e) {
             log.error("error import book", e);
-            return "error";
+
+            return new ImportWrapper(false);
         }
     }
 

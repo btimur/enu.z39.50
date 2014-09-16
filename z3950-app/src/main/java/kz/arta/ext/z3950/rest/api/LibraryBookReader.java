@@ -9,6 +9,7 @@ import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
+import kz.arta.ext.z3950.rest.ImportWrapper;
 import kz.arta.ext.z3950.util.ApiFormField;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -33,9 +34,11 @@ public class LibraryBookReader extends AFormsReader {
 
     public LibraryBookReader() {}
 
-    public String createBook(LibraryBook book, String registryUUID, RestQueryContext queryContext) throws Exception {
+    public ImportWrapper createBook(LibraryBook book, String registryUUID, RestQueryContext queryContext) throws Exception {
+
         RegistryRecord registryRecord = addNewRegistryRecord(queryContext,
                 registryUUID);
+        ImportWrapper wrapper = new ImportWrapper(registryRecord.getDataUUID(), registryRecord.getDocumentID());
         if(registryRecord.getErrorCode()!= null && !registryRecord.getErrorCode().equals("0")){
             throw new Exception("error create registry record  - "+ registryUUID);
         }
@@ -52,7 +55,7 @@ public class LibraryBookReader extends AFormsReader {
                 writeData(queryContext, formData);
             }
         }
-        return registryRecord.getDataUUID();
+        return wrapper;
     }
 
     private void clearNullValues(FormFieldsWrapper fieldsWrapper) {

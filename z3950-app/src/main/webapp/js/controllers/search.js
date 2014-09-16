@@ -117,8 +117,10 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
     };
 
 
-    function redirectToPortal(data) {
-        var destinationUrl = '/manage/forms/small/edit/' + data;
+    function redirectToPortal(wrapper) {
+        var destinationUrl = $location.protocol() + '://' +
+            $location.host()  +'/manage/forms/small/edit/' + wrapper.dataUUID +
+            '/?documentID=' + wrapper.documentID;
         $window.location.href = destinationUrl;
         $window.open(destinationUrl);
 //        $window.location.reload();
@@ -137,12 +139,12 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
             data: {id: book.id, libraryId: book.libraryId, booktype: $scope.formData.booktype},  // dataUUID: $scope.dataUUID,
             headers: { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
         })
-            .success(function (data) {
-                console.log(data);
+            .success(function (wrapper) {
+                console.log(wrapper);
                 $scope.importDo = false;
-                if (data != null && data !== 'error') {
+                if (wrapper != null && wrapper.error !== 'false') {
                     $scope.alerts.push({ type: 'success', msg: 'Импорт карточки успешно произведен!'});
-                    redirectToPortal(data);
+                    redirectToPortal(wrapper);
                 } else {
                     $scope.alerts.push({type: 'danger', msg: 'Операция выполнена не успешна!'});
                 }
