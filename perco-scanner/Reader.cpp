@@ -5,12 +5,14 @@
 CReader::CReader()
 {
 	hSerial = INVALID_HANDLE_VALUE;
+	logFile = fopen("logPercoFile.txt", "a");
 }
 
 
 CReader::~CReader()
 {
 	close();
+	fclose(logFile);
 }
 
 BOOL CReader::open(LPCWSTR port) {
@@ -143,11 +145,29 @@ BOOL CReader::inventory(unsigned long &uid) {
 			}
 			else if (rDataLen > 12 && rData[0] == 0xF2 && rData[1] == 0xFF && rData[2] >= 0x09 && rData[3] == 0xF0) {
 				for (int i = 10; i > 6; i--) 
-					uid = uid * 0xFF + rData[i];				
+					uid = uid * (unsigned long) 0x100 + rData[i];
+				writeLogFile(rData, rDataLen, uid);
 				return true;
 			}
 		}		
 	}
 
 	return false;
+}
+
+void CReader::writeLogFile(BYTE data[256], int dataLen, unsigned long uid)
+{
+	fprintf(logFile, ">> ");
+	for (int i = 0; i < dataLen; i++)
+		fprintf(logFile, " %.2X", data[i]);
+	fprintf(logFile, "\n");
+
+	fprintf(logFile, "%lu\n", uid);
+	fflush(logFile);
+}
+
+void CReader::writeLogFile(char* text) 
+{
+	fprintf(logFile, "%s\n", text);
+	fflush(logFile);
 }

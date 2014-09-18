@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "WinTools.h"
+#include <stdio.h>
 
 
 WinTools::WinTools()
@@ -72,7 +73,8 @@ void WinTools::sendAsHexToActiveWindow(LPBYTE data, int dataLen) {
 
 void WinTools::sendAsDecToActiveWindow(unsigned long uid) {
 	char text[22];
-	_itoa_s(uid, text, sizeof(text), 10);
+	//_itoa_s(uid, text, sizeof(text), 10);
+	sprintf(text, "%lu", uid);
 	int len = strlen(text);
 
 	BlockInput(true);
