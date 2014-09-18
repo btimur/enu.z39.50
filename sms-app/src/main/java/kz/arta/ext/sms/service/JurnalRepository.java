@@ -28,16 +28,18 @@ public class JurnalRepository extends ARepository<Jurnal> {
 
     /**
      * Поиск объекта "Конфигурация подключения к библиотеке" по имени
+     *
      * @param id - имя объекта "Конфигурация подключения к библиотеке"
      * @return - объект "Конфигурация подключения к библиотеке"
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Jurnal findById(long id) {
-        return em.createQuery("select l from Jurnal l where l=?1", Jurnal.class).setParameter(1,id).getSingleResult();
+        return em.createQuery("select l from Jurnal l where l=?1", Jurnal.class).setParameter(1, id).getSingleResult();
     }
 
     /**
      * Поиск объекта "Конфигурация подключения к библиотеке" по имени
+     *
      * @return - весь список объектов "Конфигурация подключения к библиотеке"
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -56,28 +58,4 @@ public class JurnalRepository extends ARepository<Jurnal> {
         return Jurnal.class;
     }
 
-    public void saveJurnal(Order order, SmsGate smsGate, UserAdditionalForm userAdditionalForm) {
-        Jurnal jurnal = new Jurnal();
-        jurnal.setSmsGate(smsGate);
-        jurnal.setDateSend(new Timestamp(new Date().getTime()));
-        jurnal.setOrderUUID(order.getDataUUID());
-        jurnal.setOrderBookName(order.getNameofbook());
-        jurnal.setMessage(userAdditionalForm.getMessage());
-        jurnal.setResult(userAdditionalForm.getResponceMessage());
-        if(userAdditionalForm.getIin().isEmpty())
-        {
-            jurnal.setIin(CodeConstants.VALUE_IS_EMPTY);
-        }else
-        {
-            jurnal.setIin(userAdditionalForm.getIin());
-        }
-        if(userAdditionalForm.getPhoneNumber().isEmpty())
-        {
-            jurnal.setPhone(CodeConstants.VALUE_IS_EMPTY);
-        }else
-        {
-            jurnal.setPhone(userAdditionalForm.getPhoneNumber());
-        }
-        save(jurnal);
-    }
 }

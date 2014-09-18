@@ -2,13 +2,16 @@ package kz.arta.ext.sms.rest.api;
 
 import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.data.FormData;
+import kz.arta.ext.api.data.FormField;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
-import kz.arta.ext.common.util.StringUtils;
-import kz.arta.ext.sms.model.synergy.Order;
 import kz.arta.ext.common.util.CodeConstants;
+import kz.arta.ext.common.util.StringUtils;
+import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
+import kz.arta.ext.sms.model.synergy.Order;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,11 +21,9 @@ import java.util.Date;
  */
 public class OrderReader extends AFormsReader {
 
-    private SimpleDateFormat sfDate;
     private SimpleDateFormat sfDateTime;
 
     public OrderReader() {
-        sfDate = new SimpleDateFormat(ConfigReader.getPropertyValue(CodeConstants.FORMAT_DATE));
         sfDateTime = new SimpleDateFormat(ConfigReader.getPropertyValue(CodeConstants.FORMAT_DATETIME));
     }
 
@@ -31,26 +32,38 @@ public class OrderReader extends AFormsReader {
         FormFieldsWrapper wrapper = orderData.convertToWrapper();
         Order order = new Order();
         order.setDataUUID(dataUUID);
-        order.setDateofsdacha(fillDate(wrapper, order, "dateofsdacha"));
-        order.setDateofvidacha(fillDate(wrapper, order, "dateofvidacha"));
-        order.setIin(wrapper.getFormFieldMap().get("iin").getValue());
-        order.setInvnum(wrapper.getFormFieldMap().get("invnum").getValue());
-        order.setNameofbook(wrapper.getFormFieldMap().get("nameofbook").getValue());
-        order.setUserid(wrapper.getFormFieldMap().get("userid").getValue());
+        order.setSrokvozvrata(fillDate(wrapper, "srokvozvrata"));
+        order.setDateofvidacha(fillDate(wrapper, "dateofvidacha"));
+        order.setIin(getValue(wrapper, "iin"));
+        order.setInvnum(getValue(wrapper, "invnum"));
+        order.setNameofbook(getValue(wrapper, "nameofbook"));
+        order.setUserid(getValue(wrapper, "userid"));
         return order;
     }
 
-    protected Date fillDate(FormFieldsWrapper wrapper, Order order, String field) {
+    private String getValue(FormFieldsWrapper wrapper, String iin) {
+        FormField field = wrapper.getFormFieldMap().get(iin);
+        return field != null ? field.getValue() : null;
+    }
+
+    protected Date fillDate(FormFieldsWrapper wrapper, String field) {
         String dateofsdacha = wrapper.getFormFieldMap().get(field).getKey();
-        if (StringUtils.isNullOrEmpty(dateofsdacha)){
+        if (StringUtils.isNullOrEmpty(dateofsdacha)) {
             return null;
         }
         try {
             return sfDateTime.parse(dateofsdacha);
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error("error parse date " + dateofsdacha, e);
         }
         return null;
+    }
+
+    public void unblockProcess(RestQueryContext context, BlockSignalMessage blockSignalMessage) throws IOException {
+        String query = String.format("/rest/api/processes/signal?signal=got_agree&m1=resolution&value1=SEND_SMS_OK&executionID=%s",
+                blockSignalMessage.getExecutionID());
+        String resultData = doGetQuery(context, query);
+        log.info("unblock process ID {} return data -{}", blockSignalMessage.getExecutionID(), resultData);
     }
 }

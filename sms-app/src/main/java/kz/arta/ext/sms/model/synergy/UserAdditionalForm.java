@@ -16,7 +16,7 @@ public class UserAdditionalForm {
     private String mandatory;
 
     private String fullName;
-    private String phoneNumber;
+    private String[] phones;
     private String iin;
     private String message;
 
@@ -46,12 +46,12 @@ public class UserAdditionalForm {
         this.iin = iin;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String[] getPhones() {
+        return phones;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhones(String[] phones) {
+        this.phones = phones;
     }
 
     public String getFullName() {

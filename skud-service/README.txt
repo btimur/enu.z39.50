@@ -6,7 +6,7 @@
     1) Возвращает ID сотрудника по UID карты
         http://localhost:8080/skud-service/skud/rest/getUserIDByCardUID?cardUID=<Card UID>
     2) Возвращает ИИН сотрудника по UID карты
-        http://localhost:8080/skud-service/skud/rest/getUserIinByCardUID?cardUID=<Card UID>
+        /skud-service/skud/rest/getUserIinByCardUID?cardUID=<Card UID>
 где,
     <Card UID> - UID карты сотрудника/читателя
 
@@ -27,4 +27,9 @@
         Datasource Class:
         Driver: jaybird-2.2.5.jar
         Driver Class: org.firebirdsql.jdbc.FBDriver
-        Connection URL: jdbc:firebirdsql://localhost:3050/C:/Fdatabase/SCD17K#.FDB
+        Connection URL: jdbc:firebirdsql://HOST:PORT/PATH.FDB
+	 где 
+		HOST  - хост серевер СКУД
+		PORT  - порт серевер СКУД(обычно 3050)
+		PATH.FDB - путь к базе данных( к примеру C:/Fdatabase/SCD17K#.FDB)
+	

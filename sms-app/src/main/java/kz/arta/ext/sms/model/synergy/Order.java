@@ -15,7 +15,7 @@ public class Order {
     private String invnum;
     private String iin;
     private Date dateofvidacha;
-    private Date dateofsdacha;
+    private Date srokvozvrata;
 
     public String getDataUUID() {
         return dataUUID;
@@ -65,11 +65,12 @@ public class Order {
         this.dateofvidacha = dateofvidacha;
     }
 
-    public Date getDateofsdacha() {
-        return dateofsdacha;
+    public Date getSrokvozvrata() {
+        return srokvozvrata;
     }
 
-    public void setDateofsdacha(Date dateofsdacha) {
-        this.dateofsdacha = dateofsdacha;
+    public void setSrokvozvrata(Date srokvozvrata) {
+        this.srokvozvrata = srokvozvrata;
     }
 }
+

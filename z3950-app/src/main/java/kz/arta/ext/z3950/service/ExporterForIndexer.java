@@ -5,7 +5,6 @@ import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
-import kz.arta.ext.z3950.rest.api.LibraryDictionaryReader;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.marc4j.MarcStreamWriter;
 import org.marc4j.MarcWriter;
@@ -91,11 +90,21 @@ public class ExporterForIndexer {
 
     private boolean updateIndex(String dataUUID) {
           try {
-               return launcher.launchSh("updateBook.sh "+ dataUUID,
-                       ConfigReader.getPropertyValue(CodeConstants.ZEBRA_DATA_PATH));
+               return launcher.launchSh(ConfigReader.getPropertyValue(CodeConstants.ZEBRA_PATH),
+                       "sh", "updateBook.sh", dataUUID);
           }catch (Exception e){
               log.error("Problem update index", e);
           }
+        return false;
+    }
+
+    public boolean deleteIndex(String dataUUID) {
+        try {
+            return launcher.launchSh(ConfigReader.getPropertyValue(CodeConstants.ZEBRA_PATH),
+                    "sh", "deleteBook.sh", dataUUID);
+        }catch (Exception e){
+            log.error("Problem delete index", e);
+        }
         return false;
     }
 

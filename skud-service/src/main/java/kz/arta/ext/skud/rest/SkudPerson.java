@@ -2,7 +2,9 @@ package kz.arta.ext.skud.rest;
 
 /**
  * Created by Администратор on 12.09.2014.
+ * JSON объект
  */
+@SuppressWarnings("UnusedDeclaration")
 public class SkudPerson {
 
     private String iin;
