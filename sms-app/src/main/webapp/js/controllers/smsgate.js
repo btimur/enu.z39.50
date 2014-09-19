@@ -17,7 +17,9 @@ app.controller('SmsGatesCtrl', function ($scope, SmsGatesFactory, SmsGateFactory
         var modalInstance = $modal.open({
             templateUrl: 'partials/onegate.html',
             controller: 'OneGateCtrl',
-            size: 'lg'
+
+            size: 'lg',
+            width: 700
         });
         modalInstance.result.then(function (gate) {
             $scope.smsgate.push(gate);
@@ -49,6 +51,7 @@ app.controller('SmsGatesCtrl', function ($scope, SmsGatesFactory, SmsGateFactory
         var modalInstance = $modal.open({
             templateUrl: 'partials/onegate.html',
             controller: 'EditGateCtrl',
+            windowClass: 'app-modal-window',
             size: 'lg',
             resolve: {
                 selectedLib: function () {

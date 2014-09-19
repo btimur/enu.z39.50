@@ -11,6 +11,12 @@
     <!--<link rel="stylesheet" href="css/ngDialog.css"/>-->
     <!--<link rel="stylesheet" href="css/ngDialog-theme-default.css"/>-->
     <!--<link rel="stylesheet" href="css/ngDialog-theme-flat.css"/>-->
+    <style type="text/css">
+        .app-modal-window .modal-dialog {
+            width: 700px;
+        }
+    </style>
+
 </head>
 <body ng-app="smsapp" ng-controller="SmsGatesCtrl">
 <div class="navbar">
@@ -69,9 +75,8 @@
             <th>Кодировка</th>
             <th>Формат</th>
             <th>Активный</th>
-            <th>Переведен</th>
-            <th>Номер</th>
-            <th>Шаблон</th>
+            <th>Транслит</th>
+            <th>Очередь</th>
             <th></th>
             </thead>
             <tbody>
@@ -81,10 +86,9 @@
                 <td>{{gate.sLogin}}</td>
                 <td>{{gate.sCharset}}</td>
                 <td>{{gate.sFormat}}</td>
-                <td>{{gate.enabled}}</td>
-                <td>{{gate.translit}}</td>
+                <td> <input type="checkbox" ng-model="gate.enabled" disabled="true"></td>
+                <td><input type="checkbox" ng-model="gate.translit" disabled="true"></td>
                 <td>{{gate.sOrder}}</td>
-                <td>{{gate.template}}</td>
                 <td>
                     <div>
                         <a ng-click="editGate(gate)"><span class="glyphicon glyphicon-pencil"></span></a>
