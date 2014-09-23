@@ -3,6 +3,7 @@ package kz.arta.ext.sms.model;
 import kz.arta.ext.common.model.IEntity;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import java.sql.Timestamp;
 
 /**
@@ -31,6 +32,13 @@ public class Jurnal implements IEntity{
      */
     @Column(name = "IIN")
     private String iin;
+
+//    private String sendDateFormat;
+    /**
+     * ФИО
+     */
+    @Column(name = "FIO")
+    private String fio;
 
     /**
      * номер телефона
@@ -65,6 +73,18 @@ public class Jurnal implements IEntity{
      */
     @Column(name = "ORDER_BOOKNAME")
     private String orderBookName;
+
+   /* public String getSendDateFormat() {
+     return String.format("%1$TD %1$TT", dateSend);
+    }*/
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        fio = fio;
+    }
 
     public Timestamp getDateSend() {
         return dateSend;

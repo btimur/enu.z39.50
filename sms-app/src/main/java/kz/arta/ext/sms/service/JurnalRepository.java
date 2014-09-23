@@ -1,7 +1,9 @@
 package kz.arta.ext.sms.service;
 
 import kz.arta.ext.common.service.ARepository;
+import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.sms.model.Jurnal;
+import kz.arta.ext.sms.model.JurnalFilterEntity;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.model.synergy.Order;
 import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
@@ -45,6 +47,22 @@ public class JurnalRepository extends ARepository<Jurnal> {
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Jurnal> getJurnals() {
         return em.createQuery("select x from Jurnal x", Jurnal.class).getResultList();
+    }
+
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Jurnal> getJurnalsByFinter(JurnalFilterEntity jurnalFilterEntity) {
+        if(StringUtils.isNullOrEmpty(jurnalFilterEntity.getTerm()))
+        {
+            return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2", Jurnal.class)
+                    .setParameter(1, jurnalFilterEntity.getBeginDate())
+                    .setParameter(2, jurnalFilterEntity.getEndDate())
+                    .getResultList();
+        }
+        return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2 and (x.message like ?3 or x.orderBookName like ?3 or x.result like ?3)", Jurnal.class)
+                .setParameter(1, jurnalFilterEntity.getBeginDate())
+                .setParameter(2, jurnalFilterEntity.getEndDate())
+                .setParameter(3,"%"+ jurnalFilterEntity.getTerm()+"%")
+                .getResultList();
     }
 
 

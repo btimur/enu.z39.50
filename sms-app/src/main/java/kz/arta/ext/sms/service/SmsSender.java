@@ -10,6 +10,7 @@ import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
 import kz.arta.ext.sms.rest.api.OrderReader;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
 import kz.arta.ext.sms.util.CodeConstants;
+import kz.arta.ext.sms.util.Translit;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -105,6 +106,7 @@ public class SmsSender extends RestQuery {
         jurnal.setOrderBookName(order.getNameofbook());
         jurnal.setMessage(userAdditionalForm.getMessage());
         jurnal.setResult(userAdditionalForm.getResponceMessage());
+        jurnal.setFio(userAdditionalForm.getFullName());
         if (userAdditionalForm.getIin().isEmpty()) {
             jurnal.setIin(CodeConstants.VALUE_IS_EMPTY);
         } else {
@@ -123,6 +125,10 @@ public class SmsSender extends RestQuery {
                 .replace("%ENU_PHONES%", phone);
         userAdditionalForm.setMessage(message);
         message = URLEncoder.encode(message, smsGate.getsCharset());
+        if(smsGate.getTranslit())
+        {
+            message = Translit.toTranslit(message);
+        }
         query = query.replace("%ENU_MSG%", message);
         context.setAddress(query);
         context.setLogin(URLEncoder.encode(smsGate.getsLogin(), smsGate.getsCharset()));

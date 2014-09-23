@@ -4,7 +4,7 @@
 angular.module('smsapp.controllers').controller('OneGateCtrl',
     function ($scope, $http, $modalInstance, SmsGatesFactory) {
 
-        $scope.gate = {enabled: true, translit:true, sCharset: 'UTF8', nameSms: 'новая'};
+        $scope.gate = {enabled: true, translit:false, sCharset: 'UTF-8', nameSms: 'новая'};
 
         $scope.applyForm = function () {
             SmsGatesFactory.create($scope.gate, function (data) {

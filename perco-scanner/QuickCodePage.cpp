@@ -121,10 +121,11 @@ void taskScanCardReader(void *param) {
 				isNeedStop = false;
 				break;
 			}
-			Sleep(200);
+			Sleep(100);
 		}
-		reader->close();
+		reader->close();		
 	}
+	delete reader;
 	setWorkStatus(WORKSTATUS_STOPED, hWnd);
 	_endthread();
 }

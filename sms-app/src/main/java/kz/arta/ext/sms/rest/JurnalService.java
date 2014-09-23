@@ -2,6 +2,7 @@ package kz.arta.ext.sms.rest;
 
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.Jurnal;
+import kz.arta.ext.sms.model.JurnalFilterEntity;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.service.JurnalRepository;
 import kz.arta.ext.sms.service.SmsGateRepository;
@@ -41,5 +42,11 @@ public class JurnalService {
         return repository.find(id);
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("searchJurnals")
+    public List<Jurnal>searchJurnals(JurnalFilterEntity jurnalFilterEntity) {
+        return repository.getJurnalsByFinter(jurnalFilterEntity);
+    }
 
 }
