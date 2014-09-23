@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/font-awesome.css"/>
     <style type="text/css">
         input.search-query {
-            padding-left:26px;
+            padding-left: 26px;
         }
 
         form.form-search {
@@ -19,15 +19,15 @@
         }
 
         form.form-search:before {
-            content:'';
+            content: '';
             display: block;
             width: 14px;
             height: 14px;
             background-image: url(img/glyphicons-halflings.png);
             background-position: -48px 0;
             position: absolute;
-            top:8px;
-            left:8px;
+            top: 8px;
+            left: 8px;
             opacity: .5;
             z-index: 1000;
         }
@@ -65,6 +65,7 @@
 <div class="container">
     <div class="page-header">
         <h1>Журнал сообщении</h1>
+
         <div class="form-group">
             <input id="rangeControl"
                    type="daterange"
@@ -78,7 +79,8 @@
 
             <div style="float: right; ">
                 <form class="form-search form-inline">
-                    <input type="text" class="search-query" id="searchControl" ng-model="searchModel" onchange="searchJunrals()" placeholder="Поиск..." />
+                    <input type="text" class="search-query" id="searchControl" ng-model="edItem"
+                           ng-keypress="($event.which === 13)?changeTerm(edItem):0"    placeholder="Поиск..."/>
                 </form>
             </div>
         </div>
@@ -100,27 +102,33 @@
             <th></th>
             </thead>
             <tbody>
-            <tr my-element blah='jurnal' ng-repeat="jurnal in jurnals" >
+            <tr my-element blah='jurnal' ng-repeat="jurnal in jurnals">
 
             </tr>
             </tbody>
 
         </table>
+        <pagination total-items="countRecord"
+                    page="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" first-text="На начало"
+                    last-text="В Конец"
+                    next-text="Следующий"
+                    previous-text="Предыдущий" on-select-page="changed(page)"></pagination>
+
     </div>
 </div>
 <script src="lib/jquery.min.js"></script>
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
-<script src="lib/angular/angular-route.js"></script>
+<!--<script src="lib/angular/angular-route.js"></script>-->
 <script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
-<script src="lib/ng-infinite-scroll.js"></script>
+<!--<script src="lib/ng-infinite-scroll.js"></script>-->
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers/jurnals.js"></script>
 <script src="js/controllers/onejurnal.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/daterangepicker.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/bootstrap.min.js"></script>-->
 <script src="js/moment.min.js"></script>
 <!--<script src="js/ru.js"></script>-->
 <script src="js/ng-bs-daterangepicker.js"></script>

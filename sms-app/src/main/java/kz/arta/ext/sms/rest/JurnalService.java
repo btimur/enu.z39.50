@@ -45,8 +45,11 @@ public class JurnalService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("searchJurnals")
-    public List<Jurnal>searchJurnals(JurnalFilterEntity jurnalFilterEntity) {
-        return repository.getJurnalsByFinter(jurnalFilterEntity);
+    public JurnalFilterEntity searchJurnals(JurnalFilterEntity jurnalFilterEntity) {
+
+        jurnalFilterEntity.setJurnals(repository.getJurnalsByFinter(jurnalFilterEntity));
+        jurnalFilterEntity.setCountRecord(repository.getCountRecord(jurnalFilterEntity));
+        return jurnalFilterEntity;
     }
 
 }

@@ -83,7 +83,7 @@ public class Jurnal implements IEntity{
     }
 
     public void setFio(String fio) {
-        fio = fio;
+        this.fio = fio;
     }
 
     public Timestamp getDateSend() {

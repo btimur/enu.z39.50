@@ -41,11 +41,11 @@ public class OrderListener implements MessageListener {
         if (!(message instanceof TextMessage)){
             return;
         }
-        log.info(" sms message - {}", message);
+        log.info("smsSend: sms message - {}", message);
         ObjectMapper mapper = new ObjectMapper();
         try {
             BlockSignalMessage blockSignalMessage = mapper.readValue(((TextMessage) message).getText(), BlockSignalMessage.class);
-            log.info("parsed message -{}", blockSignalMessage.toString());
+            log.info("smsSend: parsed message -{}", blockSignalMessage.toString());
             sender.sendSms(blockSignalMessage, ConfigUtils.getQueryContext());
 
         } catch (IOException e) {

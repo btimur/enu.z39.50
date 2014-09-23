@@ -3,7 +3,6 @@
  */
 
 var app = angular.module('smsapp.controllers', ['ngBootstrap'])
-
     .directive('myElement', function () {
         return {
             scope: {
@@ -25,16 +24,44 @@ var app = angular.module('smsapp.controllers', ['ngBootstrap'])
     });
 
 app.controller('JurnalsCtrl', function ($scope, JurnalsFactory, $modal, $http) {
-    $scope.hostPrefix = 'http://localhost:8080';
+    $scope.hostPrefix = '';//http://localhost:8080';
     $scope.alerts = [];
+    $scope.maxSize = 10;
+    $scope.countRecord = 10;
+    $scope.bigCurrentPage = 1;
+    $scope.searchModel = '';
+
+
 
     $scope.$watch('myDateRange', function () {
         searchJunrals();
     })
+    $scope.changeTerm = function (term) {
+        $scope.searchModel=term;
+        searchJunrals();
+    };
+
+    $scope.changed = function (pageNo) {
+        $scope.bigCurrentPage = pageNo;
+        searchJunrals();
+    };
+
+//    $scope.pageChanged = function() {
+//        console.log('Page changed to: ' + $scope.bigCurrentPage);
+//    };
+
+   /* $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function() {
+        console.log('current');
+        searchJunrals();
+    };*/
 
     $scope.ranges = {
-        Сегодня: [moment(), moment()],
-        "Со вчера": [moment().subtract("days", 1), moment().subtract("days", 1)],
+        Сегодня: [new moment().startOf('day'), moment()],
+        "Со вчера": [moment().subtract("days", 1), moment()],
         "7 дней назад": [moment().subtract("days", 7), moment()],
         "За этот месяц": [moment().subtract("days", 30), moment()],
         "За последний месяц": [moment().startOf("month"), moment().endOf("month")]}
@@ -79,8 +106,9 @@ app.controller('JurnalsCtrl', function ($scope, JurnalsFactory, $modal, $http) {
             return;
         }
         var st = $scope.myDateRange.startDate;
-
-        $scope.formData = {term: $scope.searchModel, beginDate: $scope.myDateRange.startDate, endDate: $scope.myDateRange.endDate };
+        var end = $scope.myDateRange.endDate;
+        end = end.add(1,"days").subtract("hours", 1);
+        $scope.formData = {pageSize:   $scope.maxSize ,page: $scope.bigCurrentPage-1, term: $scope.searchModel, beginDate: st, endDate: end};
 
         $http({
             method: 'POST',
@@ -91,7 +119,9 @@ app.controller('JurnalsCtrl', function ($scope, JurnalsFactory, $modal, $http) {
         })
             .success(function (data) {
                 console.log(data);
-                $scope.jurnals = data;
+                $scope.countRecord =data.countRecord;
+                $scope.jurnals = data.jurnals;
+
             })
             .error(function (data, status, headers, config) {
                 $scope.termClass = 'searchTermNormal';

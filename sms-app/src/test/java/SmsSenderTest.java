@@ -1,3 +1,4 @@
+import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.model.synergy.Order;
@@ -12,16 +13,15 @@ import java.io.IOException;
  */
 public class SmsSenderTest {
 
-//    @Test
-//    public void testSend() throws IOException {
-//
-//        RestQueryContext context = new RestQueryContext();
-//        context.setAddress("http://test3.arta.kz/Synergy");
-//        context.setLogin("1");
-//        context.setPassword("1");
-//        SmsSender smsSender = new SmsSender();
-//        smsSender.sendSms("test",context);
+    @Test
+    public void testSend() throws IOException {
 
+        RestQueryContext context = new RestQueryContext();
+        context.setAddress("http://test3.arta.kz/Synergy");
+        context.setLogin("1");
+        context.setPassword("1");
+        SmsSender smsSender = new SmsSender();
+        smsSender.sendSms(null, context);
 
 
      /*   SmsGate smsGate = new SmsGate();
@@ -38,5 +38,5 @@ public class SmsSenderTest {
 
 //        boolean result =new SmsSender().trySend(smsGate, order);
 //        Assert.assertEquals(result, true);
-//    }
+    }
 }

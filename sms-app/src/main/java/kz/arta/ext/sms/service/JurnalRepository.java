@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by timur on 8/28/2014 10:24 AM.
@@ -53,17 +54,39 @@ public class JurnalRepository extends ARepository<Jurnal> {
     public List<Jurnal> getJurnalsByFinter(JurnalFilterEntity jurnalFilterEntity) {
         if(StringUtils.isNullOrEmpty(jurnalFilterEntity.getTerm()))
         {
-            return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2", Jurnal.class)
+            return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2 order by x.id desc ", Jurnal.class)
                     .setParameter(1, jurnalFilterEntity.getBeginDate())
                     .setParameter(2, jurnalFilterEntity.getEndDate())
+                    .setFirstResult(jurnalFilterEntity.getPage() * jurnalFilterEntity.getPageSize())
+                    .setMaxResults(jurnalFilterEntity.getPageSize())
                     .getResultList();
         }
-        return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2 and (x.message like ?3 or x.orderBookName like ?3 or x.result like ?3)", Jurnal.class)
+        return em.createQuery("select x from Jurnal x where x.dateSend between ?1 and ?2 and (x.message like ?3 or x.orderBookName like ?3 or x.result like ?3) order by x.id desc", Jurnal.class)
                 .setParameter(1, jurnalFilterEntity.getBeginDate())
                 .setParameter(2, jurnalFilterEntity.getEndDate())
                 .setParameter(3,"%"+ jurnalFilterEntity.getTerm()+"%")
+                .setFirstResult(jurnalFilterEntity.getPage() * jurnalFilterEntity.getPageSize())
+                .setMaxResults(jurnalFilterEntity.getPageSize())
                 .getResultList();
     }
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public long getCountRecord (JurnalFilterEntity jurnalFilterEntity) {
+        javax.persistence.Query query;
+        if(StringUtils.isNullOrEmpty(jurnalFilterEntity.getTerm()))
+        {
+            query = em.createQuery("select count(x) from Jurnal x where x.dateSend between ?1 and ?2")
+                    .setParameter(1, jurnalFilterEntity.getBeginDate())
+                    .setParameter(2, jurnalFilterEntity.getEndDate());
+        }else{
+            query =  em.createQuery("select count(x) from Jurnal x where x.dateSend between ?1 and ?2 and (x.message like ?3 or x.orderBookName like ?3 or x.result like ?3) ")
+                    .setParameter(1, jurnalFilterEntity.getBeginDate())
+                    .setParameter(2, jurnalFilterEntity.getEndDate())
+                    .setParameter(3,"%"+ jurnalFilterEntity.getTerm()+"%");
+        }
+        return  (Long)query.getSingleResult();
+    }
+
+
 
 
     @Override
