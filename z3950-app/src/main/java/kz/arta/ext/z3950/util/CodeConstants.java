@@ -16,4 +16,5 @@ public class CodeConstants {
 
     public static final String INDEX_ZEBRA_JMS_DESTINATION = "java:jboss/queues/Synergy/IndexZebraQueue";
     public static final String INDEX_DELETE_ZEBRA_JMS_DESTINATION = "java:jboss/queues/Synergy/IndexDeleteZebraQueue";
+    public static final String INDEX_ALL_ZEBRA_JMS_DESTINATION = "java:jboss/queues/Synergy/IndexAllZebraQueue";
 }

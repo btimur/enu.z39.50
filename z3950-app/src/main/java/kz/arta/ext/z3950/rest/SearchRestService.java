@@ -1,29 +1,23 @@
 package kz.arta.ext.z3950.rest;
 
-import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.z3950.convert.MarcConverterBean;
-import kz.arta.ext.z3950.model.Book;
-import kz.arta.ext.z3950.model.BookAttribute;
-import kz.arta.ext.z3950.model.MarcString;
+import kz.arta.ext.z3950.model.*;
 import kz.arta.ext.z3950.model.search.MultiResult;
 import kz.arta.ext.z3950.model.search.SearchOneResult;
 import kz.arta.ext.z3950.model.search.SearchResult;
 import kz.arta.ext.z3950.model.search.SimpleSearch;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
-import kz.arta.ext.z3950.model.synergy.RegistryBookWrapper;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.service.LibraryRepository;
 import kz.arta.ext.z3950.service.Z3950Searcher;
 import kz.arta.ext.z3950.util.CacheManager;
-import org.marc4j.marc.Record;
+import org.marc4j.marc.*;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +43,6 @@ public class SearchRestService {
     private MarcConverterBean marcConverterBean;
 
 
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("simpleSeacrh")
@@ -73,7 +66,6 @@ public class SearchRestService {
         }
         return result;
     }
-
 
 
     @POST
@@ -117,23 +109,27 @@ public class SearchRestService {
         try {
 
             Record record = getRecordFromCache(id, libraryId);
-            MarcString marcString = new MarcString();
-            String[] inputData =  record.toString().split("\n");
-//            StringBuilder builder = new StringBuilder(" <table class=\"tableMARC21Tagged\">\n");
-//            for (String anInputData : inputData) {
-//                String val = anInputData.trim();
-//                String[] subVal = val.split("\t");
-//                builder.append("<tr>");
-//                if (subVal.length > 0) {
-//                    builder.append("<td><strong>").append(subVal[0]).append("</strong></td>");
-//                }
-//                if (subVal.length > 1) {
-//                    builder.append("<td>").append(subVal[1]).append("</td>");
-//                }
-//                builder.append("</tr>");
-//            }
-//            builder.append("<table>");
-            marcString.setMarc(record.toString());
+
+            MarcTextFiled leader = new MarcTextFiled("LDR", record.getLeader().toString(), null);
+            MarcString marcString = new MarcString(leader);
+
+            for (VariableField variableField : record.getVariableFields()) {
+                MarcTextFiled field;
+                if (variableField instanceof DataField) {
+                    char[] inds = new char[]{((DataField) variableField).getIndicator1(),
+                            ((DataField) variableField).getIndicator2()};
+                    field = new MarcTextFiled(variableField.getTag(), null, new String(inds));
+                    for (Subfield subfield : ((DataField) variableField).getSubfields()) {
+                        MarcSubTextFiled sub = new MarcSubTextFiled(String.valueOf(subfield.getCode()), subfield.getData());
+                        field.getSubfields().add(sub);
+                    }
+                } else {
+                    field = new MarcTextFiled(variableField.getTag(), ((ControlField) variableField).getData(), null);
+                }
+
+                marcString.getFields().add(field);
+            }
+//            marcString.setMarc(record.toString().trim());
             return marcString;
         } catch (Exception e) {
             log.error("error load marc", e);

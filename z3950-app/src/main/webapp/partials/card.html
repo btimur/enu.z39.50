@@ -57,17 +57,22 @@
                         <div class="loaderResults" ng-show="selectedBook.marc == null" id="loadDiv">
                             <img border="0" alt="Загрузка..." src="img/loader.gif">
                         </div>
-                        <span class="marcText">
-                            {{selectedBook.marc}}
-                        </span>
-                        <!--<table class="expanded_search">-->
-                        <!--<tbody>-->
-                        <!--<tr class="table-body" ng-repeat="recordAttribute in selectedBook.attributes">-->
-                        <!--<td align="right" valign="top" class="table-text">{{recordAttribute.field}}</td>-->
-                        <!--<td class="table-text"><strong>00740nam#a2200229#i#4500</strong></td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                        <!--</table>-->
+                        <!--<span class="marcText">{{selectedBook.marc}}</span>-->
+                        <table class="expanded_search">
+                            <tbody>
+                            <tr class="table-body">
+                                <td align="right" valign="top" class="table-text">{{selectedBook.marc.leader.field}}</td>
+                                <td class="table-text"><strong>{{selectedBook.marc.leader.fieldValue}}</strong></td>
+                            </tr>
+                            <tr class="table-body" ng-repeat="field in selectedBook.marc.fields">
+                                <td align="right" valign="top" class="table-text"><strong>{{field.field}}</strong></td>
+                                <td class="table-text">
+                                    <strong>{{field.fieldIndex}}</strong>
+                                    <div class="marcSub" ng-repeat="subfield in field.subfields"><strong>${{subfield.subName}}</strong> {{subfield.subValue}}</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </tab>

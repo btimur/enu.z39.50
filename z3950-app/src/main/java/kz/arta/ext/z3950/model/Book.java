@@ -15,7 +15,10 @@ public class Book {
     private String author;
     private String publishedDate;
     private String publishedPlace;
+    private String publisher;
     private String keywords;
+    private String notes;
+    private String thematic;
     private String booktype;
     private Long libraryId;
     private Record record;
@@ -75,6 +78,30 @@ public class Book {
 
     public void setPublishedPlace(String publishedPlace) {
         this.publishedPlace = publishedPlace;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getThematic() {
+        return thematic;
+    }
+
+    public void setThematic(String thematic) {
+        this.thematic = thematic;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getKeywords() {

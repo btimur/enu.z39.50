@@ -18,7 +18,7 @@ angular.module('z3950.controllers').controller('CardCtrl', function ($scope, $ht
         })
             .success(function (data) {
                 console.log(data);
-                $scope.selectedBook.marc = data.marc;
+                $scope.selectedBook.marc = data;
             })
             .error(function (data, status, headers, config) {
                 console.log(data + '\n' + status + '\n' + headers + '\n' + config);

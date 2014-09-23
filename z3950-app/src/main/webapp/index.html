@@ -261,8 +261,13 @@
                                 <li>Автор: <span>{{ book.author }}</span></li>
                                 <li>
                                 </li>
+                                <li>Год издания: <span>{{ book.publishedDate }}</span>
+                                    , Место издания: <span>{{book.publishedPlace}}</span>
+                                    , Издательство: <span>{{book.publisher}}</span></li>
                                 <li>№ ISBN: <span>{{ book.isbn }}</span></li>
-                                <li>Ключевые слова: - <span>{{ book.keywords }}</span></li>
+                                <li>Ключевые слова: <span>{{ book.keywords }}</span></li>
+                                <li>Общие примечания: <span>{{ book.notes }}</span></li>
+                                <li>Предметная рубрика: <span>{{ book.thematic }}</span></li>
                             </ul>
                             <a class="openViewMarc" ng-click="showAdditional(book)">
                                 Подробнее

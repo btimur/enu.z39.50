@@ -505,6 +505,10 @@
                         <entry name="java:jboss/queues/Synergy/IndexDeleteZebraQueue"/>
                         <durable>true</durable>
                     </jms-queue>
+                    <jms-queue name="IndexAllZebraQueue">
+                        <entry name="java:jboss/queues/Synergy/IndexAllZebraQueue"/>
+                        <durable>true</durable>
+                    </jms-queue>
                     <jms-topic name="testTopic">
                         <entry name="topic/test"/>
                         <entry name="java:jboss/exported/jms/topic/test"/>

@@ -1,5 +1,6 @@
 package kz.arta.ext.z3950.convert;
 
+import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.z3950.model.Book;
 import kz.arta.ext.z3950.model.BookAttribute;
 import kz.arta.ext.z3950.model.FormatField;
@@ -42,7 +43,10 @@ public abstract class AMarcConverter implements IMarcConverter {
     public static final String TITLE_FIELD_ALIAS = "title";
     public static final String PUBLISHED_PLACE_FIELD_ALIAS = "publishedPlace";
     public static final String PUBLISHED_DATE_FIELD_ALIAS = "publishedDate";
+    public static final String PUBLISHER_FIELD_ALIAS = "publisher";
     public static final String KEYWORDS_FIELD_ALIAS = "keywords";
+    public static final String NOTES_FIELD_ALIAS = "notes";
+    public static final String THEMATIC_FIELD_ALIAS = "thematic";
     public static final String ISBN_FIELD_ALIAS = "isbn";
     public static final String AUTHOR_SURENAME_FIELD_ALIAS = "authorSurename";
     public static final String AUTHOR_NAME_FIELD_ALIAS = "authorName";
@@ -107,24 +111,45 @@ public abstract class AMarcConverter implements IMarcConverter {
                 fieldForBook.get(TITLE_FIELD_ALIAS).substring(0,3),
                 fieldForBook.get(TITLE_FIELD_ALIAS).substring(3,4).charAt(0)));
         book.setPublishedPlace(getSubfieldData(marcRecord,
-                        fieldForBook.get(PUBLISHED_PLACE_FIELD_ALIAS).substring(0,3),
-                        fieldForBook.get(PUBLISHED_PLACE_FIELD_ALIAS).substring(3,4).charAt(0)));
+                fieldForBook.get(PUBLISHED_PLACE_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(PUBLISHED_PLACE_FIELD_ALIAS).substring(3, 4).charAt(0)));
         book.setPublishedDate(getSubfieldData(marcRecord,
-                fieldForBook.get(PUBLISHED_DATE_FIELD_ALIAS).substring(0,3),
-                fieldForBook.get(PUBLISHED_DATE_FIELD_ALIAS).substring(3,4).charAt(0)));
+                fieldForBook.get(PUBLISHED_DATE_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(PUBLISHED_DATE_FIELD_ALIAS).substring(3, 4).charAt(0)));
+        book.setPublisher(getSubfieldData(marcRecord,
+                fieldForBook.get(PUBLISHER_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(PUBLISHER_FIELD_ALIAS).substring(3, 4).charAt(0)));
+        book.setNotes(getSubfieldData(marcRecord,
+                fieldForBook.get(NOTES_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(NOTES_FIELD_ALIAS).substring(3, 4).charAt(0)));
+        book.setThematic(getSubfieldData(marcRecord,
+                fieldForBook.get(THEMATIC_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(THEMATIC_FIELD_ALIAS).substring(3, 4).charAt(0)));
         book.setKeywords(getSubfieldMultiData(marcRecord,
                 fieldForBook.get(KEYWORDS_FIELD_ALIAS).substring(0,3),
                 fieldForBook.get(KEYWORDS_FIELD_ALIAS).substring(3,4).charAt(0)));
         book.setIsbn(getSubfieldData(marcRecord,
                 fieldForBook.get(ISBN_FIELD_ALIAS).substring(0,3),
                 fieldForBook.get(ISBN_FIELD_ALIAS).substring(3,4).charAt(0)));
-        book.setAuthor(getSubfieldData(marcRecord,
-                fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(0,3),
-                fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(3,4).charAt(0))
-                 + " " +
-                getSubfieldData(marcRecord, fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(0, 3),
-                        fieldForBook.get(AUTHOR_NAME_FIELD_ALIAS).substring(3, 4).charAt(0)));
+        book.setAuthor(getAuthor(marcRecord));
         return book;
+    }
+
+    private String getAuthor(Record marcRecord) {
+        String surename = getSubfieldData(marcRecord,
+                fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(3, 4).charAt(0));
+        String firstName = getSubfieldData(marcRecord, fieldForBook.get(AUTHOR_SURENAME_FIELD_ALIAS).substring(0, 3),
+                fieldForBook.get(AUTHOR_NAME_FIELD_ALIAS).substring(3, 4).charAt(0));
+
+        if (StringUtils.isNullOrEmpty(surename)){
+            return null;
+        }else if (!StringUtils.isNullOrEmpty(firstName)){
+            return  surename + " " + firstName;
+        }else{
+            return surename;
+        }
+
     }
 
     protected String getSubfieldData(Record marcRecord, String fieldTag, char subfieldTag) {

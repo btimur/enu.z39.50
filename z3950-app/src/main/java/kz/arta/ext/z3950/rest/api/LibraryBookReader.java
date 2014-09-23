@@ -122,8 +122,9 @@ public class LibraryBookReader extends AFormsReader {
 
     }
 
-    public String[] getDataUUID(String registryFormUUID, RestQueryContext queryContext) throws IOException {
-        String query = "/rest/api/asforms/search?formUUID=" + registryFormUUID + "&type=partial";
+    public String[] getDataUUID(String registryFormUUID, RestQueryContext queryContext, int startRecord, int recordsCount) throws IOException {
+        String query = String.format("/rest/api/asforms/search?formUUID=%s&type=partial&startRecord=%d&recordsCount=%d",
+                registryFormUUID, startRecord, recordsCount);
         String result = doGetQuery(queryContext, query);
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(result, String[].class);

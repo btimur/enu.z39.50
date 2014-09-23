@@ -4,6 +4,7 @@ import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
+import kz.arta.ext.z3950.model.ExportIndexWrapper;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.marc4j.MarcStreamWriter;
@@ -11,11 +12,17 @@ import org.marc4j.MarcWriter;
 import org.marc4j.marc.Record;
 import org.slf4j.Logger;
 
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by timur on 8/26/2014 12:39 PM.
@@ -33,22 +40,82 @@ public class ExporterForIndexer {
     @Inject
     private ExternalLauncher launcher;
 
+    @Resource(mappedName = "java:/ConnectionFactory")
+    private ConnectionFactory connectionFactory;
+
+    @Resource(mappedName = CodeConstants.INDEX_ALL_ZEBRA_JMS_DESTINATION)
+    private Destination destination;
+
+    public String exportRegistry(String registryFormUUID) {
+        try {
+            //создаем подключение
+            Connection connection = connectionFactory.createConnection();
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            MessageProducer producer = session.createProducer(destination);
+
+            for (int i = 0; i < 50001; i =i+1000) {
+                ExportIndexWrapper wrapper = new ExportIndexWrapper(registryFormUUID, i, i +1000) ;
+                ObjectMessage message = session.createObjectMessage();
+                message.setObject(wrapper);
+//                setText(registryFormUUID);
+                producer.send(message);
+                log.info("message sent");
+            }
+            ExportIndexWrapper wrapper = new ExportIndexWrapper(registryFormUUID, 50001, 20000000) ;
+            ObjectMessage message = session.createObjectMessage();
+            message.setObject(wrapper);
+//                setText(registryFormUUID);
+            producer.send(message);
+            log.info("message sent");
+
+
+            session.close();
+            connection.close();
+
+        } catch (JMSException ex) {
+            log.error(ex.getMessage(), ex);
+            return "error " + ex.getMessage();
+        }
+        return "ok";
+    }
     /**
      * Сохраняет все для индексации
      *
-     * @param registryFormUUID registryID экспортируемого реестра
+     * @param wrapper данные по экспортируемому реестра
      * @return  успех операции
      */
-    public boolean exportRegistry(String registryFormUUID) {
-
+    public boolean exportAsyncRegistry(ExportIndexWrapper wrapper) {
         try {
-            String[] dataUUIDs = reader.getDataUUID(registryFormUUID, ConfigUtils.getQueryContext());
-            for (String dataUUID : dataUUIDs) {
+            int startRecord =wrapper.getStartPosition();
+            int recordsCount =200;
+            boolean nextResult;
+            List<String> uuids = new ArrayList<String>();
+            do{
+                String[] dataUUIDs = reader.getDataUUID(wrapper.getUuid(),
+                        ConfigUtils.getQueryContext(), startRecord, recordsCount);
+                if (dataUUIDs != null) {
+                    startRecord = startRecord + dataUUIDs.length;
+                    nextResult = dataUUIDs.length > 0;
+                    if (startRecord < wrapper.getEndPosition()){
+                        Collections.addAll(uuids, dataUUIDs);
+                    }else{
+                        uuids.addAll(Arrays.asList(dataUUIDs).subList(0, wrapper.getEndPosition() - startRecord));
+                        nextResult = false;
+                    }
+                    log.info("add load UUID - {}", uuids.size());
+                }else{
+                    log.info("end load UUID");
+                    nextResult = false;
+                }
+            }while (nextResult );
+            log.info("end load dataUUID from {} to {}", wrapper.getStartPosition(), wrapper.getEndPosition());
+            for (String dataUUID : uuids) {
                 export(dataUUID, false);
                 log.info("export to UNIMARC record {}", dataUUID);
             }
         } catch (Exception e) {
-            log.error("error export registry " + registryFormUUID, e);
+            log.error("error export registry " + wrapper.getUuid() + " position start - " + wrapper.getStartPosition(),
+                    e);
             return false;
         }
         return true;
