@@ -1,5 +1,6 @@
 package kz.arta.ext.z3950.service;
 
+import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.z3950.model.Library;
 import kz.arta.ext.z3950.model.QueryType;
 import kz.arta.ext.z3950.model.search.MultiResult;
@@ -33,6 +34,10 @@ public class Z3950Searcher {
 
     public SearchResult search(Library library, SearchFilter filter) throws Exception {
         Connection con = new Connection(library.getZhost(), library.getZport());
+        if (!StringUtils.isNullOrEmpty(library.getzUser())) {
+            con.setUsername(library.getzUser());
+            con.setPassword(library.getzPwd());
+        }
         con.setSyntax(library.getzFormat());
         con.setDatabaseName(library.getZdb());
         SearchResult result;
@@ -64,6 +69,10 @@ public class Z3950Searcher {
         log.debug("searchMulti library {}, search = {}", library, search);
 
         Connection con = new Connection(library.getZhost(), library.getZport());
+        if (!StringUtils.isNullOrEmpty(library.getzUser())) {
+            con.setUsername(library.getzUser());
+            con.setPassword(library.getzPwd());
+        }
         con.setSyntax(library.getzFormat());
         con.setDatabaseName(library.getZdb());
         MultiResult result = new MultiResult();
@@ -87,6 +96,10 @@ public class Z3950Searcher {
     public SearchResult search(SimpleSearch search) throws Exception {
         Library library = libraryRepository.find(search.getLibraryId());
         Connection con = new Connection(library.getZhost(), library.getZport());
+        if (!StringUtils.isNullOrEmpty(library.getzUser())) {
+            con.setUsername(library.getzUser());
+            con.setPassword(library.getzPwd());
+        }
         con.setSyntax(library.getzFormat());
         con.setDatabaseName(library.getZdb());
         SearchResult result;
