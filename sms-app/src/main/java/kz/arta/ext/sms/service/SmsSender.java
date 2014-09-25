@@ -1,12 +1,13 @@
 package kz.arta.ext.sms.service;
 
-import kz.arta.ext.api.rest.RestQuery;
+import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.Jurnal;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
 import kz.arta.ext.sms.model.synergy.Order;
 import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
+import kz.arta.ext.sms.rest.SmsQuery;
 import kz.arta.ext.sms.rest.api.OrderReader;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
 import kz.arta.ext.sms.util.CodeConstants;
@@ -15,11 +16,7 @@ import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -31,7 +28,7 @@ import java.util.List;
  * сервис отправки sms
  */
 @Stateless
-public class SmsSender extends RestQuery {
+public class SmsSender {
 
     @SuppressWarnings("CdiInjectionPointsInspection")
     @Inject
@@ -48,7 +45,7 @@ public class SmsSender extends RestQuery {
     @Inject
     private UserAdditionalFormReader userAdditionalFormReader;
 
-    public void sendSms(BlockSignalMessage blockSignalMessage, RestQueryContext context) {
+    public boolean sendSms(BlockSignalMessage blockSignalMessage, RestQueryContext context) {
 
         Order order = reader.readOrder(context, blockSignalMessage.getDataUUID());
       /*  userAdditionalFormReader = new UserAdditionalFormReader();
@@ -58,33 +55,41 @@ public class SmsSender extends RestQuery {
         order.setDateofvidacha(new Date());
         order.setNameofbook("book1");
         order.setUserid("77ad2e16-cdf9-442e-b7c0-50dad52c40c7");*/
-        try {
-
-            UserAdditionalForm userAdditionalForm = userAdditionalFormReader.getForm(context, order.getUserid());
+        boolean result = false;
+            UserAdditionalForm userAdditionalForm = null;
+            try {
+                userAdditionalForm = userAdditionalFormReader.getForm(context, order.getUserid());
+            } catch (IOException e) {
+                logger.error("error read userInfo", e);
+            }
             if (userAdditionalForm == null) {
                 logger.error("smsSend: can't find user info by order - {}", blockSignalMessage.getDataUUID());
-                return;
+                return result;
             }
             List<SmsGate> smsGates = smsGateRepository.getActiveSmsGates();
-            boolean result = false;
+
             for (SmsGate smsGate : smsGates) {
                 for (String phone : userAdditionalForm.getPhones()) {
+                    try{
                     result = result || sendOneSms(order, phone, userAdditionalForm, smsGate);
+                } catch (IOException e) {
+                    logger.error("smsSend: error send sms", e);
+                }
                 }
                 if (result) {
                     break;
                 }
             }
             if(result){
-                reader.unblockProcess(context, blockSignalMessage);
+                try {
+                    reader.unblockProcess(context, blockSignalMessage);
+                    result = true;
+                } catch (IOException e) {
+                    logger.error("error unblock process", e);
+                }
             }
-        } catch (IOException e) {
-            log.error("smsSend: error send sms", e);
-        }
-    }
 
-    private void unblockProcess() {
-
+        return result;
     }
 
     private boolean sendOneSms(Order order, String phone, UserAdditionalForm userAdditionalForm, SmsGate smsGate) throws IOException {
@@ -119,64 +124,43 @@ public class SmsSender extends RestQuery {
     }
 
     public boolean trySend(SmsGate smsGate, String phone, Order order, UserAdditionalForm userAdditionalForm) throws IOException {
-        RestQueryContext context = new RestQueryContext();
+
         String message = getText(smsGate, order, userAdditionalForm);
+
+        return sendMessage(smsGate, phone, userAdditionalForm, message, order.getDataUUID());
+    }
+
+    private boolean sendMessage(SmsGate smsGate, String phone, UserAdditionalForm userAdditionalForm,
+                                String message, String orderUUID) throws IOException {
+        RestQueryContext context = new RestQueryContext();
         String query = smsGate.getTemplate()
                 .replace("%ENU_LOGIN%", smsGate.getsLogin())
                 .replace("%ENU_PWD%", smsGate.getsPwd())
                 .replace("%ENU_PHONES%", phone);
         userAdditionalForm.setMessage(message);
-        log.info("smsSend: message text - {}", message);
+        logger.info("smsSend: message text - {}", message);
         if(smsGate.getTranslit())
         {
             message = Translit.toTranslit(message);
         }
-       message = URLEncoder.encode(message, smsGate.getsCharset());
-//        log.info("smsSend: endcoded message text - "+message);
+        message = URLEncoder.encode(message, smsGate.getsCharset());
+        logger.debug("smsSend: endcoded message text - {}", message);
         query = query.replace("%ENU_MSG%", message);
         context.setAddress(query);
         context.setLogin(smsGate.getsLogin());
         context.setPassword(smsGate.getsPwd());
-        log.info("smsSend: query - {}", query);
-        String result = doGetQuery2(context);
-        if (result.contains(smsGate.getSucessResult())) {
-            userAdditionalForm.setResponceMessage(CodeConstants.SEND_SUCCESS);
-            log.info("smsSend: success send sms by order {} to user {} to phone {}",
-                    order.getDataUUID(),
-                    userAdditionalForm.getIin(),
-                    phone);
-            return true;
-        }
-        log.info("smsSend: error send sms by order {} to user {} to phone {} is result {}",
-                order.getDataUUID(),
+        logger.info("smsSend: query - {}", query);
+        String result = new SmsQuery().doGetQueryWithoutAuth(context);
+        boolean ret = result.contains(smsGate.getSucessResult());
+        userAdditionalForm.setResponceMessage(ret ? CodeConstants.SEND_SUCCESS : result);
+        logger.info("smsSend:  send sms by order {} to user {} to phone {} is result {}",
+                orderUUID,
                 userAdditionalForm.getIin(),
                 phone,
                 result
-                );
-        userAdditionalForm.setResponceMessage(result);
-        return false;
+        );
+        return ret;
     }
-
-    protected String doGetQuery2(RestQueryContext context) throws IOException {
-        URL url = new URL(context.getAddress());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        authentication(context, conn);
-        conn.setRequestMethod("GET");
-//        if(!charset.isEmpty())
-//        {
-//    conn.setRequestProperty("Accept-Charset", "utf-8");
-//        }
-
-        String output;
-        StringBuilder result = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        while ((output = br.readLine()) != null) {
-            result.append(output);
-        }
-        conn.disconnect();
-        return result.toString();
-    }
-
 
 
     private String getText(SmsGate smsGate, Order order, UserAdditionalForm userAdditionalForm) {
@@ -190,8 +174,42 @@ public class SmsSender extends RestQuery {
                 .replace("%DATE_BACK%", formatDateJava.format(order.getSrokvozvrata())).replaceAll("[\n\r]", "");
     }
 
-    @Override
-    protected void authentication(RestQueryContext context, HttpURLConnection conn) {
+
+    public boolean sendPlainSms(String message, String userId){
+        UserAdditionalForm userAdditionalForm = null;
+        boolean result = false;
+        try {
+            userAdditionalForm = userAdditionalFormReader.getForm(ConfigUtils.getQueryContext(),
+                    userId);
+        } catch (IOException e) {
+            logger.error("error read user info", e);
+        }
+        if (userAdditionalForm == null) {
+            logger.error("smsSend: can't find user info by userId - {}", userId);
+            return result;
+        }
+        List<SmsGate> smsGates = smsGateRepository.getActiveSmsGates();
+
+        for (SmsGate smsGate : smsGates) {
+            for (String phone : userAdditionalForm.getPhones()) {
+                try {
+                    result = result || sendOnePlainSms(message, phone, userAdditionalForm, smsGate);
+                } catch (IOException e) {
+                    logger.error("error send one sms", e);
+                }
+            }
+            if (result) {
+                break;
+            }
+        }
+        return result;
 
     }
+
+    private boolean sendOnePlainSms(String message, String phone, UserAdditionalForm userAdditionalForm, SmsGate smsGate) throws IOException {
+        boolean result = sendMessage(smsGate, phone, userAdditionalForm, message, "-");
+        saveJurnal(new Order(), smsGate, userAdditionalForm, phone);
+        return result;
+    }
+
 }

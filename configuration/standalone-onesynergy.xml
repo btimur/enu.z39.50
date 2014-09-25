@@ -148,7 +148,8 @@
                     </security>
                 </datasource>
                 <datasource jta="false" jndi-name="java:/AMDS" pool-name="AMDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:mysql://127.0.0.1:3306/synergy?useUnicode=true&amp;characterEncoding=utf8</connection-url>
+                    <connection-url>jdbc:mysql://127.0.0.1:3306/synergy?useUnicode=true&amp;characterEncoding=utf8
+                    </connection-url>
                     <driver>com.mysql.nonxa</driver>
                     <pool>
                         <min-pool-size>20</min-pool-size>
@@ -159,7 +160,8 @@
                         <password>root</password>
                     </security>
                 </datasource>
-                <datasource jta="false" jndi-name="java:jboss/datasources/Z3950DS" pool-name="Z3950DS" enabled="true" use-ccm="false">
+                <datasource jta="false" jndi-name="java:jboss/datasources/Z3950DS" pool-name="Z3950DS" enabled="true"
+                            use-ccm="false">
                     <connection-url>jdbc:mysql://localhost:3306/z3950?characterEncoding=utf8</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                     <driver>com.mysql</driver>
@@ -175,7 +177,8 @@
                         <share-prepared-statements>false</share-prepared-statements>
                     </statement>
                 </datasource>
-                <datasource jta="false" jndi-name="java:jboss/datasources/SkudDS" pool-name="SkudDS" enabled="true" use-ccm="false">
+                <datasource jta="false" jndi-name="java:jboss/datasources/SkudDS" pool-name="SkudDS" enabled="true"
+                            use-ccm="false">
                     <connection-url>jdbc:firebirdsql://localhost:3050//opt/firebird/STAFF.FDB</connection-url>
                     <driver-class>org.firebirdsql.jdbc.FBDriver</driver-class>
                     <driver>jaybird-2.2.5.jar</driver>
@@ -253,7 +256,8 @@
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
-            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout="500"/>
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"
+                                deployment-timeout="500"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:1.1"/>
         <subsystem xmlns="urn:jboss:domain:jpa:1.0">
@@ -270,8 +274,10 @@
             </mdb>
             <pools>
                 <bean-instance-pools>
-                    <strict-max-pool name="slsb-strict-max-pool" max-pool-size="20000" instance-acquisition-timeout="30" instance-acquisition-timeout-unit="SECONDS"/>
-                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="20000" instance-acquisition-timeout="30" instance-acquisition-timeout-unit="SECONDS"/>
+                    <strict-max-pool name="slsb-strict-max-pool" max-pool-size="20000" instance-acquisition-timeout="30"
+                                     instance-acquisition-timeout-unit="SECONDS"/>
+                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="20000" instance-acquisition-timeout="30"
+                                     instance-acquisition-timeout-unit="SECONDS"/>
                 </bean-instance-pools>
             </pools>
             <caches>
@@ -540,7 +546,8 @@
         <subsystem xmlns="urn:jboss:domain:remoting:1.1">
             <connector name="remoting-connector" socket-binding="remoting" security-realm="ApplicationRealm"/>
             <outbound-connections>
-                <remote-outbound-connection name="remote-ejb-connection" outbound-socket-binding-ref="remote-ejb" username="ejb" security-realm="ejb-security-realm">
+                <remote-outbound-connection name="remote-ejb-connection" outbound-socket-binding-ref="remote-ejb"
+                                            username="ejb" security-realm="ejb-security-realm">
                     <properties>
                         <property name="SASL_POLICY_NOANONYMOUS" value="false"/>
                         <property name="SSL_ENABLED" value="false"/>
@@ -556,7 +563,9 @@
                     </archive>
                     <transaction-support>XATransaction</transaction-support>
                     <connection-definitions>
-                        <connection-definition class-name="org.apache.jackrabbit.jca.JCAManagedConnectionFactory" jndi-name="java:/jcr/local" enabled="true" use-java-context="true" pool-name="jackrabbit-jca-2_2_13_rar-Pool" use-ccm="true">
+                        <connection-definition class-name="org.apache.jackrabbit.jca.JCAManagedConnectionFactory"
+                                               jndi-name="java:/jcr/local" enabled="true" use-java-context="true"
+                                               pool-name="jackrabbit-jca-2_2_13_rar-Pool" use-ccm="true">
                             <config-property name="configFile">
                                 ${jboss.server.config.dir}/repository.xml
                             </config-property>
@@ -584,8 +593,10 @@
                             <module-option name="password-stacking" value="useFirstPass"/>
                         </login-module>
                         <login-module code="RealmUsersRoles" flag="required">
-                            <module-option name="usersProperties" value="${jboss.server.config.dir}/application-users.properties"/>
-                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/application-roles.properties"/>
+                            <module-option name="usersProperties"
+                                           value="${jboss.server.config.dir}/application-users.properties"/>
+                            <module-option name="rolesProperties"
+                                           value="${jboss.server.config.dir}/application-roles.properties"/>
                             <module-option name="realm" value="ApplicationRealm"/>
                             <module-option name="password-stacking" value="useFirstPass"/>
                         </login-module>
@@ -640,7 +651,8 @@
             <wsdl-host>${jboss.bind.address:127.0.0.1}</wsdl-host>
             <endpoint-config name="Standard-Endpoint-Config"/>
             <endpoint-config name="Recording-Endpoint-Config">
-                <pre-handler-chain name="recording-handlers" protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
+                <pre-handler-chain name="recording-handlers"
+                                   protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
                     <handler name="RecordingHandler" class="org.jboss.ws.common.invocation.RecordingServerHandler"/>
                 </pre-handler-chain>
             </endpoint-config>
@@ -660,7 +672,8 @@
         </interface>
     </interfaces>
 
-    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+    <socket-binding-group name="standard-sockets" default-interface="public"
+                          port-offset="${jboss.socket.binding.port-offset:0}">
         <socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9443}"/>

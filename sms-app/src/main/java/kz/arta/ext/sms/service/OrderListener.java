@@ -4,6 +4,8 @@ import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
 import kz.arta.ext.sms.util.CodeConstants;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 
@@ -49,9 +51,9 @@ public class OrderListener implements MessageListener {
             sender.sendSms(blockSignalMessage, ConfigUtils.getQueryContext());
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("error parse message", e);
         } catch (JMSException e) {
-            e.printStackTrace();
+            log.error("error process message", e);
         }
 
     }

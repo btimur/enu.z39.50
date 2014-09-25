@@ -30,6 +30,10 @@ public abstract class RestQuery {
         conn.setRequestProperty("Accept", "application/json; charset=utf-8");
 //        String encoded = DatatypeConverter.encode((context.getLogin() + ":" + context.getPassword()).getBytes());
         authentication(context, conn);
+        return readStringReturn(conn);
+    }
+
+    private String readStringReturn(HttpURLConnection conn) throws IOException {
         String output;
         StringBuffer result = new StringBuffer();
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), CodeConstants.ENCODING_UFT_8));
@@ -84,6 +88,14 @@ public abstract class RestQuery {
         conn.disconnect();
 
         return result.toString();
+    }
+
+
+    public String doGetQueryWithoutAuth(RestQueryContext context) throws IOException {
+        URL url = new URL(context.getAddress());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        return readStringReturn(conn);
     }
 
 }
