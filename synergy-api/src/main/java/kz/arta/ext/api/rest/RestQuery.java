@@ -51,8 +51,18 @@ public abstract class RestQuery {
     }
 
     protected String doPostQuery(RestQueryContext context, String query, String data) throws IOException {
-        log.debug("query = {}", query);
+        return doPostQuery(context, query, data, "data");
+    }
+
+    protected String doPostQuery(RestQueryContext context, String query, String data, String dataField) throws IOException {
         log.debug("data = {}", data);
+        String body = dataField + "=" + URLEncoder.encode(data, CodeConstants.ENCODING_UFT_8) + "&";
+        return doPostBodyQuery(context, query, body);
+    }
+
+    protected String doPostBodyQuery(RestQueryContext context, String query, String body) throws IOException {
+        log.debug("query = {}", query);
+        log.debug("body = {}", body);
         URL url = new URL(context.getAddress() + query);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -65,12 +75,7 @@ public abstract class RestQuery {
 
         OutputStream out = conn.getOutputStream();
         Writer writer = new OutputStreamWriter(out, CodeConstants.ENCODING_UFT_8);
-
-        writer.write("data");
-        writer.write("=");
-        writer.write(URLEncoder.encode(data, CodeConstants.ENCODING_UFT_8));
-        writer.write("&");
-
+        writer.write(body);
         writer.close();
         out.close();
 

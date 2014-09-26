@@ -24,9 +24,9 @@ public class RecognizeTaskRepository extends ARepository<RecognizeTask> {
     protected EntityManager em;
 
     /**
-     * Поиск объекта "Конфигурация подключения к библиотеке" по имени
-     * @param id - имя объекта "Конфигурация подключения к библиотеке"
-     * @return - объект "Конфигурация подключения к библиотеке"
+     * Поиск объекта "Задача" по  идентификатору
+     * @param id - идентификатор
+     * @return - объект "Задача"
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public RecognizeTask findById(long id) {
@@ -35,8 +35,8 @@ public class RecognizeTaskRepository extends ARepository<RecognizeTask> {
     }
 
     /**
-     * Поиск объекта "Конфигурация подключения к библиотеке" по имени
-     * @return - весь список объектов "Конфигурация подключения к библиотеке"
+     * Поиск объекта "Задача" неоконченных
+     * @return -  объект "Задача"
      */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<RecognizeTask> getRecognizeTasks() {

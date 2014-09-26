@@ -21,6 +21,9 @@ public class RecognizeTask implements IEntity {
     @Column(name = "UUID")
     private String uuid;
 
+    @Column(name = "UUID")
+    private String bookName;
+
     @Column(name = "FILE_PATH")
     private String filePath;
 
@@ -42,6 +45,11 @@ public class RecognizeTask implements IEntity {
     @Column(name = "ERROR")
     private String error;
 
+    @Column(name = "FILE_END")
+    private String fileEnd;
+
+    @Column(name = "UPLOADED")
+    private boolean uploaded;
 
     public Long getId() {
         return id;
@@ -113,5 +121,29 @@ public class RecognizeTask implements IEntity {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public String getFileEnd() {
+        return fileEnd;
+    }
+
+    public void setFileEnd(String fileEnd) {
+        this.fileEnd = fileEnd;
+    }
+
+    public boolean isUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(boolean uploaded) {
+        this.uploaded = uploaded;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 }
