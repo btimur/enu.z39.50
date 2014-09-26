@@ -1,0 +1,1 @@
+ALTER TABLE sms_jurnal ADD FIO VARCHAR(500);
