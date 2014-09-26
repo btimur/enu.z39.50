@@ -53,5 +53,6 @@
         <module>z3950-app</module>
         <module>sms-app</module>
         <module>skud-service</module>
+        <module>ocr-app</module>
     </modules>
 </project>
