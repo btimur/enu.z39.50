@@ -7,5 +7,6 @@ public class CodeConstants {
     public static final String JMS_DESTINATION = "java:jboss/queues/Synergy/SmsBlockQueue";
     public static final String VALUE_IS_EMPTY = "Данные отсутствует";
     public static final String SEND_SUCCESS = "Отправлен";
+    public static final String SEND_ERROR = "Ошибка при отправки";
 
 }

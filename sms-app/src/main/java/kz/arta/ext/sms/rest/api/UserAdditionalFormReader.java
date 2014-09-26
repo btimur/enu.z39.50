@@ -1,16 +1,29 @@
 package kz.arta.ext.sms.rest.api;
 
 import kz.arta.ext.api.config.ConfigReader;
+import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.data.FormField;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.api.data.User;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
+import kz.arta.ext.common.util.CodeConstants;
 import kz.arta.ext.common.util.StringUtils;
+import kz.arta.ext.sms.model.Jurnal;
 import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
+import kz.arta.ext.sms.model.synergy.UserChooser;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectReader;
+import org.slf4j.ILoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 05.09.14.
@@ -73,6 +86,17 @@ public class UserAdditionalFormReader extends AFormsReader {
         return value.contains(PHONES_SPLIT) ? value.split(PHONES_SPLIT) : new String[]{value};
     }
 
+    public UserChooser[] getListUser(String value) throws IOException {
+        {
+            value = value.trim();
+            RestQueryContext context = ConfigUtils.getQueryContext();
+            String query = "/rest/api/userchooser/search?search=" + URLEncoder.encode(value, "utf-8");
+            String resultData = doGetQuery(context, query);
+            ObjectMapper mapper = new ObjectMapper();
+            UserChooser[] users = mapper.readValue(resultData, UserChooser[].class);
+            return users;
+        }
+    }
 
     public User GetUserById(RestQueryContext context, String userId) throws IOException {
         User user;
@@ -89,4 +113,12 @@ public class UserAdditionalFormReader extends AFormsReader {
     }
 
 
+    public UserAdditionalForm getUserInfo(String userId) throws IOException {
+        {
+            RestQueryContext context = ConfigUtils.getQueryContext();
+            UserAdditionalForm userAdditionalForm = getUserAdditionalForm(context, userId);
+            fillUseradditionalForm(context, userAdditionalForm);
+            return userAdditionalForm;
+        }
+    }
 }

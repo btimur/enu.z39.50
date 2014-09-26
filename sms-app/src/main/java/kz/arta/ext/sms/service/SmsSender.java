@@ -4,14 +4,17 @@ import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.Jurnal;
 import kz.arta.ext.sms.model.SmsGate;
+import kz.arta.ext.sms.model.SmsWrapper;
 import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
 import kz.arta.ext.sms.model.synergy.Order;
 import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
+import kz.arta.ext.sms.model.synergy.UserChooser;
 import kz.arta.ext.sms.rest.SmsQuery;
 import kz.arta.ext.sms.rest.api.OrderReader;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
 import kz.arta.ext.sms.util.CodeConstants;
 import kz.arta.ext.sms.util.Translit;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -56,40 +59,99 @@ public class SmsSender {
         order.setNameofbook("book1");
         order.setUserid("77ad2e16-cdf9-442e-b7c0-50dad52c40c7");*/
         boolean result = false;
-            UserAdditionalForm userAdditionalForm = null;
-            try {
-                userAdditionalForm = userAdditionalFormReader.getForm(context, order.getUserid());
-            } catch (IOException e) {
-                logger.error("error read userInfo", e);
-            }
-            if (userAdditionalForm == null) {
-                logger.error("smsSend: can't find user info by order - {}", blockSignalMessage.getDataUUID());
-                return result;
-            }
-            List<SmsGate> smsGates = smsGateRepository.getActiveSmsGates();
+        UserAdditionalForm userAdditionalForm = null;
+        try {
+            userAdditionalForm = userAdditionalFormReader.getForm(context, order.getUserid());
+        } catch (IOException e) {
+            logger.error("error read userInfo", e);
+        }
+        if (userAdditionalForm == null) {
+            logger.error("smsSend: can't find user info by order - {}", blockSignalMessage.getDataUUID());
+            return result;
+        }
+        List<SmsGate> smsGates = smsGateRepository.getActiveSmsGates();
 
-            for (SmsGate smsGate : smsGates) {
-                for (String phone : userAdditionalForm.getPhones()) {
-                    try{
+        for (SmsGate smsGate : smsGates) {
+            for (String phone : userAdditionalForm.getPhones()) {
+                try {
                     result = result || sendOneSms(order, phone, userAdditionalForm, smsGate);
                 } catch (IOException e) {
                     logger.error("smsSend: error send sms", e);
                 }
+            }
+            if (result) {
+                break;
+            }
+        }
+        if (result) {
+            try {
+                reader.unblockProcess(context, blockSignalMessage);
+                result = true;
+            } catch (IOException e) {
+                logger.error("error unblock process", e);
+            }
+        }
+
+        return result;
+    }
+
+    public SmsWrapper sendSmsWithText(String[] phones, String message) throws IOException {
+        {
+
+            SmsWrapper smsWrapper = new SmsWrapper();
+           List<SmsGate> smsGates = smsGateRepository.getActiveSmsGates();
+            boolean result = false;
+            StringBuilder errorInfo = new StringBuilder(CodeConstants.SEND_ERROR+":");
+            for (SmsGate smsGate : smsGates) {
+                for (String phone : phones) {
+                    try {
+                        result = result || sendMessageWithText(smsGate, phone, message, errorInfo);
+                    } catch (IOException e) {
+                        logger.error("smsSendWithText: error send sms", e);
+                    }
                 }
                 if (result) {
                     break;
                 }
             }
-            if(result){
-                try {
-                    reader.unblockProcess(context, blockSignalMessage);
-                    result = true;
-                } catch (IOException e) {
-                    logger.error("error unblock process", e);
-                }
+            if (result) {
+                smsWrapper.setMessage(CodeConstants.SEND_SUCCESS);
+            }else
+            {
+                smsWrapper.setMessage(errorInfo.toString());
             }
+            return smsWrapper;
+        }
+    }
 
-        return result;
+    private boolean sendMessageWithText(SmsGate smsGate, String phone, String message,StringBuilder errorInfo) throws IOException {
+        RestQueryContext context = new RestQueryContext();
+        String query = smsGate.getTemplate()
+                .replace("%ENU_LOGIN%", smsGate.getsLogin())
+                .replace("%ENU_PWD%", smsGate.getsPwd())
+                .replace("%ENU_PHONES%", phone);
+        logger.info("smsSendWithText: message text - {}", message);
+        if (smsGate.getTranslit()) {
+            message = Translit.toTranslit(message);
+        }
+        message = URLEncoder.encode(message, smsGate.getsCharset());
+        logger.debug("smsSendWithText: endcoded message text - {}", message);
+        query = query.replace("%ENU_MSG%", message);
+        context.setAddress(query);
+        context.setLogin(smsGate.getsLogin());
+        context.setPassword(smsGate.getsPwd());
+        logger.info("smsSendWithText: query - {}", query);
+        String result = new SmsQuery().doGetQueryWithoutAuth(context);
+        boolean ret = result.contains(smsGate.getSucessResult());
+        if(!ret)
+        {
+            errorInfo.append(result);
+        }
+        logger.info("smsSendWithText:  send sms by  to phone {} is result {}",
+                phone,
+                result
+        );
+        return ret;
     }
 
     private boolean sendOneSms(Order order, String phone, UserAdditionalForm userAdditionalForm, SmsGate smsGate) throws IOException {
@@ -139,8 +201,7 @@ public class SmsSender {
                 .replace("%ENU_PHONES%", phone);
         userAdditionalForm.setMessage(message);
         logger.info("smsSend: message text - {}", message);
-        if(smsGate.getTranslit())
-        {
+        if (smsGate.getTranslit()) {
             message = Translit.toTranslit(message);
         }
         message = URLEncoder.encode(message, smsGate.getsCharset());
@@ -175,7 +236,7 @@ public class SmsSender {
     }
 
 
-    public boolean sendPlainSms(String message, String userId){
+    public boolean sendPlainSms(String message, String userId) {
         UserAdditionalForm userAdditionalForm = null;
         boolean result = false;
         try {

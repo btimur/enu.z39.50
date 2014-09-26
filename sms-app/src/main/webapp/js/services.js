@@ -43,3 +43,18 @@ services.factory('JurnalsFactory', function ($resource) {
         create: { method: 'POST' }
     })
 });
+
+services.factory('SmsSendFactory', function ($resource) {
+    return $resource( '/sms-app/rest/smssend/getUserInfo?userId=', {}, {
+        getUserInfo: { method: 'GET', params: {userId: '@userId'}  }
+    })
+});
+
+//
+//services.factory('SmsSendFactory', function ($resource) {
+//    return $resource('/sms-app/rest/smssend', {}, {
+//        show: { method: 'GET' }
+//
+//    })
+//});
+
