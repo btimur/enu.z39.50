@@ -7,6 +7,7 @@ package kz.arta.ext.sms.model;
 public class SmsWrapper {
     private String message;
     private String userId;
+    private Boolean success;
 
     public String getMessage() {
         return message;
@@ -22,5 +23,13 @@ public class SmsWrapper {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 }
