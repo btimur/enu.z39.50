@@ -14,6 +14,7 @@ import kz.arta.ext.z3950.util.ApiFormField;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
 import org.marc4j.marc.Subfield;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import java.beans.IntrospectionException;
@@ -29,6 +30,9 @@ import java.util.Map;
  * Created by timur on 9/3/2014 9:53 AM.
  */
 public abstract class AMarcConverter implements IMarcConverter {
+
+    @Inject
+    private Logger logger;
 
     @Inject
     protected SubIndexRepository repository;
@@ -199,7 +203,7 @@ public abstract class AMarcConverter implements IMarcConverter {
                             pd.getWriteMethod().invoke(libraryBook, value);
                         }
                     } else {
-                        System.out.println("not found key " + key + "for field " + pd.getName());
+                        logger.error("not found key " + key + "for field " + pd.getName());
                     }
                 } else if(value != null){
                     if (annotation !=null && annotation.isList()) {
@@ -215,19 +219,22 @@ public abstract class AMarcConverter implements IMarcConverter {
                 }
             }
         } catch (IntrospectionException e) {
-            e.printStackTrace();
+            logger.error("error fillLibraryBook", e);
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.error("error fillLibraryBook", e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.error("error fillLibraryBook", e);
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            logger.error("error fillLibraryBook", e);
         }
         return libraryBook;
     }
 
     private void fillDictionaryValue(LibraryBook libraryBook, PropertyDescriptor pd, String field, char subField, String value) throws IllegalAccessException, InvocationTargetException {
-        String key = dictionaryService.getDictionaryKey(getDictionaryCode(field + String.valueOf(subField)),value);
+        String sub = field + String.valueOf(subField);
+        String dictionaryCode = getDictionaryCode(sub);
+        logger.info("for field {} load dictionary -{}, value - {}",  sub, dictionaryCode, value);
+        String key = dictionaryService.getDictionaryKey(dictionaryCode,value);
         KeyObject keyObject = new KeyObject(key, value);
         pd.getWriteMethod().invoke(libraryBook, keyObject);
     }

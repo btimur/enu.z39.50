@@ -19,7 +19,7 @@ import java.net.URLEncoder;
  */
 public abstract class DictionaryReader extends RestQuery {
 
-    private Logger log = LoggerFactory.getLogger(DictionaryReader.class);
+    protected Logger log = LoggerFactory.getLogger(DictionaryReader.class);
 
     public Dictionary readDictionary(RestQueryContext context, String dictionaryCode) {
         Dictionary dictionary = null;
@@ -54,7 +54,7 @@ public abstract class DictionaryReader extends RestQuery {
             }
             return resultData;
         } catch (Exception e) {
-            log.error("error insert Dictionary " +  dictionaryCode, e);
+            log.error("error insert Dictionary - {" +  dictionaryCode + "} value -{" + value + "}", e);
             return null;
         }
     }

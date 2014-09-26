@@ -77,8 +77,8 @@ public class ExporterForIndexerTest {
 
     @Test
     public void testExportRegistry() throws Exception {
-        boolean result = exporter.exportRegistry(FORM_UUID);
-        Assert.assertTrue(result);
+        String result = exporter.exportRegistry(FORM_UUID);
+        Assert.assertEquals("ok", result);
         Assert.assertTrue(new File(path).exists());
     }
 

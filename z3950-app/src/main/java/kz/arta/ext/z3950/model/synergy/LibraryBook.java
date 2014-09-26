@@ -236,11 +236,11 @@ public class LibraryBook {
     @ApiFormField(nameField = "908c",typeField = "listbox")
     private KeyObject f908c;
 
-    /**
-     * Специальность
-     */
-    @ApiFormField(nameField = "910c",typeField = "listbox")
-    private KeyObject f910c;
+//    /**
+//     * Специальность
+//     */
+//    @ApiFormField(nameField = "910c",typeField = "listbox")
+//    private KeyObject f910c;
 
     /**
      * Год издания источника
@@ -2784,13 +2784,13 @@ public class LibraryBook {
         this.f908c = f908c;
     }
 
-    public KeyObject getF910c() {
-        return f910c;
-    }
-
-    public void setF910c(KeyObject f910c) {
-        this.f910c = f910c;
-    }
+//    public KeyObject getF910c() {
+//        return f910c;
+//    }
+//
+//    public void setF910c(KeyObject f910c) {
+//        this.f910c = f910c;
+//    }
 
     public String getFcmp_hqzf4n() {
         return fcmp_hqzf4n;

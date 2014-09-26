@@ -19,23 +19,25 @@ public class LibraryDictionaryReader extends DictionaryReader {
 
     public String loadDictionary(String dictionaryCode, String value) {
         Dictionary dictionary = readDictionary(ConfigUtils.getQueryContext(), dictionaryCode);
+        log.debug("load dictionary - {}", dictionaryCode);
         String columnID = null;
         String columnName = null;
-        for (DictionaryColumn column : dictionary.getColumns()){
+        for (DictionaryColumn column : dictionary.getColumns()) {
             if (column.getCode().equals(ID_COLUMN)) columnID = column.getColumnID();
             if (column.getCode().equals(NAME_COLUMN)) columnName = column.getColumnID();
         }
         String result = null;
-        for (DictionaryItem item : dictionary.getItems()){
+        for (DictionaryItem item : dictionary.getItems()) {
             String key = item.giveValuesMap().get(columnID);
             String val = item.giveValuesMap().get(columnName);
-            CacheManager.getInstance().addDictionary(dictionaryCode,key,val );
+            CacheManager.getInstance().addDictionary(dictionaryCode, key, val);
+            log.debug("add value for dictionary - {}, key - {}, val -{}", dictionaryCode, key, val);
             try {
                 CacheManager.getInstance().addDictionaryID(dictionaryCode, Integer.parseInt(key));
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                log.error("can't add id for dictionary {" + dictionaryCode + "}, value {" + key + "}", e);
             }
-            if (value.equals(val)){
+            if (value.equals(val)) {
                 result = key;
             }
         }
@@ -44,7 +46,7 @@ public class LibraryDictionaryReader extends DictionaryReader {
 
     public String insertDictionary(String dictionaryCode, String value) {
         String key = insertDictionary(ConfigUtils.getQueryContext(), dictionaryCode, value);
-        CacheManager.getInstance().addDictionary(dictionaryCode,key, value );
+        CacheManager.getInstance().addDictionary(dictionaryCode, key, value);
         return key;
     }
 
