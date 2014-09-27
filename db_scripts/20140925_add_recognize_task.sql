@@ -10,6 +10,7 @@ CREATE TABLE RECOGNIZE_TASK  (
   ERROR     	longtext COMMENT 'ошибка распознавания'  NULL,
   FILE_END  	varchar(4000) COMMENT 'распознанный файл'  NULL,
   UPLOADED    bit(1) COMMENT 'Залито на Synergy'  NOT NULL DEFAULT b'0',
+  BOOK_NAME 	varchar(1000) NULL,
   PRIMARY KEY(ID)
 )
   ENGINE = InnoDB

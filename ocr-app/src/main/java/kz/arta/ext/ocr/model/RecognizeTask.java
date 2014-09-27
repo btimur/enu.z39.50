@@ -21,7 +21,7 @@ public class RecognizeTask implements IEntity {
     @Column(name = "UUID")
     private String uuid;
 
-    @Column(name = "UUID")
+    @Column(name = "BOOK_NAME")
     private String bookName;
 
     @Column(name = "FILE_PATH")
