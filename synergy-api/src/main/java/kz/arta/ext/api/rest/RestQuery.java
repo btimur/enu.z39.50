@@ -21,7 +21,7 @@ import java.net.URLEncoder;
  */
 public abstract class RestQuery {
 
-    protected Logger log = LoggerFactory.getLogger(DictionaryReader.class);
+    protected Logger log = LoggerFactory.getLogger(RestQuery.class);
 
     protected String doGetQuery(RestQueryContext context, String query) throws IOException {
         URL url = new URL(context.getAddress() + query);
