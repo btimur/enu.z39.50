@@ -51,6 +51,17 @@ public class RecognizeTaskRepository extends ARepository<RecognizeTask> {
                 .getResultList();
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public RecognizeTask getNotCopmleteTask() {
+        List<RecognizeTask> taskList = em.createQuery("select x from RecognizeTask x where x.completed=?1 order by x.dateAdd desc", RecognizeTask.class)
+                .setParameter(1, false)
+                .setMaxResults(1)
+                .getResultList();
+        if(taskList != null && taskList.size() > 0)
+            return taskList.get(0);
+        return null;
+    }
+
 
     @Override
     protected EntityManager getEm() {
