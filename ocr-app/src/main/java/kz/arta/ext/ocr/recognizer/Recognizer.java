@@ -27,62 +27,46 @@ public class Recognizer {
     private File fDestination;
     private File fResult;
 
-    public boolean copySourceFileToWorkDir() {
+    public void copySourceFileToWorkDir() throws Exception {
         try {
             File fSource = new File(task.getFilePath());
             fSourceClone = new File(workDir, task.getUuid() + ".pdf");
             FileUtils.copyFile(fSource, fSourceClone);
-            return true;
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            throw new Exception("Error during copy source pdf-file to work directory", e);
         }
     }
 
-    public boolean convertToTiff() {
+    public void convertToTiff() throws Exception{
         fTiffSource = new File(workDir, task.getUuid() + ".tiff");
-        try {
-            boolean res = executeCommandLine(
-                    "gs -q -dNOPAUSE -r600 -sDEVICE=tiffg4 " +
-                            "-sOutputFile=" + fTiffSource.getAbsolutePath() +
-                            " " + fSourceClone.getAbsolutePath() +
-                            " -sCompression=none -c quit");
-            return res && fTiffSource.exists();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        boolean res = executeCommandLine(
+                "gs -q -dNOPAUSE -r600 -sDEVICE=tiffg4 " +
+                        "-sOutputFile=" + fTiffSource.getAbsolutePath() +
+                        " " + fSourceClone.getAbsolutePath() +
+                        " -sCompression=none -c quit");
+        if(!fTiffSource.exists())
+            throw new Exception("Error converting file to tiff image format");
     }
 
-    public boolean execTesseract() {
+    public void execTesseract() throws Exception {
         fTiffSource = new File(workDir, task.getUuid() + ".tiff");
-        try {
-            fDestination = new File(workDir, task.getUuid() + "_res");
-            boolean res = executeCommandLine("tesseract -l rus " + fTiffSource.getAbsolutePath() +
-                    " " + fDestination.getAbsolutePath() + " pdf");
-            fDestination = new File(workDir, task.getUuid() + "_res.pdf");
 
-            if(res && fDestination.exists()) {
-                fResult = new File(outDir, task.getUuid() + ".pdf");
-                FileUtils.moveFile(fDestination, fResult);
-            } else
-                return false;
+        fDestination = new File(workDir, task.getUuid() + "_res");
+        boolean res = executeCommandLine("tesseract -l rus " + fTiffSource.getAbsolutePath() +
+                " " + fDestination.getAbsolutePath() + " pdf");
+        fDestination = new File(workDir, task.getUuid() + "_res.pdf");
 
-            fSourceClone.delete();
-            fTiffSource.delete();
+        if(fDestination.exists()) {
+            fResult = new File(outDir, task.getUuid() + ".pdf");
+            FileUtils.moveFile(fDestination, fResult);
+        } else
+            throw new Exception("Error during recognize document with tesseract");
 
-            compliteSuccess = fResult.exists();
-            return compliteSuccess;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+        fSourceClone.delete();
+        fTiffSource.delete();
 
-    private boolean compliteSuccess = false;
-
-    public boolean isCompliteSuccess() {
-        return compliteSuccess;
+        if(!fResult.exists())
+            throw new Exception("Error during move recognized file to output directory");
     }
 
     public File getResultFile() {

@@ -10,7 +10,7 @@ import java.sql.Date;
  * Задача для распознавания
  */
 @Entity
-@Table(name = "recognize_task")
+@Table(name = "RECOGNIZE_TASK")
 public class RecognizeTask implements IEntity {
 
     @Id

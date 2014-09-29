@@ -6,9 +6,10 @@ import kz.arta.ext.ocr.service.RecognizeTaskRepository;
 import kz.arta.ext.ocr.service.UploadService;
 import org.slf4j.Logger;
 
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.ejb.*;
 import javax.inject.Inject;
 import java.io.File;
 import java.sql.Date;
@@ -34,55 +35,88 @@ public class RecognizeManager {
     @Inject
     private UploadService uploadService;
 
-
     private String workDirPath;
     private String outDirPath;
     private long sleepTime;
 
-    @Schedule(second = "0", minute = "*", hour = "*")
+    @Resource
+    private TimerService timerService;
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("postConstruct invoked. Setting up timer...");
+        timerService.createSingleActionTimer(2000, new TimerConfig("start recognize manager", false));
+    }
+
+    private boolean isShutdown = false;
+
+    @PreDestroy
+    public void terminate() {
+        isShutdown = true;
+    }
+
+    @Timeout
     public void execute() {
-        if (!init())
-            return;
+        try {
+            log.info("RecognizeManager bean initialization starting.");
+            if (!init()) {
+                log.info("RecognizeManager bean initialization failed.");
+                return;
+            }
+            log.info("RecognizeManager bean initialization success.");
 
-        File workDir = new File(workDirPath);
-        File outDir = new File(outDirPath);
+            File workDir = new File(workDirPath);
+            File outDir = new File(outDirPath);
 
-        while (true) {
-            RecognizeTask task = repository.getNotCopmleteTask();
-            while (task != null) {
-                setTaskStarted(task);
-                Recognizer recognizer = new Recognizer(workDir, outDir, task);
-                if (recognizer.copySourceFileToWorkDir()) {
-                    log.info("converting source to tiff");
-                    if (recognizer.convertToTiff()) {
+            while (true) {
+                if(isShutdown)
+                    break;
+                RecognizeTask task = repository.getNotCopmleteTask();
+                while (task != null) {
+                    try {
+                        log.info("start recognizing file '" + task.getFilePath() + "'...");
+                        setTaskStarted(task);
+
+                        Recognizer recognizer = new Recognizer(workDir, outDir, task);
+
+                        log.info("coping file start");
+                        recognizer.copySourceFileToWorkDir();
+                        log.info("coping file finished successfull");
+
+                        log.info("converting source to tiff");
+                        recognizer.convertToTiff();
                         log.info("converting source to tiff finished");
+
                         log.info("recognize tiff to pdf");
-                        if (recognizer.execTesseract()) {
-                            log.info("recognize tiff to pdf finished with result - " + recognizer.isCompliteSuccess());
-                            if (recognizer.isCompliteSuccess()) {
-                                setTaskFinished(task, recognizer.getResultFile().getAbsolutePath());
-                            }
-                        }
+                        recognizer.execTesseract();
+                        log.info("recognize tiff to pdf finished success");
+
+                        log.info("result file is '" + recognizer.getResultFile().getAbsolutePath() + "'");
+                        setTaskFinished(task, recognizer.getResultFile().getAbsolutePath());
+
+                    } catch (Exception e) {
+                        setTaskError(task, e.getMessage());
+                        log.error("Error during recognize file '" + task.getFilePath() + "'", e);
+                    } finally {
+                        log.info("finished recognizing file '" + task.getFilePath() + "'");
                     }
-                }
 
-                if (!recognizer.isCompliteSuccess()) {
-                    setTaskError(task, "error");
+                    task = repository.getNotCopmleteTask();
                 }
-
-                task = repository.getNotCopmleteTask();
+                try {
+                    Thread.sleep(sleepTime * 1000);
+                } catch (InterruptedException e) {
+                    log.error("Thread.sleep() error", e);
+                }
             }
-            try {
-                Thread.sleep(sleepTime * 1000);
-            } catch (InterruptedException e) {
-                log.error("Thread.sleep() error", e);
-            }
+        } finally {
+            log.info("RecognizeManager bean finished");
         }
-
     }
 
     private void setTaskStarted(RecognizeTask task) {
         task.setDateStart(new Date(System.currentTimeMillis()));
+        task.setStarted(true);
         task.setDateEnd(null);
         task.setError(null);
         repository.update(task);
@@ -105,7 +139,6 @@ public class RecognizeManager {
     }
 
     private boolean init() {
-        log.info("Initialization starting.");
         workDirPath = checkDirectory(OCR_DIR_WORK_KEY);
         if (workDirPath == null)
             return false;
@@ -127,7 +160,6 @@ public class RecognizeManager {
             return false;
         }
 
-        log.info("Initialization success.");
         return true;
     }
 
