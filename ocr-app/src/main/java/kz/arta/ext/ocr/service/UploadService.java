@@ -40,7 +40,7 @@ public class UploadService {
         }
         boolean b = upload(filePath, tmpFilePath) &&
                 fileReader.createAttachment(ConfigUtils.getQueryContext(),
-                        task.getUuid(), task.getBookName() + ".txt", tmpFilePath);
+                        task.getDataUUID(), task.getBookName() + ".txt", tmpFilePath);
         task.setUploaded(b);
         return b;
 
