@@ -21,6 +21,7 @@ import java.sql.Date;
 @Startup
 public class RecognizeManager {
 
+    public static final String OCR_TEMP_DIR = "ocr.temp.dir";
     public static final String OCR_DIR_WORK_KEY = "ocr.dir.work";
     public static final String OCR_DIR_OUTPUT_KEY = "ocr.dir.output";
 

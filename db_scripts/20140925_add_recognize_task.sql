@@ -1,6 +1,7 @@
 CREATE TABLE RECOGNIZE_TASK  (
   ID        	bigint(20) AUTO_INCREMENT COMMENT 'идентификатор'  NOT NULL,
-  UUID      	varchar(100) NOT NULL,
+  DATA_UUID 	varchar(100) NOT NULL,
+  DOC_ID    	varchar(100) COMMENT 'docId документа'  NOT NULL,
   FILE_PATH 	varchar(4000) COMMENT 'сетевая папка сканов'  NOT NULL,
   STARTED   	bit(1) COMMENT 'запущено распознавание'  NULL DEFAULT b'0',
   DATE_ADD  	datetime COMMENT 'дата добавления задачи'  NOT NULL,

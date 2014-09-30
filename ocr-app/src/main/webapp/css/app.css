@@ -1,0 +1,37 @@
+.alert{
+    height: 100px;
+}
+
+
+.thumbnail {
+    line-height: 20px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    word-break: normal;
+}
+.thumbnail img {
+    max-width: 200px;
+    max-height: 150px;
+}
+
+.gallery-box {
+    width: 200px;
+    padding: 5px;
+    margin: 7px;
+    float: left;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.gallery-box .progress {
+    margin-bottom: 0;
+}
+.gallery-box .thumbnail {
+    height: 188px;
+    width: 188px;
+}
+.gallery-box .title {
+    height: 22px;
+    overflow: hidden;
+    display: block;
+}

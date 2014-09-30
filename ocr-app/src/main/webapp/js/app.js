@@ -2,11 +2,19 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('ocrapp',
-    [ 'ocrapp.controllers','ocrapp.services', 'ui.bootstrap'])
-
-//    .config(function ($routeProvider, $locationProvider) {
-//        $routeProvider.when('/', {templateUrl: 'index.html', controller: 'SearchCtrl'});
-//        $locationProvider.html5Mode(true);
-//    })
-
-;
+    [ 'ocrapp.controllers', 'flow'])
+    .config(['flowFactoryProvider', function (flowFactoryProvider) {
+        flowFactoryProvider.defaults = {
+            permanentErrors: [404, 500, 501],
+            testChunks: false,
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 4,
+            singleFile: false
+        };
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('catchAll', arguments);
+        });
+        // Can be used with different implementations of Flow.js
+        // flowFactoryProvider.factory = fustyFlowFactory;
+    }]);

@@ -3,22 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>OCR App</title>
-
-    <!--<link rel="stylesheet" href="css/style.css"/>-->
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <!--<link rel="stylesheet" href="css/app.css"/>-->
-    <link rel="stylesheet" href="css/font-awesome.css"/>
-    <!--<link rel="stylesheet" href="css/ngDialog.css"/>-->
-    <!--<link rel="stylesheet" href="css/ngDialog-theme-default.css"/>-->
-    <!--<link rel="stylesheet" href="css/ngDialog-theme-flat.css"/>-->
-    <style type="text/css">
-        .app-modal-window .modal-dialog {
-            width: 700px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">-->
 </head>
-<body ng-app="smsapp" ng-controller="SmsGatesCtrl">
+<body ng-app="ocrapp" ng-controller="UploadCtrl">
 <div class="navbar">
     <div class="container">
         <div class="navbar-header">
@@ -30,7 +20,7 @@
             </button>
             <a class="navbar-brand" href="/enu-smsapp/">
                 <!--   <img src="img/arta.png"/>-->
-                   <!--<i class="fa fa-book"></i>-->
+                <!--<i class="fa fa-book"></i>-->
                 <!--Электронная библиотека-->
             </a>
         </div>
@@ -45,72 +35,49 @@
     </div>
 </div>
 <div class="container">
-    <div class="page-header">
-        <h1>Сообщение поиска</h1>
-    </div>
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Подверждение</h3>
-        </div>
-        <div class="modal-body">
-            <b>Вы точно хотите удалить сообщение</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="okForm()">OK</button>
-            <button class="btn btn-warning" ng-click="cancelForm()">Cancel</button>
-        </div>
-    </script>
-    <div class="row">
-        <div style="position: fixed; top: 0; right: 0">
-            <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-        </div>
-        <button type="button" class="btn btn-default" ng-click="addGate()">
-            <span class="glyphicon glyphicon-plus"> Добавить сообщение</span>
-        </button>
-        <table class="table table-hover">
-            <thead>
-            <th>Наименование</th>
-            <th>Хост</th>
-            <th>Логин</th>
-            <th>Кодировка</th>
-            <th>Формат</th>
-            <th>Активный</th>
-            <th>Транслит</th>
-            <th>Очередь</th>
-            <th></th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="gate in gates">
-                <td>{{gate.nameSms}}</td>
-                <td>{{gate.sUrl}}</td>
-                <td>{{gate.sLogin}}</td>
-                <td>{{gate.sCharset}}</td>
-                <td>{{gate.sFormat}}</td>
-                <td> <input type="checkbox" ng-model="gate.enabled" disabled="true"></td>
-                <td><input type="checkbox" ng-model="gate.translit" disabled="true"></td>
-                <td>{{gate.sOrder}}</td>
-                <td>
-                    <div>
-                        <a ng-click="editGate(gate)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="removeGate(gate)"><span class="glyphicon glyphicon-remove"></span></a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
+    <div flow-init="{target: '/ocr-app/rest/ocr/upload'}"
+         flow-files-submitted="$flow.upload()"
+         flow-file-success="$file.msg = $message">
 
-        </table>
+        <input type="file" flow-btn/>
+        Загрузите сканы
+        <span class="btn" flow-btn>Загрузить файл</span>
+
+        <div class="alert alert-info" flow-drop>
+            Перетащите сюда сканы
+        </div>
+        <!--<table>-->
+            <!--<tr ng-repeat="file in $flow.files">-->
+                <!--<td>{{$index+1}}</td>-->
+                <!--<td>{{file.name}}</td>-->
+                <!--<td>{{file.msg}}</td>-->
+            <!--</tr>-->
+        <!--</table>-->
+        <div>
+            <div ng-repeat="file in $flow.files" class="gallery-box">
+                <span class="title">{{file.title}}</span>
+                <div class="thumbnail" ng-show="$flow.files.length">
+                    <img flow-img="file" />
+                </div>
+                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                         ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                        Удалить
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
+
 </div>
-<script src="lib/jquery.min.js"></script>
-<script src="lib/angular/angular.js"></script>
-<script src="lib/angular/angular-resource.js"></script>
-<script src="lib/angular/angular-route.js"></script>
-<script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
-<script src="lib/ng-infinite-scroll.js"></script>
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/ng-flow-standalone.min.js"></script>
 <script src="js/app.js"></script>
-<script src="js/services.js"></script>
-<script src="js/controllers/smsgate.js"></script>
-<script src="js/controllers/onegate.js"></script>
-<script src="js/filters.js"></script>
+<script src="js/controllers/upload.js"></script>
 </body>
 </html>

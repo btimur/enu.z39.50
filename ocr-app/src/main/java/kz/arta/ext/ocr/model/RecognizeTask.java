@@ -18,8 +18,11 @@ public class RecognizeTask implements IEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "UUID")
-    private String uuid;
+    @Column(name = "DATA_UUID")
+    private String dataUUID;
+
+    @Column(name = "DOC_ID")
+    private String docId;
 
     @Column(name = "BOOK_NAME")
     private String bookName;
@@ -59,12 +62,20 @@ public class RecognizeTask implements IEntity {
         this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getDataUUID() {
+        return dataUUID;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setDataUUID(String dataUUID) {
+        this.dataUUID = dataUUID;
+    }
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 
     public String getFilePath() {

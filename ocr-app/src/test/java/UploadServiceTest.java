@@ -38,7 +38,7 @@ public class UploadServiceTest {
         Assert.assertFalse(result);
 
         task.setFileEnd(ClassLoader.getSystemResource("min.doc").getPath());
-        task.setUuid("uuid");
+        task.setDocId("11-1");
         task.setCompleted(true);
 
         doReturn("tempFile").when(fileReader, "startUploadFile", any(RestQueryContext.class));

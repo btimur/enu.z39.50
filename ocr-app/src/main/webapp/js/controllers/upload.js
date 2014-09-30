@@ -5,7 +5,7 @@
 var app = angular.module('ocrapp.controllers', []);
 
 
-app.controller('SearchCtrl', function ($scope, $http, $modal, $location) {
+app.controller('UploadCtrl', function ($scope, $http, $location) {
 
 
 });
