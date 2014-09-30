@@ -22,6 +22,7 @@ import java.sql.Date;
 public class RecognizeManager {
 
     public static final String OCR_TEMP_DIR = "ocr.temp.dir";
+    public static final String OCR_DIR_INPUT_KEY = "ocr.dir.input";
     public static final String OCR_DIR_WORK_KEY = "ocr.dir.work";
     public static final String OCR_DIR_OUTPUT_KEY = "ocr.dir.output";
 
@@ -36,6 +37,7 @@ public class RecognizeManager {
     @Inject
     private UploadService uploadService;
 
+    private String inputDirPath;
     private String workDirPath;
     private String outDirPath;
     private long sleepTime;
@@ -66,6 +68,7 @@ public class RecognizeManager {
             }
             log.info("RecognizeManager bean initialization success.");
 
+            File inputDir = new File(inputDirPath);
             File workDir = new File(workDirPath);
             File outDir = new File(outDirPath);
 
@@ -78,7 +81,7 @@ public class RecognizeManager {
                         log.info("start recognizing file '" + task.getFilePath() + "'...");
                         setTaskStarted(task);
 
-                        Recognizer recognizer = new Recognizer(workDir, outDir, task);
+                        Recognizer recognizer = new Recognizer(inputDir, workDir, outDir, task);
 
                         log.info("coping file start");
                         recognizer.copySourceFileToWorkDir();
@@ -91,6 +94,10 @@ public class RecognizeManager {
                         log.info("recognize tiff to pdf");
                         recognizer.execTesseract();
                         log.info("recognize tiff to pdf finished success");
+
+                        log.info("concat pdf");
+                        recognizer.execConcatFiles();
+                        log.info("concat pdf finished success");
 
                         log.info("result file is '" + recognizer.getResultFile().getAbsolutePath() + "'");
                         setTaskFinished(task, recognizer.getResultFile().getAbsolutePath());
@@ -140,6 +147,10 @@ public class RecognizeManager {
     }
 
     private boolean init() {
+        inputDirPath = checkDirectory(OCR_DIR_INPUT_KEY);
+        if (inputDirPath == null)
+            return false;
+
         workDirPath = checkDirectory(OCR_DIR_WORK_KEY);
         if (workDirPath == null)
             return false;
