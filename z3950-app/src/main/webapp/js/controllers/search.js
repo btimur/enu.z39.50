@@ -8,6 +8,7 @@ var app = angular.module('z3950.controllers', []);
 app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, $location, $window) {
     $scope.hostPrefix = '';//http://localhost:8080';
     $scope.dataUUID = $location.search()['dataUUID'];
+    $scope.data = {registry: true, lib: false}
     $scope.formData = {
         maxResult: 10,
         term: $location.search()['isbn'],
@@ -25,6 +26,11 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
         $scope.libraries = data;
     });
 
+    $scope.resetLib = function(lib){
+        lib.showMulti = false;
+        lib.countResult = 0;
+    };
+
     $scope.loadBooks = function () {
         if (!angular.isUndefined($scope.books) && $scope.resultCount > $scope.books.length){
             $scope.formData.nextElement = $scope.books.length;
@@ -35,6 +41,8 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
     $scope.searchOne = function (libraryId) {
         $scope.formData.libraryId = libraryId;
         searchOneLibrary();
+        $scope.data.registry = false;
+        $scope.data.lib = true;
     };
 
     function searchOneLibrary() {
@@ -90,6 +98,7 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
                         if (lib.id == data.libraryId) {
                             lib.countResult = data.countResult;
                             lib.load = false;
+                            lib.showMulti = true;
                         }
                     });
 
@@ -110,6 +119,7 @@ app.controller('SearchCtrl', function ($scope, LibrariesFactory, $http, $modal, 
 
         } else if ($scope.librarySelected.length == 1) {
             $scope.formData.libraryId = $scope.librarySelected[0].id;
+            $scope.resetLib($scope.librarySelected[0]);
             searchOneLibrary();
         }
 

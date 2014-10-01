@@ -213,11 +213,12 @@
 
                 </ul>
             </tab>
-            <tab heading="Библиотеки">
+            <tab heading="Библиотеки" active='data.lib'>
                 <ul class="menu_main">
                     <li ng-repeat="lib in libraries">
                         <span>
-                            <input type="checkbox" ng-model="lib.useSearch"> {{lib.nameLib}}
+                            <input type="checkbox" ng-model="lib.useSearch" ng-click="resetLib(lib)"> {{lib.nameLib}}
+                            <a ng-click="searchOne(lib.id)" ng-show="lib.showMulti">{{lib.countResult}}</a>
                         </span>
                     </li>
                 </ul>
@@ -298,7 +299,7 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
 <script src="lib/angular/angular-route.js"></script>
-<script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
+<script src="lib/angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
 <script src="lib/ng-infinite-scroll.js"></script>
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
