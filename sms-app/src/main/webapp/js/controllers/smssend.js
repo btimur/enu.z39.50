@@ -5,7 +5,7 @@
 var app = angular.module('smsapp.controllers', []), sendQueryMessage;
 
 app.controller('SmsSendCtrl', function ($scope, $http) {
-    $scope.hostPrefix = 'http://localhost:8080';
+    $scope.hostPrefix = '';//http://localhost:8080';
     $scope.isDisabled = false;
     $scope.typemassage = 'info';
     $scope.alerts = [];
