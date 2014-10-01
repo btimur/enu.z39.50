@@ -14,7 +14,9 @@ import kz.arta.ext.sms.model.synergy.Order;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by timur on 8/28/2014 11:10 AM.
@@ -36,9 +38,30 @@ public class OrderReader extends AFormsReader {
         order.setDateofvidacha(fillDate(wrapper, "dateofvidacha"));
         order.setIin(getValue(wrapper, "iin"));
         order.setInvnum(getValue(wrapper, "invnum"));
-        order.setNameofbook(getValue(wrapper, "nameofbook"));
         order.setUserid(getValue(wrapper, "userid"));
+        order.setNameofbook(getValue(wrapper, "nameofbook"));
         return order;
+    }
+
+    private String GetNameBooks(RestQueryContext context, String UserId, Date srokvozvrata ) {
+        //todo получение списка книг
+        List<String> bookNames = new ArrayList<String>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean isFirst = true;
+        for (String intValue : bookNames) {
+            if(!isFirst)
+            {
+                stringBuilder.append(", ");
+            }
+            stringBuilder.append(intValue);
+            isFirst = false;
+        }
+
+        if (stringBuilder.toString().length() > kz.arta.ext.sms.util.CodeConstants.MAX_SIZE_NAMRBOOK) {
+            return String.format("кол-во %d книг", bookNames.size());
+        }
+            return stringBuilder.toString();
     }
 
     private String getValue(FormFieldsWrapper wrapper, String iin) {
