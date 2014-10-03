@@ -35,7 +35,13 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public SmsOrder findByOrderUid(String id) {
-        return em.createQuery("select l from SmsOrder l where l.dataUUID=?1", SmsOrder.class).setParameter(1,id ).getSingleResult();
+        List<SmsOrder> smsOrders= em.createQuery("select x from SmsOrder x where x.dataUUID=?1", SmsOrder.class)
+                .setParameter(1, id).getResultList();
+        if(smsOrders==null || smsOrders.size()==0)
+        {
+            return null;
+        }
+        return smsOrders.get(0);
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -59,14 +65,14 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<SmsOrder> getOrderByFilter(OrderFilterEntity orderFilterEntity) {
         if (StringUtils.isNullOrEmpty(orderFilterEntity.getTerm())) {
-            return em.createQuery("select x from SmsOrder x where x.dateofvidacha between ?1 and ?2 order by x.id desc ", SmsOrder.class)
+            return em.createQuery("select x from SmsOrder x where x.regDate between ?1 and ?2 order by x.id desc ", SmsOrder.class)
                     .setParameter(1, orderFilterEntity.getBeginDate())
                     .setParameter(2, orderFilterEntity.getEndDate())
                     .setFirstResult(orderFilterEntity.getPage() * orderFilterEntity.getPageSize())
                     .setMaxResults(orderFilterEntity.getPageSize())
                     .getResultList();
         }
-        return em.createQuery("select x from SmsOrder x where x.dateofvidacha between ?1 and ?2 and (x.fio like ?3 or x.iin like ?3 or x.nameofbook like ?3 or x.invnum like ?3) order by x.id desc", SmsOrder.class)
+        return em.createQuery("select x from SmsOrder x where x.regDate between ?1 and ?2 and (x.fio like ?3 or x.iin like ?3 or x.nameofbook like ?3 or x.invnum like ?3) order by x.id desc", SmsOrder.class)
                 .setParameter(1, orderFilterEntity.getBeginDate())
                 .setParameter(2, orderFilterEntity.getEndDate())
                 .setParameter(3, "%" + orderFilterEntity.getTerm() + "%")
@@ -79,11 +85,11 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
     public long getCountRecord(OrderFilterEntity orderFilterEntity) {
         javax.persistence.Query query;
         if (StringUtils.isNullOrEmpty(orderFilterEntity.getTerm())) {
-            query = em.createQuery("select count(x) from SmsOrder x where x.dateofvidacha between ?1 and ?2")
+            query = em.createQuery("select count(x) from SmsOrder x where x.regDate between ?1 and ?2")
                     .setParameter(1, orderFilterEntity.getBeginDate())
                     .setParameter(2, orderFilterEntity.getEndDate());
         } else {
-            query = em.createQuery("select count(x) from SmsOrder x where x.dateofvidacha between ?1 and ?2 and (x.fio like ?3 or x.iin like ?3 or x.nameofbook like ?3 or x.invnum like ?3) ")
+            query = em.createQuery("select count(x) from SmsOrder x where x.regDate between ?1 and ?2 and (x.fio like ?3 or x.iin like ?3 or x.nameofbook like ?3 or x.invnum like ?3) ")
                     .setParameter(1, orderFilterEntity.getBeginDate())
                     .setParameter(2, orderFilterEntity.getEndDate())
                     .setParameter(3, "%" + orderFilterEntity.getTerm() + "%");

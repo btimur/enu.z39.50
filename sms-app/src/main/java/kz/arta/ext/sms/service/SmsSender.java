@@ -91,7 +91,9 @@ public class SmsSender {
     private void saveJurnal(List<SmsOrder> smsOrders, SmsGate smsGate, UserAdditionalForm userAdditionalForm, String phone) {
 
         for (SmsOrder order : smsOrders) {
-            jurnalRepository.save(createJurnal(order, smsGate, userAdditionalForm, phone));
+            Jurnal jurnal =jurnalRepository.save(createJurnal(order, smsGate, userAdditionalForm, phone));
+            order.setJurnal(jurnal);
+
         }
     }
 
@@ -201,12 +203,18 @@ public class SmsSender {
     public boolean saveOrUpdateOrder(BlockSignalMessage blockSignalMessage, RestQueryContext context) {
 
         Order order = reader.readOrder(context, blockSignalMessage.getDataUUID());
+        logger.info("smsSend: read order by -{}", order.getDataUUID());
+
         SmsOrder smsOrder = smsOrderRepository.findByOrderUid(order.getDataUUID());
         boolean result = false;
         if (smsOrder == null) {
+            logger.info("smsSend: new  smsOrder order by -{}", order.getDataUUID());
             smsOrder = new SmsOrder();
+        } else {
+            logger.info("smsSend: exist  smsOrder order by -{}", order.getDataUUID());
         }
         smsOrder.setSrokvozvrata(order.getSrokvozvrata());
+        smsOrder.setUserid(order.getUserid());
         smsOrder.setDataUUID(order.getDataUUID());
         smsOrder.setDateofvidacha(order.getDateofvidacha());
         smsOrder.setNameofbook(order.getNameofbook());
@@ -225,8 +233,9 @@ public class SmsSender {
         smsOrder.setIin(userAdditionalForm.getIin());
         smsOrder.setRegDate(new Timestamp(new Date().getTime()));
         smsOrder.setExecuted(true);
+        smsOrder.setSended(false);
 
-        if (smsOrder.getId() == 0) {
+        if (smsOrder.getId() == null || smsOrder.getId() == 0) {
             smsOrderRepository.save(smsOrder);
             logger.info("smsSend: save new smsorder by order - {}", blockSignalMessage.getDataUUID());
 
@@ -246,12 +255,12 @@ public class SmsSender {
 
     public void runSmsSender() {
         List<String> userIds = smsOrderRepository.getDistinctUserId();
-        if(userIds==null || userIds.size()==0)
-        {
+        if (userIds == null || userIds.size() == 0) {
             logger.info("smsSend: smsorder list is empty");
             return;
         }
         for (String userId : userIds) {
+            logger.info("smsSend: smsorder userid - {}", userId);
             SendSmsByUserId(userId);
         }
     }
@@ -260,6 +269,9 @@ public class SmsSender {
         String DATE_FORMAT_NOW = "dd-MM-yy";
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
         List<SmsOrder> smsOrders = smsOrderRepository.getSmsOrdersByUserId(userId);
+        if (smsOrders != null) {
+            logger.info("smsSend: get list smsOrder count - {}", smsOrders.size());
+        }
         Map<String, List<SmsOrder>> dictionary = new HashMap<String, List<SmsOrder>>();
         for (SmsOrder smsOrder : smsOrders) {
             String dateStr = sdf.format(smsOrder.getSrokvozvrata());
@@ -275,7 +287,7 @@ public class SmsSender {
         for (String date : dictionary.keySet()) {
             logger.info("smsSend: send sms for by userId - {} date - {} count order - {}", userId, date, dictionary.get(date));
             RestQueryContext context = ConfigUtils.getQueryContext();
-            sendSms(userId,date, dictionary.get(date),context);
+            sendSms(userId, date, dictionary.get(date), context);
 
         }
     }
