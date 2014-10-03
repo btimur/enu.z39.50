@@ -48,7 +48,8 @@ public class OrderListener implements MessageListener {
         try {
             BlockSignalMessage blockSignalMessage = mapper.readValue(((TextMessage) message).getText(), BlockSignalMessage.class);
             log.info("smsSend: parsed message -{}", blockSignalMessage.toString());
-            sender.sendSms(blockSignalMessage, ConfigUtils.getQueryContext());
+            sender.saveOrUpdateOrder(blockSignalMessage, ConfigUtils.getQueryContext());
+//            sender.sendSms(blockSignalMessage, ConfigUtils.getQueryContext());
 
         } catch (IOException e) {
             log.error("error parse message", e);
