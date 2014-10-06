@@ -76,7 +76,7 @@ public class TestSearch  {
 //        library.setEncoding("cp1251");
     }
 
-    @Test
+//    @Test
     public void TestZ3950Searcher() throws Exception {
 
         SimpleSearch search = new SimpleSearch();

@@ -21,7 +21,7 @@ public class QLBuildTest {
         String pql = builder.createQueryString(simpleSeacrh);
         Assert.assertNotNull(pql);
 //        Assert.assertEquals(pql, "@attr 1=1035 @attr 2=3 @attr 3=3 \"test\"");
-        Assert.assertEquals(pql, "@attr 1=1035 @attr 5=1 \"test\"");
+        Assert.assertEquals(pql, "@attr 1=1016 @attr 5=1 \"test\"");
     }
 
     @Test
@@ -48,15 +48,16 @@ public class QLBuildTest {
 
         simpleSeacrh.setAddAuthor("author2");
         pql = builder.createQueryString(simpleSeacrh);
-        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @attr 1=1005 \"author2\"");
+//        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @attr 1=1005 \"author2\"");
+        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @attr 1=1003 \"author2\"");
 
         simpleSeacrh.setIssn("issn");
         pql = builder.createQueryString(simpleSeacrh);
-        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @and @attr 1=1005 \"author2\" @attr 1=8 \"issn\"");
+        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @and @attr 1=1003 \"author2\" @attr 1=8 \"issn\"");
 
         simpleSeacrh.setParallelTitle("title2");
         pql = builder.createQueryString(simpleSeacrh);
-        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @and @attr 1=1005 \"author2\" @and @attr 1=8 \"issn\" @attr 1=35 \"title2\"");
+        Assert.assertEquals(pql, "@and @attr 1=7 \"isbn\" @and @attr 1=1003 \"author2\" @and @attr 1=8 \"issn\" @attr 1=35 \"title2\"");
 
 
     }

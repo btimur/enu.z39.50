@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ENUSearch App</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <style>
+        ul[datepicker-popup-wrap] > li > .btn-group > button.btn-default {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="z3950" ng-controller="ExternalCtrl">
+<div class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/enu-z3950/">
+                <img src="img/arta.png"/>
+                <!--<i class="fa fa-book"></i>-->
+                <!--Электронная библиотека-->
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="/auth/login/"><i class="fa fa-sign-in"></i> Войти</a></li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+    <div class="page-header">
+        <h1>Доступ к Библиотеке</h1>
+    </div>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Подверждение</h3>
+        </div>
+        <div class="modal-body">
+            <b>Вы точно хотите удалить пользователя</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="okForm()">OK</button>
+            <button class="btn btn-warning" ng-click="cancelForm()">Cancel</button>
+        </div>
+    </script>
+    <div class="row">
+        <div style="position: fixed; top: 0; right: 0">
+            <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="addLib()">
+            <span class="glyphicon glyphicon-plus"> Добавить пользователя</span>
+        </button>
+        <table class="table table-hover">
+            <thead>
+            <th>Логин</th>
+            <th>Дата добавления</th>
+            <th>Дата окончания</th>
+            <th>Заблокирован</th>
+            <th>Описание</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ext in externals">
+                <td>{{ext.login}}</td>
+                <td>{{ext.dateAdd | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td>{{ext.dateEnd | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td>{{ext.block}}</td>
+                <td>{{ext.descr}}</td>
+                <td>
+                    <div>
+                        <a ng-click="editLib(ext)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="removeLib(ext)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
+<script src="lib/ng-password-strength.min.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="lib/underscore.string.min.js"></script>
+<script src="js/extapp.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers/external.js"></script>
+<script src="js/controllers/onepwd.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>

@@ -2,14 +2,20 @@ package test;
 
 import kz.arta.ext.api.data.FormData;
 import kz.arta.ext.api.data.FormFieldsWrapper;
-import kz.arta.ext.z3950.convert.IMarcConverter;
+import kz.arta.ext.common.util.CodeConstants;
 import kz.arta.ext.z3950.convert.UnimarcConverter;
 import kz.arta.ext.z3950.model.Book;
+import kz.arta.ext.z3950.model.FormatEnum;
+import kz.arta.ext.z3950.model.FormatField;
 import kz.arta.ext.z3950.model.SubIndex;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.rest.api.LibraryBookReader;
+import kz.arta.ext.z3950.service.DictionaryService;
+import kz.arta.ext.z3950.service.FormatFieldRepository;
+import kz.arta.ext.z3950.service.SubIndexRepository;
 import kz.arta.ext.z3950.util.SomeMarcStreamReader;
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,49 +25,79 @@ import org.marc4j.MarcStreamWriter;
 import org.marc4j.MarcWriter;
 import org.marc4j.marc.DataField;
 import org.marc4j.marc.Record;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.slf4j.Logger;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import static org.powermock.api.mockito.PowerMockito.*;
+import static org.powermock.api.mockito.PowerMockito.doReturn;
 
 /**
  * Created by timur on 8/11/2014 6:43 PM.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({UnimarcConverter.class})
-public class TestConverter {
+@PrepareForTest({UnimarcConverter.class, SubIndexRepository.class, FormatFieldRepository.class})
+public class ConverterTest {
 
-    private IMarcConverter converter;
+    @Spy
+    protected SubIndexRepository repository = new SubIndexRepository();
+    @Mock
+    private Logger logger;
+    @Mock
+    private DictionaryService dictionaryService;
+    @Spy
+    private FormatFieldRepository formatFieldRepository = new FormatFieldRepository();
+    @Spy
+    @InjectMocks
+    private UnimarcConverter converter = new UnimarcConverter();
+
     private Record record;
 
     @Before
     public void setUp() throws Exception {
+        String fieldsForBook = TestUtils.readResource("fieldsForBook-unimarc.json", CodeConstants.ENCODING_UFT_8);
+        ObjectMapper mapper = new ObjectMapper();
+        FormatField[] fields = mapper.readValue(fieldsForBook, FormatField[].class);
+        List<FormatField> listForBook = new ArrayList<FormatField>();
+        Collections.addAll(listForBook, fields);
+        doReturn(listForBook).when(formatFieldRepository, "getFieldsForBook", FormatEnum.UNIMARC.name());
+
+
+        String subfields = TestUtils.readResource("subfields-unimarc.json", CodeConstants.ENCODING_UFT_8);
+        FormatField[] fieldsForAttributes = mapper.readValue(subfields, FormatField[].class);
+        List<FormatField> attributes = new ArrayList<FormatField>();
+        Collections.addAll(attributes, fieldsForAttributes);
+        doReturn(attributes).when(formatFieldRepository, "getSubFieldsByFormat", FormatEnum.UNIMARC.name());
+
+
         InputStream input = ClassLoader.getSystemResourceAsStream("4.mrc");
         MarcReader reader = new SomeMarcStreamReader(input, "cp1251");
         record = reader.next();
-//        converter = new RusMarcConverter();
-        UnimarcConverter c = new UnimarcConverter();
-        converter = spy(c);
-        doNothing().when(converter, "fillSubindexes");
+        List<SubIndex> list = new ArrayList<SubIndex>();
+        list.add(new SubIndex("100", 'a', 1, 0, 7));
+        list.add(new SubIndex("100", 'a', 2, 8, 8));
+        list.add(new SubIndex("100", 'a', 3, 9, 12));
+        list.add(new SubIndex("100", 'a', 4, 13, 16));
+        list.add(new SubIndex("100", 'a', 5, 17, 19));
+        list.add(new SubIndex("100", 'a', 6, 20, 20));
+        list.add(new SubIndex("100", 'a', 7, 21, 21));
+        list.add(new SubIndex("100", 'a', 8, 22, 24));
+        list.add(new SubIndex("100", 'a', 9, 25, 25));
+        list.add(new SubIndex("100", 'a', 10, 26, 29));
+        list.add(new SubIndex("100", 'a', 11, 30, 33));
+        list.add(new SubIndex("100", 'a', 12, 34, 35));
+        doReturn(list).when(repository, "getFormatList", FormatEnum.UNIMARC.name());
 
-        Map<String, SubIndex> subindexes = new HashMap<String, SubIndex>();
-        subindexes.put("100a1", new SubIndex("100", 'a', 1, 0, 7));
-        subindexes.put("100a2", new SubIndex("100", 'a', 2, 8, 8));
-        subindexes.put("100a3", new SubIndex("100", 'a', 3, 9, 12));
-        subindexes.put("100a4", new SubIndex("100", 'a', 4, 13, 16));
-        subindexes.put("100a5", new SubIndex("100", 'a', 5, 17, 19));
-        subindexes.put("100a6", new SubIndex("100", 'a', 6, 20, 20));
-        subindexes.put("100a7", new SubIndex("100", 'a', 7, 21, 21));
-        subindexes.put("100a8", new SubIndex("100", 'a', 8, 22, 24));
-        subindexes.put("100a9", new SubIndex("100", 'a', 9, 25, 25));
-        subindexes.put("100a10", new SubIndex("100", 'a', 10, 26, 29));
-        subindexes.put("100a11", new SubIndex("100", 'a', 11, 30, 33));
-        subindexes.put("100a12", new SubIndex("100", 'a', 12, 34, 35));
-        field(UnimarcConverter.class, "subindexes").set(converter, subindexes);
+
+
+
     }
 
     @Test
@@ -92,7 +128,8 @@ public class TestConverter {
         Assert.assertNotNull(libraryBook.getF010a());
         Assert.assertEquals(libraryBook.getF010a(), "5-8046-0135-0");
         Assert.assertNotNull(libraryBook.getF700a());
-        Assert.assertEquals(libraryBook.getF700a(), "Эдди");//"Эдди С.Э."
+        Assert.assertEquals(libraryBook.getF700a().size(), 1);
+        Assert.assertEquals(libraryBook.getF700a().get(0), "Эдди");//"Эдди С.Э."
         Assert.assertNotNull(libraryBook.getF200a());
         Assert.assertEquals(libraryBook.getF200a(), "XML: справочник");
         Assert.assertNotNull(libraryBook.getF210d());
@@ -147,10 +184,10 @@ public class TestConverter {
 
 
         UnimarcConverter unimarcConverter = new UnimarcConverter();
-        Record record  = unimarcConverter.getMarcRecord(fieldsWrapper);
+        Record record = unimarcConverter.getMarcRecord(fieldsWrapper);
         Assert.assertNotNull(record);
-        Assert.assertNotNull(record.getControlNumberField().getData(),"7d4efde7-dda2-4e8f-b276-f848639033cf");
-        Assert.assertNotNull(((DataField) record.getVariableField("200")).getSubfield('a').getData(),"Математические методы синтеза слоистых структур");
+        Assert.assertNotNull(record.getControlNumberField().getData(), "7d4efde7-dda2-4e8f-b276-f848639033cf");
+        Assert.assertNotNull(((DataField) record.getVariableField("200")).getSubfield('a').getData(), "Математические методы синтеза слоистых структур");
         System.out.println(record.toString());
 
         OutputStream stream = null;

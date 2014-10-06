@@ -30,6 +30,7 @@ import java.util.List;
  */
 @Stateless
 public class ExporterForIndexer {
+    public static final int BUFFER_READ_BOOKS = 200;
     @SuppressWarnings("CdiInjectionPointsInspection")
     @Inject
     private Logger log;
@@ -57,14 +58,12 @@ public class ExporterForIndexer {
                 ExportIndexWrapper wrapper = new ExportIndexWrapper(registryFormUUID, i, i +1000) ;
                 ObjectMessage message = session.createObjectMessage();
                 message.setObject(wrapper);
-//                setText(registryFormUUID);
                 producer.send(message);
                 log.info("message sent");
             }
             ExportIndexWrapper wrapper = new ExportIndexWrapper(registryFormUUID, 50001, 20000000) ;
             ObjectMessage message = session.createObjectMessage();
             message.setObject(wrapper);
-//                setText(registryFormUUID);
             producer.send(message);
             log.info("message sent");
 
@@ -87,7 +86,7 @@ public class ExporterForIndexer {
     public boolean exportAsyncRegistry(ExportIndexWrapper wrapper) {
         try {
             int startRecord =wrapper.getStartPosition();
-            int recordsCount =200;
+            int recordsCount = BUFFER_READ_BOOKS;
             boolean nextResult;
             List<String> uuids = new ArrayList<String>();
             do{
@@ -99,7 +98,8 @@ public class ExporterForIndexer {
                     if (startRecord < wrapper.getEndPosition()){
                         Collections.addAll(uuids, dataUUIDs);
                     }else{
-                        uuids.addAll(Arrays.asList(dataUUIDs).subList(0, wrapper.getEndPosition() - startRecord));
+                        uuids.addAll(Arrays.asList(dataUUIDs).subList(0, wrapper.getEndPosition() - startRecord
+                                + dataUUIDs.length));
                         nextResult = false;
                     }
                     log.info("add load UUID - {}", uuids.size());
