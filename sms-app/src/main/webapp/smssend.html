@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="css/daterangepicker-bs3.css"/>
     <!--<link rel="stylesheet" href="css/app.css"/>-->
     <link rel="stylesheet" href="css/font-awesome.css"/>
-
+    <style type="text/css">
+    .contactListDiv .alert {
+        float: left;
+        padding: 1px;
+        margin-left: 3px;
+        margin-bottom: 1px;
+    }
+    </style>
     <!--<link rel="stylesheet" href="css/ngDialog.css"/>-->
     <!--<link rel="stylesheet" href="css/ngDialog-theme-default.css"/>-->
     <!--<link rel="stylesheet" href="css/ngDialog-theme-flat.css"/>-->
@@ -41,26 +48,35 @@
     </div>
 </div>
 <div class="container">
+
     <div style="position: fixed; top: 0; right: 0">
-        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+  <button type="button" ng-show="isShowClearBtn" class="btn btn-block" ng-click="clearAlert()">
+    <span style="float: left" class="glyphicon glyphicon-refresh"> Очистить</span>
+</button>
+        <alert  ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
     </div>
     <div class="page-header">
         <h1>Отправить сообщение</h1>
 
         <div class="form-group">
-            <input type="text"   typeahead-on-select="selectUserFio($item.userID)" ng-model="selectUserByFio" placeholder="ФИО" typeahead="address as address.title for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length='3' class="form-control">
-            <span>ИИН:{{selectedUserForm.iin}}</span>
-            <span>Телефон:{{selectedUserForm.phones}}</span>
-            <div style="float: right; ">
+            <input type="text" typeahead-on-select="selectUserFio($item.userID, $item.title)" ng-model="selectUserByFio"
+                   placeholder="ФИО" typeahead="address as address.title for address in getLocation($viewValue)"
+                   typeahead-loading="loadingLocations" typeahead-min-length='3' class="form-control">
+            <!--<span>ИИН:{{selectedUserForm.iin}}</span>-->
+            <!--<span>Телефон:{{selectedUserForm.phones}}</span>-->
+
+            <div class="contactListDiv">
+                <alert ng-repeat="contact in contacts" type="contact.type"  close="closeContacts($index)">{{contact.fullName}} ИИН:{{contact.iin}}; Телефоны:{{contact.phones}}</alert>
             </div>
 
         </div>
         <div class="form-group">
-        <textarea style="width: 100%" ng-model="noticeText" placeholder="Текст сообщение" maxlength="250"></textarea>
+            <textarea style="width: 100%; margin-top: 10px" ng-model="noticeText" placeholder="Текст сообщение"
+                      maxlength="250"></textarea>
         </div>
 
         <!--<div class="form-group">-->
-            <!--<textarea style="width: 100%" ng-model="replyText" placeholder="Результат отправки" readonly="true" disabled ="true"></textarea>-->
+        <!--<textarea style="width: 100%" ng-model="replyText" placeholder="Результат отправки" readonly="true" disabled ="true"></textarea>-->
         <!--</div>-->
 
         <button type="button" class="btn btn-default" ng-disabled="isDisabled" ng-click="sendMessage()">

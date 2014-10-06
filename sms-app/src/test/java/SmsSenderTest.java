@@ -102,9 +102,17 @@ public class SmsSenderTest {
 
 
     }
+    @Test
+    public void sendSms() throws IOException {
+
+         smsSender.runSmsSender();
+//        Mockito.verify(jurnalRepository, times(1)).save(any(Jurnal.class));
+//        Assert.assertTrue(result);
+
+    }
 
     @Test
-    public void testSend() throws IOException {
+    public void saveOrUpdateOrder() throws IOException {
 
         RestQueryContext context = new RestQueryContext();
         context.setAddress("http://test3.arta.kz/Synergy");
@@ -114,7 +122,7 @@ public class SmsSenderTest {
         message.setDocumentID("1");
         message.setDataUUID("1");
         message.setExecutionID("1");
-        boolean result = smsSender.sendSms(message, context);
+        boolean result = smsSender.saveOrUpdateOrder(message, context);
         Mockito.verify(jurnalRepository, times(1)).save(any(Jurnal.class));
         Assert.assertTrue(result);
 

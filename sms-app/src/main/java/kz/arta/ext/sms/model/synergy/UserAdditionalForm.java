@@ -14,13 +14,31 @@ public class UserAdditionalForm {
     private String name;
     private String editable;
     private String mandatory;
+    private String userId;
 
     private String fullName;
     private String[] phones;
     private String iin;
     private String message;
+    private String type;
 
    private String responceMessage;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getResponceMessage() {
         return responceMessage;

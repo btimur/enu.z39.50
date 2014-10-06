@@ -60,7 +60,12 @@ public class UserAdditionalFormReader extends AFormsReader {
     private boolean fillUseradditionalForm(RestQueryContext context, UserAdditionalForm userAdditionalForm) {
         FormFieldsWrapper wrapper = readFormData(context, userAdditionalForm.getDataUuid()).convertToWrapper();
         FormField phoneField = wrapper.getFormFieldMap().get(TELEPHONE);
-        String iinValue = wrapper.getFormFieldMap().get(CMP_LG67BO).getValue();
+
+        FormField iinField = wrapper.getFormFieldMap().get(CMP_LG67BO);
+        String iinValue =null;
+        if (iinField != null && !StringUtils.isNullOrEmpty(iinField.getValue())) {
+            iinValue=iinField.getValue();
+        }
 
         if (phoneField == null || StringUtils.isNullOrEmpty(phoneField.getValue())) {
             return true;
