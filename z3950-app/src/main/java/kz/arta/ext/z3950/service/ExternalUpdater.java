@@ -5,9 +5,15 @@ import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.z3950.model.External;
 import kz.arta.ext.z3950.util.CodeConstants;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
 
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.*;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by timur on 10/3/14.
@@ -18,6 +24,15 @@ public class ExternalUpdater {
 
     public static final String ZEBRA_CFG = "//zebra.cfg";
     public static final String ZEBRA_PWD = "//zebra.passwd";
+
+    @Inject
+    private Logger logger;
+
+    @Inject
+    private ExternalRepository repository;
+
+    @Inject
+    private ExternalLauncher launcher;
 
     public static String listLines(File file, String assertRow) throws IOException {
         String fileStr = FileUtils.readFileToString(file);
@@ -30,9 +45,26 @@ public class ExternalUpdater {
         return null;
     }
 
+    @Schedule(second = "0", minute = "*/5", hour = "*")
+    public void updateOld() {
+        Date current = new Date(Calendar.getInstance().getTimeInMillis());
+        logger.debug("remove old before {}", current);
+        List<External> list = repository.getOld(current);
+        for (External user : list) {
+            try {
+                remove(user);
+                logger.debug("remove older user {},  id - {}, dateEnd -{}", user.getLogin(),
+                        user.getId(), user.getDateEnd());
+            } catch (IOException e) {
+                logger.error("error remove user " + user.getId());
+            }
+        }
+    }
+
     public void update(External external) throws IOException {
         checkCfg(external, false);
         checkPwd(external, false);
+        restart();
     }
 
     private void checkPwd(External external, boolean delete) throws IOException {
@@ -41,6 +73,9 @@ public class ExternalUpdater {
         FileUtils.copyFile(file, filebak);
 
         String newRow = external.getLogin() + ":" + external.getPwd();
+        if (external.isBlock()){
+            newRow = "#" + newRow;
+        }
         String line = listLines(file, external.getLogin());
         addNewUserToPwd(file, filebak, newRow, !StringUtils.isNullOrEmpty(line), external.getLogin(), delete);
     }
@@ -116,7 +151,13 @@ public class ExternalUpdater {
     }
 
     public void remove(External external) throws IOException {
-         checkCfg(external, true);
-         checkPwd(external, true);
+        checkCfg(external, true);
+        checkPwd(external, true);
+        restart();
+    }
+
+    private void restart() {
+        launcher.launchSh(ConfigReader.getPropertyValue(CodeConstants.ZEBRA_PATH),
+                "sh", "restart.sh");
     }
 }

@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -58,4 +59,8 @@ public class ExternalRepository extends ARepository<External> {
         return External.class;
     }
 
+    public List<External> getOld(Date date) {
+        return em.createQuery("select x from External x where x.dateEnd < ?1", External.class)
+                .setParameter(1, date).getResultList();
+    }
 }

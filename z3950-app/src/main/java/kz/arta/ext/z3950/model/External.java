@@ -3,7 +3,7 @@ package kz.arta.ext.z3950.model;
 import kz.arta.ext.common.model.IEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Created by timur on 10/3/14.
@@ -15,8 +15,8 @@ public class External implements IEntity {
     private Long id;
     private String login;
     private String pwd;
-    private Timestamp dateAdd;
-    private Timestamp dateEnd;
+    private Date dateAdd;
+    private Date dateEnd;
     private boolean block;
     private String descr;
     private boolean deleted;
@@ -54,21 +54,21 @@ public class External implements IEntity {
 
     @Basic
     @Column(name = "DATE_ADD")
-    public Timestamp getDateAdd() {
+    public Date getDateAdd() {
         return dateAdd;
     }
 
-    public void setDateAdd(Timestamp dateAdd) {
+    public void setDateAdd(Date dateAdd) {
         this.dateAdd = dateAdd;
     }
 
     @Basic
     @Column(name = "DATE_END")
-    public Timestamp getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Timestamp dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 
@@ -100,7 +100,7 @@ public class External implements IEntity {
     }
 
     public void setDeleted(boolean isDeleted) {
-        this.deleted = deleted;
+        this.deleted = isDeleted;
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
