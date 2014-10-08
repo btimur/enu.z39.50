@@ -2,7 +2,7 @@ package test.service;
 
 import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.z3950.model.External;
-import kz.arta.ext.z3950.service.ExternalLauncher;
+import kz.arta.ext.common.service.ExternalLauncher;
 import kz.arta.ext.z3950.service.ExternalRepository;
 import kz.arta.ext.z3950.service.ExternalUpdater;
 import org.apache.commons.io.FileUtils;
@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

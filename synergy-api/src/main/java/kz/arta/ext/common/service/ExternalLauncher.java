@@ -1,10 +1,13 @@
-package kz.arta.ext.z3950.service;
+package kz.arta.ext.common.service;
 
 
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by timur on 9/2/2014 12:33 PM.
@@ -12,7 +15,6 @@ import java.io.*;
  */
 public class ExternalLauncher {
 
-    @SuppressWarnings("CdiInjectionPointsInspection")
     @Inject
     private Logger log;
 
@@ -25,7 +27,7 @@ public class ExternalLauncher {
             pb.redirectErrorStream(true);
             process = pb.start();
             process.waitFor();
-            OutputStream stdin = process.getOutputStream();
+//            OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
 
@@ -46,6 +48,7 @@ public class ExternalLauncher {
                 log.info(s);
             }
 
+            process.waitFor();
             int a = process.exitValue();
             log.info(" command{} return - {}", parametrs, a);
             return true;

@@ -1,10 +1,14 @@
 package kz.arta.ext.ocr.recognizer;
 
+import kz.arta.ext.api.config.ConfigReader;
+import kz.arta.ext.common.service.ExternalLauncher;
 import kz.arta.ext.ocr.model.RecognizeTask;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
+import javax.inject.Inject;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,45 +16,68 @@ import java.util.List;
 
 /**
  * Created by Администратор on 27.09.2014.
+ * работа с tesseract
  */
 public class Recognizer {
 
-    private File inputDir;
     private File workDir;
     private File outputDir;
 
+    private File tempWorkDir;
+
     private RecognizeTask task;
 
-    public Recognizer(File inputDir, File workDir, File outputDir, RecognizeTask task) {
-        this.inputDir = inputDir;
-        this.workDir = workDir;
-        this.outputDir = outputDir;
+    @Inject
+    private ExternalLauncher launcher;
+
+    @Inject
+    private Logger log;
+
+
+    public RecognizeTask getTask() {
+        return task;
+    }
+
+    public void setTask(RecognizeTask task) {
         this.task = task;
     }
 
-    private File tempWorkDir;
+    public File getWorkDir() {
+        return workDir;
+    }
+
+    public void setWorkDir(File workDir) {
+        this.workDir = workDir;
+    }
+
+    public File getOutputDir() {
+        return outputDir;
+    }
+
+    public void setOutputDir(File outputDir) {
+        this.outputDir = outputDir;
+    }
 
     public void copySourceFileToWorkDir() throws Exception {
         try {
-            File fSourceDir = new File(inputDir, task.getDocId());
+            File fSourceDir = new File(task.getFilePath());
             tempWorkDir = new File(workDir, task.getDocId());
             FileUtils.copyDirectory(fSourceDir, tempWorkDir);
         } catch (IOException e) {
+            log.error("error copy source to work for task {} ", task.getDocId());
             throw new Exception("Error during copy to work directory", e);
         }
     }
 
     public void convertToTiff() throws Exception{
         File[] files = tempWorkDir.listFiles();
-        for(File file: files) {
+        for(File file: files != null ? files : new File[0]) {
             if(file.getName().toLowerCase().endsWith(".pdf")) {
                 String fname = file.getName();
                 File fTiffSource = new File(tempWorkDir, fname.substring(0, fname.length() - 4) + ".tiff");
-                boolean res = executeCommandLine(
-                        "gs -q -dNOPAUSE -r600 -sDEVICE=tiffg4 " +
-                                "-sOutputFile=" + fTiffSource.getAbsolutePath() +
-                                " " + file.getAbsolutePath() +
-                                " -sCompression=none -c quit");
+                launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
+                        "sh", "convertToTiff.sh",
+                        fTiffSource.getPath(), file.getPath());
                 if(!fTiffSource.exists())
                     throw new Exception("Error converting file to tiff image format");
             }
@@ -61,12 +88,13 @@ public class Recognizer {
 
     public void execTesseract() throws Exception {
         File[] files = tempWorkDir.listFiles();
-        for(File file: files) {
+        for(File file: files != null ? files : new File[0]) {
             if(file.getName().toLowerCase().endsWith(".tiff")) {
                 String fname = file.getName();
                 File fDestination = new File(tempWorkDir, fname.substring(0, fname.length() - 5) + ".res");
-                boolean res = executeCommandLine("tesseract -l rus " + file.getAbsolutePath() +
-                        " " + fDestination.getAbsolutePath() + " pdf");
+                launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
+                        "sh", "execTesseract.sh",
+                        file.getPath(), fDestination.getPath());
                 fDestination = new File(tempWorkDir, fname.substring(0, fname.length() - 5) + ".res.pdf");
 
                 if(fDestination.exists()) {
@@ -89,14 +117,13 @@ public class Recognizer {
                 }
             });
             concatFile = new File(tempWorkDir, task.getDocId() + ".pdf");
-            StringBuffer buff = new StringBuffer(
-                    "gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=" + concatFile.getAbsolutePath() + " -dBATCH");
+            StringBuilder buff = new StringBuilder();
             for(File file: fileList) {
-                buff.append(" " + file.getAbsolutePath());
+                buff.append(" ").append(file.getAbsolutePath());
             }
-            System.out.println(buff.toString());
-            executeCommandLine(buff.toString());
-
+            log.info("result - {}", buff.toString());
+            launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
+                    "sh","execConcatFiles.sh", concatFile.getPath(), buff.toString());
             if(!concatFile.exists())
                 throw new Exception("Error during concating documents");
         } else {
@@ -111,10 +138,4 @@ public class Recognizer {
         return resultFile;
     }
 
-    private boolean executeCommandLine(String command) throws Exception {
-        Runtime rt = Runtime.getRuntime();
-        Process pr = rt.exec(command);
-        int res = pr.waitFor();
-        return res == 0;
-    }
 }

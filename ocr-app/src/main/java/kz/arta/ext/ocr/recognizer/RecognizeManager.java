@@ -22,7 +22,6 @@ import java.sql.Date;
 public class RecognizeManager {
 
     public static final String OCR_TEMP_DIR = "ocr.temp.dir";
-    public static final String OCR_DIR_INPUT_KEY = "ocr.dir.input";
     public static final String OCR_DIR_WORK_KEY = "ocr.dir.work";
     public static final String OCR_DIR_OUTPUT_KEY = "ocr.dir.output";
 
@@ -37,21 +36,23 @@ public class RecognizeManager {
     @Inject
     private UploadService uploadService;
 
-    private String inputDirPath;
     private String workDirPath;
     private String outDirPath;
     private long sleepTime;
 
     @Resource
     private TimerService timerService;
+    private boolean isShutdown = false;
+
+
+    @Inject
+    private Recognizer recognizer;
 
     @PostConstruct
     public void postConstruct() {
         log.info("postConstruct invoked. Setting up timer...");
         timerService.createSingleActionTimer(2000, new TimerConfig("start recognize manager", false));
     }
-
-    private boolean isShutdown = false;
 
     @PreDestroy
     public void terminate() {
@@ -68,12 +69,14 @@ public class RecognizeManager {
             }
             log.info("RecognizeManager bean initialization success.");
 
-            File inputDir = new File(inputDirPath);
+
             File workDir = new File(workDirPath);
             File outDir = new File(outDirPath);
+            recognizer.setWorkDir(workDir);
+            recognizer.setOutputDir(outDir);
 
             while (true) {
-                if(isShutdown)
+                if (isShutdown)
                     break;
                 RecognizeTask task = repository.getNotCopmleteTask();
                 while (task != null) {
@@ -81,7 +84,7 @@ public class RecognizeManager {
                         log.info("start recognizing file '" + task.getFilePath() + "'...");
                         setTaskStarted(task);
 
-                        Recognizer recognizer = new Recognizer(inputDir, workDir, outDir, task);
+                        recognizer.setTask(task);
 
                         log.info("coping file start");
                         recognizer.copySourceFileToWorkDir();
@@ -147,7 +150,7 @@ public class RecognizeManager {
     }
 
     private boolean init() {
-        inputDirPath = checkDirectory(OCR_DIR_INPUT_KEY);
+        String inputDirPath = checkDirectory(OCR_TEMP_DIR);
         if (inputDirPath == null)
             return false;
 
