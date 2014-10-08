@@ -22,7 +22,17 @@ public class UserAdditionalForm {
     private String message;
     private String type;
 
-   private String responceMessage;
+    private String SmsId;
+
+    public String getSmsId() {
+        return SmsId;
+    }
+
+    public void setSmsId(String smsId) {
+        SmsId = smsId;
+    }
+
+    private String responceMessage;
 
     public String getType() {
         return type;

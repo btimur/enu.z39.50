@@ -2,15 +2,13 @@ package kz.arta.ext.sms.rest;
 
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.*;
-import kz.arta.ext.sms.service.JurnalRepository;
-import kz.arta.ext.sms.service.SmsGateRepository;
-import kz.arta.ext.sms.service.SmsOrderRepository;
-import kz.arta.ext.sms.service.SmsSender;
+import kz.arta.ext.sms.service.*;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,6 +23,11 @@ public class SmsOrderService {
     @Inject
     private SmsOrderRepository repository;
 
+    @Inject
+    private SmsSender sender;
+
+    @Inject
+    private OldNotSendManager oldNotSendManager;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,4 +54,13 @@ public class SmsOrderService {
         return orderFilterEntity;
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("startSync")
+    public void startSync() throws IOException {
+        log.info("smsSend: run manual sender sms");
+        oldNotSendManager.CheckStatusOldOrder();
+        sender.runSmsSender();
+        log.info("smsSend: finish manual sender sms");
+    }
 }

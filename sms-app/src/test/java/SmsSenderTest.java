@@ -7,6 +7,7 @@ import kz.arta.ext.sms.rest.api.OrderReader;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
 import kz.arta.ext.sms.service.JurnalRepository;
 import kz.arta.ext.sms.service.SmsGateRepository;
+import kz.arta.ext.sms.service.SmsPlainSender;
 import kz.arta.ext.sms.service.SmsSender;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -59,6 +60,9 @@ public class SmsSenderTest {
 
     @InjectMocks
     private SmsSender smsSender;
+
+    @InjectMocks
+    private SmsPlainSender sendPlainSms;
 
 //    @InjectMocks
 //    private DictionaryService service;
@@ -130,7 +134,7 @@ public class SmsSenderTest {
 
     @Test
     public void testSendPlainSms(){
-        boolean result = smsSender.sendPlainSms("test", "ba7d7ebe-4cf3-4172-8d07-1b7e6355eaa0");
+        boolean result = sendPlainSms.sendPlainSms("test", "ba7d7ebe-4cf3-4172-8d07-1b7e6355eaa0");
         Mockito.verify(jurnalRepository, times(1)).save(any(Jurnal.class));
         Assert.assertTrue(result);
     }

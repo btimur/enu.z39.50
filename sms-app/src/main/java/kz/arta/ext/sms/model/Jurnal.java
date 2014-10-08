@@ -78,6 +78,20 @@ public class Jurnal implements IEntity{
      return String.format("%1$TD %1$TT", dateSend);
     }*/
 
+    /**
+     * смс ИД
+     */
+    @Column(name = "SMSID_SEND")
+    private String smsIdSend;
+
+    public String getSmsIdSend() {
+        return smsIdSend;
+    }
+
+    public void setSmsIdSend(String smsIdSend) {
+        this.smsIdSend = smsIdSend;
+    }
+
     public String getFio() {
         return fio;
     }

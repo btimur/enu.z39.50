@@ -73,7 +73,7 @@
             <th>ИИН</th>
             <th>Испольнить</th>
             <th>Отправлен</th>
-
+            <th>Кол-во попыток</th>
             <th></th>
             </thead>
             <tbody>
@@ -88,7 +88,11 @@
                     last-text="В Конец"
                     next-text="Следующий"
                     previous-text="Предыдущий" on-select-page="changed(page)"></pagination>
-
+        <div>
+            <button type="button" class="btn btn-default" ng-click="startSync()" style="float: right">
+                <span class="glyphicon glyphicon-play"> Отправить сообщение</span>
+            </button>
+            </div>
     </div>
 </div>
 <script src="lib/jquery.min.js"></script>

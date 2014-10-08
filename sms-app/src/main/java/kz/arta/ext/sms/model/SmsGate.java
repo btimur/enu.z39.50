@@ -91,12 +91,54 @@ public class SmsGate implements IEntity{
     @Column(name = "SUCESS_RESULT")
     private String sucessResult;
 
-
     /**
      * Шаблон сообщения
      */
     @Column(name = "MESSAGE_CONTEXT")
     private String messageContext;
+
+    /**
+     * Запрос на проверку статуса
+     */
+    @Column(name = "CHECK_STATUS")
+    private String checkStatusUrl;
+
+    /**
+     * Где указывается ид сообщение
+     */
+    @Column(name = "SMSID_START")
+    private String smsIdStart;
+
+    /**
+     * Положительный ответ по проверке статуса
+     */
+    @Column(name = "CHECK_STATUS_OK")
+    private String checkStatusOk;
+
+
+    public String getCheckStatusUrl() {
+        return checkStatusUrl;
+    }
+
+    public void setCheckStatusUrl(String checkStatusUrl) {
+        this.checkStatusUrl = checkStatusUrl;
+    }
+
+    public String getSmsIdStart() {
+        return smsIdStart;
+    }
+
+    public void setSmsIdStart(String smsIdStart) {
+        this.smsIdStart = smsIdStart;
+    }
+
+    public String getCheckStatusOk() {
+        return checkStatusOk;
+    }
+
+    public void setCheckStatusOk(String checkStatusOk) {
+        this.checkStatusOk = checkStatusOk;
+    }
 
     public String getMessageContext() {
         return messageContext;

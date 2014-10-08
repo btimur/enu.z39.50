@@ -97,6 +97,24 @@ public class SmsOrder implements IEntity{
     @Column(name = "SEND_DATE")
     private Timestamp sendDate;
 
+
+
+    /**
+     * кол-во попыток
+     */
+    @Column(name = "COUNT_TRY")
+    private Integer countTry;
+
+
+
+    public Integer getCountTry() {
+        return countTry;
+    }
+
+    public void setCountTry(Integer countTry) {
+        this.countTry = countTry;
+    }
+
     public Long getId() {
         return id;
     }
