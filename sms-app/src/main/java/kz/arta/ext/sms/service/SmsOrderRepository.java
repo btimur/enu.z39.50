@@ -35,10 +35,9 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public SmsOrder findByOrderUid(String id) {
-        List<SmsOrder> smsOrders= em.createQuery("select x from SmsOrder x where x.dataUUID=?1", SmsOrder.class)
+        List<SmsOrder> smsOrders = em.createQuery("select x from SmsOrder x where x.dataUUID=?1", SmsOrder.class)
                 .setParameter(1, id).getResultList();
-        if(smsOrders==null || smsOrders.size()==0)
-        {
+        if (smsOrders == null || smsOrders.size() == 0) {
             return null;
         }
         return smsOrders.get(0);
@@ -47,13 +46,14 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<String> getDistinctUserId() {
 
-        return em.createQuery("select distinct l.userid from SmsOrder l where l.executed=true and l.sended =false ", String.class).getResultList();
+        return em.createQuery("select distinct l.userid from SmsOrder l where l.executed=true and l.sended =false and l.countTry<?1", String.class).setParameter(1, CodeConstants.MAX_COUNT_TRY_SEND).getResultList();
     }
 
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<SmsOrder> getSmsOrdersByUserId(String userId) {
-        return em.createQuery("select l from SmsOrder l where l.executed=true and l.sended =false and l.userid=?1", SmsOrder.class)
+        return em.createQuery("select l from SmsOrder l where l.executed=true and l.sended =false and l.userid=?1  and l.countTry<?2", SmsOrder.class)
                 .setParameter(1, userId)
+                .setParameter(2, CodeConstants.MAX_COUNT_TRY_SEND)
                 .getResultList();
     }
 
@@ -108,14 +108,18 @@ public class SmsOrderRepository extends ARepository<SmsOrder> {
     }
 
     public void updateListWtithResult(List<SmsOrder> smsOrders, boolean result) {
-        for(SmsOrder smsOrder : smsOrders)
-        {
+        for (SmsOrder smsOrder : smsOrders) {
             smsOrder.setSended(result);
-            if(result)
-            {
-                smsOrder.setSendDate(new Timestamp(new Date().getTime()));
-            }
+            smsOrder.setSendDate(new Timestamp(new Date().getTime()));
+            smsOrder.setCountTry(smsOrder.getCountTry() + 1);
             update(smsOrder);
         }
+    }
+
+    public List<SmsOrder> GetListNotSendFirstTime() {
+        return em.createQuery("select l from SmsOrder l where l.executed=true and l.sended =false and l.countTry between ?1 and ?2", SmsOrder.class)
+                .setParameter(1, 1)
+                .setParameter(2, CodeConstants.MAX_COUNT_TRY_SEND)
+                .getResultList();
     }
 }

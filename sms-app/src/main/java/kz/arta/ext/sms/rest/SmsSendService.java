@@ -4,8 +4,7 @@ import kz.arta.ext.sms.model.SmsWrapper;
 import kz.arta.ext.sms.model.synergy.UserAdditionalForm;
 import kz.arta.ext.sms.model.synergy.UserChooser;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
-import kz.arta.ext.sms.service.SmsSender;
-import kz.arta.ext.sms.util.CodeConstants;
+import kz.arta.ext.sms.service.SmsPlainSender;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -29,7 +28,7 @@ public class SmsSendService {
     private UserAdditionalFormReader userAdditionalFormReader;
 
     @Inject
-    private SmsSender smsSender;
+    private SmsPlainSender sendPlainSms;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +49,7 @@ public class SmsSendService {
     @Path("sendMessage")
     public SmsWrapper sendMessage(@QueryParam("userId") String userId, @QueryParam("message") String message) throws IOException {
         SmsWrapper smsWrapper = new SmsWrapper();
-        smsWrapper.setSuccess(smsSender.sendPlainSms(message,userId));
+        smsWrapper.setSuccess(sendPlainSms.sendPlainSms(message,userId));
         return smsWrapper;
 
 

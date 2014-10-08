@@ -9,5 +9,6 @@ public class CodeConstants {
     public static final String SEND_SUCCESS = "Отправлен";
     public static final String SEND_ERROR = "Ошибка при отправки";
     public static final int MAX_SIZE_NAMRBOOK = 50;
+    public static final int MAX_COUNT_TRY_SEND = 3;
 
 }

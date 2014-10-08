@@ -63,4 +63,5 @@ public class SmsGateRepository  extends ARepository<SmsGate> {
         return SmsGate.class;
     }
 
+
 }

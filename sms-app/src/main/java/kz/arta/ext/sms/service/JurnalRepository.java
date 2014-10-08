@@ -99,4 +99,22 @@ public class JurnalRepository extends ARepository<Jurnal> {
         return Jurnal.class;
     }
 
+    public List<Jurnal> getListNotSendByOrderUid(String dataUUID) {
+        return em.createQuery("select x from Jurnal x where x.orderUUID=?1 and x.smsIdSend is not null", Jurnal.class)
+                .setParameter(1, dataUUID)
+                .getResultList();
+    }
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void changeJurnalResult(long id, String result)
+    {
+        Jurnal jurnal = em.find(Jurnal.class,id);
+        jurnal.setResult(result);
+        em.merge(jurnal);
+
+
+//        Jurnal jurnal = em.createQuery("select l from Jurnal l where l.id=?1", Jurnal.class).setParameter(1, id).getSingleResult();
+//        jurnal.setResult(result);
+//        update(jurnal);
+    }
 }

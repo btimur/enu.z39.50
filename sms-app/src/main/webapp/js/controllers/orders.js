@@ -10,21 +10,22 @@ var app = angular.module('smsapp.controllers', ['ngBootstrap'])
                 showDetails: '&'
             },
             restrict: 'EA',
-            template:
-                '<td>{{item.dateofvidacha | date: "short"}}</td>' +
+            template: '<td>{{item.dateofvidacha | date: "short"}}</td>' +
                 '<td>{{item.srokvozvrata | date: "short"}}</td>' +
                 '<td>{{item.nameofbook}}</td>' +
                 '<td>{{item.fio}}</td>' +
                 '<td>{{item.iin}}</td>' +
-                '<td> <input type="checkbox" ng-model="item.executed" disabled="true"></td>'+
-                '<td> <input type="checkbox" ng-model="item.sended" disabled="true"></td>'+
+                '<td> <input type="checkbox" ng-model="item.executed" disabled="true"></td>' +
+                '<td> <input type="checkbox" ng-model="item.sended" disabled="true"></td>' +
+                '<td>{{item.countTry}}</td>' +
                 '<td><a ng-click="$parent.showDetails({selectedId: item.id});"><span class="glyphicon glyphicon-info-sign"></span></a></td>'
+
 
         }
 
     }), searchSmsOrders;
 
-app.controller('OrdersCtrl', function ($scope,  $modal, $http) {
+app.controller('OrdersCtrl', function ($scope, $modal, $http) {
     $scope.hostPrefix = '';//http://localhost:8080';
     $scope.alerts = [];
     $scope.maxSize = 10;
@@ -37,7 +38,7 @@ app.controller('OrdersCtrl', function ($scope,  $modal, $http) {
         searchSmsOrders();
     })
     $scope.changeTerm = function (term) {
-        $scope.searchModel=term;
+        $scope.searchModel = term;
         searchSmsOrders();
     };
 
@@ -57,7 +58,7 @@ app.controller('OrdersCtrl', function ($scope,  $modal, $http) {
         console.log(selectedId);
         $http({
             method: 'GET',
-            url: $scope.hostPrefix + '/sms-app/rest/order/'+selectedId.selectedId,
+            url: $scope.hostPrefix + '/sms-app/rest/order/' + selectedId.selectedId,
             headers: { 'Content-Type': 'application/json' },
             crossDomain: true
         })
@@ -85,14 +86,23 @@ app.controller('OrdersCtrl', function ($scope,  $modal, $http) {
     };
 
 
+    $scope.startSync = function () {
+        $http({
+            method: 'POST',
+            url: $scope.hostPrefix + '/sms-app/rest/order/startSync',
+            headers: { 'Content-Type': 'application/json' },
+            crossDomain: true
+        })
+    };
+
     searchSmsOrders = function () {
         if ($scope.myDateRange == null) {
             return;
         }
         var st = $scope.myDateRange.startDate;
         var end = $scope.myDateRange.endDate;
-        end = end.add(1,"days").subtract("hours", 1);
-        $scope.formData = {pageSize:   $scope.maxSize ,page: $scope.bigCurrentPage-1, term: $scope.searchModel, beginDate: st, endDate: end};
+        end = end.add(1, "days").subtract("hours", 1);
+        $scope.formData = {pageSize: $scope.maxSize, page: $scope.bigCurrentPage - 1, term: $scope.searchModel, beginDate: st, endDate: end};
 
         $http({
             method: 'POST',
@@ -103,7 +113,7 @@ app.controller('OrdersCtrl', function ($scope,  $modal, $http) {
         })
             .success(function (data) {
                 console.log(data);
-                $scope.countRecord =data.countRecord;
+                $scope.countRecord = data.countRecord;
                 $scope.orders = data.smsOrders;
 
             })
