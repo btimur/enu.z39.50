@@ -24,11 +24,11 @@ public class SmsSendManager {
     private OldNotSendManager oldNotSendManager;
 
 
-//    @Schedule(second = "0", minute ="*/10", hour = "*")
+    @Schedule(second = "0", minute ="0", hour = "*/1")
     public void runTask() throws IOException {
         log.info("smsSend: run task sender sms");
-//        oldNotSendManager.CheckStatusOldOrder();
-//        sender.runSmsSender();
+        oldNotSendManager.CheckStatusOldOrder();
+        sender.runSmsSender();
         log.info("smsSend: finish task sender sms");
     }
 }

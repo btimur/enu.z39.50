@@ -9,6 +9,7 @@ import kz.arta.ext.sms.util.CodeConstants;
 import kz.arta.ext.sms.util.Translit;
 import org.slf4j.Logger;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URLEncoder;

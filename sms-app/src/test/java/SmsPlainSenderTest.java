@@ -2,44 +2,35 @@ import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.sms.model.Jurnal;
 import kz.arta.ext.sms.model.SmsGate;
 import kz.arta.ext.sms.model.SmsOrder;
-import kz.arta.ext.sms.model.synergy.BlockSignalMessage;
 import kz.arta.ext.sms.rest.SmsQuery;
 import kz.arta.ext.sms.rest.api.OrderReader;
 import kz.arta.ext.sms.rest.api.UserAdditionalFormReader;
 import kz.arta.ext.sms.service.*;
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.mockito.cglib.transform.impl.AccessFieldTransformer;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
-import static org.powermock.api.mockito.PowerMockito.*;
+import static org.powermock.api.mockito.PowerMockito.doReturn;
+import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
- * Created by admin on 04.09.14.
- * тесты отправки
+ * Created by admin on 13.10.14.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({SmsSender.class, OrderReader.class, UserAdditionalFormReader.class, SmsOrder.class})
-public class SmsSenderTest {
-
-    static {
-        System.setProperty("jboss.server.config.dir", "configuration");
-    }
-
-    public static final String OK = "ok";
+public class SmsPlainSenderTest extends ACommonTest {
 
     @Spy
     private OrderReader reader = new OrderReader();
@@ -50,30 +41,19 @@ public class SmsSenderTest {
     @Spy
     private SmsGateRepository smsGateRepository = new SmsGateRepository();
 
-    @Spy
-    private SmsOrderRepository smsOrderRepository = new SmsOrderRepository();
-
-    @Mock
-    private Logger loggerMock;
-
     @Mock
     private JurnalRepository jurnalRepository;
 
+    @Spy
     @InjectMocks
-    private SmsSender smsSender;
+    private SmsSender smsSender = new SmsSender();
+
+    @Spy
+    @InjectMocks
+    private SendService sendService = new SendService();
 
     @InjectMocks
     private SmsPlainSender sendPlainSms;
-
-//    @InjectMocks
-//    private DictionaryService service;
-
-    public static String readResource(String resourceName, String encoding) throws IOException {
-        InputStream input = ClassLoader.getSystemResourceAsStream(resourceName);
-        StringWriter writer = new StringWriter();
-        IOUtils.copy(input, writer, encoding);
-        return writer.toString();
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -104,35 +84,7 @@ public class SmsSenderTest {
         smsGate.setTemplate("http://sssss.ru/sms/send?api_id=06d24b0b-4b81-7214-7d85-4f33f6711955&to=%ENU_PHONES%&text=%ENU_MSG%");
         smsGates.add(smsGate);
         doReturn(smsGates).when(smsGateRepository, "getActiveSmsGates");
-
-
     }
-    @Test
-    public void sendSms() throws IOException {
-
-         smsSender.runSmsSender();
-//        Mockito.verify(jurnalRepository, times(1)).save(any(Jurnal.class));
-//        Assert.assertTrue(result);
-
-    }
-
-    @Test
-    public void saveOrUpdateOrder() throws IOException {
-
-        RestQueryContext context = new RestQueryContext();
-        context.setAddress("http://test3.arta.kz/Synergy");
-        context.setLogin("1");
-        context.setPassword("1");
-        BlockSignalMessage message = new BlockSignalMessage();
-        message.setDocumentID("1");
-        message.setDataUUID("1");
-        message.setExecutionID("1");
-        boolean result = smsSender.saveOrUpdateOrder(message, context);
-        Mockito.verify(jurnalRepository, times(1)).save(any(Jurnal.class));
-        Assert.assertTrue(result);
-
-    }
-
     @Test
     public void testSendPlainSms(){
         boolean result = sendPlainSms.sendPlainSms("test", "ba7d7ebe-4cf3-4172-8d07-1b7e6355eaa0");
