@@ -35,7 +35,7 @@ public class OldNotSendManager {
     @Inject
     private JurnalRepository jurnalRepository;
 
-    public void CheckStatusOldOrder() throws IOException {
+    public boolean CheckStatusOldOrder() throws IOException {
 
         logger.info("smsSend.OldNotSendManager start");
         List<SmsOrder> smsOrders = smsOrderRepository.GetListNotSendFirstTime();
@@ -59,6 +59,7 @@ public class OldNotSendManager {
             }
 
         }
+        return res;
     }
 
 
