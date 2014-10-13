@@ -3,16 +3,14 @@ package kz.arta.ext.ocr.recognizer;
 import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.common.service.ExternalLauncher;
 import kz.arta.ext.ocr.model.RecognizeTask;
+import kz.arta.ext.ocr.util.RandomGUID;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Администратор on 27.09.2014.
@@ -62,6 +60,7 @@ public class Recognizer {
         try {
             File fSourceDir = new File(task.getFilePath());
             tempWorkDir = new File(workDir, task.getDocId());
+            FileUtils.deleteDirectory(tempWorkDir);
             FileUtils.copyDirectory(fSourceDir, tempWorkDir);
         } catch (IOException e) {
             log.error("error copy source to work for task {} ", task.getDocId());
@@ -69,17 +68,23 @@ public class Recognizer {
         }
     }
 
+    private String baseName;
+
     public void convertToTiff() throws Exception{
+        baseName = (new RandomGUID()).toString();
+        int index = 1;
+
         File[] files = tempWorkDir.listFiles();
+        Arrays.sort(files);
         for(File file: files != null ? files : new File[0]) {
             if(file.getName().toLowerCase().endsWith(".pdf")) {
                 String fname = file.getName();
                 File fTiffSource = new File(tempWorkDir, fname.substring(0, fname.length() - 4) + ".tiff");
-                launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
-                        "sh", "convertToTiff.sh",
-                        fTiffSource.getPath(), file.getPath());
-                if(!fTiffSource.exists())
-                    throw new Exception("Error converting file to tiff image format");
+                launcher.launchSh(tempWorkDir.getAbsolutePath(),
+                        "sh", "convertToTiff2.sh",
+                        fTiffSource.getAbsolutePath(), String.format("%s_%5d", baseName, index++));
+//                if(!fTiffSource.exists())
+//                    throw new Exception("Error converting file to tiff image format");
             }
         }
     }
@@ -87,27 +92,20 @@ public class Recognizer {
     private List<File> fileList = new ArrayList<File>();
 
     public void execTesseract() throws Exception {
-        File[] files = tempWorkDir.listFiles();
-        for(File file: files != null ? files : new File[0]) {
-            if(file.getName().toLowerCase().endsWith(".tiff")) {
-                String fname = file.getName();
-                File fDestination = new File(tempWorkDir, fname.substring(0, fname.length() - 5) + ".res");
-                launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
-                        "sh", "execTesseract.sh",
-                        file.getPath(), fDestination.getPath());
-                fDestination = new File(tempWorkDir, fname.substring(0, fname.length() - 5) + ".res.pdf");
-
-                if(fDestination.exists()) {
-                    fileList.add(fDestination);
-                } else
-                    throw new Exception("Error during recognize document with tesseract");
-            }
-        }
+        launcher.launchSh(tempWorkDir.getAbsolutePath(),
+                "sh", "execTesseract2.sh");
     }
 
     private File resultFile;
 
     public void execConcatFiles() throws Exception {
+        File[] files = tempWorkDir.listFiles();
+        for(File file: files) {
+            String filename = file.getName();
+            if(filename.startsWith(baseName) && filename.endsWith(".pdf"))
+                fileList.add(file);
+        }
+
         File concatFile;
         if (fileList.size() > 1) {
             Collections.sort(fileList, new Comparator<File>() {
@@ -122,7 +120,7 @@ public class Recognizer {
                 buff.append(" ").append(file.getAbsolutePath());
             }
             log.info("result - {}", buff.toString());
-            launcher.launchSh(ConfigReader.getPropertyValue(RecognizeManager.OCR_DIR_WORK_KEY),
+            launcher.launchSh(tempWorkDir.getAbsolutePath(),
                     "sh","execConcatFiles.sh", concatFile.getPath(), buff.toString());
             if(!concatFile.exists())
                 throw new Exception("Error during concating documents");

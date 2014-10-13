@@ -35,5 +35,6 @@ do
 		LAST_PAGE=$DOC_PAGE_COUNT
 	fi
 	echo '['$FIRST_PAGE']-['$LAST_PAGE']'
-	gs -q -dNOPAUSE -r600 -sDEVICE=tiffg4 -dBATCH -sCompression=none -sOutputFile=$2-$i.tiff -dFirstPage=$FIRST_PAGE -dLastPage=$LAST_PAGE $1
+    inputNo=$(printf "%04d" $i);
+	gs -q -dNOPAUSE -r600 -sDEVICE=tiffg4 -dBATCH -sCompression=none -sOutputFile=$2-$inputNo.tiff -dFirstPage=$FIRST_PAGE -dLastPage=$LAST_PAGE $1
 done
