@@ -92,6 +92,10 @@ public class Recognizer {
     private List<File> fileList = new ArrayList<File>();
 
     public void execTesseract() throws Exception {
+//        log.info("current tesseracrt dir  - {}", tempWorkDir.getPath());
+//        for (String file : tempWorkDir.list()){
+//            log.info("tempWorkDir has file {}", file);
+//        }
         launcher.launchSh(tempWorkDir.getPath(),
                 "sh", "../execTesseract2.sh");
     }

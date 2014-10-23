@@ -4,11 +4,13 @@ import kz.arta.ext.api.config.ConfigUtils;
 import kz.arta.ext.api.rest.FileReader;
 import kz.arta.ext.common.util.StringUtils;
 import kz.arta.ext.ocr.model.RecognizeTask;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -27,23 +29,37 @@ public class UploadService {
     private FileReader fileReader;
 
     public boolean uploadToServer(RecognizeTask task) {
-
+        logger.info("start upload file {},  to docId {}, name {}", task.getFileEnd(), task.getDocId(), task.getBookName());
         String filePath = task.getFileEnd();
         if (StringUtils.isNullOrEmpty(filePath)) {
             logger.error("error upload because recognise file is null");
             return false;
         }
         String tmpFilePath = fileReader.startUploadFile(ConfigUtils.getQueryContext());
+        logger.info("get temp file {}", tmpFilePath);
         if (StringUtils.isNullOrEmpty(filePath)) {
             logger.error("error on server create tempFile");
             return false;
         }
-        boolean b = upload(filePath, tmpFilePath) &&
+        boolean b =
+                doUpload(filePath, tmpFilePath) &&
                 fileReader.createAttachment(ConfigUtils.getQueryContext(),
-                        task.getDocId(), task.getBookName() + ".txt", tmpFilePath);
+                        task.getDocId(), task.getBookName() + ".pdf", tmpFilePath);
         task.setUploaded(b);
+        logger.info("end upload file {},  to docId {}, name {}", filePath, task.getDocId(), task.getBookName());
         return b;
 
+    }
+
+    private boolean doUpload(String filePath, String tmpFilePath) {
+//        return upload(filePath, tmpFilePath);
+        try {
+            FileUtils.copyFile(new File(filePath), new File(tmpFilePath), true);
+            return true;
+        } catch (IOException e) {
+            logger.error("error copy file",e);
+            return false;
+        }
     }
 
     private boolean upload(String filePath, String tmFile) {
@@ -58,12 +74,15 @@ public class UploadService {
                 buffer.append(line);
                 if (buffer.length() > BATCH_SIZE) {
                     upload = upload && fileReader.uploadPart(ConfigUtils.getQueryContext(), tmFile, buffer.toString());
+                    logger.info("upload chunk to server file - {},  result - {}", tmFile, upload);
                     buffer.setLength(0);
                 }
             }
             if (buffer.length() > 0) {
                 upload = upload && fileReader.uploadPart(ConfigUtils.getQueryContext(), tmFile, buffer.toString());
+                logger.info("upload chunk to server file - {},  result - {}", tmFile, upload);
             }
+
             result = upload;
         } catch (FileNotFoundException e) {
             logger.error("can't find file = {}", filePath);

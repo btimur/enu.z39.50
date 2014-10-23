@@ -13,6 +13,7 @@ import javax.ejb.*;
 import javax.inject.Inject;
 import java.io.File;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Класс - менеджер распознования PDF-документов
@@ -126,7 +127,7 @@ public class RecognizeManager {
     }
 
     private void setTaskStarted(RecognizeTask task) {
-        task.setDateStart(new Date(System.currentTimeMillis()));
+        task.setDateStart(new Timestamp(System.currentTimeMillis()));
         task.setStarted(true);
         task.setDateEnd(null);
         task.setError(null);
@@ -134,19 +135,22 @@ public class RecognizeManager {
     }
 
     private void setTaskError(RecognizeTask task, String errorMessage) {
-        task.setDateEnd(new Date(System.currentTimeMillis()));
+        task.setDateEnd(new Timestamp(System.currentTimeMillis()));
         task.setError(errorMessage);
         task.setCompleted(true);
         repository.update(task);
     }
 
     private void setTaskFinished(RecognizeTask task, String resultFilepath) {
-        task.setDateEnd(new Date(System.currentTimeMillis()));
+        task.setDateEnd(new Timestamp(System.currentTimeMillis()));
         task.setError(null);
         task.setCompleted(true);
         task.setFileEnd(resultFilepath);
-        repository.update(task);
+
+        log.info("start uploadToServer");
         uploadService.uploadToServer(task);
+        log.info(" end uploadToServer");
+        repository.update(task);
     }
 
     private boolean init() {
@@ -181,7 +185,7 @@ public class RecognizeManager {
     private String checkDirectory(String paratemerKey) {
         String dirPath = ConfigReader.getPropertyValue(paratemerKey);
         if (dirPath == null) {
-            log.error("parameter '" + OCR_DIR_WORK_KEY + "' not set. Please, set it!");
+            log.error("parameter '" + paratemerKey + "' not set. Please, set it!");
             return null;
         }
 

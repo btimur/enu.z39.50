@@ -4,6 +4,7 @@ import kz.arta.ext.common.model.IEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by timur on 9/25/14.
@@ -34,13 +35,13 @@ public class RecognizeTask implements IEntity {
     private boolean started;
 
     @Column(name = "DATE_ADD")
-    private Date dateAdd;
+    private Timestamp dateAdd;
 
     @Column(name = "DATE_START")
-    private Date dateStart;
+    private Timestamp dateStart;
 
     @Column(name = "DATE_END")
-    private Date dateEnd;
+    private Timestamp dateEnd;
 
     @Column(name = "COMPLETED")
     private boolean completed;
@@ -94,27 +95,27 @@ public class RecognizeTask implements IEntity {
         this.started = started;
     }
 
-    public Date getDateAdd() {
+    public Timestamp getDateAdd() {
         return dateAdd;
     }
 
-    public void setDateAdd(Date dateAdd) {
+    public void setDateAdd(Timestamp dateAdd) {
         this.dateAdd = dateAdd;
     }
 
-    public Date getDateStart() {
+    public Timestamp getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(Timestamp dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public Timestamp getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(Timestamp dateEnd) {
         this.dateEnd = dateEnd;
     }
 

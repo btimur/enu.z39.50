@@ -33,8 +33,9 @@ public class FileReader extends RestQuery {
     public boolean uploadPart(RestQueryContext context, String file, String data) {
         try {
             log.debug("uploadPart size ={}", data.length());
-            String query = String.format("/rest/api/storage/uploadPart?file=%s",
-                    URLEncoder.encode(file, CodeConstants.ENCODING_UFT_8));
+            String query = String.format("/rest/api/storage/upload_part?file=%s",
+                    file);
+            log.info("query  - {}", query );
             String resultData = doPostQuery(context, query, data, "body");
             log.debug("resultData = {}", resultData);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -60,6 +61,7 @@ public class FileReader extends RestQuery {
             String data = String.format("docID=%s&path=ase:attachmentContainer&fileName=%s&filePath=%s&",
                     docId, URLEncoder.encode(fileName, CodeConstants.ENCODING_UFT_8),
                     URLEncoder.encode(filePath, CodeConstants.ENCODING_UFT_8));
+            log.info("query  - {}", query );
             String resultData = doPostBodyQuery(context, query, data);
             log.debug("resultData = {}", resultData);
             ObjectMapper objectMapper = new ObjectMapper();
