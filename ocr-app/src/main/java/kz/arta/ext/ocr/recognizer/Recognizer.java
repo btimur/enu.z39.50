@@ -119,15 +119,16 @@ public class Recognizer {
                 }
             });
             concatFile = new File(tempWorkDir, (new RandomGUID()).toString() + "_res.pdf");
-            StringBuilder buff = new StringBuilder();
+            StringBuilder buff = new StringBuilder("\"");
             for(File file: fileList) {
                 buff.append(" ").append(file.getPath());
             }
 
-            if(fileList != null && fileList.size() > 0)
-                buff.append(" ").append(fileList.get(fileList.size() - 1).getPath());
+//            if(fileList != null && fileList.size() > 0)
+//                buff.append(" ").append(fileList.get(fileList.size() - 1).getPath());
 
             log.info("result - {}", buff.toString());
+            buff.append("\"");
             launcher.launchSh(tempWorkDir.getPath(),
                     "sh","../execConcatFiles.sh", concatFile.getPath(), buff.toString());
             if(!concatFile.exists())
