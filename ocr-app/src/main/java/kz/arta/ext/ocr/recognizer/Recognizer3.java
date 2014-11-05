@@ -1,12 +1,10 @@
 package kz.arta.ext.ocr.recognizer;
 
-import kz.arta.ext.api.config.ConfigReader;
 import kz.arta.ext.common.service.ExternalLauncher;
 import kz.arta.ext.ocr.model.RecognizeTask;
 import kz.arta.ext.ocr.util.RandomGUID;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.io.*;
@@ -16,7 +14,7 @@ import java.util.*;
  * Created by Администратор on 27.09.2014.
  * работа с tesseract
  */
-public class Recognizer {
+public class Recognizer3 {
 
     private File workDir;
     private File outputDir;
@@ -62,29 +60,24 @@ public class Recognizer {
             tempWorkDir = new File(workDir, task.getDocId());
             FileUtils.deleteDirectory(tempWorkDir);
             FileUtils.copyDirectory(fSourceDir, tempWorkDir);
+
+            File imagesDir = new File(tempWorkDir, "images");
+            imagesDir.mkdir();
         } catch (IOException e) {
             log.error("error copy source to work for task {} ", task.getDocId());
             throw new Exception("Error during copy to work directory", e);
         }
     }
 
-    private String baseName;
-
     public void convertToTiff() throws Exception{
-        baseName = (new RandomGUID()).toString();
         int index = 1;
-
         File[] files = tempWorkDir.listFiles();
         Arrays.sort(files);
-        for(File file: files != null ? files : new File[0]) {
+        for(File file: files) {
             if(file.getName().toLowerCase().endsWith(".pdf")) {
-                String fname = file.getName();
-//                File fTiffSource = new File(tempWorkDir, fname.substring(0, fname.length() - 4) + ".tiff");
                 launcher.launchSh(tempWorkDir.getPath(),
-                        "sh", "../convertToTiff2.sh",
-                        file.getPath(), String.format("%s_%05d", baseName, index++));
-//                if(!fTiffSource.exists())
-//                    throw new Exception("Error converting file to tiff image format");
+                        "sh", "../work1_extract.sh",
+                                    file.getPath(), String.format("%05d", index++));
             }
         }
     }
@@ -92,50 +85,18 @@ public class Recognizer {
     private List<File> fileList = new ArrayList<File>();
 
     public void execTesseract() throws Exception {
-//        log.info("current tesseracrt dir  - {}", tempWorkDir.getPath());
-//        for (String file : tempWorkDir.list()){
-//            log.info("tempWorkDir has file {}", file);
-//        }
         launcher.launchSh(tempWorkDir.getPath(),
-                "sh", "../execTesseract2.sh");
+                "sh", "../work2_recognize.sh");
     }
 
     private File resultFile;
 
     public void execConcatFiles() throws Exception {
-        File[] files = tempWorkDir.listFiles();
-        for(File file: files) {
-            String filename = file.getName();
-            if(filename.startsWith(baseName) && filename.endsWith(".pdf"))
-                fileList.add(file);
-        }
-
-        File concatFile;
-        if (fileList.size() > 1) {
-            Collections.sort(fileList, new Comparator<File>() {
-                @Override
-                public int compare(File o1, File o2) {
-                    return o1.getName().compareTo(o2.getName());
-                }
-            });
-            concatFile = new File(tempWorkDir, (new RandomGUID()).toString() + "_res.pdf");
-            StringBuilder buff = new StringBuilder("\"");
-            for(File file: fileList) {
-                buff.append(" ").append(file.getPath());
-            }
-
-//            if(fileList != null && fileList.size() > 0)
-//                buff.append(" ").append(fileList.get(fileList.size() - 1).getPath());
-
-            log.info("result - {}", buff.toString());
-            buff.append("\"");
-            launcher.launchSh(tempWorkDir.getPath(),
-                    "sh","../execConcatFiles.sh", concatFile.getPath(), buff.toString());
-            if(!concatFile.exists())
-                throw new Exception("Error during concating documents");
-        } else {
-            concatFile = fileList.get(0);
-        }
+        File concatFile = new File(tempWorkDir, (new RandomGUID()).toString() + "_res.pdf");
+        launcher.launchSh(tempWorkDir.getPath(),
+                "sh","../execConcatFiles.sh", concatFile.getPath());
+        if(!concatFile.exists())
+            throw new Exception("Error during concating documents");
 
         resultFile = new File(outputDir, task.getDocId() + ".pdf");
         if(resultFile.exists())
