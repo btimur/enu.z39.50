@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ENUSearch App</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+</head>
+<body ng-app="sportapp" ng-controller="federationCtrl">
+<div class="form-group">
+
+
+    <button type="button" class="btn btn-default" ng-click="changeView()" ng-show="isViewButton">
+        <span class="glyphicon glyphicon-book"> {{titleView}}</span>
+    </button>
+    <button type="button" class="btn btn-default" ng-click="exportData()">
+        <span class="glyphicon glyphicon-export"> Экспорт</span>
+    </button>
+    <div id="exportableReg">
+        <table class="table table-hover" ng-show="isRegion">
+            <thead>
+            <tr>
+                <th style="text-align: left;border: 1px solid black">Наименование областей</th>
+                <th style="border: 1px solid black" data-ng-repeat="title in fdTitle">{{title}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="key in fdRegion">
+                <td  style="text-align: left">{{key}}</td>
+                <td ng-repeat="cell in records[key] track by $index">
+                    {{cell}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="exportableFed">
+        <table class="table table-hover" ng-show="!isRegion">
+            <thead>
+            <tr>
+                <th rowspan="2" style="text-align: left;border: 1px solid black"> {{title}}</th>
+                <th colspan="2" style="border: 1px solid black">Взрослая</th>
+                <th colspan="2" style="border: 1px solid black">Молодежная</th>
+                <th colspan="2" style="border: 1px solid black">Юниоры</th>
+                <th rowspan="2" style="border: 1px solid black">Итого</th>
+            </tr>
+            <tr>
+                <th>Муж</th>
+                <th>Жен</th>
+                <th>Муж</th>
+                <th>Жен</th>
+                <th>Муж</th>
+                <th>Жен</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr ng-repeat="ct in categories">
+                <td  style="text-align: left">{{ct.name}}</td>
+                <td>{{ct.adult.countMale}}</td>
+                <td>{{ct.adult.countFemale}}</td>
+                <td>{{ct.youth.countMale}}</td>
+                <td>{{ct.youth.countFemale}}</td>
+                <td>{{ct.junior.countMale}}</td>
+                <td>{{ct.junior.countFemale}}</td>
+                <td>{{ct.allCount}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<button type="button" class="btn btn-default" ng-click="syncData()" ng-show="false">
+    <span class="glyphicon glyphicon-refresh"> Синхранизация данных</span>
+</button>
+<script src="lib/FileSaver.js" type="text/javascript"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
+<script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/federation.js"></script>
+<script src="js/services.js"></script>
+</body>
+</html>
