@@ -16,4 +16,5 @@ public @interface ApiFormField {
     String nameField();
     boolean isList() default false;
     String parentTable() default "";
+    boolean isListKeyobject() default false;
 }

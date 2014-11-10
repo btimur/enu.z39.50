@@ -21,6 +21,8 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,10 +67,20 @@ public abstract class AMarcConverter implements IMarcConverter {
     public AMarcConverter() {
         dicCodes = new HashMap<String, String>();
         dicCodes.put("101a", "Язык основного текста");
+        dicCodes.put("101d", "Язык основного текста");
+        dicCodes.put("101e", "Язык основного текста");
+        dicCodes.put("101g", "Язык основного текста");
+        dicCodes.put("101h", "Язык основного текста");
+        dicCodes.put("101i", "Язык основного текста");
+        dicCodes.put("101j", "Язык основного текста");
+        dicCodes.put("200z", "Язык основного текста");
+        dicCodes.put("225z", "Язык основного текста");
+        dicCodes.put("510z", "Язык основного текста");
+        dicCodes.put("675z", "Язык основного текста");
         dicCodes.put("200b", "Материал (носитель)");
         dicCodes.put("9015", "Служебные отметки");
         dicCodes.put("908b", "Вид содержания");
-        dicCodes.put("908c", "Вид содержания");
+        dicCodes.put("908c", "Вид издания");
         dicCodes.put("901a", "Сигла");
     }
 
@@ -207,12 +219,26 @@ public abstract class AMarcConverter implements IMarcConverter {
                     }
                 } else if(value != null){
                     if (annotation !=null && annotation.isList()) {
-                        List<String> list  = (List<String>) pd.getReadMethod().invoke(libraryBook);
-                        if (list == null){
-                            list = new ArrayList<String>();
-                            pd.getWriteMethod().invoke(libraryBook, list);
+                        Object invoke = pd.getReadMethod().invoke(libraryBook);
+
+                        if(annotation.isListKeyobject()) {
+                            List<KeyObject> list  = (List<KeyObject>) invoke;
+                            if (list == null){
+                                list = new ArrayList<KeyObject>();
+                                pd.getWriteMethod().invoke(libraryBook, list);
+                            }
+                            KeyObject ko = getDictionaryKeyObject(field, subField, value);
+                            list.add(ko);
+                        }else{
+                            List<String> list  = (List<String>) invoke;
+                            if (list == null){
+                                list = new ArrayList<String>();
+                                pd.getWriteMethod().invoke(libraryBook, list);
+                            }
+                            list.add(value);
                         }
-                        list.add(value);
+
+
                     }else{
                         pd.getWriteMethod().invoke(libraryBook, value);
                     }
@@ -231,12 +257,16 @@ public abstract class AMarcConverter implements IMarcConverter {
     }
 
     private void fillDictionaryValue(LibraryBook libraryBook, PropertyDescriptor pd, String field, char subField, String value) throws IllegalAccessException, InvocationTargetException {
+        KeyObject keyObject = getDictionaryKeyObject(field, subField, value);
+        pd.getWriteMethod().invoke(libraryBook, keyObject);
+    }
+
+    private KeyObject getDictionaryKeyObject(String field, char subField, String value) {
         String sub = field + String.valueOf(subField);
         String dictionaryCode = getDictionaryCode(sub);
         logger.info("for field {} load dictionary -{}, value - {}",  sub, dictionaryCode, value);
         String key = dictionaryService.getDictionaryKey(dictionaryCode,value);
-        KeyObject keyObject = new KeyObject(key, value);
-        pd.getWriteMethod().invoke(libraryBook, keyObject);
+        return new KeyObject(key, value);
     }
 
     private String getDictionaryCode(String field) {
