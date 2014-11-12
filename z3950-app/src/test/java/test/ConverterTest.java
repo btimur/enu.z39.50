@@ -127,9 +127,9 @@ public class ConverterTest {
         Assert.assertNotNull(libraryBook);
         Assert.assertNotNull(libraryBook.getF010a());
         Assert.assertEquals(libraryBook.getF010a(), "5-8046-0135-0");
-        Assert.assertNotNull(libraryBook.getF700a());
-        Assert.assertEquals(libraryBook.getF700a().size(), 1);
-        Assert.assertEquals(libraryBook.getF700a().get(0), "Эдди");//"Эдди С.Э."
+//        Assert.assertNotNull(libraryBook.getF700a());
+//        Assert.assertEquals(libraryBook.getF700a().size(), 1);
+        Assert.assertEquals(libraryBook.getF700a(), "Эдди");//"Эдди С.Э."
         Assert.assertNotNull(libraryBook.getF200a());
         Assert.assertEquals(libraryBook.getF200a(), "XML: справочник");
         Assert.assertNotNull(libraryBook.getF210d());

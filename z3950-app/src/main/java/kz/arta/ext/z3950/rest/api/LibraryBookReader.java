@@ -7,6 +7,7 @@ import kz.arta.ext.api.data.RegistryRecord;
 import kz.arta.ext.api.rest.AFormsReader;
 import kz.arta.ext.api.rest.RestQueryContext;
 import kz.arta.ext.common.util.StringUtils;
+import kz.arta.ext.z3950.model.FormatField;
 import kz.arta.ext.z3950.model.synergy.KeyObject;
 import kz.arta.ext.z3950.model.synergy.LibraryBook;
 import kz.arta.ext.z3950.rest.ImportWrapper;
@@ -65,6 +66,18 @@ public class LibraryBookReader extends AFormsReader {
             if (StringUtils.isNullOrEmpty(formField.getValue()) &&
                     formField.getData() == null){
                 i.remove();
+            }else if(formField.getData() != null ) {
+                Iterator<FormField> a = formField.getData().iterator();
+                while (a.hasNext()){
+                    FormField child = a.next();
+                    if(StringUtils.isNullOrEmpty(child.getValue())){
+                        a.remove();
+                    }
+                }
+                if(formField.getData().size() == 0){
+                    i.remove();
+                }
+
             }
         }
     }
@@ -112,8 +125,17 @@ public class LibraryBookReader extends AFormsReader {
                     if (!annotation.isList()) {
                         formField.setValue(o != null ? o.toString() : null);
                     }else if (o !=null && annotation.isList()){
-                        List<String> list = (List<String>) o;
-                        formField.setValue(list.get(listFields.get(nameField.substring(0,4)) - 1));
+                        if(annotation.isListKeyobject()){
+                            List<KeyObject> list = (List<KeyObject>) o;
+                            KeyObject value = list.get(listFields.get(nameField.substring(0, 4)) - 1);
+                            formField.setValue(value.getNameRu());
+                            formField.setKey(value.getKey());
+                        } else {
+                            List<String> list = (List<String>) o;
+                            String value = list.get(listFields.get(nameField.substring(0, 4)) - 1);
+                            formField.setValue(value);
+                        }
+
                     }
                 }
 

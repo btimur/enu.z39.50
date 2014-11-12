@@ -36,7 +36,7 @@ public class User {
         return userid;
     }
 
-    public Object getPositions() {
+    public Object  getPositions() {
         return positions;
     }
 

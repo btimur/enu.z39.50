@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by timur on 04/08/2014 21:18.
+ * Книга в Synergy
  */
 public class LibraryBook {
     /**
@@ -23,14 +24,14 @@ public class LibraryBook {
     /**
      * Автор
      */
-    @ApiFormField(nameField = "700a",typeField = "textbox", isList = true, parentTable = "dyntable_700a")
-    private List<String> f700a;
+    @ApiFormField(nameField = "700a",typeField = "textbox")
+    private String f700a;
 
     /**
      * Номер ISBN
      */
-    @ApiFormField(nameField = "010a",typeField = "textbox")
-    private String f010a;
+    @ApiFormField(nameField = "010a",typeField = "textbox", isList = true, parentTable = "dyntable_010a")
+    private List<String> f010a;
 
     /**
      * Цена
@@ -41,8 +42,8 @@ public class LibraryBook {
     /**
      * Язык основного текста
      */
-    @ApiFormField(nameField = "101a",typeField = "listbox")
-    private KeyObject f101a;
+    @ApiFormField(nameField = "101a",typeField = "listbox", isList = true, parentTable = "dyntable_101a", isListKeyobject = true)
+    private List<KeyObject> f101a;
 
     /**
      * Заглавие
@@ -53,44 +54,44 @@ public class LibraryBook {
     /**
      * Материал(носитель)
      */
-    @ApiFormField(nameField = "200b",typeField = "listbox")
-    private KeyObject f200b;
+    @ApiFormField(nameField = "200b",typeField = "listbox", isList = true, parentTable = "dyntable_200b", isListKeyobject = true)
+    private List<KeyObject> f200b;
 
     /**
      * Параллельное заглавие
      */
-    @ApiFormField(nameField = "200d",typeField = "textbox")
-    private String f200d;
+    @ApiFormField(nameField = "200d",typeField = "textbox", isList = true, parentTable = "dyntable_200d")
+    private List<String> f200d;
 
     /**
      * Сведения, относящиеся к заглавию
      */
-    @ApiFormField(nameField = "200e",typeField = "textbox")
-    private String f200e;
+    @ApiFormField(nameField = "200e",typeField = "textbox", isList = true, parentTable = "dyntable_200e")
+    private List<String> f200e;
 
     /**
      * Сведения об ответственности
      */
-    @ApiFormField(nameField = "200f",typeField = "textbox")
-    private String f200f;
+    @ApiFormField(nameField = "200f",typeField = "textbox", isList = true, parentTable = "dyntable_200f")
+    private List<String> f200f;
 
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "200h",typeField = "textbox")
-    private String f200h;
+    @ApiFormField(nameField = "200h",typeField = "textbox", isList = true, parentTable = "dyntable_200h")
+    private List<String> f200h;
 
     /**
      * Название части
      */
-    @ApiFormField(nameField = "200i",typeField = "textbox")
-    private String f200i;
+    @ApiFormField(nameField = "200i",typeField = "textbox", isList = true, parentTable = "dyntable_200i")
+    private List<String> f200i;
 
     /**
      * Язык параллельного заглавия
      */
-    @ApiFormField(nameField = "200z",typeField = "textbox")
-    private String f200z;
+    @ApiFormField(nameField = "200z",typeField = "textbox", isList = true, parentTable = "dyntable_200z", isListKeyobject = true)
+    private List<KeyObject> f200z;
 
     /**
      * Сведения об издании
@@ -107,26 +108,26 @@ public class LibraryBook {
     /**
      * Место издания
      */
-    @ApiFormField(nameField = "210a",typeField = "textbox")
-    private String f210a;
+    @ApiFormField(nameField = "210a",typeField = "textbox", isList = true, parentTable = "dyntable_210a")
+    private List<String> f210a;
 
     /**
      * Издательство
      */
-    @ApiFormField(nameField = "210c",typeField = "textbox")
-    private String f210c;
+    @ApiFormField(nameField = "210c",typeField = "textbox", isList = true, parentTable = "dyntable_210c")
+    private List<String> f210c;
 
     /**
      * Год издания
      */
-    @ApiFormField(nameField = "210d",typeField = "textbox")
-    private String f210d;
+    @ApiFormField(nameField = "210d",typeField = "textbox", isList = true, parentTable = "dyntable_210d")
+    private List<String> f210d;
 
     /**
      * Объём
      */
-    @ApiFormField(nameField = "215a",typeField = "textbox")
-    private String f215a;
+    @ApiFormField(nameField = "215a",typeField = "textbox", isList = true, parentTable = "dyntable_215a")
+    private List<String> f215a;
 
     /**
      * Другие физические характеристики
@@ -137,32 +138,32 @@ public class LibraryBook {
     /**
      * Сопроводительный материал
      */
-    @ApiFormField(nameField = "215e",typeField = "textbox")
-    private String f215e;
+    @ApiFormField(nameField = "215e",typeField = "textbox", isList = true, parentTable = "dyntable_215e")
+    private List<String> f215e;
 
     /**
      * Заглавие серии
      */
-    @ApiFormField(nameField = "225a",typeField = "textbox")
-    private String f225a;
+    @ApiFormField(nameField = "225a",typeField = "textbox", isList = true, parentTable = "dyntable_225a")
+    private List<String> f225a;
 
     /**
      * Вид и объем электронного ресурса
      */
-    @ApiFormField(nameField = "230a",typeField = "textbox")
-    private String f230a;
+    @ApiFormField(nameField = "230a",typeField = "textbox", isList = true, parentTable = "dyntable_230a")
+    private List<String> f230a;
 
     /**
      * Общие примечания
      */
-    @ApiFormField(nameField = "300a",typeField = "textbox")
-    private String f300a;
+    @ApiFormField(nameField = "300a",typeField = "textbox", isList = true, parentTable = "dyntable_300a")
+    private List<String> f300a;
 
     /**
      * Примечание о содержании
      */
-    @ApiFormField(nameField = "327a",typeField = "textbox")
-    private String f327a;
+    @ApiFormField(nameField = "327a",typeField = "textbox", isList = true, parentTable = "dyntable_327a")
+    private List<String> f327a;
 
     /**
      * Сведения об издании источника
@@ -188,11 +189,11 @@ public class LibraryBook {
     @ApiFormField(nameField = "675a",typeField = "textbox")
     private String f675a;
 
-    /**
-     * Индекс ББК мас. библ
-     */
-    @ApiFormField(nameField = "907b",typeField = "textbox")
-    private String f907b;
+//    /**
+//     * Индекс ББК мас. библ
+//     */
+//    @ApiFormField(nameField = "907b",typeField = "textbox")
+//    private String f907b;
 
     /**
      * Прим. к электронному адресу
@@ -293,8 +294,8 @@ public class LibraryBook {
     /**
      * Ошибочный ISSN.
      */
-    @ApiFormField(nameField = "011z",typeField = "textbox")
-    private String f011z;
+    @ApiFormField(nameField = "011z",typeField = "textbox", isList = true, parentTable = "dyntable_011z")
+    private List<String> f011z;
 
     /**
      * Отпечатки пальцев
@@ -419,8 +420,8 @@ public class LibraryBook {
     /**
      * Ошибочный номер
      */
-    @ApiFormField(nameField = "020z",typeField = "textbox")
-    private String f020z;
+    @ApiFormField(nameField = "020z",typeField = "textbox", isList = true, parentTable = "dyntable_020z")
+    private List<String> f020z;
 
     /**
      * Код страны
@@ -455,8 +456,8 @@ public class LibraryBook {
     /**
      * Ошибочный номер
      */
-    @ApiFormField(nameField = "022z",typeField = "textbox")
-    private String f022z;
+    @ApiFormField(nameField = "022z",typeField = "textbox", isList = true, parentTable = "dyntable_022z")
+    private List<String> f022z;
 
     /**
      * Номер системы контроля
@@ -551,56 +552,56 @@ public class LibraryBook {
     /**
      * Язык резюме
      */
-    @ApiFormField(nameField = "101d",typeField = "textbox")
-    private String f101d;
+    @ApiFormField(nameField = "101d",typeField = "textbox", isList = true, parentTable = "dyntable_101d", isListKeyobject = true)
+    private List<KeyObject> f101d;
 
     /**
      * Язык оглавления
      */
-    @ApiFormField(nameField = "101e",typeField = "textbox")
-    private String f101e;
+    @ApiFormField(nameField = "101e",typeField = "textbox", isList = true, parentTable = "dyntable_101e", isListKeyobject = true)
+    private List<KeyObject> f101e;
 
     /**
      * Язык промежуточного перевода, когда каталогизируемый документ переводится с языка оригинала
      */
-    @ApiFormField(nameField = "101b",typeField = "textbox")
-    private String f101b;
+    @ApiFormField(nameField = "101b",typeField = "textbox", isList = true, parentTable = "dyntable_101b", isListKeyobject = true)
+    private List<KeyObject> f101b;
 
     /**
      * Язык оригинала
      */
-    @ApiFormField(nameField = "101c",typeField = "textbox")
-    private String f101c;
+    @ApiFormField(nameField = "101c",typeField = "textbox", isList = true, parentTable = "dyntable_101c", isListKeyobject = true)
+    private List<KeyObject> f101c;
 
     /**
      * Язык точного названия если это не основной язык текста, музыки из кинофильма и т.д
      */
-    @ApiFormField(nameField = "101g",typeField = "textbox")
-    private String f101g;
+    @ApiFormField(nameField = "101g",typeField = "textbox", isList = true, parentTable = "dyntable_101g", isListKeyobject = true)
+    private List<KeyObject> f101g;
 
     /**
      * Язык либретто
      */
-    @ApiFormField(nameField = "101h",typeField = "textbox")
-    private String f101h;
+    @ApiFormField(nameField = "101h",typeField = "textbox", isList = true, parentTable = "dyntable_101h", isListKeyobject = true)
+    private List<KeyObject> f101h;
 
     /**
      * язык сопроводительного материала (не кртакого изложения, резюме, либретто)
      */
-    @ApiFormField(nameField = "101i",typeField = "textbox")
-    private String f101i;
+    @ApiFormField(nameField = "101i",typeField = "textbox", isList = true, parentTable = "dyntable_101i", isListKeyobject = true)
+    private List<KeyObject> f101i;
 
     /**
      * Язык подзагловока
      */
-    @ApiFormField(nameField = "101j",typeField = "textbox")
-    private String f101j;
+    @ApiFormField(nameField = "101j",typeField = "textbox", isList = true, parentTable = "dyntable_101j", isListKeyobject = true)
+    private List<KeyObject> f101j;
 
     /**
      * Страна публикации
      */
-    @ApiFormField(nameField = "102a",typeField = "textbox")
-    private String f102a;
+    @ApiFormField(nameField = "102a",typeField = "textbox", isList = true, parentTable = "dyntable_102a", isListKeyobject = true)
+    private List<KeyObject> f102a;
 
     /**
      * Кодированные данные о книге
@@ -881,32 +882,32 @@ public class LibraryBook {
     /**
      * Основное заглавие произведения другого автора
      */
-    @ApiFormField(nameField = "200c",typeField = "textbox")
-    private String f200c;
+    @ApiFormField(nameField = "200c",typeField = "textbox", isList = true, parentTable = "dyntable_200c")
+    private List<String> f200c;
 
     /**
      * Последующие сведения об ответственности
      */
-    @ApiFormField(nameField = "200g",typeField = "textbox")
-    private String f200g;
+    @ApiFormField(nameField = "200g",typeField = "textbox", isList = true, parentTable = "dyntable_200g")
+    private List<String> f200g;
 
     /**
      * Обозначение тома
      */
-    @ApiFormField(nameField = "200v",typeField = "textbox")
-    private String f200v;
+    @ApiFormField(nameField = "200v",typeField = "textbox", isList = true, parentTable = "dyntable_200v")
+    private List<String> f200v;
 
     /**
      * Дополнительные сведения об издании
      */
-    @ApiFormField(nameField = "205b",typeField = "textbox")
-    private String f205b;
+    @ApiFormField(nameField = "205b",typeField = "textbox", isList = true, parentTable = "dyntable_205b")
+    private List<String> f205b;
 
     /**
      * Сведения об ответственности,  относящиеся к изданию
      */
-    @ApiFormField(nameField = "205f",typeField = "textbox")
-    private String f205f;
+    @ApiFormField(nameField = "205f",typeField = "textbox", isList = true, parentTable = "dyntable_205f")
+    private List<String> f205f;
 
     /**
      * Источник информации о нумерации
@@ -917,44 +918,44 @@ public class LibraryBook {
     /**
      * Размеры
      */
-    @ApiFormField(nameField = "215d",typeField = "textbox")
-    private String f215d;
+    @ApiFormField(nameField = "215d",typeField = "textbox", isList = true, parentTable = "dyntable_215d")
+    private List<String> f215d;
 
     /**
      * Параллельное заглавие серии
      */
-    @ApiFormField(nameField = "225d",typeField = "textbox")
-    private String f225d;
+    @ApiFormField(nameField = "225d",typeField = "textbox", isList = true, parentTable = "dyntable_225d")
+    private List<String> f225d;
 
     /**
      * Сведения, относящиеся к заглавию
      */
-    @ApiFormField(nameField = "225e",typeField = "textbox")
-    private String f225e;
+    @ApiFormField(nameField = "225e",typeField = "textbox", isList = true, parentTable = "dyntable_225e")
+    private List<String> f225e;
 
     /**
      * Сведения об ответственности
      */
-    @ApiFormField(nameField = "225f",typeField = "textbox")
-    private String f225f;
+    @ApiFormField(nameField = "225f",typeField = "textbox", isList = true, parentTable = "dyntable_225f")
+    private List<String> f225f;
 
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "225h",typeField = "textbox")
-    private String f225h;
+    @ApiFormField(nameField = "225h",typeField = "textbox", isList = true, parentTable = "dyntable_225h")
+    private List<String> f225h;
 
     /**
      * Наименование части
      */
-    @ApiFormField(nameField = "225i",typeField = "textbox")
-    private String f225i;
+    @ApiFormField(nameField = "225i",typeField = "textbox", isList = true, parentTable = "dyntable_225i")
+    private List<String> f225i;
 
     /**
      * Язык параллельного заглавия
      */
     @ApiFormField(nameField = "225z",typeField = "textbox")
-    private String f225z;
+    private KeyObject f225z;
 
     /**
      * Обозначение тома
@@ -1631,26 +1632,26 @@ public class LibraryBook {
     /**
      * Сведения, относящиеся к заглавию
      */
-    @ApiFormField(nameField = "510e",typeField = "textbox")
-    private String f510e;
+    @ApiFormField(nameField = "510e",typeField = "textbox", isList = true, parentTable = "dyntable_510e")
+    private List<String> f510e;
 
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "510h",typeField = "textbox")
-    private String f510h;
+    @ApiFormField(nameField = "510h",typeField = "textbox", isList = true, parentTable = "dyntable_510h")
+    private List<String> f510h;
 
     /**
      * Наименование части
      */
-    @ApiFormField(nameField = "510i",typeField = "textbox")
-    private String f510i;
+    @ApiFormField(nameField = "510i",typeField = "textbox", isList = true, parentTable = "dyntable_510i")
+    private List<String> f510i;
 
     /**
      * Язык заглавия
      */
     @ApiFormField(nameField = "510z",typeField = "textbox")
-    private String f510z;
+    private KeyObject f510z;
 
     /**
      * Заглавие обложки
@@ -1661,8 +1662,8 @@ public class LibraryBook {
     /**
      * Сведения, относящиеся к заглавию
      */
-    @ApiFormField(nameField = "512e",typeField = "textbox")
-    private String f512e;
+    @ApiFormField(nameField = "512e",typeField = "textbox", isList = true, parentTable = "dyntable_512e")
+    private List<String> f512e;
 
     /**
      * Добавочное заглавие титульного листа
@@ -1673,20 +1674,20 @@ public class LibraryBook {
     /**
      * Сведения относящиеся к заглавию
      */
-    @ApiFormField(nameField = "513e",typeField = "textbox")
-    private String f513e;
+    @ApiFormField(nameField = "513e",typeField = "textbox", isList = true, parentTable = "dyntable_513e")
+    private List<String> f513e;
 
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "513h",typeField = "textbox")
-    private String f513h;
+    @ApiFormField(nameField = "513h",typeField = "textbox", isList = true, parentTable = "dyntable_513h")
+    private List<String> f513h;
 
     /**
      * Наименование части
      */
-    @ApiFormField(nameField = "513i",typeField = "textbox")
-    private String f513i;
+    @ApiFormField(nameField = "513i",typeField = "textbox", isList = true, parentTable = "dyntable_513i")
+    private List<String> f513i;
 
     /**
      * Прежнее основное заглавие
@@ -1697,32 +1698,32 @@ public class LibraryBook {
     /**
      * Сведения, относящиеся к заглавию
      */
-    @ApiFormField(nameField = "520e",typeField = "textbox")
-    private String f520e;
+    @ApiFormField(nameField = "520e",typeField = "textbox", isList = true, parentTable = "dyntable_520e")
+    private List<String> f520e;
 
     /**
      * Номер части
      */
-    @ApiFormField(nameField = "520h",typeField = "textbox")
+    @ApiFormField(nameField = "520h",typeField = "textbox", isList = true, parentTable = "dyntable_520h")
     private String f520h;
 
     /**
      * Наименование части
      */
-    @ApiFormField(nameField = "520i",typeField = "textbox")
-    private String f520i;
+    @ApiFormField(nameField = "520i",typeField = "textbox", isList = true, parentTable = "dyntable_520i")
+    private List<String> f520i;
 
     /**
      * Тома или даты выхода документа под прежним заглавием
      */
-    @ApiFormField(nameField = "520j",typeField = "textbox")
-    private String f520j;
+    @ApiFormField(nameField = "520j",typeField = "textbox", isList = true, parentTable = "dyntable_520j")
+    private List<String> f520j;
 
     /**
      * ISSN прежнего заглавия
      */
-    @ApiFormField(nameField = "520x",typeField = "textbox")
-    private String f520x;
+    @ApiFormField(nameField = "520x",typeField = "textbox", isList = true, parentTable = "dyntable_520x")
+    private List<String> f520x;
 
     /**
      * Ключевое заглавие
@@ -1775,8 +1776,8 @@ public class LibraryBook {
     /**
      * Дополнения к имени
      */
-    @ApiFormField(nameField = "600c",typeField = "textbox")
-    private String f600c;
+    @ApiFormField(nameField = "600c",typeField = "textbox", isList = true, parentTable = "dyntable_600c")
+    private List<String> f600c;
 
     /**
      * Даты
@@ -1787,8 +1788,8 @@ public class LibraryBook {
     /**
      * Тематическая подрубрика
      */
-    @ApiFormField(nameField = "600x",typeField = "textbox")
-    private String f600x;
+    @ApiFormField(nameField = "600x",typeField = "textbox", isList = true, parentTable = "dyntable_600x")
+    private List<String> f600x;
 
     /**
      * Начальный элемент ввода
@@ -1799,14 +1800,14 @@ public class LibraryBook {
     /**
      * Структурное подразделение
      */
-    @ApiFormField(nameField = "601b",typeField = "textbox")
-    private String f601b;
+    @ApiFormField(nameField = "601b",typeField = "textbox", isList = true, parentTable = "dyntable_601b")
+    private List<String> f601b;
 
     /**
      * Дополнение к наименованию организации или уточнения
      */
-    @ApiFormField(nameField = "601c",typeField = "textbox")
-    private String f601c;
+    @ApiFormField(nameField = "601c",typeField = "textbox", isList = true, parentTable = "dyntable_601c")
+    private List<String> f601c;
 
     /**
      * Номер совещания
@@ -1853,15 +1854,19 @@ public class LibraryBook {
     /**
      * Тематическая подрубрика
      */
-    @ApiFormField(nameField = "605x",typeField = "textbox")
-    private String f605x;
+    @ApiFormField(nameField = "605x",typeField = "textbox", isList = true, parentTable = "dyntable_605x")
+    private List<String> f605x;
 
     /**
      * Географическая подрубрика
      */
-    @ApiFormField(nameField = "605y",typeField = "textbox")
-    private String f605y;
-
+    @ApiFormField(nameField = "605y",typeField = "textbox", isList = true, parentTable = "dyntable_605y")
+    private List<String> f605y;
+    /**
+     * Хронологическая подрубрика
+     */
+    @ApiFormField(nameField = "605z",typeField = "textbox", isList = true, parentTable = "dyntable_605z")
+    private List<String> f605z;
     /**
      * Хронологическая подрубрика
      */
@@ -1871,26 +1876,26 @@ public class LibraryBook {
     /**
      * НАчальный элемент ввода
      */
-    @ApiFormField(nameField = "606a",typeField = "textbox")
-    private String f606a;
+    @ApiFormField(nameField = "606a",typeField = "textbox", isList = true, parentTable = "dyntable_606a")
+    private List<String> f606a;
 
     /**
      * Тематическая подрубрика
      */
-    @ApiFormField(nameField = "606x",typeField = "textbox")
-    private String f606x;
+    @ApiFormField(nameField = "606x",typeField = "textbox", isList = true, parentTable = "dyntable_606x")
+    private List<String> f606x;
 
     /**
      * Географическая подрубрика
      */
-    @ApiFormField(nameField = "606y",typeField = "textbox")
-    private String f606y;
+    @ApiFormField(nameField = "606y",typeField = "textbox", isList = true, parentTable = "dyntable_606y")
+    private List<String> f606y;
 
     /**
      * Хронологическая подрубрика
      */
-    @ApiFormField(nameField = "606z",typeField = "textbox")
-    private String f606z;
+    @ApiFormField(nameField = "606z",typeField = "textbox", isList = true, parentTable = "dyntable_606z")
+    private List<String> f606z;
 
     /**
      * Начальный элемент ввода
@@ -1913,8 +1918,8 @@ public class LibraryBook {
     /**
      * Хронологическая подрубрика
      */
-    @ApiFormField(nameField = "607z",typeField = "textbox")
-    private String f607z;
+    @ApiFormField(nameField = "607z",typeField = "textbox", isList = true, parentTable = "dyntable_606z")
+    private List<String> f607z;
 
     /**
      * Издание
@@ -1926,25 +1931,25 @@ public class LibraryBook {
      * Язык издания
      */
     @ApiFormField(nameField = "675z",typeField = "textbox")
-    private String f675z;
+    private KeyObject f675z;
 
     /**
      * Индекс классификации
      */
-    @ApiFormField(nameField = "686a",typeField = "textbox")
-    private String f686a;
+    @ApiFormField(nameField = "686a",typeField = "textbox", isList = true, parentTable = "dyntable_686a")
+    private List<String> f686a;
 
     /**
      * Книжный номер
      */
-    @ApiFormField(nameField = "686b",typeField = "textbox")
-    private String f686b;
+    @ApiFormField(nameField = "686b",typeField = "textbox", isList = true, parentTable = "dyntable_686b")
+    private List<String> f686b;
 
     /**
      * Классификационная подрубрика
      */
-    @ApiFormField(nameField = "686c",typeField = "textbox")
-    private String f686c;
+    @ApiFormField(nameField = "686c",typeField = "textbox", isList = true, parentTable = "dyntable_686c")
+    private List<String> f686c;
 
     /**
      * Код системы
@@ -1961,8 +1966,8 @@ public class LibraryBook {
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "700c",typeField = "textbox")
-    private String f700c;
+    @ApiFormField(nameField = "700c",typeField = "textbox", isList = true, parentTable = "dyntable_700c")
+    private List<String> f700c;
 
     /**
      * Римские цифры
@@ -1997,14 +2002,14 @@ public class LibraryBook {
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "7004",typeField = "textbox")
-    private String f7004;
+    @ApiFormField(nameField = "7004",typeField = "textbox", isList = true, parentTable = "dyntable_7004")
+    private List<String> f7004;
 
     /**
      * Начальный элемент ввода (Фамилия)
      */
-    @ApiFormField(nameField = "701a",typeField = "textbox")
-    private String f701a;
+    @ApiFormField(nameField = "701a",typeField = "textbox", isList = true, parentTable = "dyntable_701a")
+    private List<String> f701a;
 
     /**
      * Часть имени, кроме начального элемента ввода
@@ -2015,8 +2020,8 @@ public class LibraryBook {
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "701c",typeField = "textbox")
-    private String f701c;
+    @ApiFormField(nameField = "701c",typeField = "textbox", isList = true, parentTable = "dyntable_701c")
+    private List<String> f701c;
 
     /**
      * Римские цифры
@@ -2033,8 +2038,8 @@ public class LibraryBook {
     /**
      * Расширение инициалов личного имени
      */
-    @ApiFormField(nameField = "701g",typeField = "textbox")
-    private String f701g;
+    @ApiFormField(nameField = "701g",typeField = "textbox", isList = true, parentTable = "dyntable_701g")
+    private List<String> f701g;
 
     /**
      * Место работы/адрес
@@ -2051,8 +2056,8 @@ public class LibraryBook {
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "7014",typeField = "textbox")
-    private String f7014;
+    @ApiFormField(nameField = "7014",typeField = "textbox", isList = true, parentTable = "dyntable_7014")
+    private List<String> f7014;
 
     /**
      * Начальный элемент ввода (Фамилия)
@@ -2069,8 +2074,8 @@ public class LibraryBook {
     /**
      * Дополнения к именам, кроме дат
      */
-    @ApiFormField(nameField = "702c",typeField = "textbox")
-    private String f702c;
+    @ApiFormField(nameField = "702c",typeField = "textbox", isList = true, parentTable = "dyntable_702c")
+    private List<String> f702c;
 
     /**
      * Римские цифры
@@ -2105,8 +2110,8 @@ public class LibraryBook {
     /**
      * Код отношений
      */
-    @ApiFormField(nameField = "7024",typeField = "textbox")
-    private String f7024;
+    @ApiFormField(nameField = "7024",typeField = "textbox", isList = true, parentTable = "dyntable_7024")
+    private List<String> f7024;
 
     /**
      * Начальный элемент ввода
@@ -2117,20 +2122,20 @@ public class LibraryBook {
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "710b",typeField = "textbox")
-    private String f710b;
+    @ApiFormField(nameField = "710b",typeField = "textbox", isList = true, parentTable = "dyntable_710b")
+    private List<String> f710b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "710c",typeField = "textbox")
-    private String f710c;
+    @ApiFormField(nameField = "710c",typeField = "textbox", isList = true, parentTable = "dyntable_710c")
+    private List<String> f710c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "710d",typeField = "textbox")
-    private String f710d;
+    @ApiFormField(nameField = "710d",typeField = "textbox", isList = true, parentTable = "dyntable_710d")
+    private List<String> f710d;
 
     /**
      * Место проведения совещания
@@ -2153,8 +2158,8 @@ public class LibraryBook {
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "710h",typeField = "textbox")
-    private String f710h;
+    @ApiFormField(nameField = "710h",typeField = "textbox", isList = true, parentTable = "dyntable_710h")
+    private List<String> f710h;
 
     /**
      * Местонахождение организации
@@ -2177,20 +2182,20 @@ public class LibraryBook {
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "711b",typeField = "textbox")
-    private String f711b;
+    @ApiFormField(nameField = "711b",typeField = "textbox", isList = true, parentTable = "dyntable_711b")
+    private List<String> f711b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "711c",typeField = "textbox")
-    private String f711c;
+    @ApiFormField(nameField = "711c",typeField = "textbox", isList = true, parentTable = "dyntable_711c")
+    private List<String> f711c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "711d",typeField = "textbox")
-    private String f711d;
+    @ApiFormField(nameField = "711d",typeField = "textbox", isList = true, parentTable = "dyntable_711d")
+    private List<String> f711d;
 
     /**
      * Место проведения совещания
@@ -2213,8 +2218,8 @@ public class LibraryBook {
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "711h",typeField = "textbox")
-    private String f711h;
+    @ApiFormField(nameField = "711h",typeField = "textbox", isList = true, parentTable = "dyntable_711h")
+    private List<String> f711h;
 
     /**
      * Местонахождение организации
@@ -2237,20 +2242,20 @@ public class LibraryBook {
     /**
      * Подразделение
      */
-    @ApiFormField(nameField = "712b",typeField = "textbox")
-    private String f712b;
+    @ApiFormField(nameField = "712b",typeField = "textbox", isList = true, parentTable = "dyntable_712b")
+    private List<String> f712b;
 
     /**
      * Дополнение к наименованию или уточнения
      */
-    @ApiFormField(nameField = "712c",typeField = "textbox")
-    private String f712c;
+    @ApiFormField(nameField = "712c",typeField = "textbox", isList = true, parentTable = "dyntable_712c")
+    private List<String> f712c;
 
     /**
      * Номер совещания
      */
-    @ApiFormField(nameField = "712d",typeField = "textbox")
-    private String f712d;
+    @ApiFormField(nameField = "712d",typeField = "textbox", isList = true, parentTable = "dyntable_712d")
+    private List<String> f712d;
 
     /**
      * Место проведения совещания
@@ -2273,8 +2278,8 @@ public class LibraryBook {
     /**
      * Часть наименования, отличная от начального элемента ввода и инвертированного элемента
      */
-    @ApiFormField(nameField = "712h",typeField = "textbox")
-    private String f712h;
+    @ApiFormField(nameField = "712h",typeField = "textbox", isList = true, parentTable = "dyntable_712h")
+    private List<String> f712h;
 
     /**
      * Местонахождение организации
@@ -2472,7 +2477,7 @@ public class LibraryBook {
      * Тематический рубрика
      */
     @ApiFormField(nameField = "909b",typeField = "textbox")
-    private String f909b;
+    private KeyObject f909b;
 
     /**
      * Номер гос.регистрации
@@ -2496,19 +2501,19 @@ public class LibraryBook {
         this.f610a = f610a;
     }
 
-    public List<String> getF700a() {
+    public String getF700a() {
         return f700a;
     }
 
-    public void setF700a(List<String> f700a) {
+    public void setF700a(String f700a) {
         this.f700a = f700a;
     }
 
-    public String getF010a() {
+    public List<String> getF010a() {
         return f010a;
     }
 
-    public void setF010a(String f010a) {
+    public void setF010a(List<String> f010a) {
         this.f010a = f010a;
     }
 
@@ -2520,11 +2525,11 @@ public class LibraryBook {
         this.f010d = f010d;
     }
 
-    public KeyObject getF101a() {
+    public List<KeyObject> getF101a() {
         return f101a;
     }
 
-    public void setF101a(KeyObject f101a) {
+    public void setF101a(List<KeyObject> f101a) {
         this.f101a = f101a;
     }
 
@@ -2536,59 +2541,59 @@ public class LibraryBook {
         this.f200a = f200a;
     }
 
-    public KeyObject getF200b() {
+    public List<KeyObject> getF200b() {
         return f200b;
     }
 
-    public void setF200b(KeyObject f200b) {
+    public void setF200b(List<KeyObject> f200b) {
         this.f200b = f200b;
     }
 
-    public String getF200d() {
+    public List<String> getF200d() {
         return f200d;
     }
 
-    public void setF200d(String f200d) {
+    public void setF200d(List<String> f200d) {
         this.f200d = f200d;
     }
 
-    public String getF200e() {
+    public List<String> getF200e() {
         return f200e;
     }
 
-    public void setF200e(String f200e) {
+    public void setF200e(List<String> f200e) {
         this.f200e = f200e;
     }
 
-    public String getF200f() {
+    public List<String> getF200f() {
         return f200f;
     }
 
-    public void setF200f(String f200f) {
+    public void setF200f(List<String> f200f) {
         this.f200f = f200f;
     }
 
-    public String getF200h() {
+    public List<String> getF200h() {
         return f200h;
     }
 
-    public void setF200h(String f200h) {
+    public void setF200h(List<String> f200h) {
         this.f200h = f200h;
     }
 
-    public String getF200i() {
+    public List<String> getF200i() {
         return f200i;
     }
 
-    public void setF200i(String f200i) {
+    public void setF200i(List<String> f200i) {
         this.f200i = f200i;
     }
 
-    public String getF200z() {
+    public List<KeyObject> getF200z() {
         return f200z;
     }
 
-    public void setF200z(String f200z) {
+    public void setF200z(List<KeyObject> f200z) {
         this.f200z = f200z;
     }
 
@@ -2608,35 +2613,35 @@ public class LibraryBook {
         this.f207a = f207a;
     }
 
-    public String getF210a() {
+    public List<String> getF210a() {
         return f210a;
     }
 
-    public void setF210a(String f210a) {
+    public void setF210a(List<String> f210a) {
         this.f210a = f210a;
     }
 
-    public String getF210c() {
+    public List<String> getF210c() {
         return f210c;
     }
 
-    public void setF210c(String f210c) {
+    public void setF210c(List<String> f210c) {
         this.f210c = f210c;
     }
 
-    public String getF210d() {
+    public List<String> getF210d() {
         return f210d;
     }
 
-    public void setF210d(String f210d) {
+    public void setF210d(List<String> f210d) {
         this.f210d = f210d;
     }
 
-    public String getF215a() {
+    public List<String> getF215a() {
         return f215a;
     }
 
-    public void setF215a(String f215a) {
+    public void setF215a(List<String> f215a) {
         this.f215a = f215a;
     }
 
@@ -2648,43 +2653,43 @@ public class LibraryBook {
         this.f215c = f215c;
     }
 
-    public String getF215e() {
+    public List<String> getF215e() {
         return f215e;
     }
 
-    public void setF215e(String f215e) {
+    public void setF215e(List<String> f215e) {
         this.f215e = f215e;
     }
 
-    public String getF225a() {
+    public List<String> getF225a() {
         return f225a;
     }
 
-    public void setF225a(String f225a) {
+    public void setF225a(List<String> f225a) {
         this.f225a = f225a;
     }
 
-    public String getF230a() {
+    public List<String> getF230a() {
         return f230a;
     }
 
-    public void setF230a(String f230a) {
+    public void setF230a(List<String> f230a) {
         this.f230a = f230a;
     }
 
-    public String getF300a() {
+    public List<String> getF300a() {
         return f300a;
     }
 
-    public void setF300a(String f300a) {
+    public void setF300a(List<String> f300a) {
         this.f300a = f300a;
     }
 
-    public String getF327a() {
+    public List<String> getF327a() {
         return f327a;
     }
 
-    public void setF327a(String f327a) {
+    public void setF327a(List<String> f327a) {
         this.f327a = f327a;
     }
 
@@ -2718,14 +2723,6 @@ public class LibraryBook {
 
     public void setF675a(String f675a) {
         this.f675a = f675a;
-    }
-
-    public String getF907b() {
-        return f907b;
-    }
-
-    public void setF907b(String f907b) {
-        this.f907b = f907b;
     }
 
     public String getF856t() {
@@ -2783,14 +2780,6 @@ public class LibraryBook {
     public void setF908c(KeyObject f908c) {
         this.f908c = f908c;
     }
-
-//    public KeyObject getF910c() {
-//        return f910c;
-//    }
-//
-//    public void setF910c(KeyObject f910c) {
-//        this.f910c = f910c;
-//    }
 
     public String getFcmp_hqzf4n() {
         return fcmp_hqzf4n;
@@ -2856,11 +2845,11 @@ public class LibraryBook {
         this.f011y = f011y;
     }
 
-    public String getF011z() {
+    public List<String> getF011z() {
         return f011z;
     }
 
-    public void setF011z(String f011z) {
+    public void setF011z(List<String> f011z) {
         this.f011z = f011z;
     }
 
@@ -3024,11 +3013,11 @@ public class LibraryBook {
         this.f020b = f020b;
     }
 
-    public String getF020z() {
+    public List<String> getF020z() {
         return f020z;
     }
 
-    public void setF020z(String f020z) {
+    public void setF020z(List<String> f020z) {
         this.f020z = f020z;
     }
 
@@ -3072,11 +3061,11 @@ public class LibraryBook {
         this.f022b = f022b;
     }
 
-    public String getF022z() {
+    public List<String> getF022z() {
         return f022z;
     }
 
-    public void setF022z(String f022z) {
+    public void setF022z(List<String> f022z) {
         this.f022z = f022z;
     }
 
@@ -3200,75 +3189,75 @@ public class LibraryBook {
         this.f100a_12 = f100a_12;
     }
 
-    public String getF101d() {
+    public List<KeyObject> getF101d() {
         return f101d;
     }
 
-    public void setF101d(String f101d) {
+    public void setF101d(List<KeyObject> f101d) {
         this.f101d = f101d;
     }
 
-    public String getF101e() {
+    public List<KeyObject> getF101e() {
         return f101e;
     }
 
-    public void setF101e(String f101e) {
+    public void setF101e(List<KeyObject> f101e) {
         this.f101e = f101e;
     }
 
-    public String getF101b() {
+    public List<KeyObject> getF101b() {
         return f101b;
     }
 
-    public void setF101b(String f101b) {
+    public void setF101b(List<KeyObject> f101b) {
         this.f101b = f101b;
     }
 
-    public String getF101c() {
+    public List<KeyObject> getF101c() {
         return f101c;
     }
 
-    public void setF101c(String f101c) {
+    public void setF101c(List<KeyObject> f101c) {
         this.f101c = f101c;
     }
 
-    public String getF101g() {
+    public List<KeyObject> getF101g() {
         return f101g;
     }
 
-    public void setF101g(String f101g) {
+    public void setF101g(List<KeyObject> f101g) {
         this.f101g = f101g;
     }
 
-    public String getF101h() {
+    public List<KeyObject> getF101h() {
         return f101h;
     }
 
-    public void setF101h(String f101h) {
+    public void setF101h(List<KeyObject> f101h) {
         this.f101h = f101h;
     }
 
-    public String getF101i() {
+    public List<KeyObject> getF101i() {
         return f101i;
     }
 
-    public void setF101i(String f101i) {
+    public void setF101i(List<KeyObject> f101i) {
         this.f101i = f101i;
     }
 
-    public String getF101j() {
+    public List<KeyObject> getF101j() {
         return f101j;
     }
 
-    public void setF101j(String f101j) {
+    public void setF101j(List<KeyObject> f101j) {
         this.f101j = f101j;
     }
 
-    public String getF102a() {
+    public List<KeyObject> getF102a() {
         return f102a;
     }
 
-    public void setF102a(String f102a) {
+    public void setF102a(List<KeyObject> f102a) {
         this.f102a = f102a;
     }
 
@@ -3640,43 +3629,43 @@ public class LibraryBook {
         this.f135 = f135;
     }
 
-    public String getF200c() {
+    public List<String> getF200c() {
         return f200c;
     }
 
-    public void setF200c(String f200c) {
+    public void setF200c(List<String> f200c) {
         this.f200c = f200c;
     }
 
-    public String getF200g() {
+    public List<String> getF200g() {
         return f200g;
     }
 
-    public void setF200g(String f200g) {
+    public void setF200g(List<String> f200g) {
         this.f200g = f200g;
     }
 
-    public String getF200v() {
+    public List<String> getF200v() {
         return f200v;
     }
 
-    public void setF200v(String f200v) {
+    public void setF200v(List<String> f200v) {
         this.f200v = f200v;
     }
 
-    public String getF205b() {
+    public List<String> getF205b() {
         return f205b;
     }
 
-    public void setF205b(String f205b) {
+    public void setF205b(List<String> f205b) {
         this.f205b = f205b;
     }
 
-    public String getF205f() {
+    public List<String> getF205f() {
         return f205f;
     }
 
-    public void setF205f(String f205f) {
+    public void setF205f(List<String> f205f) {
         this.f205f = f205f;
     }
 
@@ -3688,59 +3677,59 @@ public class LibraryBook {
         this.f207z = f207z;
     }
 
-    public String getF215d() {
+    public List<String> getF215d() {
         return f215d;
     }
 
-    public void setF215d(String f215d) {
+    public void setF215d(List<String> f215d) {
         this.f215d = f215d;
     }
 
-    public String getF225d() {
+    public List<String> getF225d() {
         return f225d;
     }
 
-    public void setF225d(String f225d) {
+    public void setF225d(List<String> f225d) {
         this.f225d = f225d;
     }
 
-    public String getF225e() {
+    public List<String> getF225e() {
         return f225e;
     }
 
-    public void setF225e(String f225e) {
+    public void setF225e(List<String> f225e) {
         this.f225e = f225e;
     }
 
-    public String getF225f() {
+    public List<String> getF225f() {
         return f225f;
     }
 
-    public void setF225f(String f225f) {
+    public void setF225f(List<String> f225f) {
         this.f225f = f225f;
     }
 
-    public String getF225h() {
+    public List<String> getF225h() {
         return f225h;
     }
 
-    public void setF225h(String f225h) {
+    public void setF225h(List<String> f225h) {
         this.f225h = f225h;
     }
 
-    public String getF225i() {
+    public List<String> getF225i() {
         return f225i;
     }
 
-    public void setF225i(String f225i) {
+    public void setF225i(List<String> f225i) {
         this.f225i = f225i;
     }
 
-    public String getF225z() {
+    public KeyObject getF225z() {
         return f225z;
     }
 
-    public void setF225z(String f225z) {
+    public void setF225z(KeyObject f225z) {
         this.f225z = f225z;
     }
 
@@ -4640,35 +4629,35 @@ public class LibraryBook {
         this.f510a = f510a;
     }
 
-    public String getF510e() {
+    public List<String> getF510e() {
         return f510e;
     }
 
-    public void setF510e(String f510e) {
+    public void setF510e(List<String> f510e) {
         this.f510e = f510e;
     }
 
-    public String getF510h() {
+    public List<String> getF510h() {
         return f510h;
     }
 
-    public void setF510h(String f510h) {
+    public void setF510h(List<String> f510h) {
         this.f510h = f510h;
     }
 
-    public String getF510i() {
+    public List<String> getF510i() {
         return f510i;
     }
 
-    public void setF510i(String f510i) {
+    public void setF510i(List<String> f510i) {
         this.f510i = f510i;
     }
 
-    public String getF510z() {
+    public KeyObject getF510z() {
         return f510z;
     }
 
-    public void setF510z(String f510z) {
+    public void setF510z(KeyObject f510z) {
         this.f510z = f510z;
     }
 
@@ -4680,11 +4669,11 @@ public class LibraryBook {
         this.f512a = f512a;
     }
 
-    public String getF512e() {
+    public List<String> getF512e() {
         return f512e;
     }
 
-    public void setF512e(String f512e) {
+    public void setF512e(List<String> f512e) {
         this.f512e = f512e;
     }
 
@@ -4696,27 +4685,27 @@ public class LibraryBook {
         this.f513a = f513a;
     }
 
-    public String getF513e() {
+    public List<String> getF513e() {
         return f513e;
     }
 
-    public void setF513e(String f513e) {
+    public void setF513e(List<String> f513e) {
         this.f513e = f513e;
     }
 
-    public String getF513h() {
+    public List<String> getF513h() {
         return f513h;
     }
 
-    public void setF513h(String f513h) {
+    public void setF513h(List<String> f513h) {
         this.f513h = f513h;
     }
 
-    public String getF513i() {
+    public List<String> getF513i() {
         return f513i;
     }
 
-    public void setF513i(String f513i) {
+    public void setF513i(List<String> f513i) {
         this.f513i = f513i;
     }
 
@@ -4728,11 +4717,11 @@ public class LibraryBook {
         this.f520a = f520a;
     }
 
-    public String getF520e() {
+    public List<String> getF520e() {
         return f520e;
     }
 
-    public void setF520e(String f520e) {
+    public void setF520e(List<String> f520e) {
         this.f520e = f520e;
     }
 
@@ -4744,27 +4733,27 @@ public class LibraryBook {
         this.f520h = f520h;
     }
 
-    public String getF520i() {
+    public List<String> getF520i() {
         return f520i;
     }
 
-    public void setF520i(String f520i) {
+    public void setF520i(List<String> f520i) {
         this.f520i = f520i;
     }
 
-    public String getF520j() {
+    public List<String> getF520j() {
         return f520j;
     }
 
-    public void setF520j(String f520j) {
+    public void setF520j(List<String> f520j) {
         this.f520j = f520j;
     }
 
-    public String getF520x() {
+    public List<String> getF520x() {
         return f520x;
     }
 
-    public void setF520x(String f520x) {
+    public void setF520x(List<String> f520x) {
         this.f520x = f520x;
     }
 
@@ -4832,11 +4821,11 @@ public class LibraryBook {
         this.f600b = f600b;
     }
 
-    public String getF600c() {
+    public List<String> getF600c() {
         return f600c;
     }
 
-    public void setF600c(String f600c) {
+    public void setF600c(List<String> f600c) {
         this.f600c = f600c;
     }
 
@@ -4848,11 +4837,11 @@ public class LibraryBook {
         this.f600f = f600f;
     }
 
-    public String getF600x() {
+    public List<String> getF600x() {
         return f600x;
     }
 
-    public void setF600x(String f600x) {
+    public void setF600x(List<String> f600x) {
         this.f600x = f600x;
     }
 
@@ -4864,19 +4853,19 @@ public class LibraryBook {
         this.f601a = f601a;
     }
 
-    public String getF601b() {
+    public List<String> getF601b() {
         return f601b;
     }
 
-    public void setF601b(String f601b) {
+    public void setF601b(List<String> f601b) {
         this.f601b = f601b;
     }
 
-    public String getF601c() {
+    public List<String> getF601c() {
         return f601c;
     }
 
-    public void setF601c(String f601c) {
+    public void setF601c(List<String> f601c) {
         this.f601c = f601c;
     }
 
@@ -4936,20 +4925,28 @@ public class LibraryBook {
         this.f605a = f605a;
     }
 
-    public String getF605x() {
+    public List<String> getF605x() {
         return f605x;
     }
 
-    public void setF605x(String f605x) {
+    public void setF605x(List<String> f605x) {
         this.f605x = f605x;
     }
 
-    public String getF605y() {
+    public List<String> getF605y() {
         return f605y;
     }
 
-    public void setF605y(String f605y) {
+    public void setF605y(List<String> f605y) {
         this.f605y = f605y;
+    }
+
+    public List<String> getF605z() {
+        return f605z;
+    }
+
+    public void setF605z(List<String> f605z) {
+        this.f605z = f605z;
     }
 
     public String getF601z() {
@@ -4960,35 +4957,35 @@ public class LibraryBook {
         this.f601z = f601z;
     }
 
-    public String getF606a() {
+    public List<String> getF606a() {
         return f606a;
     }
 
-    public void setF606a(String f606a) {
+    public void setF606a(List<String> f606a) {
         this.f606a = f606a;
     }
 
-    public String getF606x() {
+    public List<String> getF606x() {
         return f606x;
     }
 
-    public void setF606x(String f606x) {
+    public void setF606x(List<String> f606x) {
         this.f606x = f606x;
     }
 
-    public String getF606y() {
+    public List<String> getF606y() {
         return f606y;
     }
 
-    public void setF606y(String f606y) {
+    public void setF606y(List<String> f606y) {
         this.f606y = f606y;
     }
 
-    public String getF606z() {
+    public List<String> getF606z() {
         return f606z;
     }
 
-    public void setF606z(String f606z) {
+    public void setF606z(List<String> f606z) {
         this.f606z = f606z;
     }
 
@@ -5016,11 +5013,11 @@ public class LibraryBook {
         this.f607y = f607y;
     }
 
-    public String getF607z() {
+    public List<String> getF607z() {
         return f607z;
     }
 
-    public void setF607z(String f607z) {
+    public void setF607z(List<String> f607z) {
         this.f607z = f607z;
     }
 
@@ -5032,35 +5029,35 @@ public class LibraryBook {
         this.f675v = f675v;
     }
 
-    public String getF675z() {
+    public KeyObject getF675z() {
         return f675z;
     }
 
-    public void setF675z(String f675z) {
+    public void setF675z(KeyObject f675z) {
         this.f675z = f675z;
     }
 
-    public String getF686a() {
+    public List<String> getF686a() {
         return f686a;
     }
 
-    public void setF686a(String f686a) {
+    public void setF686a(List<String> f686a) {
         this.f686a = f686a;
     }
 
-    public String getF686b() {
+    public List<String> getF686b() {
         return f686b;
     }
 
-    public void setF686b(String f686b) {
+    public void setF686b(List<String> f686b) {
         this.f686b = f686b;
     }
 
-    public String getF686c() {
+    public List<String> getF686c() {
         return f686c;
     }
 
-    public void setF686c(String f686c) {
+    public void setF686c(List<String> f686c) {
         this.f686c = f686c;
     }
 
@@ -5080,11 +5077,11 @@ public class LibraryBook {
         this.f700b = f700b;
     }
 
-    public String getF700c() {
+    public List<String> getF700c() {
         return f700c;
     }
 
-    public void setF700c(String f700c) {
+    public void setF700c(List<String> f700c) {
         this.f700c = f700c;
     }
 
@@ -5128,19 +5125,19 @@ public class LibraryBook {
         this.f7003 = f7003;
     }
 
-    public String getF7004() {
+    public List<String> getF7004() {
         return f7004;
     }
 
-    public void setF7004(String f7004) {
+    public void setF7004(List<String> f7004) {
         this.f7004 = f7004;
     }
 
-    public String getF701a() {
+    public List<String> getF701a() {
         return f701a;
     }
 
-    public void setF701a(String f701a) {
+    public void setF701a(List<String> f701a) {
         this.f701a = f701a;
     }
 
@@ -5152,11 +5149,11 @@ public class LibraryBook {
         this.f701b = f701b;
     }
 
-    public String getF701c() {
+    public List<String> getF701c() {
         return f701c;
     }
 
-    public void setF701c(String f701c) {
+    public void setF701c(List<String> f701c) {
         this.f701c = f701c;
     }
 
@@ -5176,11 +5173,11 @@ public class LibraryBook {
         this.f701f = f701f;
     }
 
-    public String getF701g() {
+    public List<String> getF701g() {
         return f701g;
     }
 
-    public void setF701g(String f701g) {
+    public void setF701g(List<String> f701g) {
         this.f701g = f701g;
     }
 
@@ -5200,11 +5197,11 @@ public class LibraryBook {
         this.f7013 = f7013;
     }
 
-    public String getF7014() {
+    public List<String> getF7014() {
         return f7014;
     }
 
-    public void setF7014(String f7014) {
+    public void setF7014(List<String> f7014) {
         this.f7014 = f7014;
     }
 
@@ -5224,11 +5221,11 @@ public class LibraryBook {
         this.f702b = f702b;
     }
 
-    public String getF702c() {
+    public List<String> getF702c() {
         return f702c;
     }
 
-    public void setF702c(String f702c) {
+    public void setF702c(List<String> f702c) {
         this.f702c = f702c;
     }
 
@@ -5272,11 +5269,11 @@ public class LibraryBook {
         this.f7023 = f7023;
     }
 
-    public String getF7024() {
+    public List<String> getF7024() {
         return f7024;
     }
 
-    public void setF7024(String f7024) {
+    public void setF7024(List<String> f7024) {
         this.f7024 = f7024;
     }
 
@@ -5288,27 +5285,27 @@ public class LibraryBook {
         this.f710a = f710a;
     }
 
-    public String getF710b() {
+    public List<String> getF710b() {
         return f710b;
     }
 
-    public void setF710b(String f710b) {
+    public void setF710b(List<String> f710b) {
         this.f710b = f710b;
     }
 
-    public String getF710c() {
+    public List<String> getF710c() {
         return f710c;
     }
 
-    public void setF710c(String f710c) {
+    public void setF710c(List<String> f710c) {
         this.f710c = f710c;
     }
 
-    public String getF710d() {
+    public List<String> getF710d() {
         return f710d;
     }
 
-    public void setF710d(String f710d) {
+    public void setF710d(List<String> f710d) {
         this.f710d = f710d;
     }
 
@@ -5336,11 +5333,11 @@ public class LibraryBook {
         this.f710g = f710g;
     }
 
-    public String getF710h() {
+    public List<String> getF710h() {
         return f710h;
     }
 
-    public void setF710h(String f710h) {
+    public void setF710h(List<String> f710h) {
         this.f710h = f710h;
     }
 
@@ -5368,27 +5365,27 @@ public class LibraryBook {
         this.f711a = f711a;
     }
 
-    public String getF711b() {
+    public List<String> getF711b() {
         return f711b;
     }
 
-    public void setF711b(String f711b) {
+    public void setF711b(List<String> f711b) {
         this.f711b = f711b;
     }
 
-    public String getF711c() {
+    public List<String> getF711c() {
         return f711c;
     }
 
-    public void setF711c(String f711c) {
+    public void setF711c(List<String> f711c) {
         this.f711c = f711c;
     }
 
-    public String getF711d() {
+    public List<String> getF711d() {
         return f711d;
     }
 
-    public void setF711d(String f711d) {
+    public void setF711d(List<String> f711d) {
         this.f711d = f711d;
     }
 
@@ -5416,11 +5413,11 @@ public class LibraryBook {
         this.f711g = f711g;
     }
 
-    public String getF711h() {
+    public List<String> getF711h() {
         return f711h;
     }
 
-    public void setF711h(String f711h) {
+    public void setF711h(List<String> f711h) {
         this.f711h = f711h;
     }
 
@@ -5448,27 +5445,27 @@ public class LibraryBook {
         this.f712a = f712a;
     }
 
-    public String getF712b() {
+    public List<String> getF712b() {
         return f712b;
     }
 
-    public void setF712b(String f712b) {
+    public void setF712b(List<String> f712b) {
         this.f712b = f712b;
     }
 
-    public String getF712c() {
+    public List<String> getF712c() {
         return f712c;
     }
 
-    public void setF712c(String f712c) {
+    public void setF712c(List<String> f712c) {
         this.f712c = f712c;
     }
 
-    public String getF712d() {
+    public List<String> getF712d() {
         return f712d;
     }
 
-    public void setF712d(String f712d) {
+    public void setF712d(List<String> f712d) {
         this.f712d = f712d;
     }
 
@@ -5496,11 +5493,11 @@ public class LibraryBook {
         this.f712g = f712g;
     }
 
-    public String getF712h() {
+    public List<String> getF712h() {
         return f712h;
     }
 
-    public void setF712h(String f712h) {
+    public void setF712h(List<String> f712h) {
         this.f712h = f712h;
     }
 
@@ -5760,11 +5757,11 @@ public class LibraryBook {
         this.f909a = f909a;
     }
 
-    public String getF909b() {
+    public KeyObject getF909b() {
         return f909b;
     }
 
-    public void setF909b(String f909b) {
+    public void setF909b(KeyObject f909b) {
         this.f909b = f909b;
     }
 
