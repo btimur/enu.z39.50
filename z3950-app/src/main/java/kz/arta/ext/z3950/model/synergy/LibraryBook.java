@@ -24,8 +24,8 @@ public class LibraryBook {
     /**
      * Автор
      */
-    @ApiFormField(nameField = "700a",typeField = "textbox", isList = true, parentTable = "dyntable_700a")
-    private List<String> f700a;
+    @ApiFormField(nameField = "700a",typeField = "textbox")
+    private String f700a;
 
     /**
      * Номер ISBN
@@ -48,8 +48,8 @@ public class LibraryBook {
     /**
      * Заглавие
      */
-    @ApiFormField(nameField = "200a",typeField = "textbox", isList = true, parentTable = "dyntable_200a")
-    private List<String> f200a;
+    @ApiFormField(nameField = "200a",typeField = "textbox")
+    private String f200a;
 
     /**
      * Материал(носитель)
@@ -156,14 +156,14 @@ public class LibraryBook {
     /**
      * Общие примечания
      */
-    @ApiFormField(nameField = "300a",typeField = "textbox")
-    private String f300a;
+    @ApiFormField(nameField = "300a",typeField = "textbox", isList = true, parentTable = "dyntable_300a")
+    private List<String> f300a;
 
     /**
      * Примечание о содержании
      */
-    @ApiFormField(nameField = "327a",typeField = "textbox")
-    private String f327a;
+    @ApiFormField(nameField = "327a",typeField = "textbox", isList = true, parentTable = "dyntable_327a")
+    private List<String> f327a;
 
     /**
      * Сведения об издании источника
@@ -600,8 +600,8 @@ public class LibraryBook {
     /**
      * Страна публикации
      */
-    @ApiFormField(nameField = "102a",typeField = "textbox", isList = true, parentTable = "dyntable_102a")
-    private List<String> f102a;
+    @ApiFormField(nameField = "102a",typeField = "textbox", isList = true, parentTable = "dyntable_102a", isListKeyobject = true)
+    private List<KeyObject> f102a;
 
     /**
      * Кодированные данные о книге
@@ -2477,7 +2477,7 @@ public class LibraryBook {
      * Тематический рубрика
      */
     @ApiFormField(nameField = "909b",typeField = "textbox")
-    private String f909b;
+    private KeyObject f909b;
 
     /**
      * Номер гос.регистрации
@@ -2501,11 +2501,11 @@ public class LibraryBook {
         this.f610a = f610a;
     }
 
-    public List<String> getF700a() {
+    public String getF700a() {
         return f700a;
     }
 
-    public void setF700a(List<String> f700a) {
+    public void setF700a(String f700a) {
         this.f700a = f700a;
     }
 
@@ -2533,11 +2533,11 @@ public class LibraryBook {
         this.f101a = f101a;
     }
 
-    public List<String> getF200a() {
+    public String getF200a() {
         return f200a;
     }
 
-    public void setF200a(List<String> f200a) {
+    public void setF200a(String f200a) {
         this.f200a = f200a;
     }
 
@@ -2677,19 +2677,19 @@ public class LibraryBook {
         this.f230a = f230a;
     }
 
-    public String getF300a() {
+    public List<String> getF300a() {
         return f300a;
     }
 
-    public void setF300a(String f300a) {
+    public void setF300a(List<String> f300a) {
         this.f300a = f300a;
     }
 
-    public String getF327a() {
+    public List<String> getF327a() {
         return f327a;
     }
 
-    public void setF327a(String f327a) {
+    public void setF327a(List<String> f327a) {
         this.f327a = f327a;
     }
 
@@ -3253,11 +3253,11 @@ public class LibraryBook {
         this.f101j = f101j;
     }
 
-    public List<String> getF102a() {
+    public List<KeyObject> getF102a() {
         return f102a;
     }
 
-    public void setF102a(List<String> f102a) {
+    public void setF102a(List<KeyObject> f102a) {
         this.f102a = f102a;
     }
 
@@ -5757,11 +5757,11 @@ public class LibraryBook {
         this.f909a = f909a;
     }
 
-    public String getF909b() {
+    public KeyObject getF909b() {
         return f909b;
     }
 
-    public void setF909b(String f909b) {
+    public void setF909b(KeyObject f909b) {
         this.f909b = f909b;
     }
 

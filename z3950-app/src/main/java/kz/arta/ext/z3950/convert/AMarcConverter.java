@@ -82,6 +82,9 @@ public abstract class AMarcConverter implements IMarcConverter {
         dicCodes.put("908b", "Вид содержания");
         dicCodes.put("908c", "Вид издания");
         dicCodes.put("901a", "Сигла");
+        dicCodes.put("909b", "Тематическая рубрика");
+        dicCodes.put("909b", "Тематическая рубрика");
+        dicCodes.put("102a", "Код страны");
     }
 
 
