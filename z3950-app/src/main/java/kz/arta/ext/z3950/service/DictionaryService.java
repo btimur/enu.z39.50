@@ -22,7 +22,8 @@ public class DictionaryService {
         try {
             String result = CacheManager.getInstance().getDictionaryKey(dictionaryCode, value);
             if (result == null) {
-                result = reader.loadDictionary(dictionaryCode, value);
+                reader.loadDictionary(dictionaryCode);
+                result = CacheManager.getInstance().getDictionaryKey(dictionaryCode, value);
                 if (result == null) {
                     result = reader.insertDictionary(dictionaryCode, value);
                 }
@@ -30,6 +31,20 @@ public class DictionaryService {
             return result;
         } catch (Exception e) {
             logger.error("error load dictionary "+ dictionaryCode + ", value - "+ value, e);
+            return null;
+        }
+    }
+
+    public String getDictionaryValue(String dictionaryCode, String key)  {
+        try {
+            String result = CacheManager.getInstance().getDictionaryValue(dictionaryCode, key);
+            if (result == null) {
+                reader.loadDictionary(dictionaryCode);
+                result = CacheManager.getInstance().getDictionaryValue(dictionaryCode, key);
+            }
+            return result;
+        } catch (Exception e) {
+            logger.error("error load dictionary "+ dictionaryCode + ", key - "+ key, e);
             return null;
         }
     }

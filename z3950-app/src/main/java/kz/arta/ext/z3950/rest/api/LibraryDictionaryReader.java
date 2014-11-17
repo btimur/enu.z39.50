@@ -17,7 +17,8 @@ public class LibraryDictionaryReader extends DictionaryReader {
     public static final String NAME_COLUMN = "Name";
     public static final String ID_COLUMN = "ID";
 
-    public String loadDictionary(String dictionaryCode, String value) {
+
+    public void loadDictionary(String dictionaryCode) {
         Dictionary dictionary = readDictionary(ConfigUtils.getQueryContext(), dictionaryCode);
         log.debug("load dictionary - {}", dictionaryCode);
         String columnID = null;
@@ -26,7 +27,6 @@ public class LibraryDictionaryReader extends DictionaryReader {
             if (column.getCode().equals(ID_COLUMN)) columnID = column.getColumnID();
             if (column.getCode().equals(NAME_COLUMN)) columnName = column.getColumnID();
         }
-        String result = null;
         for (DictionaryItem item : dictionary.getItems()) {
             String key = item.giveValuesMap().get(columnID);
             String val = item.giveValuesMap().get(columnName);
@@ -37,11 +37,7 @@ public class LibraryDictionaryReader extends DictionaryReader {
             } catch (NumberFormatException e) {
                 log.error("can't add id for dictionary {" + dictionaryCode + "}, value {" + key + "}", e);
             }
-            if (value.equals(val)) {
-                result = key;
-            }
         }
-        return result;
     }
 
     public String insertDictionary(String dictionaryCode, String value) {

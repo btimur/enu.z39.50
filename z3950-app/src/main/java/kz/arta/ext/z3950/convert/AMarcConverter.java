@@ -34,7 +34,7 @@ import java.util.Map;
 public abstract class AMarcConverter implements IMarcConverter {
 
     @Inject
-    private Logger logger;
+    protected Logger logger;
 
     @Inject
     protected SubIndexRepository repository;
@@ -272,7 +272,7 @@ public abstract class AMarcConverter implements IMarcConverter {
         return new KeyObject(key, value);
     }
 
-    private String getDictionaryCode(String field) {
+    protected String getDictionaryCode(String field) {
         return dicCodes.get(field);
     }
 

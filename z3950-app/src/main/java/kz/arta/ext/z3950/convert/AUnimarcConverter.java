@@ -3,7 +3,10 @@ package kz.arta.ext.z3950.convert;
 import kz.arta.ext.api.data.FormField;
 import kz.arta.ext.api.data.FormFieldsWrapper;
 import kz.arta.ext.common.util.StringUtils;
+import kz.arta.ext.z3950.rest.api.LibraryDictionaryReader;
 import org.marc4j.marc.*;
+
+import javax.inject.Inject;
 
 /**
  * Created by timur on 09/08/2014 12:34.
@@ -19,6 +22,18 @@ public abstract class AUnimarcConverter extends AMarcConverter {
         for (FormField formField : fieldsWrapper.getFormFieldMap().values()) {
             String id = formField.getId();
             String val = formField.getValue();
+
+            /*************************/
+            //[TODO] - неправильный импорт в Synergy
+            if(formField.getType().equals("listbox") && formField.getKey() == null){
+                logger.debug("get listbox value from key not value");{
+                    val = dictionaryService.getDictionaryValue(getDictionaryCode(id.substring(0, 4)), val);
+                }
+            }
+            /*************************/
+            logger.debug("export field id - {}, val - {}", id, val);
+
+
             String first = id.substring(0, 1);
             if (!StringUtils.isNumber(first) || CONTROL_ID_TAG.equals(id)       //id.length() > 4 ||
                     || val == null || "".equals(val.trim())) {
