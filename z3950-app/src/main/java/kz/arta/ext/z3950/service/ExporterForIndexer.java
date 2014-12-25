@@ -42,11 +42,16 @@ public class ExporterForIndexer {
     @Inject
     private ExternalLauncher launcher;
 
+    @Inject
+    private UnimarcConverter converter;
+
     @Resource(mappedName = "java:/ConnectionFactory")
     private ConnectionFactory connectionFactory;
 
     @Resource(mappedName = CodeConstants.INDEX_ALL_ZEBRA_JMS_DESTINATION)
     private Destination destination;
+
+
 
     public String exportRegistry(String registryFormUUID) {
         try {
@@ -181,7 +186,7 @@ public class ExporterForIndexer {
     }
 
     public Record getRecord(FormData formData) {
-        UnimarcConverter converter = new UnimarcConverter();
+
         return converter.getMarcRecord(formData.convertToWrapper());
     }
 

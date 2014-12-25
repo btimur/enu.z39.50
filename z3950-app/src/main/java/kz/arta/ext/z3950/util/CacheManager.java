@@ -16,13 +16,15 @@ public class CacheManager {
 
     private Map<Long, Map<String, Record>> records;
 
-    private Map<String, Map<String,String>> dictionaries;
+    private Map<String, Map<String,String>> dictionariesByValues;
+    private Map<String, Map<String,String>> dictionariesByKeys;
     private Map<String, Integer> dictionariesId;
 
     private CacheManager() {
 
         records = new HashMap<Long, Map<String, Record>>();
-        dictionaries = new HashMap<String, Map<String, String>>();
+        dictionariesByValues = new HashMap<String, Map<String, String>>();
+        dictionariesByKeys = new HashMap<String, Map<String, String>>();
         dictionariesId = new HashMap<String, Integer>();
     }
 
@@ -52,23 +54,47 @@ public class CacheManager {
     }
 
     public void addDictionary(String dictionaryCode,String key, String value){
-        Map<String, String> dictionaryMap  = dictionaries.get(dictionaryCode);
+        addByValue(dictionaryCode, key, value);
+        addByKey(dictionaryCode, key, value);
+    }
+
+    private void addByValue(String dictionaryCode, String key, String value) {
+        Map<String, String> dictionaryMap  = dictionariesByValues.get(dictionaryCode);
         if (dictionaryMap == null){
             dictionaryMap = new HashMap<String, String>();
-            dictionaries.put(dictionaryCode, dictionaryMap);
+            dictionariesByValues.put(dictionaryCode, dictionaryMap);
         }
         dictionaryMap.put(value, key);
     }
 
-
-    public String getDictionaryKey(String dictionaryCode,String value){
-        Map<String, String> dictionaryMap  = dictionaries.get(dictionaryCode);
+    private void addByKey(String dictionaryCode, String key, String value) {
+        Map<String, String> dictionaryMap  = dictionariesByKeys.get(dictionaryCode);
         if (dictionaryMap == null){
             dictionaryMap = new HashMap<String, String>();
-            dictionaries.put(dictionaryCode, dictionaryMap);
+            dictionariesByKeys.put(dictionaryCode, dictionaryMap);
+        }
+        dictionaryMap.put(key, value);
+    }
+
+
+    public String getDictionaryKey(String dictionaryCode,String value){
+        Map<String, String> dictionaryMap  = dictionariesByValues.get(dictionaryCode);
+        if (dictionaryMap == null){
+            dictionaryMap = new HashMap<String, String>();
+            dictionariesByValues.put(dictionaryCode, dictionaryMap);
         }
         return dictionaryMap.get(value);
     }
+
+    public String getDictionaryValue(String dictionaryCode,String key){
+        Map<String, String> dictionaryMap  = dictionariesByKeys.get(dictionaryCode);
+        if (dictionaryMap == null){
+            return null;
+        }
+        return dictionaryMap.get(key);
+    }
+
+
 
 
     public void addDictionaryID(String dictionaryCode, Integer val){
