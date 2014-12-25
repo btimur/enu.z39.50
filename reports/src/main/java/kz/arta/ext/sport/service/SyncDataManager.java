@@ -40,14 +40,14 @@ public class SyncDataManager {
     public boolean Run() throws IOException {
 
         boolean result = true;
-        logger.info("sportapp.syncData run");
+        logger.info("reports.syncData run");
         syncDeparment();
         syncUserChooser();
         return result;
     }
 
     private void syncUserChooser() throws IOException {
-        logger.info("sync UserChooser database begin");
+        logger.info("reports: sync UserChooser database begin");
 
         RestQueryContext context = ConfigUtils.getQueryContext();
         fillUserChoosers(CodeConstants.MALE_GROUP, CodeConstants.MALE_INDEX, context);
@@ -55,7 +55,7 @@ public class SyncDataManager {
         fillUserChoosers(CodeConstants.FEMALE_ABULT, CodeConstants.FEMALE_INDEX, context);
         fillUserChoosers(CodeConstants.FEMALE_JUNIOR, CodeConstants.FEMALE_INDEX, context);
         fillUserChoosers(CodeConstants.FEMALE_YOUTH, CodeConstants.FEMALE_INDEX, context);
-        logger.info("sync UserChooser database end");
+        logger.info("reports: sync UserChooser database end");
     }
 
     private void fillUserChoosers(String code, int index, RestQueryContext context) throws IOException {
@@ -85,16 +85,22 @@ public class SyncDataManager {
     }
 
     private void syncDeparment() throws IOException {
-        logger.info("sync Deparment database begin");
+        logger.info("reports: sync Deparment database begin");
         userChooserRepository.clear();
+        logger.info("reports: clear Users");
         departmentRepository.clear();
+        logger.info("reports: clear Departments");
         RestQueryContext context = ConfigUtils.getQueryContext();
+        logger.info("reports: RestQueryContext Address: {}, Login: {} ",context.getAddress(),context.getLogin());
         Department department = departmentReader.getDepartment(CodeConstants.ROOT_DEPARTMENT,context);
         if(department!=null)
         {
+            logger.info("get Department ID: {}, Name: {} ",department.getDepartmentID(),department.getNameRu() );
             departmentRepository.save(department);
+        }else{
+            logger.info("reports: not found  Department ID: {}",CodeConstants.ROOT_DEPARTMENT);
         }
-        logger.info("sync Deparment database end");
+        logger.info("sync Department database end");
     }
 
 

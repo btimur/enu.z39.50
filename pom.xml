@@ -54,6 +54,6 @@
         <module>sms-app</module>
         <module>skud-service</module>
         <module>ocr-app</module>
-        <module>sport-app</module>
+        <module>reports</module>
     </modules>
 </project>

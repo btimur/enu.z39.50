@@ -59,7 +59,8 @@ public class UserChooserReader extends AFormsReader {
                     if (position.containsKey("departmentID")) {
                         String departmentId = position.get("departmentID").toString();
                         Department department = departmentRepository.find(departmentId);
-                        if(department==null)
+                        log.info("Department ID : {}",departmentId);
+                         if(department==null)
                         {
                             department = departmentReader.getDepartment(departmentId,context);
                             if(department!=null)
@@ -91,6 +92,7 @@ public class UserChooserReader extends AFormsReader {
             if(parent!=null)
             {
                 parent.setParent(fillParentDepartment(parent,context));
+                log.info("Department ID : {}",parent.getDepartmentID());
                 departmentRepository.save(parent);
             }
         }
